@@ -1,6 +1,5 @@
 ---
 jupytext:
-  default_lexer: ipython3
   formats: ipynb,md:myst
   text_representation:
     extension: .md
@@ -8,7 +7,7 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.16.4
 kernelspec:
-  display_name: jax-docs
+  display_name: Python 3
   language: python
   name: python3
 ---
@@ -284,118 +283,9 @@ This is because the function generates an array whose shape is not known at comp
 
 +++
 
-For more on JIT compilation in JAX, check out {ref}`jit-compilation`.
+For more on JIT compilation in JAX, check out [Just-in-time compilation](https://docs.jax.dev/en/latest/jit-compilation.html).
 
-+++ {"id": "BzBnKbXwXjLV"}
-
-### JIT mechanics: tracing and static variables
-
-**Key concepts:**
-
-- JIT and other JAX transforms work by *tracing* a function to determine its effect on inputs of a specific shape and type.
-
-- Variables that you don't want to be traced can be marked as *static*
-
-To use `jax.jit` effectively, it is useful to understand how it works. Let's put a few `print()` statements within a JIT-compiled function and then call the function:
-
-```{code-cell} ipython3
-:id: TfjVIVuD4gnc
-:outputId: 9f4ddcaa-8ab7-4984-afb6-47fede5314ea
-
-@jit
-def f(x, y):
-  print("Running f():")
-  print(f"  x = {x}")
-  print(f"  y = {y}")
-  result = jnp.dot(x + 1, y + 1)
-  print(f"  result = {result}")
-  return result
-
-x = np.random.randn(3, 4)
-y = np.random.randn(4)
-f(x, y)
-```
-
-+++ {"id": "Ts1fP45A40QV"}
-
-Notice that the print statements execute, but rather than printing the data we passed to the function, though, it prints *tracer* objects that stand-in for them.
-
-These tracer objects are what `jax.jit` uses to extract the sequence of operations specified by the function. Basic tracers are stand-ins that encode the **shape** and **dtype** of the arrays, but are agnostic to the values. This recorded sequence of computations can then be efficiently applied within XLA to new inputs with the same shape and dtype, without having to re-execute the Python code.
-
-When we call the compiled function again on matching inputs, no re-compilation is required and nothing is printed because the result is computed in compiled XLA rather than in Python:
-
-```{code-cell} ipython3
-:id: xGntvzNH7skE
-:outputId: 43aaeee6-3853-4b00-fb2b-646df695204a
-
-x2 = np.random.randn(3, 4)
-y2 = np.random.randn(4)
-f(x2, y2)
-```
-
-+++ {"id": "9EB9WkRX7fm0"}
-
-The extracted sequence of operations is encoded in a JAX expression, or [*jaxpr*](https://docs.jax.dev/en/latest/key-concepts.html#jaxprs) for short. You can view the jaxpr using the `jax.make_jaxpr` transformation:
-
-```{code-cell} ipython3
-:id: 89TMp_Op5-JZ
-:outputId: 48212815-059a-4af1-de82-cd39ecac264a
-
-from jax import make_jaxpr
-
-def f(x, y):
-  return jnp.dot(x + 1, y + 1)
-
-make_jaxpr(f)(x, y)
-```
-
-+++ {"id": "0Oq9S4MZ90TL"}
-
-Note one consequence of this: because JIT compilation is done *without* information on the content of the array, control flow statements in the function cannot depend on traced values. For example, this fails:
-
-```{code-cell} ipython3
-:id: A0rFdM95-Ix_
-:outputId: e37bf04e-6a6a-4536-e423-f082f52d5f11
-:tags: [raises-exception]
-
-@jit
-def f(x, neg):
-  return -x if neg else x
-
-f(1, True)
-```
-
-+++ {"id": "DkTO9m8j-TYI"}
-
-If there are variables that you would not like to be traced, they can be marked as static for the purposes of JIT compilation:
-
-```{code-cell} ipython3
-:id: K1C7ZnVv-lbv
-:outputId: e9d6cce3-b036-43da-ad99-887af9625ab0
-
-from functools import partial
-
-@partial(jit, static_argnums=(1,))
-def f(x, neg):
-  return -x if neg else x
-
-f(1, True)
-```
-
-+++ {"id": "dD7p4LRsGzhx"}
-
-Note that calling a JIT-compiled function with a different static argument results in re-compilation, so the function still works as expected:
-
-```{code-cell} ipython3
-:id: sXqczBOrG7-w
-:outputId: 5fb7c278-b87e-4a6b-ef50-5e4e9c765b52
-
-f(1, False)
-```
-
-+++ {"id": "ZESlrDngGVb1"}
-
-Understanding which values and operations will be static and which will be traced is a key part of using `jax.jit` effectively.
+For more information on *tracing* in JAX, see [Tracing](https://docs.jax.dev/en/latest/tracing.html).
 
 +++
 
@@ -405,7 +295,7 @@ Understanding which values and operations will be static and which will be trace
 - JAX provides automatic differentiation via the `jax.grad` transformation.
 - The `jax.grad` and `jax.jit` transformations compose and can be mixed arbitrarily.
 
-In addition to transforming functions via JIT compilation, JAX also provides other transformations. One such transformation is {func}`jax.grad`, which performs [automatic differentiation (autodiff)](https://en.wikipedia.org/wiki/Automatic_differentiation):
+In addition to transforming functions via JIT compilation, JAX also provides other transformations. One such transformation is [`jax.grad`](https://docs.jax.dev/en/latest/_autosummary/jax.grad.html), which performs [automatic differentiation (autodiff)](https://en.wikipedia.org/wiki/Automatic_differentiation):
 
 ```{code-cell} ipython3
 from jax import grad
@@ -428,14 +318,14 @@ def first_finite_differences(f, x, eps=1E-3):
 print(first_finite_differences(sum_logistic, x_small))
 ```
 
-The {func}`~jax.grad` and {func}`~jax.jit` transformations compose and can be mixed arbitrarily.
+The [`jax.grad`](https://docs.jax.dev/en/latest/_autosummary/jax.grad.html) and [`jax.jit`](https://docs.jax.dev/en/latest/_autosummary/jax.jit.html) transformations compose and can be mixed arbitrarily.
 For instance, while the `sum_logistic` function was differentiated directly in the previous example, it could also be JIT-compiled, and these operations can be combined. We can go further:
 
 ```{code-cell} ipython3
 print(grad(jit(grad(jit(grad(sum_logistic)))))(1.0))
 ```
 
-Beyond scalar-valued functions, the {func}`jax.jacobian` transformation can be
+Beyond scalar-valued functions, the [`jax.jacobian`](https://docs.jax.dev/en/latest/_autosummary/jax.jacobian.html) transformation can be
 used to compute the full Jacobian matrix for vector-valued functions:
 
 ```{code-cell} ipython3
@@ -443,10 +333,10 @@ from jax import jacobian
 print(jacobian(jnp.exp)(x_small))
 ```
 
-For more advanced autodiff operations, you can use {func}`jax.vjp` for reverse-mode vector-Jacobian products,
-and {func}`jax.jvp` and {func}`jax.linearize` for forward-mode Jacobian-vector products.
+For more advanced autodiff operations, you can use [`jax.vjp`](https://docs.jax.dev/en/latest/_autosummary/jax.vjp.html) for reverse-mode vector-Jacobian products,
+and [`jax.jvp`](https://docs.jax.dev/en/latest/_autosummary/jax.jvp.html) and [`jax.linearize`](https://docs.jax.dev/en/latest/_autosummary/jax.linearize.html) for forward-mode Jacobian-vector products.
 The two can be composed arbitrarily with one another, and with other JAX transformations.
-For example, {func}`jax.jvp` and {func}`jax.vjp` are used to define the forward-mode {func}`jax.jacfwd` and reverse-mode {func}`jax.jacrev` for computing Jacobians in forward- and reverse-mode, respectively.
+For example, `jax.jvp` and `jax.vjp` are used to define the forward-mode [`jax.jacfwd`](https://docs.jax.dev/en/latest/_autosummary/jax.jacfwd.html) and reverse-mode [`jax.jacrev`](https://docs.jax.dev/en/latest/_autosummary/jax.jacrev.html) for computing Jacobians in forward- and reverse-mode, respectively.
 Here's one way to compose them to make a function that efficiently computes full Hessian matrices:
 
 ```{code-cell} ipython3
@@ -456,25 +346,25 @@ def hessian(fun):
 print(hessian(sum_logistic)(x_small))
 ```
 
-This kind of composition produces efficient code in practice; this is more-or-less how JAX's built-in {func}`jax.hessian` function is implemented.
+This kind of composition produces efficient code in practice; this is more-or-less how JAX's built-in [`jax.hessian`](https://docs.jax.dev/en/latest/_autosummary/jax.hessian.html) function is implemented.
 
-For more on automatic differentiation in JAX, check out {ref}`automatic-differentiation`.
+For more on automatic differentiation in JAX, check out [Automatic differentiation](https://docs.jax.dev/en/latest/automatic-differentiation.html).
 
 +++
 
-## Auto-vectorization with {func}`jax.vmap`
+## Auto-vectorization with `jax.vmap`
 
 **Key concepts:**
-- JAX provides automatic vectorization via the `jax.vmap` transformation.
+- JAX provides automatic vectorization via the [`jax.vmap`](https://docs.jax.dev/en/latest/_autosummary/jax.vmap.html) transformation.
 - `jax.vmap` can be composed with `jax.jit` to produce efficient vectorized code.
 
-Another useful transformation is {func}`~jax.vmap`, the vectorizing map.
+Another useful transformation is [`jax.vmap`](https://docs.jax.dev/en/latest/_autosummary/jax.vmap.html), the vectorizing map.
 It has the familiar semantics of mapping a function along array axes, but instead of explicitly looping
 over function calls, it transforms the function into a natively vectorized version for better performance.
-When composed with {func}`~jax.jit`, it can be just as performant as manually rewriting your function
+When composed with [`jax.jit`](https://docs.jax.dev/en/latest/_autosummary/jax.jit.html), it can be just as performant as manually rewriting your function
 to operate over an extra batch dimension.
 
-We're going to work with a simple example, and promote matrix-vector products into matrix-matrix products using {func}`~jax.vmap`.
+We're going to work with a simple example, and promote matrix-vector products into matrix-matrix products using [`jax.vmap`](https://docs.jax.dev/en/latest/_autosummary/jax.vmap.html).
 Although this is easy to do by hand in this specific case, the same technique can apply to more complicated functions.
 
 ```{code-cell} ipython3
@@ -517,7 +407,7 @@ print('Manually batched')
 ```
 
 However, as functions become more complicated, this kind of manual batching becomes more difficult and error-prone.
-The {func}`~jax.vmap` transformation is designed to automatically transform a function into a batch-aware version:
+The `jax.vmap` transformation is designed to automatically transform a function into a batch-aware version:
 
 ```{code-cell} ipython3
 from jax import vmap
@@ -532,10 +422,10 @@ print('Auto-vectorized with vmap')
 %timeit vmap_batched_apply_matrix(batched_x).block_until_ready()
 ```
 
-As you would expect, {func}`~jax.vmap` can be arbitrarily composed with {func}`~jax.jit`,
-{func}`~jax.grad`, and any other JAX transformation.
+As you would expect, `jax.vmap` can be arbitrarily composed with `jax.jit`,
+`jax.grad`, and any other JAX transformation.
 
-For more on automatic vectorization in JAX, check out {ref}`automatic-vectorization`.
+For more on automatic vectorization in JAX, check out [Automatic vectorization](https://docs.jax.dev/en/latest/automatic-vectorization.html).
 
 +++
 
@@ -585,5 +475,7 @@ Note that this code is thread safe, since the local random state eliminates poss
 For more on pseudo random numbers in JAX, see the [Pseudorandom numbers tutorial](https://docs.jax.dev/en/latest/random-numbers.html).
 
 +++
+
+---
 
 This is just a taste of what JAX can do. We're really excited to see what you do with it!

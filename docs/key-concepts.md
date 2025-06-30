@@ -213,3 +213,54 @@ in a tree.
 
 You can learn more in the {ref}`working-with-pytrees` tutorial.
 
+## JAX API layering: NumPy, lax & XLA
+
+All JAX operations are implemented in terms of operations in [XLA](https://www.tensorflow.org/xla/) – the Accelerated Linear Algebra compiler. If you look at the source of `jax.numpy`, you'll see that all the operations are eventually expressed in terms of functions defined in {mod}`jax.lax`. While `jax.numpy` is a high-level wrapper that provides a familiar interface, you can think of `jax.lax` as a stricter, but often more powerful, lower-level API for working with multi-dimensional arrays.
+
+For example, while `jax.numpy` will implicitly promote arguments to allow operations between mixed data types, `jax.lax` will not:
+
+```{code-cell}
+import jax.numpy as jnp
+jnp.add(1, 1.0)  # jax.numpy API implicitly promotes mixed types.
+```
+
+```{code-cell}
+:tags: [raises-exception]
+
+from jax import lax
+lax.add(1, 1.0)  # jax.lax API requires explicit type promotion.
+```
+
+If using `jax.lax` directly, you'll have to do type promotion explicitly in such cases:
+
+```{code-cell}
+lax.add(jnp.float32(1), 1.0)
+```
+
+Along with this strictness, `jax.lax` also provides efficient APIs for some more general operations than are supported by NumPy.
+
+For example, consider a 1D convolution, which can be expressed in NumPy this way:
+
+```{code-cell}
+x = jnp.array([1, 2, 1])
+y = jnp.ones(10)
+jnp.convolve(x, y)
+```
+
+Under the hood, this NumPy operation is translated to a much more general convolution implemented by [`lax.conv_general_dilated`](https://docs.jax.dev/en/latest/_autosummary/jax.lax.conv_general_dilated.html):
+
+```{code-cell}
+from jax import lax
+result = lax.conv_general_dilated(
+    x.reshape(1, 1, 3).astype(float),  # note: explicit promotion
+    y.reshape(1, 1, 10),
+    window_strides=(1,),
+    padding=[(len(y) - 1, len(y) - 1)])  # equivalent of padding='full' in NumPy
+result[0, 0]
+```
+
+This is a batched convolution operation designed to be efficient for the types of convolutions often used in deep neural nets. It requires much more boilerplate, but is far more flexible and scalable than the convolution provided by NumPy (See [Convolutions in JAX](https://docs.jax.dev/en/latest/notebooks/convolutions.html) for more detail on JAX convolutions).
+
+At their heart, all `jax.lax` operations are Python wrappers for operations in XLA; here, for example, the convolution implementation is provided by [XLA:ConvWithGeneralPadding](https://www.tensorflow.org/xla/operation_semantics#convwithgeneralpadding_convolution).
+Every JAX operation is eventually expressed in terms of these fundamental XLA operations, which is what enables just-in-time (JIT) compilation.
+

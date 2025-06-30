@@ -134,7 +134,6 @@ maintains an up-to-date list.
    :caption: Getting started
 
    installation
-   quickstart
    notebooks/thinking_in_jax
 
 .. toctree::

@@ -1,25 +1,52 @@
 ---
 jupytext:
+  default_lexer: ipython3
   formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.2
+    jupytext_version: 1.16.4
 kernelspec:
   display_name: Python 3
+  language: python
   name: python3
 ---
 
 +++ {"id": "LQHmwePqryRU"}
 
-# How to think in JAX
+# Quickstart: How to think in JAX
 
 <!--* freshness: { reviewed: '2024-04-08' } *-->
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/jax-ml/jax/blob/main/docs/notebooks/thinking_in_jax.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/jax-ml/jax/blob/main/docs/notebooks/thinking_in_jax.ipynb)
 
-JAX provides a simple and powerful API for writing accelerated numerical code, but working effectively in JAX sometimes requires extra consideration. This document is meant to help build a ground-up understanding of how JAX operates, so that you can use it more effectively.
+**JAX is a library for array-oriented numerical computation (*à la* [NumPy](https://numpy.org/)), with automatic differentiation and JIT compilation to enable high-performance machine learning research**.
+
++++
+
+This document provides a quick overview of essential JAX features, so you can get started with JAX:
+
+* JAX provides a unified NumPy-like interface to computations that run on CPU, GPU, or TPU, in local or distributed settings.
+* JAX features built-in Just-In-Time (JIT) compilation via [Open XLA](https://github.com/openxla), an open-source machine learning compiler ecosystem.
+* JAX functions support efficient evaluation of gradients via its automatic differentiation transformations.
+* JAX functions can be automatically vectorized to efficiently map them over arrays representing batches of inputs.
+
++++
+
+## Installation
+
+JAX can be installed for CPU on Linux, Windows, and macOS directly from the [Python Package Index](https://pypi.org/project/jax/):
+
+```
+pip install jax
+```
+or, for NVIDIA GPU:
+
+```
+pip install -U "jax[cuda12]"
+```
+For more detailed platform-specific installation information, check out [Installation](https://docs.jax.dev/en/latest/installation.html).
 
 +++ {"id": "nayIExVUtsVD"}
 
@@ -30,6 +57,37 @@ JAX provides a simple and powerful API for writing accelerated numerical code, b
 - JAX provides a NumPy-inspired interface for convenience.
 - Through duck-typing, JAX arrays can often be used as drop-in replacements of NumPy arrays.
 - Unlike NumPy arrays, JAX arrays are always immutable.
+
++++
+
+NumPy provides a well-known, powerful API for working with numerical data. For convenience, JAX provides [`jax.numpy`](https://docs.jax.dev/en/latest/jax.numpy.html) which closely mirrors the NumPy API and provides easy entry into JAX. Almost anything that can be done with `numpy` can be done with `jax.numpy`, which is typically imported under the `jnp` alias:
+
+```{code-cell} ipython3
+import jax.numpy as jnp
+```
+
+With this import, you can immediately use JAX in a similar manner to typical NumPy programs, including using NumPy-style array creation functions, Python functions and operators, and array attributes and methods:
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+import numpy as np
+
+x_np = np.linspace(0, 10, 1000)
+y_np = 2 * np.sin(x_np) * np.cos(x_np)
+plt.plot(x_np, y_np);
+```
+
+```{code-cell} ipython3
+import jax.numpy as jnp
+
+x_jnp = jnp.linspace(0, 10, 1000)
+y_jnp = 2 * jnp.sin(x_jnp) * jnp.cos(x_jnp)
+plt.plot(x_jnp, y_jnp);
+```
+
+The code blocks are identical aside from replacing `np` with `jnp`, and the results are the same. As we can see, JAX arrays can often be used directly in place of NumPy arrays for things like plotting.
+
++++
 
 The arrays themselves are implemented as different Python types:
 
@@ -60,9 +118,7 @@ type(x_jnp)
 
 +++ {"id": "Mx94Ri7euEZm"}
 
-Python's [duck-typing](https://en.wikipedia.org/wiki/Duck_typing) allows JAX arrays and NumPy arrays to be used interchangeably in many places.
-
-However, there is one important difference between JAX and NumPy arrays: JAX arrays are immutable, meaning that once created their contents cannot be changed.
+Python's [duck-typing](https://en.wikipedia.org/wiki/Duck_typing) allows JAX arrays and NumPy arrays to be used interchangeably in many places. However, there is one important difference between JAX and NumPy arrays: JAX arrays are immutable, meaning that once created their contents cannot be changed.
 
 Here is an example of mutating an array in NumPy:
 
@@ -110,6 +166,13 @@ print(x)
 print(y)
 ```
 
+You'll find a few differences between JAX arrays and NumPy arrays once you begin digging-in. See also:
+
+- [Key concepts](https://docs.jax.dev/en/latest/key-concepts.html#jax-arrays-jax-array) for an introduction to the key concepts of JAX, such as transformations, tracing, jaxprs and pytrees.
+- [🔪 JAX - The Sharp Bits 🔪](https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html) for common gotchas when using JAX.
+
++++
+
 ## JAX arrays (`jax.Array`)
 
 **Key concepts:**
@@ -148,7 +211,7 @@ JAX Array objects have a `devices` method that lets you inspect where the conten
 x.devices()
 ```
 
-In general, an array may be *sharded* across multiple devices, in a manner that can be inspected via the `sharding` attribute:
+In general, an array may be [*sharded*](https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html) across multiple devices, in a manner that can be inspected via the `sharding` attribute:
 
 ```{code-cell} ipython3
 x.sharding
@@ -156,94 +219,11 @@ x.sharding
 
 Here the array is on a single device, but in general a JAX array can be
 sharded across multiple devices, or even multiple hosts.
-To read more about sharded arrays and parallel computation, refer to {ref}`sharded-computation`.
+To read more about sharded arrays and parallel computation, refer to [Introduction to parallel programming](https://docs.jax.dev/en/latest/sharded-computation.html).
 
-+++ {"id": "886BGDPeyXCu"}
++++
 
-## NumPy, lax & XLA: JAX API layering
-
-**Key concepts:**
-
-- `jax.numpy` is a high-level wrapper that provides a familiar interface.
-- `jax.lax` is a lower-level API that is stricter and often more powerful.
-- All JAX operations are implemented in terms of operations in [XLA](https://www.tensorflow.org/xla/) – the Accelerated Linear Algebra compiler.
-
-+++ {"id": "BjE4m2sZy4hh"}
-
-If you look at the source of `jax.numpy`, you'll see that all the operations are eventually expressed in terms of functions defined in `jax.lax`. You can think of `jax.lax` as a stricter, but often more powerful, API for working with multi-dimensional arrays.
-
-For example, while `jax.numpy` will implicitly promote arguments to allow operations between mixed data types, `jax.lax` will not:
-
-```{code-cell} ipython3
-:id: c6EFPcj12mw0
-:outputId: 827d09eb-c8aa-43bc-b471-0a6c9c4f6601
-
-import jax.numpy as jnp
-jnp.add(1, 1.0)  # jax.numpy API implicitly promotes mixed types.
-```
-
-```{code-cell} ipython3
-:id: 0VkqlcXL2qSp
-:outputId: 7e1e9233-2fe1-46a8-8eb1-1d1dbc54b58c
-:tags: [raises-exception]
-
-from jax import lax
-lax.add(1, 1.0)  # jax.lax API requires explicit type promotion.
-```
-
-+++ {"id": "aC9TkXaTEu7A"}
-
-If using `jax.lax` directly, you'll have to do type promotion explicitly in such cases:
-
-```{code-cell} ipython3
-:id: 3PNQlieT81mi
-:outputId: 4bd2b6f3-d2d1-44cb-f8ee-18976ae40239
-
-lax.add(jnp.float32(1), 1.0)
-```
-
-+++ {"id": "M3HDuM4x2eTL"}
-
-Along with this strictness, `jax.lax` also provides efficient APIs for some more general operations than are supported by NumPy.
-
-For example, consider a 1D convolution, which can be expressed in NumPy this way:
-
-```{code-cell} ipython3
-:id: Bv-7XexyzVCN
-:outputId: d570f64a-ca61-456f-8cab-6cd643cb8ea1
-
-x = jnp.array([1, 2, 1])
-y = jnp.ones(10)
-jnp.convolve(x, y)
-```
-
-+++ {"id": "0GPqgT7S0q8r"}
-
-Under the hood, this NumPy operation is translated to a much more general convolution implemented by [`lax.conv_general_dilated`](https://docs.jax.dev/en/latest/_autosummary/jax.lax.conv_general_dilated.html):
-
-```{code-cell} ipython3
-:id: pi4f6ikjzc3l
-:outputId: 0bb56ae2-7837-4c04-ff8b-6cbc0565b7d7
-
-from jax import lax
-result = lax.conv_general_dilated(
-    x.reshape(1, 1, 3).astype(float),  # note: explicit promotion
-    y.reshape(1, 1, 10),
-    window_strides=(1,),
-    padding=[(len(y) - 1, len(y) - 1)])  # equivalent of padding='full' in NumPy
-result[0, 0]
-```
-
-+++ {"id": "7mdo6ycczlbd"}
-
-This is a batched convolution operation designed to be efficient for the types of convolutions often used in deep neural nets. It requires much more boilerplate, but is far more flexible and scalable than the convolution provided by NumPy (See [Convolutions in JAX](https://docs.jax.dev/en/latest/notebooks/convolutions.html) for more detail on JAX convolutions).
-
-At their heart, all `jax.lax` operations are Python wrappers for operations in XLA; here, for example, the convolution implementation is provided by [XLA:ConvWithGeneralPadding](https://www.tensorflow.org/xla/operation_semantics#convwithgeneralpadding_convolution).
-Every JAX operation is eventually expressed in terms of these fundamental XLA operations, which is what enables just-in-time (JIT) compilation.
-
-+++ {"id": "NJfWa2PktD5_"}
-
-## To JIT or not to JIT
+## Just-in-time compilation with `jax.jit`
 
 **Key concepts:**
 
@@ -251,7 +231,9 @@ Every JAX operation is eventually expressed in terms of these fundamental XLA op
 - Using a just-in-time (JIT) compilation decorator, sequences of operations can be optimized together and run at once.
 - Not all JAX code can be JIT compiled, as it requires array shapes to be static & known at compile time.
 
-The fact that all JAX operations are expressed in terms of XLA allows JAX to use the XLA compiler to execute blocks of code very efficiently.
+JAX runs transparently on the GPU or TPU (falling back to CPU if you don't have one), with all JAX operations being expressed in terms of XLA. If we have a sequence of operations, we can use the [`jax.jit`](https://docs.jax.dev/en/latest/_autosummary/jax.jit.html) function to compile this sequence of operations together using the XLA compiler.
+
++++
 
 For example, consider this function that normalizes the rows of a 2D matrix, expressed in terms of `jax.numpy` operations:
 
@@ -265,52 +247,33 @@ def norm(X):
   return X / X.std(0)
 ```
 
-+++ {"id": "0yVo_OKSAolW"}
-
 A just-in-time compiled version of the function can be created using the `jax.jit` transform:
 
 ```{code-cell} ipython3
-:id: oHLwGmhZAnCY
-
 from jax import jit
 norm_compiled = jit(norm)
 ```
 
-+++ {"id": "Q3H9ig5GA2Ms"}
-
 This function returns the same results as the original, up to standard floating-point accuracy:
 
 ```{code-cell} ipython3
-:id: oz7zzyS3AwMc
-:outputId: ed1c796c-59f8-4238-f6e2-f54330edadf0
-
 np.random.seed(1701)
 X = jnp.array(np.random.rand(10000, 10))
 np.allclose(norm(X), norm_compiled(X), atol=1E-6)
 ```
 
-+++ {"id": "3GvisB-CA9M8"}
-
-But due to the compilation (which includes fusing of operations, avoidance of allocating temporary arrays, and a host of other tricks), execution times can be orders of magnitude faster in the JIT-compiled case (note the use of `block_until_ready()` to account for JAX's [asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html)):
+But due to the compilation (which includes fusing of operations, avoidance of allocating temporary arrays, and a host of other tricks), execution times can be orders of magnitude faster in the JIT-compiled case. We can use IPython's `%timeit` to quickly benchmark our function, using `block_until_ready()` to account for JAX's [asynchronous dispatch](https://docs.jax.dev/en/latest/async_dispatch.html):
 
 ```{code-cell} ipython3
-:id: 6mUB6VdDAEIY
-:outputId: 1050a69c-e713-44c1-b3eb-1ef875691978
-
 %timeit norm(X).block_until_ready()
 %timeit norm_compiled(X).block_until_ready()
 ```
-
-+++ {"id": "B1eGBGn0tMba"}
 
 That said, `jax.jit` does have limitations: in particular, it requires all arrays to have static shapes. That means that some JAX operations are incompatible with JIT compilation.
 
 For example, this operation can be executed in op-by-op mode:
 
 ```{code-cell} ipython3
-:id: YfZd9mW7CSKM
-:outputId: 6fdbfde4-7cde-447f-badf-26e1f8db288d
-
 def get_negatives(x):
   return x[x < 0]
 
@@ -318,25 +281,23 @@ x = jnp.array(np.random.randn(10))
 get_negatives(x)
 ```
 
-+++ {"id": "g6niKxoQC2mZ"}
-
 But it returns an error if you attempt to execute it in jit mode:
 
 ```{code-cell} ipython3
-:id: yYWvE4rxCjPK
-:outputId: 9cf7f2d4-8f28-4265-d701-d52086cfd437
 :tags: [raises-exception]
 
 jit(get_negatives)(x)
 ```
 
-+++ {"id": "vFL6DNpECfVz"}
-
 This is because the function generates an array whose shape is not known at compile time: the size of the output depends on the values of the input array, and so it is not compatible with JIT.
+
++++
+
+For more on JIT compilation in JAX, check out {ref}`jit-compilation`.
 
 +++ {"id": "BzBnKbXwXjLV"}
 
-## JIT mechanics: tracing and static variables
+### JIT mechanics: tracing and static variables
 
 **Key concepts:**
 
@@ -383,7 +344,7 @@ f(x2, y2)
 
 +++ {"id": "9EB9WkRX7fm0"}
 
-The extracted sequence of operations is encoded in a JAX expression, or *jaxpr* for short. You can view the jaxpr using the `jax.make_jaxpr` transformation:
+The extracted sequence of operations is encoded in a JAX expression, or [*jaxpr*](https://docs.jax.dev/en/latest/key-concepts.html#jaxprs) for short. You can view the jaxpr using the `jax.make_jaxpr` transformation:
 
 ```{code-cell} ipython3
 :id: 89TMp_Op5-JZ
@@ -444,3 +405,194 @@ f(1, False)
 +++ {"id": "ZESlrDngGVb1"}
 
 Understanding which values and operations will be static and which will be traced is a key part of using `jax.jit` effectively.
+
++++
+
+## Taking derivatives with `jax.grad`
+
+**Key concepts:**
+- JAX provides automatic differentiation via the `jax.grad` transformation.
+- The `jax.grad` and `jax.jit` transformations compose and can be mixed arbitrarily.
+
+In addition to transforming functions via JIT compilation, JAX also provides other transformations. One such transformation is {func}`jax.grad`, which performs [automatic differentiation (autodiff)](https://en.wikipedia.org/wiki/Automatic_differentiation):
+
+```{code-cell} ipython3
+from jax import grad
+
+def sum_logistic(x):
+  return jnp.sum(1.0 / (1.0 + jnp.exp(-x)))
+
+x_small = jnp.arange(3.)
+derivative_fn = grad(sum_logistic)
+print(derivative_fn(x_small))
+```
+
+Let's verify with finite differences that our result is correct.
+
+```{code-cell} ipython3
+def first_finite_differences(f, x, eps=1E-3):
+  return jnp.array([(f(x + eps * v) - f(x - eps * v)) / (2 * eps)
+                   for v in jnp.eye(len(x))])
+
+print(first_finite_differences(sum_logistic, x_small))
+```
+
+The {func}`~jax.grad` and {func}`~jax.jit` transformations compose and can be mixed arbitrarily.
+For instance, while the `sum_logistic` function was differentiated directly in the previous example, it could also be JIT-compiled, and these operations can be combined. We can go further:
+
+```{code-cell} ipython3
+print(grad(jit(grad(jit(grad(sum_logistic)))))(1.0))
+```
+
+Beyond scalar-valued functions, the {func}`jax.jacobian` transformation can be
+used to compute the full Jacobian matrix for vector-valued functions:
+
+```{code-cell} ipython3
+from jax import jacobian
+print(jacobian(jnp.exp)(x_small))
+```
+
+For more advanced autodiff operations, you can use {func}`jax.vjp` for reverse-mode vector-Jacobian products,
+and {func}`jax.jvp` and {func}`jax.linearize` for forward-mode Jacobian-vector products.
+The two can be composed arbitrarily with one another, and with other JAX transformations.
+For example, {func}`jax.jvp` and {func}`jax.vjp` are used to define the forward-mode {func}`jax.jacfwd` and reverse-mode {func}`jax.jacrev` for computing Jacobians in forward- and reverse-mode, respectively.
+Here's one way to compose them to make a function that efficiently computes full Hessian matrices:
+
+```{code-cell} ipython3
+from jax import jacfwd, jacrev
+def hessian(fun):
+  return jit(jacfwd(jacrev(fun)))
+print(hessian(sum_logistic)(x_small))
+```
+
+This kind of composition produces efficient code in practice; this is more-or-less how JAX's built-in {func}`jax.hessian` function is implemented.
+
+For more on automatic differentiation in JAX, check out {ref}`automatic-differentiation`.
+
++++
+
+## Auto-vectorization with {func}`jax.vmap`
+
+**Key concepts:**
+- JAX provides automatic vectorization via the `jax.vmap` transformation.
+- `jax.vmap` can be composed with `jax.jit` to produce efficient vectorized code.
+
+Another useful transformation is {func}`~jax.vmap`, the vectorizing map.
+It has the familiar semantics of mapping a function along array axes, but instead of explicitly looping
+over function calls, it transforms the function into a natively vectorized version for better performance.
+When composed with {func}`~jax.jit`, it can be just as performant as manually rewriting your function
+to operate over an extra batch dimension.
+
+We're going to work with a simple example, and promote matrix-vector products into matrix-matrix products using {func}`~jax.vmap`.
+Although this is easy to do by hand in this specific case, the same technique can apply to more complicated functions.
+
+```{code-cell} ipython3
+from jax import random
+
+key = random.key(1701)
+key1, key2 = random.split(key)
+mat = random.normal(key1, (150, 100))
+batched_x = random.normal(key2, (10, 100))
+
+def apply_matrix(x):
+  return jnp.dot(mat, x)
+```
+
+The `apply_matrix` function maps a vector to a vector, but we may want to apply it row-wise across a matrix.
+We could do this by looping over the batch dimension in Python, but this usually results in poor performance.
+
+```{code-cell} ipython3
+def naively_batched_apply_matrix(v_batched):
+  return jnp.stack([apply_matrix(v) for v in v_batched])
+
+print('Naively batched')
+%timeit naively_batched_apply_matrix(batched_x).block_until_ready()
+```
+
+A programmer familiar with the `jnp.dot` function might recognize that `apply_matrix` can
+be rewritten to avoid explicit looping, using the built-in batching semantics of `jnp.dot`:
+
+```{code-cell} ipython3
+import numpy as np
+
+@jit
+def batched_apply_matrix(batched_x):
+  return jnp.dot(batched_x, mat.T)
+
+np.testing.assert_allclose(naively_batched_apply_matrix(batched_x),
+                           batched_apply_matrix(batched_x), atol=1E-4, rtol=1E-4)
+print('Manually batched')
+%timeit batched_apply_matrix(batched_x).block_until_ready()
+```
+
+However, as functions become more complicated, this kind of manual batching becomes more difficult and error-prone.
+The {func}`~jax.vmap` transformation is designed to automatically transform a function into a batch-aware version:
+
+```{code-cell} ipython3
+from jax import vmap
+
+@jit
+def vmap_batched_apply_matrix(batched_x):
+  return vmap(apply_matrix)(batched_x)
+
+np.testing.assert_allclose(naively_batched_apply_matrix(batched_x),
+                           vmap_batched_apply_matrix(batched_x), atol=1E-4, rtol=1E-4)
+print('Auto-vectorized with vmap')
+%timeit vmap_batched_apply_matrix(batched_x).block_until_ready()
+```
+
+As you would expect, {func}`~jax.vmap` can be arbitrarily composed with {func}`~jax.jit`,
+{func}`~jax.grad`, and any other JAX transformation.
+
+For more on automatic vectorization in JAX, check out {ref}`automatic-vectorization`.
+
++++
+
+(key-concepts-prngs)=
+## Pseudorandom numbers
+
+**Key concepts:**
+
+- JAX uses a different model for pseudo random number generation than NumPy.
+- JAX random functions consume a random `key` that must be split to generate new independent keys.
+- JAX's random key model is thread-safe and avoids issues with global state.
+
+Generally, JAX strives to be compatible with NumPy, but pseudo random number generation is a notable exception. NumPy supports a method of pseudo random number generation that is based on a global `state`, which can be set using [`numpy.random.seed`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.seed.html). Global random state interacts poorly with JAX's compute model and makes it difficult to enforce reproducibility across different threads, processes, and devices. JAX instead tracks state explicitly via a random `key`:
+
+```{code-cell} ipython3
+from jax import random
+
+key = random.key(43)
+print(key)
+```
+
+The key is effectively a stand-in for NumPy's hidden state object, but we pass it explicitly to [`jax.random`](https://docs.jax.dev/en/latest/jax.random.html) functions. Importantly, random functions consume the key, but do not modify it: feeding the same key object to a random function will always result in the same sample being generated.
+
+```{code-cell} ipython3
+print(random.normal(key))
+print(random.normal(key))
+```
+
+**The rule of thumb is: never reuse keys (unless you want identical outputs).**
+
+In order to generate different and independent samples, you must [`jax.random.split`](https://docs.jax.dev/en/latest/_autosummary/jax.random.split.html) the key explicitly before passing it to a random function:
+
+```{code-cell} ipython3
+for i in range(3):
+  new_key, subkey = random.split(key)
+  del key  # The old key is consumed by split() -- we must never use it again.
+
+  val = random.normal(subkey)
+  del subkey  # The subkey is consumed by normal().
+
+  print(f"draw {i}: {val}")
+  key = new_key  # new_key is safe to use in the next iteration.
+```
+
+Note that this code is thread safe, since the local random state eliminates possible race conditions involving global state. `jax.random.split` is a deterministic function that converts one `key` into several independent (in the pseudorandomness sense) keys.
+
+For more on pseudo random numbers in JAX, see the [Pseudorandom numbers tutorial](https://docs.jax.dev/en/latest/random-numbers.html).
+
++++
+
+This is just a taste of what JAX can do. We're really excited to see what you do with it!

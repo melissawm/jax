@@ -1,0 +1,2009 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Distributed arrays and automatic parallelization &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Distributed_arrays_and_automatic_parallelization';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Explicit sharding (a.k.a. “sharding in types”)" href="explicit-sharding.html" />
+    <link rel="prev" title="Profiling device memory" href="../device_memory_profiling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Distributed...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/Distributed_arrays_and_automatic_parallelization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Distributed arrays and automatic parallelization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-and-a-quick-example">Intro and a quick example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharding-describes-how-array-values-are-laid-out-in-memory-across-devices"><code class="docutils literal notranslate"><span class="pre">Sharding</span></code> describes how array values are laid out in memory across devices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sharding-basics-and-the-namedsharding-subclass">Sharding basics, and the <code class="docutils literal notranslate"><span class="pre">NamedSharding</span></code> subclass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-follows-data-sharding-and-is-automatically-parallelized">Computation follows data sharding and is automatically parallelized</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-explicit-shardings-disagree-jax-errors">When explicit shardings disagree, JAX errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraining-shardings-of-intermediates-in-jitted-code">Constraining shardings of intermediates in <code class="docutils literal notranslate"><span class="pre">jit</span></code>ted code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-neural-networks">Examples: neural networks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#way-batch-data-parallelism">8-way batch data parallelism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#way-batch-data-parallelism-and-2-way-model-tensor-parallelism">4-way batch data parallelism and 2-way model tensor parallelism</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharp-bits">Sharp bits</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-random-numbers">Generating random numbers</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="distributed-arrays-and-automatic-parallelization">
+<h1>Distributed arrays and automatic parallelization<a class="headerlink" href="#distributed-arrays-and-automatic-parallelization" title="Link to this heading">#</a></h1>
+<!--* freshness: { reviewed: '2024-04-16' } *--><p><a class="reference external" href="https://colab.research.google.com/github/jax-ml/jax/blob/main/docs/notebooks/Distributed_arrays_and_automatic_parallelization.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a> <a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://github.com/jax-ml/jax/blob/main/docs/notebooks/Distributed_arrays_and_automatic_parallelization.ipynb"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
+<p>This tutorial discusses parallelism via <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code>, the unified array object model available in JAX v0.4.1 and newer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>⚠️ WARNING: The notebook requires 8 devices to run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+  <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Notebook requires 8 devices to run&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="intro-and-a-quick-example">
+<h2>Intro and a quick example<a class="headerlink" href="#intro-and-a-quick-example" title="Link to this heading">#</a></h2>
+<p>By reading this tutorial notebook, you’ll learn about <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code>, a unified
+datatype for representing arrays, even with physical storage spanning multiple
+devices. You’ll also learn about how using <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code>s together with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>
+can provide automatic compiler-based parallelization.</p>
+<p>Before we think step by step, here’s a quick example.
+First, we’ll create a <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code> sharded across multiple devices:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span><span class="p">,</span> <span class="n">NamedSharding</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Sharding object to distribute a value across devices:</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an array of random values:</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">8192</span><span class="p">,</span> <span class="mi">8192</span><span class="p">))</span>
+<span class="c1"># and use jax.device_put to distribute it across devices:</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>Next, we’ll apply a computation to it and visualize how the result values are
+stored across multiple devices too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>The evaluation of the <code class="docutils literal notranslate"><span class="pre">jnp.sin</span></code> application was automatically parallelized
+across the devices on which the input values (and output values) are stored:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># `x` is present on a single device</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">5</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The slowest run took 8.96 times longer than the fastest. This could mean that an intermediate result is being cached.
+25.2 ms ± 30.9 ms per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># `y` is sharded across 8 devices.</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">5</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.4 ms ± 61.4 µs per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s look at each of these pieces in more detail!</p>
+</section>
+<section id="sharding-describes-how-array-values-are-laid-out-in-memory-across-devices">
+<h2><code class="docutils literal notranslate"><span class="pre">Sharding</span></code> describes how array values are laid out in memory across devices<a class="headerlink" href="#sharding-describes-how-array-values-are-laid-out-in-memory-across-devices" title="Link to this heading">#</a></h2>
+<section id="sharding-basics-and-the-namedsharding-subclass">
+<h3>Sharding basics, and the <code class="docutils literal notranslate"><span class="pre">NamedSharding</span></code> subclass<a class="headerlink" href="#sharding-basics-and-the-namedsharding-subclass" title="Link to this heading">#</a></h3>
+<p>To parallelize computation across multiple devices, we first must lay out input data across multiple devices.</p>
+<p>In JAX, <code class="docutils literal notranslate"><span class="pre">Sharding</span></code> objects describe distributed memory layouts. They can be used with <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code> to produce a value with distributed layout.</p>
+<p>For example, here’s a value with a single-device <code class="docutils literal notranslate"><span class="pre">Sharding</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">8192</span><span class="p">,</span> <span class="mi">8192</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│                       │
+│                       │
+│                       │
+│                       │
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>         │
+│                       │
+│                       │
+│                       │
+│                       │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<p>Here, we’re using the <code class="docutils literal notranslate"><span class="pre">jax.debug.visualize_array_sharding</span></code> function to show where the value <code class="docutils literal notranslate"><span class="pre">x</span></code> is stored in memory. All of <code class="docutils literal notranslate"><span class="pre">x</span></code> is stored on a single device, so the visualization is pretty boring!</p>
+<p>But we can shard <code class="docutils literal notranslate"><span class="pre">x</span></code> across multiple devices by using <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code> and a <code class="docutils literal notranslate"><span class="pre">Sharding</span></code> object. First, we make a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> of <code class="docutils literal notranslate"><span class="pre">Devices</span></code> using <code class="docutils literal notranslate"><span class="pre">jax.make_mesh</span></code>, which takes hardware topology into account for the <code class="docutils literal notranslate"><span class="pre">Device</span></code> order:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">PartitionSpec</span><span class="p">,</span> <span class="n">NamedSharding</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="n">PartitionSpec</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>We can define a helper function to make things simpler:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">mesh_sharding</span><span class="p">(</span>
+    <span class="n">pspec</span><span class="p">:</span> <span class="n">PartitionSpec</span><span class="p">,</span> <span class="n">mesh</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mesh</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NamedSharding</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">mesh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">default_mesh</span>
+  <span class="k">return</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">pspec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh_sharding</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>Here, we use <code class="docutils literal notranslate"><span class="pre">P('a',</span> <span class="pre">'b')</span></code> to express that the first and second axes of <code class="docutils literal notranslate"><span class="pre">x</span></code> should be sharded over the device mesh axes <code class="docutils literal notranslate"><span class="pre">'a'</span></code> and <code class="docutils literal notranslate"><span class="pre">'b'</span></code>, respectively. We can easily switch to <code class="docutils literal notranslate"><span class="pre">P('b',</span> <span class="pre">'a')</span></code> to shard the axes of <code class="docutils literal notranslate"><span class="pre">x</span></code> over different devices:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh_sharding</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┬───────┬───────┬───────┐
+│       │       │       │       │
+│ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span> │
+│       │       │       │       │
+│       │       │       │       │
+├───────┼───────┼───────┼───────┤
+│       │       │       │       │
+│ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span> │
+│       │       │       │       │
+│       │       │       │       │
+└───────┴───────┴───────┴───────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This `None` means that `x` is not sharded on its second dimension,</span>
+<span class="c1"># and since the Mesh axis name &#39;b&#39; is not mentioned, shards are</span>
+<span class="c1"># replicated across it.</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh_sharding</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        │
+├───────────────────────┤
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>        │
+├───────────────────────┤
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>        │
+├───────────────────────┤
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>        │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<p>Here, because <code class="docutils literal notranslate"><span class="pre">P('a',</span> <span class="pre">None)</span></code> doesn’t mention the <code class="docutils literal notranslate"><span class="pre">Mesh</span></code> axis name <code class="docutils literal notranslate"><span class="pre">'b'</span></code>, we get replication over the axis <code class="docutils literal notranslate"><span class="pre">'b'</span></code>. The <code class="docutils literal notranslate"><span class="pre">None</span></code> here is just acting as a placeholder to line up against the second axis of the value <code class="docutils literal notranslate"><span class="pre">x</span></code>, without expressing sharding over any mesh axis. (As a shorthand, trailing <code class="docutils literal notranslate"><span class="pre">None</span></code>s can be omitted, so that <code class="docutils literal notranslate"><span class="pre">P('a',</span> <span class="pre">None)</span></code> means the same thing as <code class="docutils literal notranslate"><span class="pre">P('a')</span></code>. But it doesn’t hurt to be explicit!)</p>
+<p>To shard only over the second axis of <code class="docutils literal notranslate"><span class="pre">x</span></code>, we can use a <code class="docutils literal notranslate"><span class="pre">None</span></code> placeholder in the <code class="docutils literal notranslate"><span class="pre">PartitionSpec</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh_sharding</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────┬───────────┐
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+└───────────┴───────────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh_sharding</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┬───────┬───────┬───────┐
+│       │       │       │       │
+│       │       │       │       │
+│       │       │       │       │
+│       │       │       │       │
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>│
+│       │       │       │       │
+│       │       │       │       │
+│       │       │       │       │
+│       │       │       │       │
+└───────┴───────┴───────┴───────┘
+</pre>
+</div></div>
+</div>
+<p>For a fixed mesh, we can even partition one logical axis of <code class="docutils literal notranslate"><span class="pre">x</span></code> over multiple device mesh axes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh_sharding</span><span class="p">(</span><span class="n">P</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="kc">None</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>         │
+├───────────────────────┤
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>         │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">NamedSharding</span></code> makes it easy to define a device mesh once and give its axes names, then just refer to those names in <code class="docutils literal notranslate"><span class="pre">PartitionSpec</span></code>s for each <code class="docutils literal notranslate"><span class="pre">device_put</span></code> as needed.</p>
+</section>
+</section>
+<section id="computation-follows-data-sharding-and-is-automatically-parallelized">
+<h2>Computation follows data sharding and is automatically parallelized<a class="headerlink" href="#computation-follows-data-sharding-and-is-automatically-parallelized" title="Link to this heading">#</a></h2>
+<p>With sharded input data, the compiler can give us parallel computation. In particular, functions decorated with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> can operate over sharded arrays without copying data onto a single device. Instead, computation follows sharding: based on the sharding of the input data, the compiler decides shardings for intermediates and output values, and parallelizes their evaluation, even inserting communication operations as necessary.</p>
+<p>For example, the simplest computation is an elementwise one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input sharding:&#39;</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;output sharding:&#39;</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>input sharding:
+output sharding:
+</pre></div>
+</div>
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>Here for the elementwise operation <code class="docutils literal notranslate"><span class="pre">jnp.sin</span></code> the compiler chose the output sharding to be the same as the input. Moreover, the compiler automatically parallelized the computation, so that each device computed its output shard from its input shard in parallel.</p>
+<p>In other words, even though we wrote the <code class="docutils literal notranslate"><span class="pre">jnp.sin</span></code> computation as if a single machine were to execute it, the compiler splits up the computation for us and executes it on multiple devices.</p>
+<p>We can do the same for more than just elementwise operations too. Consider a matrix multiplication with sharded inputs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lhs sharding:&#39;</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rhs sharding:&#39;</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;out sharding:&#39;</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lhs sharding:
+rhs sharding:
+out sharding:
+</pre></div>
+</div>
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>        │
+├───────────────────────┤
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>        │
+├───────────────────────┤
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>        │
+├───────────────────────┤
+│        TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>        │
+└───────────────────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────┬───────────┐
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+└───────────┴───────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>Here the compiler chose the output sharding so that it could maximally parallelize the computation: without needing communication, each device already has the input shards it needs to compute its output shard.</p>
+<p>How can we be sure it’s actually running in parallel? We can do a simple timing experiment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_single</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">x_single</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│                       │
+│                       │
+│                       │
+│                       │
+│         TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>         │
+│                       │
+│                       │
+│                       │
+│                       │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_single</span><span class="p">,</span> <span class="n">x_single</span><span class="p">),</span>
+            <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">5</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_single</span><span class="p">,</span> <span class="n">x_single</span><span class="p">)</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49.7 ms ± 349 µs per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">5</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.47 ms ± 44.8 µs per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even copying a sharded <code class="docutils literal notranslate"><span class="pre">Array</span></code> produces a result with the sharding of the input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w_copy</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">w_copy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div></div>
+</div>
+<p>So computation follows data placement: when we explicitly shard data with <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code>, and apply functions to that data, the compiler attempts to parallelize the computation and decide the output sharding. This policy for sharded data is a generalization of <a class="reference external" href="https://docs.jax.dev/en/latest/faq.html#controlling-data-and-computation-placement-on-devices">JAX’s policy of following explicit device placement</a>.</p>
+<section id="when-explicit-shardings-disagree-jax-errors">
+<h3>When explicit shardings disagree, JAX errors<a class="headerlink" href="#when-explicit-shardings-disagree-jax-errors" title="Link to this heading">#</a></h3>
+<p>But what if two arguments to a computation are explicitly placed on different sets of devices, or with incompatible device orders?
+In these ambiguous cases, an error is raised:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+
+<span class="k">def</span> <span class="nf">print_exception</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+  <span class="n">name</span> <span class="o">=</span> <span class="n">colored</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">force_color</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sharding1</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">Mesh</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[:</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="n">sharding2</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">Mesh</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">4</span><span class="p">:],</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharding1</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharding2</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="n">print_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ValueError</span>: Received incompatible devices for jitted
+computation. Got argument x1 of jax.numpy.add with shape int32[24] and
+device ids [0, 1, 2, 3] on platform TPU and argument x2 of
+jax.numpy.add with shape int32[24] and device ids [4, 5, 6, 7] on
+platform TPU
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()</span>
+<span class="n">permuted_devices</span> <span class="o">=</span> <span class="p">[</span><span class="n">devices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+
+<span class="n">sharding1</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">Mesh</span><span class="p">(</span><span class="n">devices</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="n">sharding2</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">Mesh</span><span class="p">(</span><span class="n">permuted_devices</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharding1</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharding2</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="n">print_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ValueError</span>: Received incompatible devices for jitted
+computation. Got argument x1 of jax.numpy.add with shape int32[24] and
+device ids [0, 1, 2, 3, 4, 5, 6, 7] on platform TPU and argument x2 of
+jax.numpy.add with shape int32[24] and device ids [0, 1, 2, 3, 6, 7,
+4, 5] on platform TPU
+</pre></div>
+</div>
+</div>
+</div>
+<p>We say arrays that have been explicitly placed or sharded with <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code> are <em>committed</em> to their device(s), and so won’t be automatically moved. See the <a class="reference external" href="https://docs.jax.dev/en/latest/faq.html#controlling-data-and-computation-placement-on-devices">device placement FAQ</a> for more information.</p>
+<p>When arrays are <em>not</em> explicitly placed or sharded with <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code>, they are placed <em>uncommitted</em> on the default device.
+Unlike committed arrays, uncommitted arrays can be moved and resharded automatically: that is, uncommitted arrays can be arguments to a computation even if other arguments are explicitly placed on different devices.</p>
+<p>For example, the output of <code class="docutils literal notranslate"><span class="pre">jnp.zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">jnp.arange</span></code>, and <code class="docutils literal notranslate"><span class="pre">jnp.array</span></code> are uncommitted:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sharding1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no error!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>no error!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="constraining-shardings-of-intermediates-in-jitted-code">
+<h2>Constraining shardings of intermediates in <code class="docutils literal notranslate"><span class="pre">jit</span></code>ted code<a class="headerlink" href="#constraining-shardings-of-intermediates-in-jitted-code" title="Link to this heading">#</a></h2>
+<p>While the compiler will attempt to decide how a function’s intermediate values and outputs should be sharded, we can also give it hints using <code class="docutils literal notranslate"><span class="pre">jax.lax.with_sharding_constraint</span></code>. Using <code class="docutils literal notranslate"><span class="pre">jax.lax.with_sharding_constraint</span></code> is much like <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code>, except we use it inside staged-out (i.e. <code class="docutils literal notranslate"><span class="pre">jit</span></code>-decorated) functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">8192</span><span class="p">,</span> <span class="mi">8192</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">with_sharding_constraint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)))</span>
+  <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┬───────┬───────┬───────┐
+│       │       │       │       │
+│ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span> │
+│       │       │       │       │
+│       │       │       │       │
+├───────┼───────┼───────┼───────┤
+│       │       │       │       │
+│ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span> │
+│       │       │       │       │
+│       │       │       │       │
+└───────┴───────┴───────┴───────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">with_sharding_constraint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">()))</span>
+  <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌──────────┬──────────┐
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>   │
+├──────────┼──────────┤
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>   │  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>   │
+└──────────┴──────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│                       │
+│                       │
+│                       │
+│                       │
+│  TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>  │
+│                       │
+│                       │
+│                       │
+│                       │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<p>By adding <code class="docutils literal notranslate"><span class="pre">with_sharding_constraint</span></code>, we’ve constrained the sharding of the output. In addition to respecting the annotation on a particular intermediate, the compiler will use annotations to decide shardings for other values.</p>
+<p>It’s often a good practice to annotate the outputs of computations, for example based on how the values are ultimately consumed.</p>
+</section>
+<section id="examples-neural-networks">
+<h2>Examples: neural networks<a class="headerlink" href="#examples-neural-networks" title="Link to this heading">#</a></h2>
+<p><strong>⚠️ WARNING: The following is meant to be a simple demonstration of automatic sharding propagation with <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code>, but it may not reflect best practices for real examples.</strong> For instance, real examples may require more use of <code class="docutils literal notranslate"><span class="pre">with_sharding_constraint</span></code>.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">jax.device_put</span></code> and <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>’s computation-follows-sharding features to parallelize computation in neural networks. Here are some simple examples, based on this basic neural network:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">outputs</span>
+
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">batch</span>
+  <span class="n">predictions</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">predictions</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loss_jit</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+<span class="n">gradfun</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">init_layer</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">):</span>
+  <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+  <span class="n">W</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">))</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n_in</span><span class="p">)</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">k2</span><span class="p">,</span> <span class="p">(</span><span class="n">n_out</span><span class="p">,))</span>
+  <span class="k">return</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">init_model</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+  <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">))</span>
+  <span class="n">params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">init_layer</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">layer_sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+
+  <span class="n">key</span><span class="p">,</span> <span class="o">*</span><span class="n">keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="n">inputs</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+  <span class="n">targets</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+  <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+
+<span class="n">layer_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">784</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8192</span>
+
+<span class="n">params</span><span class="p">,</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">init_model</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">layer_sizes</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="way-batch-data-parallelism">
+<h3>8-way batch data parallelism<a class="headerlink" href="#way-batch-data-parallelism" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">8</span><span class="p">,),</span> <span class="p">(</span><span class="s1">&#39;batch&#39;</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sharding</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;batch&#39;</span><span class="p">))</span>
+<span class="n">replicated_sharding</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">sharding</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">replicated_sharding</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">loss_jit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(23.469475, dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">step_size</span> <span class="o">=</span> <span class="mf">1e-5</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+  <span class="n">grads</span> <span class="o">=</span> <span class="n">gradfun</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>
+  <span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="n">W</span> <span class="o">-</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">dW</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">db</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">dW</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">grads</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">loss_jit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.760109
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">5</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="n">gradfun</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53.8 ms ± 1.14 ms per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_single</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">params_single</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">5</span> <span class="o">-</span><span class="n">r</span> <span class="mi">5</span> <span class="n">gradfun</span><span class="p">(</span><span class="n">params_single</span><span class="p">,</span> <span class="n">batch_single</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>351 ms ± 81.2 ms per loop (mean ± std. dev. of 5 runs, 5 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="way-batch-data-parallelism-and-2-way-model-tensor-parallelism">
+<h3>4-way batch data parallelism and 2-way model tensor parallelism<a class="headerlink" href="#way-batch-data-parallelism-and-2-way-model-tensor-parallelism" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;batch&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;batch&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┐
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>│
+├───────┤
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>│
+├───────┤
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│
+├───────┤
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>│
+└───────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┐
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>│
+├───────┤
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>│
+├───────┤
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│
+├───────┤
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>│
+└───────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">replicated_sharding</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">),</span> <span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span> <span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">b3</span><span class="p">),</span> <span class="p">(</span><span class="n">W4</span><span class="p">,</span> <span class="n">b4</span><span class="p">)</span> <span class="o">=</span> <span class="n">params</span>
+
+<span class="n">W1</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">replicated_sharding</span><span class="p">)</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span> <span class="n">replicated_sharding</span><span class="p">)</span>
+
+<span class="n">W2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">)))</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">b2</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">)))</span>
+
+<span class="n">W3</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">b3</span><span class="p">,</span> <span class="n">replicated_sharding</span><span class="p">)</span>
+
+<span class="n">W4</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">W4</span><span class="p">,</span> <span class="n">replicated_sharding</span><span class="p">)</span>
+<span class="n">b4</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">b4</span><span class="p">,</span> <span class="n">replicated_sharding</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">),</span> <span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span> <span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">b3</span><span class="p">),</span> <span class="p">(</span><span class="n">W4</span><span class="p">,</span> <span class="n">b4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">W2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────┬───────────┐
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+└───────────┴───────────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">W3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│                       │
+│      TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>      │
+│                       │
+│                       │
+├───────────────────────┤
+│                       │
+│      TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>      │
+│                       │
+│                       │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">loss_jit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.760109
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">step_size</span> <span class="o">=</span> <span class="mf">1e-5</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="n">gradfun</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[(</span><span class="n">W</span> <span class="o">-</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">dW</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">db</span><span class="p">)</span>
+              <span class="k">for</span> <span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">dW</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">grads</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">loss_jit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.752513
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">),</span> <span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span> <span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">b3</span><span class="p">),</span> <span class="p">(</span><span class="n">W4</span><span class="p">,</span> <span class="n">b4</span><span class="p">)</span> <span class="o">=</span> <span class="n">params</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">W2</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">W3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────┬───────────┐
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>│TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>│
+│           │           │
+│           │           │
+│           │           │
+│           │           │
+└───────────┴───────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────────────────────┐
+│                       │
+│      TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span>      │
+│                       │
+│                       │
+├───────────────────────┤
+│                       │
+│      TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span>,<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span>      │
+│                       │
+│                       │
+└───────────────────────┘
+</pre>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="o">-</span><span class="n">r</span> <span class="mi">10</span> <span class="n">gradfun</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">batch</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">block_until_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51.4 ms ± 454 µs per loop (mean ± std. dev. of 10 runs, 10 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sharp-bits">
+<h2>Sharp bits<a class="headerlink" href="#sharp-bits" title="Link to this heading">#</a></h2>
+<section id="generating-random-numbers">
+<h3>Generating random numbers<a class="headerlink" href="#generating-random-numbers" title="Link to this heading">#</a></h3>
+<p>JAX comes with a functional, deterministic <a class="reference external" href="https://docs.jax.dev/en/latest/jep/263-prng.html">random number generator</a>. It underlies the various sampling functions in the <a class="reference external" href="https://docs.jax.dev/en/latest/jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a>, such as <code class="docutils literal notranslate"><span class="pre">jax.random.uniform</span></code>.</p>
+<p>JAX’s random numbers are produced by a counter-based PRNG, so in principle, random number generation should be a pure map over counter values. A pure map is a trivially partitionable operation in principle. It should require no cross-device communication, nor any redundant computation across devices.</p>
+<p>However, the existing stable RNG implementation is not automatically partitionable, for historical reasons.</p>
+<p>Consider the following example, where a function draws random uniform numbers and adds them to the input, elementwise:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  <span class="n">numbers</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">numbers</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">(),</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">x_sharding</span> <span class="o">=</span> <span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">),</span> <span class="n">x_sharding</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On a partitioned input, the function <code class="docutils literal notranslate"><span class="pre">f</span></code> produces output that is also partitioned:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┐
+│ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span> │
+└───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┘
+</pre>
+</div></div>
+</div>
+<p>But if we inspect the compiled computation for <code class="docutils literal notranslate"><span class="pre">f</span></code> on this partitioned input, we see that it does involve some communication:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f_exe</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Communicating?&#39;</span><span class="p">,</span> <span class="s1">&#39;collective-permute&#39;</span> <span class="ow">in</span> <span class="n">f_exe</span><span class="o">.</span><span class="n">as_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Communicating? True
+</pre></div>
+</div>
+</div>
+</div>
+<p>One way to work around this is to configure JAX with the experimental upgrade flag <code class="docutils literal notranslate"><span class="pre">jax_threefry_partitionable</span></code>. With the flag on, the “collective permute” operation is now gone from the compiled computation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;jax_threefry_partitionable&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">f_exe</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Communicating?&#39;</span><span class="p">,</span> <span class="s1">&#39;collective-permute&#39;</span> <span class="ow">in</span> <span class="n">f_exe</span><span class="o">.</span><span class="n">as_text</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Communicating? False
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output is still partitioned:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">visualize_array_sharding</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┐
+│ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">3</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">4</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">5</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6</span> │ TPU <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">7</span> │
+└───────┴───────┴───────┴───────┴───────┴───────┴───────┴───────┘
+</pre>
+</div></div>
+</div>
+<p>One caveat to the <code class="docutils literal notranslate"><span class="pre">jax_threefry_partitionable</span></code> option, however, is that <em>the random values produced may be different than without the flag set</em>, even though they were generated by the same random key:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;jax_threefry_partitionable&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Stable:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">jax</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;jax_threefry_partitionable&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Partitionable:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stable:
+[ 0.72503686  1.8532515   2.983416    3.083253    4.0332246   5.4782867
+  6.1720605   7.6900277   8.602836    9.810046   10.861367   11.907651
+ 12.330483   13.456195   14.808557   15.960099   16.067581   17.739723
+ 18.335474   19.46401    20.390276   21.116539   22.858128   23.223194  ]
+
+Partitionable:
+[ 0.48870957  1.6797972   2.6162715   3.561016    4.4506445   5.585866
+  6.0748096   7.775133    8.698959    9.818634   10.350306   11.87282
+ 12.925881   13.86013    14.477554   15.818481   16.711355   17.586697
+ 18.073738   19.777622   20.404566   21.119123   22.026257   23.63918   ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">jax_threefry_partitionable</span></code> mode, the JAX PRNG remains deterministic, but its implementation is new (and under development). The random values generated for a given key will be the same at a given JAX version (or a given commit on the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch), but may vary across releases.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../device_memory_profiling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Profiling device memory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="explicit-sharding.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Explicit sharding (a.k.a. “sharding in types”)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-and-a-quick-example">Intro and a quick example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharding-describes-how-array-values-are-laid-out-in-memory-across-devices"><code class="docutils literal notranslate"><span class="pre">Sharding</span></code> describes how array values are laid out in memory across devices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sharding-basics-and-the-namedsharding-subclass">Sharding basics, and the <code class="docutils literal notranslate"><span class="pre">NamedSharding</span></code> subclass</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-follows-data-sharding-and-is-automatically-parallelized">Computation follows data sharding and is automatically parallelized</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-explicit-shardings-disagree-jax-errors">When explicit shardings disagree, JAX errors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraining-shardings-of-intermediates-in-jitted-code">Constraining shardings of intermediates in <code class="docutils literal notranslate"><span class="pre">jit</span></code>ted code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-neural-networks">Examples: neural networks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#way-batch-data-parallelism">8-way batch data parallelism</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#way-batch-data-parallelism-and-2-way-model-tensor-parallelism">4-way batch data parallelism and 2-way model tensor parallelism</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharp-bits">Sharp bits</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-random-numbers">Generating random numbers</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

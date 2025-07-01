@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pallas Design &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pallas/design/design';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pallas Async Operations" href="async_note.html" />
+    <link rel="prev" title="Pallas Design Notes" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">Pallas: a JAX kernel language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">Pallas Design Notes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pallas Design Notes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Pallas Design</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/pallas/design/design.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pallas Design</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pallas-extending-jax-for-kernels">Pallas: Extending JAX for kernels</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-types">Reference types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-from-writing-into-refs">Reading from/writing into Refs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-jax-with-new-pallas-primitives">Extending JAX with new Pallas primitives</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pallas-load-and-pallas-store"><code class="docutils literal notranslate"><span class="pre">pallas.load</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.store</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pallas-program-id-and-pallas-num-programs"><code class="docutils literal notranslate"><span class="pre">pallas.program_id</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.num_programs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-subset-of-jax-primitives-in-pallas">Using a subset of JAX primitives in Pallas</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-pallas-kernels-with-pallas-call">Executing Pallas kernels with <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-functions">Transformation functions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immediate-benefits-of-pallas-as-a-front-end">Immediate benefits of Pallas as a front-end</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#more-flexible-front-end">More flexible front end</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emulation-mode">Emulation mode</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-examples">GPU Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add"><code class="docutils literal notranslate"><span class="pre">add</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#templated-matmul">Templated matmul</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lowering-pallas">Lowering Pallas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lowering-pallas-to-triton-for-gpu">Lowering Pallas to Triton for GPU</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lowering-pallas-to-mosaic-for-tpu">Lowering Pallas to Mosaic for TPU</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-pallas">Transforming Pallas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vmap-of-pallas-call"><code class="docutils literal notranslate"><span class="pre">vmap-of-pallas_call</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grad-of-pallas-call"><code class="docutils literal notranslate"><span class="pre">grad-of-pallas_call</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-transformations">Other transformations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pallas-design">
+<h1>Pallas Design<a class="headerlink" href="#pallas-design" title="Link to this heading">#</a></h1>
+<!--* freshness: { reviewed: '2024-04-15' } *-->
+<p>In this document, we explain the initial Pallas design.
+This is a snapshot of some of the earlier design decisions made
+and Pallas’s specific APIs might have changed since.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>JAX is being used for a diverse set of workloads, from large scale machine
+learning to scientific computing.
+JAX’s success story is as much a success story for XLA,
+the primary compiler that JAX targets – XLA compiles JAX
+programs for accelerators and has enabled JAX to scale to the largest ML
+models.
+JAX describes logical computations in XLA’s representation, HLO.
+HLO describes how computations happen logically but not physically.
+Given a logical HLO computation, XLA decides how that computation is to be
+executed physically.
+For a wide variety of ML applications, XLA does a good
+job of compiling user programs but inevitably some users hit XLA’s
+limitations.
+In these cases, we need to provide an “escape hatch” to allow
+experts to write hand-tuned kernels that outperform XLA at that
+point in time.
+Furthermore, advances in ML systems research take some time to be
+incorporated into XLA and users often want to run ahead with them.
+Over time, the compiler can incorporate the optimizations that were proven
+out experimentally through hand-tuned kernels.</p>
+<p>XLA does offer the <code class="docutils literal notranslate"><span class="pre">CustomCall</span></code> mechanism as an escape hatch, but it
+requires users to write C++ and on GPU it requires users to learn the
+CUDA programming model.
+The CUDA programming model is arguably too low-level for many machine
+learning GPU kernels, like matrix multiplication,
+and even expert users will have trouble using CUDA to implement efficient
+matrix multiplication or multi-headed attention.
+Not only this, JAX users are usually familiar with Python and NumPy-style
+array programming which doesn’t involve writing any C++ or thinking about
+GPU parallelism.
+All popular machine learning frameworks share this
+idea: manipulating (usually) arrays with high level operations
+like <code class="docutils literal notranslate"><span class="pre">matmul</span></code> or <code class="docutils literal notranslate"><span class="pre">convolution</span></code>.
+Unfortunately, this means implementing a custom operation via <code class="docutils literal notranslate"><span class="pre">CustomCall</span></code>
+is a big investment, involving potentially learning C++ and/or GPU
+programming.</p>
+<p><a class="reference external" href="https://triton-lang.org/main/index.html">Triton</a>, a GPU compiler built
+and maintained by OpenAI, has taken the ML compiler world by storm.
+Triton offers the best of both worlds: an array-based programming model
+for GPU kernels. Triton is the primary code generation route
+for <code class="docutils literal notranslate"><span class="pre">torch.compile</span></code> in PyTorch 2.0, via the Torch Inductor library.
+Triton actively hides some aspects of GPU programming in the name of a
+more accessible programming model that can be used from Python and to
+generate optimized code from a higher-level representation.
+While GPUs are more flexible than what Triton offers, in the ML domain,
+Triton seems to be expressive enough for many applications.</p>
+<p>In this document, we describe Pallas, an extension to JAX that enables
+kernel programming for both GPUs and TPUs using a Triton-like model.
+A JAX-based kernel language offers several advantages:</p>
+<ul class="simple">
+<li><p>Although Triton exposes a TPU-like programming model to users,
+i.e. writing programs for tiles of arrays in L1-cache, it is specialized
+enough to GPU that we cannot directly compile Triton for TPU.
+For example, Triton offers atomic operations specifically meant to
+handle parallel writes that don’t necessarily make sense on TPU.
+A higher level front end can abstract away details of the platform
+while surfacing just that tile-based programming model.
+The kernels will thus be portable across different hardware platforms.</p></li>
+<li><p>JAX as a tracing-based frontend for numerical computing is both
+mature and well-used.
+By embedding the kernel programming language in JAX itself,
+we can reuse JAX’s tracing infrastructure and provide a
+NumPy-like frontend that’s already familiar to users.</p></li>
+<li><p>JAX transformations are key to its success, allowing users to
+express simple programs but transform them to achieve complex
+functionality.
+We can leverage the same transformations (vmap, jvp, etc.) to
+transform user-written kernels.</p></li>
+</ul>
+<p>The open question is: is JAX a good fit for a kernel language at all?
+We think so.
+Triton demonstrates that an array programming language can be
+practical for writing GPU kernels and JAX is just that.
+JAX has also proven to be a flexible front-end for compilers and
+for program transformations.</p>
+<p>We describe Pallas as follows: we first describe the ways in which
+we extend JAX to support writing custom kernels.
+We then show how we can lower Pallas to both Triton and Mosaic.
+We conclude by describing existing and potential ways to transform
+Pallas kernels via JAX transformations.</p>
+<center>
+<p><img alt="Pallas lowering path" src="../../_images/pallas_flow.png" />
+Visualization of Pallas lowering paths</p>
+</center>
+</section>
+<section id="pallas-extending-jax-for-kernels">
+<h2>Pallas: Extending JAX for kernels<a class="headerlink" href="#pallas-extending-jax-for-kernels" title="Link to this heading">#</a></h2>
+<p>The key point we’d like to make is that Pallas is just JAX, with some
+extensions:</p>
+<ol class="arabic simple">
+<li><p>Users now use reference types called <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s in their JAX code.
+This gives users more precise control over memory access and
+layout in JAX will more closely resemble physical layout.</p></li>
+<li><p>Users write their JAX programs using a subset of JAX primitives,
+along with a set of Pallas-specific primitives.</p></li>
+<li><p>Users embed their Pallas kernels in an outer JAX program via a
+special <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> higher-order function, that executes the
+kernel in a map. It is analogous to <code class="docutils literal notranslate"><span class="pre">pmap</span></code> or <code class="docutils literal notranslate"><span class="pre">shard_map</span></code>,
+except with references to shared memory.</p></li>
+</ol>
+<p>We’ll go over these three extensions one at a time, by example.</p>
+<p>Note that these APIs are still experimental and subject to change.</p>
+<section id="reference-types">
+<h3>Reference types<a class="headerlink" href="#reference-types" title="Link to this heading">#</a></h3>
+<p>Let’s look at an example Pallas program for adding two vectors:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">pallas</span> <span class="k">as</span> <span class="n">pl</span>
+
+<span class="k">def</span> <span class="nf">add_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+  <span class="c1"># In this code, `x_ref`, `y_ref` and `o_ref` are (8,)-shaped `Ref`s</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[:]</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">y_ref</span><span class="p">[:]</span>
+  <span class="n">o_ref</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span><span class="n">add_kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">8</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+<span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unlike a regular JAX program, <code class="docutils literal notranslate"><span class="pre">add_kernel</span></code> does not receive immutable
+array arguments.
+Instead, it’s provided with references that can be read from and
+updated in-place using NumPy-like syntax.
+<code class="docutils literal notranslate"><span class="pre">Ref</span></code>s are not a Pallas-specific concept – they were introduced to
+JAX to represent stateful computations.
+However, we can leverage them when writing kernels that operate on
+mutable memory too.</p>
+<p>Pallas kernels not only receive <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s corresponding to the inputs
+to the kernel, but also receive <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s for the outputs as well
+(specified in <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> via <code class="docutils literal notranslate"><span class="pre">out_shape</span></code>).
+<code class="docutils literal notranslate"><span class="pre">Ref</span></code>s are special types that cannot be passed into the usual set of
+JAX primitives without being read from first.
+When you read from a <code class="docutils literal notranslate"><span class="pre">Ref</span></code> you get a JAX <code class="docutils literal notranslate"><span class="pre">Array</span></code> type out, and you
+must write an <code class="docutils literal notranslate"><span class="pre">Array</span></code> into a <code class="docutils literal notranslate"><span class="pre">Ref</span></code>.</p>
+<section id="reading-from-writing-into-refs">
+<h4>Reading from/writing into Refs<a class="headerlink" href="#reading-from-writing-into-refs" title="Link to this heading">#</a></h4>
+<p>Reading from a <code class="docutils literal notranslate"><span class="pre">Ref</span></code> corresponds to loading an array into the
+lowest level of the memory hierarchy (L1-cache on GPU and vector
+registers on TPU). Writing into a <code class="docutils literal notranslate"><span class="pre">Ref</span></code> is analogous.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+  <span class="c1"># Using vanilla Python indexing</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
+  <span class="c1"># Or via Numpy advanced int indexing</span>
+  <span class="n">o_ref</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span>
+
+<span class="c1"># Note that in order to use NumPy advanced int indexing, you need to broadcast the indices against each other into the desired multidimensional shape:</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x_ref</span><span class="p">):</span>
+  <span class="c1"># Assume x_ref is (8, 4) and we want to read out a (2, 3) slice</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Writing to <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s can be done via analogous <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code> style
+indexing.</p>
+<p>Other forms of indexing (for example, dynamic slicing) can be done
+via <code class="docutils literal notranslate"><span class="pre">pallas.load</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.store</span></code>, new JAX primitives designed to
+make loading from/storing into memory easier.
+We’ll discuss these new primitives later.</p>
+</section>
+</section>
+<section id="extending-jax-with-new-pallas-primitives">
+<h3>Extending JAX with new Pallas primitives<a class="headerlink" href="#extending-jax-with-new-pallas-primitives" title="Link to this heading">#</a></h3>
+<p>Because JAX was designed with HLO in mind, the set of JAX primitives
+closely mirrors the set of HLO operations.
+Targeting a new compiler (e.g. Triton or Mosaic) means we might need
+to supplement JAX’s primitives with new ones specific to the new
+compiler.
+At the same time, we may not be able to lower all JAX primitives,
+so we need to restrict it to a subset.</p>
+<p>Because Pallas was initially designed with Triton in mind,
+we offer a set of new primitives targeting the Triton programming model.
+As we’ll show later, we can lower these primitives to Mosaic as well.</p>
+<section id="pallas-load-and-pallas-store">
+<h4><code class="docutils literal notranslate"><span class="pre">pallas.load</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.store</span></code><a class="headerlink" href="#pallas-load-and-pallas-store" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">pallas.load</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.store</span></code> are primitives that allow loading
+from memory and storing into memory.
+Unlike <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code> they are more flexible at the
+cost of being more verbose.
+Specifically, you can use the <code class="docutils literal notranslate"><span class="pre">pallas.dynamic_slice</span></code> (<code class="docutils literal notranslate"><span class="pre">pallas.ds</span></code> for
+short) construct (which should maybe be upstreamed into JAX to be
+used with Ref <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+  <span class="c1"># Reading from memory via pallas.load</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)))</span>
+  <span class="c1"># Using integer indexing automatically broadcasts</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)))</span>
+  <span class="c1"># You can also use `pl.dynamic_slice` (`pl.ds` for short) objects as well</span>
+  <span class="n">pl</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">o_ref</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pallas.load</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.store</span></code> also support masking via the mask
+argument.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+  <span class="c1"># Reading from memory via pallas.load</span>
+  <span class="n">idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+  <span class="n">mask</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">5</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="p">(</span><span class="n">idx</span><span class="p">,),</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">other</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Masking is important when doing out-of-bounds loads/stores.
+The operational semantics of masking can be compiler-determined
+(if we understand the documentation properly, Triton avoids the read
+from/write to memory if it’s masked).</p>
+</section>
+<section id="pallas-program-id-and-pallas-num-programs">
+<h4><code class="docutils literal notranslate"><span class="pre">pallas.program_id</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.num_programs</span></code><a class="headerlink" href="#pallas-program-id-and-pallas-num-programs" title="Link to this heading">#</a></h4>
+<p>As we’ll soon see, we’ll be executing the same Pallas kernels many
+times (either in parallel or in a pipeline depending on the backend).
+These new primitives tell us “where” we are in the execution of the
+kernel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pallas.program_id</span></code> takes in an axis argument, which tells us which
+index in an axis of a multidimensional grid this kernel is currently
+executing in (analogous to <code class="docutils literal notranslate"><span class="pre">threadId</span></code> from CUDA programming or
+<code class="docutils literal notranslate"><span class="pre">lax.axis_index</span></code> in <code class="docutils literal notranslate"><span class="pre">jax.pmap</span></code>).
+Note that we are currently borrowing the “program” terminology from
+Triton and in the future we might want to change it to something more
+familiar to JAX users.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">program_id</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># execution index in the first axis of the grid</span>
+  <span class="n">o_ref</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_ref</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pallas.num_programs</span></code> also takes in an axis and returns the grid size
+for that axis.</p>
+<p>Note that while <code class="docutils literal notranslate"><span class="pre">program_id</span></code> and <code class="docutils literal notranslate"><span class="pre">num_programs</span></code> are Triton-specific
+terminology they are easily generalized to make sense on TPU as well.</p>
+</section>
+<section id="using-a-subset-of-jax-primitives-in-pallas">
+<h4>Using a subset of JAX primitives in Pallas<a class="headerlink" href="#using-a-subset-of-jax-primitives-in-pallas" title="Link to this heading">#</a></h4>
+<p>Because we’re writing kernels, not high-level HLO programs, some JAX
+primitives may not be able to be represented in our underlying
+substrate efficiently.
+However, we know we can support most elementwise operations,
+simple dot products, and JAX control flow.</p>
+<p>While we haven’t yet mapped out exactly all the JAX primitives that
+we can support in Pallas kernels, we can certainly identify some that
+are not easy to lower or are unlikely to be useful:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">conv_general</span></code> - convolution usually isn’t offered as primitive in
+the underlying hardware.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gather/scatter</span></code> - the underlying compiler may not support
+noncontiguous memory reads and writes</p></li>
+</ul>
+</section>
+</section>
+<section id="executing-pallas-kernels-with-pallas-call">
+<h3>Executing Pallas kernels with <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code><a class="headerlink" href="#executing-pallas-kernels-with-pallas-call" title="Link to this heading">#</a></h3>
+<p>Now that we’ve written our Pallas kernels (a.k.a. JAX with <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s and
+the extra Pallas primitives), how do we execute them on a GPU or TPU?
+We use <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code>, a higher order function (akin to <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> and
+<code class="docutils literal notranslate"><span class="pre">jax.pmap</span></code>) that executes the kernel.</p>
+<p>The signature of <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pallas_call</span><span class="p">(</span>
+    <span class="n">kernel</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">out_shape</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">in_specs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Spec</span><span class="p">],</span>
+    <span class="n">out_specs</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Spec</span><span class="p">],</span>
+    <span class="n">grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>When we provide a kernel to <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> we provide additional
+information. The first is <code class="docutils literal notranslate"><span class="pre">out_shape</span></code> which tells the kernel what the
+outputs look like (<code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> will pass a <code class="docutils literal notranslate"><span class="pre">Ref</span></code> corresponding to
+these into the kernel to be written to).
+The rest of the information (<code class="docutils literal notranslate"><span class="pre">in_specs</span></code>, <code class="docutils literal notranslate"><span class="pre">out_specs</span></code>, and <code class="docutils literal notranslate"><span class="pre">grid</span></code>) are
+information about how the kernel will be scheduled on the accelerator.</p>
+<p>The (rough) semantics for <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> are as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pallas_call</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">in_specs</span><span class="p">,</span> <span class="n">out_specs</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">empty_ref</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">)</span>
+    <span class="n">grid_indices</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">grid_indices</span><span class="p">):</span> <span class="c1"># Could run in parallel!</span>
+      <span class="n">local_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">in_spec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">in_spec</span> <span class="ow">in</span>
+                      <span class="nb">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">in_specs</span><span class="p">)]</span>
+      <span class="n">local_outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_spec</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">out_spec</span>  <span class="ow">in</span>
+                       <span class="nb">zip</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">out_specs</span><span class="p">)]</span>
+      <span class="n">kernel</span><span class="p">(</span><span class="o">*</span><span class="n">local_inputs</span><span class="p">,</span> <span class="o">*</span><span class="n">local_outputs</span><span class="p">)</span> <span class="c1"># writes to outputs</span>
+  <span class="k">return</span> <span class="n">execute</span>
+</pre></div>
+</div>
+<p>Specifically, <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> will “loop” over grid iteration space,
+applying a transformation to the inputs and outputs specified via
+the <code class="docutils literal notranslate"><span class="pre">in_specs</span></code> and <code class="docutils literal notranslate"><span class="pre">out_specs</span></code>.
+In each iteration, the kernel will be called on the transformed
+inputs and outputs. Note that the “loop” over the iteration space
+could be executed in parallel (e.g. on GPU).
+<code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> also provides no guarantees on the order of loop
+iterations over the iteration space, just that every member of the
+iteration space will be looped over.
+Compilers like Triton and Mosaic will have more specific operational
+semantics associated with the grid.</p>
+<section id="transformation-functions">
+<h4>Transformation functions<a class="headerlink" href="#transformation-functions" title="Link to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">in_specs</span></code> and <code class="docutils literal notranslate"><span class="pre">out_specs</span></code> arguments to <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> allow
+inputs and outputs to be transformed in some way.
+The two options that Pallas offers right now are an identity
+transformation (where inputs and outputs are left unchanged),
+and <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>s, take fixed-size slices of <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s determined by the
+loop index.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code> takes an <code class="docutils literal notranslate"><span class="pre">index_map</span></code> function and a <code class="docutils literal notranslate"><span class="pre">block_shape</span></code>.
+Logically, it takes an array and slices it along each axis into
+<code class="docutils literal notranslate"><span class="pre">block_shape</span></code> sizes blocks.
+The <code class="docutils literal notranslate"><span class="pre">index_map</span></code> function takes loop indices (from the grid index set)
+and maps them to block indices.
+The transform function converts <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s into logical views of the
+<code class="docutils literal notranslate"><span class="pre">Ref</span></code> at the corresponding block.
+When we specify <code class="docutils literal notranslate"><span class="pre">None</span></code> in an entry in block_shape,
+that corresponds to “mapping” over that dimension,
+removing it from the block within the kernel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BlockSpec</span><span class="p">:</span>
+  <span class="n">index_map</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Int</span><span class="p">,</span> <span class="o">...</span><span class="p">]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Int</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span>
+  <span class="n">block_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="o">*</span><span class="n">loop_indices</span><span class="p">):</span>
+    <span class="n">block_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_function</span><span class="p">(</span><span class="n">loop_indices</span><span class="p">)</span>
+    <span class="c1"># Returns a view of `ref` starting at `block_indices` of shape self.block_shape</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>We could also imagine other <code class="docutils literal notranslate"><span class="pre">Spec</span></code>s that are used with <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code>,
+for example a <code class="docutils literal notranslate"><span class="pre">Spec</span></code> that corresponds to overlapping windows to, say,
+implement convolutions.</p>
+</section>
+</section>
+<section id="immediate-benefits-of-pallas-as-a-front-end">
+<h3>Immediate benefits of Pallas as a front-end<a class="headerlink" href="#immediate-benefits-of-pallas-as-a-front-end" title="Link to this heading">#</a></h3>
+<p>By offering a JAX front-end for kernel writing, we can immediately
+reap some benefits.</p>
+<section id="more-flexible-front-end">
+<h4>More flexible front end<a class="headerlink" href="#more-flexible-front-end" title="Link to this heading">#</a></h4>
+<p>The first is that JAX users are already accustomed to the benefits
+(and limitations) of programming with JAX and its tracing-based
+transformations.
+This means users can use closures and other familiar Python constructs
+when writing Pallas kernels.
+This is unlike the existing AST-parsing-based Triton front end or the
+MLIR builders for Mosaic.
+For example, this makes Pallas far more amenable to templating than
+Triton.</p>
+<p>See this example of how we can use higher-order functions in Python
+to template a kernel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_kernel</span><span class="p">(</span><span class="n">eltwise_kernel</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="p">())</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">y_ref</span><span class="p">,</span> <span class="p">())</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">o_ref</span><span class="p">,</span> <span class="p">(),</span> <span class="n">eltwise_kernel</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">add</span>
+
+<span class="n">kernel1</span> <span class="o">=</span> <span class="n">make_kernel</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">kernel2</span> <span class="o">=</span> <span class="n">make_kernel</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span><span class="n">kernel1</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span><span class="n">kernel2</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="emulation-mode">
+<h4>Emulation mode<a class="headerlink" href="#emulation-mode" title="Link to this heading">#</a></h4>
+<p>By representing kernels as programs with JAX primitives and some new
+Pallas primitives, we can also lower Pallas programs to StableHLO
+directly and compile/execute them with XLA.
+Specifically, a <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> can be implemented as a <code class="docutils literal notranslate"><span class="pre">lax.scan</span></code> over
+the grid.
+This enables us to develop GPU or TPU kernels on any XLA-supported
+platform (even CPU!) and debug them using JAX/XLA debugging tools
+(like <code class="docutils literal notranslate"><span class="pre">jax.debug.print</span></code>).
+We can also use the more reliable and better tested XLA numerics to
+verify the correctness of the Triton and Mosaic compilers.
+One could also imagine perturbing the <code class="docutils literal notranslate"><span class="pre">scan</span></code> ordering to simulate the
+parallel reads and writes that happen on GPU.</p>
+</section>
+</section>
+<section id="gpu-examples">
+<h3>GPU Examples<a class="headerlink" href="#gpu-examples" title="Link to this heading">#</a></h3>
+<p>Note all the following examples are for GPU only. They will require tweaks to
+the block sizes to work on TPUs.</p>
+<section id="add">
+<h4><code class="docutils literal notranslate"><span class="pre">add</span></code><a class="headerlink" href="#add" title="Link to this heading">#</a></h4>
+<p>We modify our <code class="docutils literal notranslate"><span class="pre">add_kernel</span></code> example to operate over (2,)-sized blocks
+using <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>s.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">):</span>
+  <span class="c1"># In this code, `x_ref`, `y_ref` and `o_ref` are (2,)-shaped `Ref`s</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[:]</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">y_ref</span><span class="p">[:]</span>
+  <span class="n">o_ref</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+    <span class="n">add_kernel</span><span class="p">,</span>
+    <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">8</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+    <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="mi">2</span><span class="p">,),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">),</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="mi">2</span><span class="p">,),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="mi">2</span><span class="p">,),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">i</span><span class="p">),</span>
+    <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,))</span>
+<span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="templated-matmul">
+<h4>Templated matmul<a class="headerlink" href="#templated-matmul" title="Link to this heading">#</a></h4>
+<p>In this example, we compute tiles of the output by doing an unrolled
+accumulation over blocks of rows and columns from our input arrays.
+We inline an activation function into the body of the kernel using a
+higher order function so we can emit a fused kernel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">matmul_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">block_k</span><span class="p">):</span>
+  <span class="n">acc</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x_ref</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">block_k</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[:,</span> <span class="n">k</span><span class="o">*</span><span class="n">block_k</span><span class="p">:(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">block_k</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y_ref</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="n">block_k</span><span class="p">:(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">block_k</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">acc</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">y</span>
+  <span class="n">o_ref</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">activation</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">o_ref</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">)),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+<span class="n">block_shape</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">128</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;block_shape&quot;</span><span class="p">,</span> <span class="s2">&quot;activation&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">block_shape</span><span class="p">,</span> <span class="n">activation</span><span class="p">):</span>
+  <span class="n">block_m</span><span class="p">,</span> <span class="n">block_n</span><span class="p">,</span> <span class="n">block_k</span> <span class="o">=</span> <span class="n">block_shape</span>
+  <span class="n">fused_matmul</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+      <span class="n">partial</span><span class="p">(</span><span class="n">matmul_kernel</span><span class="p">,</span> <span class="n">block_k</span><span class="o">=</span><span class="n">block_k</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">activation</span><span class="p">),</span>
+      <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+      <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="n">block_m</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">block_n</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+      <span class="p">],</span>
+      <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="n">block_m</span><span class="p">,</span> <span class="n">block_n</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)),</span>
+      <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+  <span class="p">)</span>
+  <span class="k">return</span> <span class="n">fused_matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">block_shape</span><span class="o">=</span><span class="n">block_shape</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">gelu</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="lowering-pallas">
+<h3>Lowering Pallas<a class="headerlink" href="#lowering-pallas" title="Link to this heading">#</a></h3>
+<p>After users express their Pallas kernels, we lower them to different
+representations depending on the target backend.
+On GPUs, we lower Pallas to Triton IR, and on TPU we lower Pallas to
+Mosaic.</p>
+<section id="lowering-pallas-to-triton-for-gpu">
+<h4>Lowering Pallas to Triton for GPU<a class="headerlink" href="#lowering-pallas-to-triton-for-gpu" title="Link to this heading">#</a></h4>
+<p>Lowering Pallas to Triton is easy because Pallas was designed with
+Triton as a target language in mind.
+The main differences between Pallas and Triton is that Triton doesn’t
+have a notion of <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>s and also uses pointers when doing
+memory loads and stores as opposed to indices.</p>
+<p>Triton supports pointers as an array element type in its language
+and in Triton you can load from and store to arrays of pointers.
+In Pallas, when given a <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">5)</span></code>-shaped <code class="docutils literal notranslate"><span class="pre">Ref</span></code>, <code class="docutils literal notranslate"><span class="pre">x_ref</span></code>, and then do
+like <code class="docutils literal notranslate"><span class="pre">x_ref[3,</span> <span class="pre">2]</span></code>, we need to lower this to computing a Triton
+pointer to the appropriate row-major position in <code class="docutils literal notranslate"><span class="pre">x_ref</span></code> (that is,
+doing 5 * 3 + 2 * 1).
+Similarly, when we lower slices to Triton, e.g. <code class="docutils literal notranslate"><span class="pre">x_ref[4,</span> <span class="pre">:]</span></code> we need
+to produce an array of pointers <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">4</span> <span class="pre">+</span> <span class="pre">jnp.arange(3)</span></code>.</p>
+<p>Other than that, lowering to Triton is fairly straightforward.
+JAX dot products can be lowered to Triton dot products and JAX unary
+primitives are lowered to their Triton equivalents.
+Triton’s atomic operations are lowered via new Pallas atomic
+primitives.</p>
+</section>
+<section id="lowering-pallas-to-mosaic-for-tpu">
+<h4>Lowering Pallas to Mosaic for TPU<a class="headerlink" href="#lowering-pallas-to-mosaic-for-tpu" title="Link to this heading">#</a></h4>
+<p>Mosaic consumes (mostly) standard dialect MLIR and emits LLO to be
+compiled for TPU.
+Pallas can be lowered to Mosaic via translating JAX primitives to
+MLIR (mostly the <code class="docutils literal notranslate"><span class="pre">vector</span></code> and <code class="docutils literal notranslate"><span class="pre">arith</span></code> dialects).
+The <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>s can be converted into pipeline schedules
+(i.e. the <code class="docutils literal notranslate"><span class="pre">transform_func</span></code>s in Mosaic).</p>
+</section>
+</section>
+<section id="transforming-pallas">
+<h3>Transforming Pallas<a class="headerlink" href="#transforming-pallas" title="Link to this heading">#</a></h3>
+<p>A natural question is how do JAX transformations interact with Pallas
+kernels?
+There are two main ways: transformations inside Pallas kernels and
+transformations outside Pallas kernels.</p>
+<p>Transformation inside Pallas kernels should actually “just work”,
+so long as we are able to lower the transformed code.
+For example, we could use <code class="docutils literal notranslate"><span class="pre">jax.grad(jnp.sin)(...)</span></code> inside of a JAX
+kernel because we can lower a <code class="docutils literal notranslate"><span class="pre">cos</span></code> to both Triton and Mosaic.
+However, we might not be able to lower a <code class="docutils literal notranslate"><span class="pre">jax.vmap(lax.dynamic_slice)</span></code>
+because it could turn into a gather that we cannot lower.</p>
+<p>Transformations of Pallas kernels from the outer JAX programs is
+perhaps the more interesting case. How do we handle things like
+<code class="docutils literal notranslate"><span class="pre">vmap(pallas_call)</span></code> and <code class="docutils literal notranslate"><span class="pre">grad(pallas_call)</span></code>?</p>
+<section id="vmap-of-pallas-call">
+<h4><code class="docutils literal notranslate"><span class="pre">vmap-of-pallas_call</span></code><a class="headerlink" href="#vmap-of-pallas-call" title="Link to this heading">#</a></h4>
+<p>vmap automatically vectorizes JAX programs. While kernel writers might
+want precise control over how a batched kernel will behave differently
+from its unbatched variant, we can offer a reasonable default <code class="docutils literal notranslate"><span class="pre">vmap</span></code>
+rule for <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> while offering the <code class="docutils literal notranslate"><span class="pre">jax.custom_vmap</span></code>
+customization mechanism. When <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> is <code class="docutils literal notranslate"><span class="pre">vmap</span></code>-ed, we augment
+the <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> to have an extra grid dimension corresponding to the
+new batch dimension and transform the <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>s to handle indexing
+along that dimension.</p>
+</section>
+<section id="grad-of-pallas-call">
+<h4><code class="docutils literal notranslate"><span class="pre">grad-of-pallas_call</span></code><a class="headerlink" href="#grad-of-pallas-call" title="Link to this heading">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">grad</span></code> of <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> enables automatic differentiation of kernels.
+<code class="docutils literal notranslate"><span class="pre">jax.grad</span></code> breaks down into applications of three distinct transforms:
+<code class="docutils literal notranslate"><span class="pre">jvp</span></code>, <code class="docutils literal notranslate"><span class="pre">partial_eval</span></code> and <code class="docutils literal notranslate"><span class="pre">transpose</span></code>.
+In principle, we can reuse most of JAX’s infrastructure when
+implementing these rules for <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> (since it behaves much like
+existing JAX higher order primitives).</p>
+<p>However, automatic differentiation of kernels can result in a
+performance hit due to how memory access is transposed.
+If we write a GPU kernel with overlapping-and-parallel reads and
+disjoint-but-parallel writes, we automatically transpose it into a
+kernel that has overlapping-but-parallel writes (which are slow when
+done atomically) and disjoint-and-parallel reads.
+To emit a kernel that better uses parallelism with shared memory,
+we would need to reorder loops and change how the kernel is vectorized.
+Unfortunately, we do not have a program representation amenable to
+that in Pallas.
+A potential direction to automatically differentiating kernels
+efficiently is to explore a different representation, perhaps one
+like that in Dex.
+We could also look at how Enzyme approaches this problem.
+However, AD of Pallas kernels may still be useful for a class of
+kernels that does transpose efficiently (for example elementwise
+kernels).</p>
+<p>In general, though, <code class="docutils literal notranslate"><span class="pre">jax.custom_vjp</span></code> is a viable escape hatch to
+express Pallas kernels that work with <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code>.</p>
+</section>
+<section id="other-transformations">
+<h4>Other transformations<a class="headerlink" href="#other-transformations" title="Link to this heading">#</a></h4>
+<p>We could imagine other JAX transformations applying to Pallas kernels
+that we haven’t explicitly explored yet.
+For example, <code class="docutils literal notranslate"><span class="pre">checkify</span></code> is a JAX transformation that does functional
+error handling.
+We could imagine using <code class="docutils literal notranslate"><span class="pre">checkify</span></code> with pallas_call to allow plumbing
+out error codes from GPU kernels that indicate if OOB access or NaNs
+were produced.</p>
+<p>Another potential transformation to integrate with is
+custom_partitioning to enable automatically partitionable kernels to
+be used with pjit.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pallas Design Notes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="async_note.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pallas Async Operations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pallas-extending-jax-for-kernels">Pallas: Extending JAX for kernels</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-types">Reference types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-from-writing-into-refs">Reading from/writing into Refs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-jax-with-new-pallas-primitives">Extending JAX with new Pallas primitives</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pallas-load-and-pallas-store"><code class="docutils literal notranslate"><span class="pre">pallas.load</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.store</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pallas-program-id-and-pallas-num-programs"><code class="docutils literal notranslate"><span class="pre">pallas.program_id</span></code> and <code class="docutils literal notranslate"><span class="pre">pallas.num_programs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-subset-of-jax-primitives-in-pallas">Using a subset of JAX primitives in Pallas</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#executing-pallas-kernels-with-pallas-call">Executing Pallas kernels with <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-functions">Transformation functions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#immediate-benefits-of-pallas-as-a-front-end">Immediate benefits of Pallas as a front-end</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#more-flexible-front-end">More flexible front end</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#emulation-mode">Emulation mode</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-examples">GPU Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#add"><code class="docutils literal notranslate"><span class="pre">add</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#templated-matmul">Templated matmul</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lowering-pallas">Lowering Pallas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lowering-pallas-to-triton-for-gpu">Lowering Pallas to Triton for GPU</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lowering-pallas-to-mosaic-for-tpu">Lowering Pallas to Mosaic for TPU</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-pallas">Transforming Pallas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vmap-of-pallas-call"><code class="docutils literal notranslate"><span class="pre">vmap-of-pallas_call</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#grad-of-pallas-call"><code class="docutils literal notranslate"><span class="pre">grad-of-pallas_call</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#other-transformations">Other transformations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

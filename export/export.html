@@ -1,0 +1,1609 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exporting and serializing staged-out computations &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'export/export';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shape polymorphism" href="shape_poly.html" />
+    <link rel="prev" title="Exporting and serialization" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Exporting and serialization</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Exporting and serialization</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Exporting...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/export/export.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exporting and serializing staged-out computations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-for-reverse-mode-ad">Support for reverse-mode AD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compatibility-guarantees">Compatibility guarantees</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compatibility-guarantees-for-custom-calls">Compatibility guarantees for custom calls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-platform-and-multi-platform-export">Cross-platform and multi-platform export</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-polymorphic-export">Shape polymorphic export</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-polymorphic-export">Device-polymorphic export</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-convention-versions">Calling convention versions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-calling-convention">Module calling convention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-calling-convention-version">Calling convention versions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-documentation">Developer documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensuring-forward-and-backward-compatibility">Ensuring forward and backward compatibility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migration-guide-from-jax-experimental-export">Migration guide from jax.experimental.export</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <!--* freshness: { owner: "necula" reviewed: "2024-06-26" } *-->
+<section class="tex2jax_ignore mathjax_ignore" id="exporting-and-serializing-staged-out-computations">
+<h1>Exporting and serializing staged-out computations<a class="headerlink" href="#exporting-and-serializing-staged-out-computations" title="Link to this heading">#</a></h1>
+<p>The <a class="reference internal" href="../aot.html#ahead-of-time-lowering"><span class="std std-ref">Ahead-of-time lowering and compilation</span></a> APIs produce
+objects that can be used for debugging or for compilation and
+execution in the same process.
+Sometimes you want to serialize a lowered JAX function for
+compilation and execution in a separate process, perhaps
+at a later time. This would allow you to:</p>
+<ul class="simple">
+<li><p>compile and execute the function in another process or machine
+without requiring access to the JAX program,
+and without having to repeat the staging-out and lowering, e.g.,
+in an inference system.</p></li>
+<li><p>trace and lower a function on a machine that does not have access
+to the accelerator for which you want to later compile and execute
+the function.</p></li>
+<li><p>archive a snapshot of a JAX function, e.g., to be able to
+reproduce later your results. <strong>Note:</strong> check out the <a class="reference internal" href="#compatibility-guarantees">compatibility
+guarantees</a> for this use case.</p></li>
+</ul>
+<p>For more details see the <a class="reference internal" href="../jax.export.html#module-jax.export" title="jax.export"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.export</span></code></a> API reference.</p>
+<p>Here is an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exported</span><span class="p">:</span> <span class="n">export</span><span class="o">.</span><span class="n">Exported</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span>
+<span class="gp">... </span>   <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((),</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You can inspect the Exported object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exported</span><span class="o">.</span><span class="n">fun_name</span>
+<span class="go">&#39;f&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exported</span><span class="o">.</span><span class="n">in_avals</span>
+<span class="go">(ShapedArray(float32[]),)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*@main.*&quot;</span><span class="p">,</span> <span class="n">exported</span><span class="o">.</span><span class="n">mlir_module</span><span class="p">())</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="go">  func.func public @main(%arg0: tensor&lt;f32&gt; loc(&quot;x&quot;)) -&gt; (tensor&lt;f32&gt; {jax.result_info = &quot;result&quot;}) {</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># And you can serialize the Exported to a bytearray.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">serialized</span><span class="p">:</span> <span class="nb">bytearray</span> <span class="o">=</span> <span class="n">exported</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The serialized function can later be rehydrated and called from</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># another JAX computation, possibly in another process.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rehydrated_exp</span><span class="p">:</span> <span class="n">export</span><span class="o">.</span><span class="n">Exported</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">serialized</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rehydrated_exp</span><span class="o">.</span><span class="n">in_avals</span>
+<span class="go">(ShapedArray(float32[]),)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">callee</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="mf">3.</span> <span class="o">*</span> <span class="n">rehydrated_exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mf">4.</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">callee</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="go">Array(96., dtype=float32)</span>
+
+</pre></div>
+</div>
+<p>Serialization is broken down into two stages:</p>
+<ol class="arabic simple">
+<li><p>exporting to produce an <a class="reference internal" href="../jax.export.html#jax.export.Exported" title="jax.export.Exported"><code class="xref py py-class docutils literal notranslate"><span class="pre">jax.export.Exported</span></code></a> object that contains
+the StableHLO for the lowered function along with the metadata necessary to
+call it from another JAX function. We have plans to add code to generate
+<code class="docutils literal notranslate"><span class="pre">Exported</span></code> objects from TensorFlow, and to use <code class="docutils literal notranslate"><span class="pre">Exported</span></code> objects from
+TensorFlow and PyTorch.</p></li>
+<li><p>the actual serialization to a byte array using the flatbuffers format.
+See <a class="reference internal" href="jax2tf.html#jax2tf"><span class="std std-ref">Interoperation with TensorFlow</span></a> for
+an alternative serialization to TensorFlow graph that can be used
+for interoperation with TensorFlow.</p></li>
+</ol>
+<section id="support-for-reverse-mode-ad">
+<h2>Support for reverse-mode AD<a class="headerlink" href="#support-for-reverse-mode-ad" title="Link to this heading">#</a></h2>
+<p>Serialization can optionally support higher-order reverse-mode AD. This is done
+by serializing the <a class="reference internal" href="../_autosummary/jax.vjp.html#jax.vjp" title="jax.vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vjp()</span></code></a> of the primal function along with the primal function,
+up to a user-specified order (default is 0, meaning that the rehydrated
+function cannot be differentiated):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Serialize 3 levels of VJP along with the primal function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blob</span><span class="p">:</span> <span class="nb">bytearray</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">vjp_order</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rehydrated_f</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">blob</span><span class="p">)</span><span class="o">.</span><span class="n">call</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rehydrated_f</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 7 * 0.1^3</span>
+<span class="go">Array(0.007, dtype=float32)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">rehydrated_f</span><span class="p">)(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 7*3 * 0.1^2</span>
+<span class="go">Array(0.21000001, dtype=float32)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">rehydrated_f</span><span class="p">))(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 7*3*2 * 0.1</span>
+<span class="go">Array(4.2, dtype=float32)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">rehydrated_f</span><span class="p">)))(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 7*3*2</span>
+<span class="go">Array(42., dtype=float32)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">rehydrated_f</span><span class="p">))))(</span><span class="mf">0.1</span><span class="p">)</span>  
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">No VJP is available</span>
+
+</pre></div>
+</div>
+<p>Note that the VJP function is computed lazily while serializing,
+when the JAX program is still available.
+This means that it respects all features of JAX VJP,
+e.g., <a class="reference internal" href="../_autosummary/jax.custom_vjp.html#jax.custom_vjp" title="jax.custom_vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.custom_vjp()</span></code></a> and <code class="xref py py-func docutils literal notranslate"><span class="pre">jax.remat()</span></code>.</p>
+<p>Note that the rehydrated function does not support any other
+transformations, e.g., forward-mode AD (jvp), or <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vmap()</span></code></a>.</p>
+</section>
+<section id="compatibility-guarantees">
+<h2>Compatibility guarantees<a class="headerlink" href="#compatibility-guarantees" title="Link to this heading">#</a></h2>
+<p>You should not use the raw StableHLO that is obtained from just lowering
+(<code class="docutils literal notranslate"><span class="pre">jax.jit(f).lower(1.).compiler_ir()</span></code>)
+for archival and for compilation in another process, for several reasons.</p>
+<p>First, the compilation may use a different version of the compiler, supporting a
+different version of StableHLO. The <a class="reference internal" href="../jax.export.html#module-jax.export" title="jax.export"><code class="xref py py-class docutils literal notranslate"><span class="pre">jax.export</span></code></a> module takes
+care of this by using the
+<a class="reference external" href="https://github.com/openxla/stablehlo/blob/main/docs/compatibility.md">portable-artifact feature of StableHLO</a>
+to deal with the possible evolution of the StableHLO opset.</p>
+<section id="compatibility-guarantees-for-custom-calls">
+<h3>Compatibility guarantees for custom calls<a class="headerlink" href="#compatibility-guarantees-for-custom-calls" title="Link to this heading">#</a></h3>
+<p>Second, the raw StableHLO may contain custom calls referencing C++
+functions.
+JAX uses custom calls for lowering of a small number of primitives,
+e.g., linear algebra primitives, sharding annotations, or Pallas kernels.
+These do not fall under the compatibility guarantees for StableHLO.
+The C++ implementations of these functions change rarely, but they can change.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> makes the following export compatibility guarantees:
+A JAX exported artifact can be compiled and executed by a compiler and
+JAX runtime system that are:</p>
+<ul class="simple">
+<li><p><strong>up to 6 months newer</strong> than the version of JAX used for exporting
+(we say that JAX export offers <strong>6 months backward compatibility</strong>).
+This is useful if we want to archive the exported artifact to be compiled and executed later.</p></li>
+<li><p><strong>up to 3 weeks older</strong> than the version of JAX used for exporting
+(we say that JAX export offers <strong>3 weeks forward compatibility</strong>).
+This is useful if we want to compile and run an exported artifact with a
+consumer that was built and deployed before the export, e.g.,
+an inference system that is already deployed when the exporting is done.</p></li>
+</ul>
+<p>(The particular compatibility window lengths are the same that JAX
+<a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/experimental/jax2tf/README.md#usage-saved-model">promised for jax2tf</a>,
+and are based on <a class="reference external" href="https://www.tensorflow.org/guide/versions#graph_and_checkpoint_compatibility_when_extending_tensorflow">TensorFlow Compatibility</a>.
+The terminology “backward compatibility” is from the perspective of the consumer,
+e.g., the inference system.)</p>
+<p>What <strong>matters is when the exporting and consuming components were built</strong>,
+not the time when the exporting and the compilation happen.
+For external JAX users, it is
+<a class="reference external" href="https://docs.jax.dev/en/latest/jep/9419-jax-versioning.html#how-are-jax-and-jaxlib-versioned">possible to run JAX and jaxlib at different versions</a>;
+what matters is when the jaxlib release was built.</p>
+<p>To reduce chances of incompatibility, internal JAX users should:</p>
+<ul class="simple">
+<li><p><strong>rebuild and redeploy consumer systems as frequently as possible</strong>.</p></li>
+</ul>
+<p>and external users should:</p>
+<ul class="simple">
+<li><p>run the exporting and consumer systems with the same version of jaxlib, whenever possible, and</p></li>
+<li><p>export for archival <strong>with the latest released version of jaxlib</strong>.</p></li>
+</ul>
+<p>The compatibility guarantees do not apply if you bypass the <code class="docutils literal notranslate"><span class="pre">jax.export</span></code> APIs
+to obtain the StableHLO code.</p>
+<p>In order to ensure forward compatibility, when we change the JAX lowering rules
+to use a new custom call target, JAX will refrain for 3 weeks to use the new
+target. To use the latest lowering rules, you can pass the
+<code class="docutils literal notranslate"><span class="pre">--jax_export_ignore_forward_compatibility=1</span></code> configuration flag
+or the <code class="docutils literal notranslate"><span class="pre">JAX_EXPORT_IGNORE_FORWARD_COMPATIBILITY=1</span></code> environment variable.</p>
+<p>Only a subset of custom calls are guaranteed stable and have
+compatibility guarantees (<a class="reference external" href="https://github.com/search?q=repo%3Ajax-ml%2Fjax++%22_CUSTOM_CALL_TARGETS_GUARANTEED_STABLE+%3D%22+path%3A_export.py&amp;amp;amp%3Btype=code&amp;amp;type=code">see list</a>).
+We continuously
+add more custom call targets to the allowed list along with backwards
+compatibility tests. If you try to serialize
+code that invokes other custom call targets you will get an error
+during exporting.</p>
+<p>If you want to disable this safety check for a specific custom call,
+e.g., with target <code class="docutils literal notranslate"><span class="pre">my_target</span></code>, you can add
+<code class="docutils literal notranslate"><span class="pre">export.DisabledSafetyCheck.custom_call(&quot;my_target&quot;)</span></code> to the
+<code class="docutils literal notranslate"><span class="pre">disabled_checks</span></code> parameter of the <code class="docutils literal notranslate"><span class="pre">export</span></code> method,
+as in the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax._src</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax._src.interpreters</span> <span class="kn">import</span> <span class="n">mlir</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a new primitive backed by a custom call</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_prim</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Primitive</span><span class="p">(</span><span class="s2">&quot;new_prim&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">new_prim</span><span class="o">.</span><span class="n">def_abstract_eval</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">mlir</span><span class="o">.</span><span class="n">register_lowering</span><span class="p">(</span><span class="n">new_prim</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="n">mlir</span><span class="o">.</span><span class="n">custom_call</span><span class="p">(</span><span class="s2">&quot;my_new_prim&quot;</span><span class="p">,</span> <span class="n">operands</span><span class="o">=</span><span class="p">[</span><span class="n">o</span><span class="p">],</span> <span class="n">result_types</span><span class="o">=</span><span class="p">[</span><span class="n">o</span><span class="o">.</span><span class="n">type</span><span class="p">])</span><span class="o">.</span><span class="n">results</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">new_prim</span><span class="o">.</span><span class="n">bind</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">compiler_ir</span><span class="p">())</span>
+<span class="go">module @jit_bind attributes {mhlo.num_partitions = 1 : i32, mhlo.num_replicas = 1 : i32} {</span>
+<span class="go">  func.func public @main(%arg0: tensor&lt;f32&gt;) -&gt; (tensor&lt;f32&gt; {jax.result_info = &quot;result&quot;}) {</span>
+<span class="go">    %0 = stablehlo.custom_call @my_new_prim(%arg0) {api_version = 2 : i32, backend_config = &quot;&quot;} : (tensor&lt;f32&gt;) -&gt; tensor&lt;f32&gt;</span>
+<span class="go">    return %0 : tensor&lt;f32&gt;</span>
+<span class="go">  }</span>
+<span class="go">}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># If we try to export, we get an error</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">new_prim</span><span class="o">.</span><span class="n">bind</span><span class="p">))(</span><span class="mf">1.</span><span class="p">)</span>  
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">Cannot serialize code with custom calls whose targets have no compatibility guarantees: my_new_bind</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can avoid the error if we pass a `DisabledSafetyCheck.custom_call`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">new_prim</span><span class="o">.</span><span class="n">bind</span><span class="p">),</span>
+<span class="gp">... </span>   <span class="n">disabled_checks</span><span class="o">=</span><span class="p">[</span><span class="n">export</span><span class="o">.</span><span class="n">DisabledSafetyCheck</span><span class="o">.</span><span class="n">custom_call</span><span class="p">(</span><span class="s2">&quot;my_new_prim&quot;</span><span class="p">)])(</span><span class="mf">1.</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="#export-ensuring-compat"><span class="std std-ref">Ensuring forward and backward compatibility</span></a> for developer information regarding
+ensuring compatibility.</p>
+</section>
+</section>
+<section id="cross-platform-and-multi-platform-export">
+<h2>Cross-platform and multi-platform export<a class="headerlink" href="#cross-platform-and-multi-platform-export" title="Link to this heading">#</a></h2>
+<p>JAX lowering is platform specific for a small number of JAX primitives.
+By default, the code is lowered and exported for the accelerator
+present on the exporting machine:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export</span><span class="o">.</span><span class="n">default_export_platform</span><span class="p">()</span>
+<span class="go">&#39;cpu&#39;</span>
+
+</pre></div>
+</div>
+<p>There is a safety check that will raise an error when trying to compile
+an <code class="docutils literal notranslate"><span class="pre">Exported</span></code> object on a machine that does not have the accelerator
+for which the code was exported.</p>
+<p>You can specify explicitly for what platforms the code should be exported.
+This allows you to specify a different accelerator than you have
+available at export time,
+and it even allows you to specify multi-platform export to
+obtain an <code class="docutils literal notranslate"><span class="pre">Exported</span></code> object that can be compiled and executed
+on multiple platforms.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You can specify the export platform, e.g., `tpu`, `cpu`, `cuda`, `rocm`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># even if the current machine does not have that accelerator.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">cos</span><span class="p">),</span> <span class="n">platforms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tpu&#39;</span><span class="p">])(</span><span class="mf">1.</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But you will get an error if you try to compile `exp`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># on a machine that does not have TPUs.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>  
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">Function &#39;cos&#39; was lowered for platforms &#39;(&#39;tpu&#39;,)&#39; but it is used on &#39;(&#39;cpu&#39;,)&#39;.</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can avoid the error if we pass a `DisabledSafetyCheck.platform`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># parameter to `export`, e.g., because you have reasons to believe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># that the code lowered will run adequately on the current</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># compilation platform (which is the case for `cos` in this</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># example):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp_unsafe</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">cos</span><span class="p">),</span>
+<span class="gp">... </span>   <span class="n">platforms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tpu&#39;</span><span class="p">],</span>
+<span class="gp">... </span>   <span class="n">disabled_checks</span><span class="o">=</span><span class="p">[</span><span class="n">export</span><span class="o">.</span><span class="n">DisabledSafetyCheck</span><span class="o">.</span><span class="n">platform</span><span class="p">()])(</span><span class="mf">1.</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp_unsafe</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="go">Array(0.5403023, dtype=float32, weak_type=True)</span>
+
+<span class="go"># and similarly with multi-platform lowering</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp_multi</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">cos</span><span class="p">),</span>
+<span class="gp">... </span>   <span class="n">platforms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tpu&#39;</span><span class="p">,</span> <span class="s1">&#39;cpu&#39;</span><span class="p">,</span> <span class="s1">&#39;cuda&#39;</span><span class="p">])(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp_multi</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="go">Array(0.5403023, dtype=float32, weak_type=True)</span>
+
+</pre></div>
+</div>
+<p>For multi-platform export, the StableHLO will contain multiple
+lowerings but only for those primitives that require it, so the
+resulting module size should be only marginally larger than the
+size of a module with default export.
+As an extreme case, when serializing a module without any
+primitives with platform-specific lowering, you will get
+the same StableHLO as for the single-platform export.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A largish function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">x</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp_single</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">exp_single</span><span class="o">.</span><span class="n">mlir_module_serialized</span><span class="p">)</span>  
+<span class="go">9220</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp_multi</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">),</span>
+<span class="gp">... </span>                          <span class="n">platforms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cpu&quot;</span><span class="p">,</span> <span class="s2">&quot;tpu&quot;</span><span class="p">,</span> <span class="s2">&quot;cuda&quot;</span><span class="p">])(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">exp_multi</span><span class="o">.</span><span class="n">mlir_module_serialized</span><span class="p">)</span>  
+<span class="go">9282</span>
+
+</pre></div>
+</div>
+</section>
+<section id="shape-polymorphic-export">
+<h2>Shape polymorphic export<a class="headerlink" href="#shape-polymorphic-export" title="Link to this heading">#</a></h2>
+<p>When used in JIT mode, JAX will trace and lower a function separately
+for each combination of input shapes. When exporting, it is possible
+in some cases to use dimension variables for some input dimensions
+in order to obtain an exported artifact that can be used with multiple
+combinations of input shapes.</p>
+<p>See the <a class="reference internal" href="shape_poly.html#shape-poly"><span class="std std-ref">Shape polymorphism</span></a> documentation.</p>
+</section>
+<section id="device-polymorphic-export">
+<h2>Device-polymorphic export<a class="headerlink" href="#device-polymorphic-export" title="Link to this heading">#</a></h2>
+<p>An exported artifact may contain sharding annotations for inputs,
+outputs and for some intermediates, but these annotations do not refer
+directly to the actual physical devices that existed at exporting time.
+Instead, the sharding annotations refer to logical devices. This
+means that you can compile and run the exported artifacts on different
+physical devices that were used for exporting.</p>
+<p>The cleanest way to achieve a device-polymorphic export is to
+use shardings constructed with a <code class="docutils literal notranslate"><span class="pre">jax.sharding.AbstractMesh</span></code>,
+which contains only the mesh shape and axis names. But,
+you can achieve the same results if you use shardings
+constructed for a mesh with concrete devices, since the actual
+devices in the mesh are ignored for tracing and lowering:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">AbstractMesh</span><span class="p">,</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">NamedSharding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use an AbstractMesh for exporting</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export_mesh</span> <span class="o">=</span> <span class="n">AbstractMesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span> <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span>
+<span class="gp">... </span>   <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">32</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">sharding</span><span class="o">=</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">export_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># `exp` knows for how many devices it was exported.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">nr_devices</span>
+<span class="go">4</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># and it knows the shardings for the inputs. These will be applied</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># when the exported is called.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">in_shardings_hlo</span>
+<span class="go">({devices=[4]&lt;=[4]},)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You can also use a concrete set of devices for exporting</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()[:</span><span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">concrete_devices</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp2</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span>
+<span class="gp">... </span>   <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">32</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">sharding</span><span class="o">=</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">concrete_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You can expect the same results</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">exp</span><span class="o">.</span><span class="n">in_shardings_hlo</span> <span class="o">==</span> <span class="n">exp2</span><span class="o">.</span><span class="n">in_shardings_hlo</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When you call an Exported, you must use a concrete set of devices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arg</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res1</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">NamedSharding</span><span class="p">(</span><span class="n">concrete_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check out the first 2 shards of the result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;device=</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2"> index=</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">res1</span><span class="o">.</span><span class="n">addressable_shards</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]</span>
+<span class="go">[&#39;device=TFRT_CPU_0 index=(slice(0, 8, None),)&#39;,</span>
+<span class="go"> &#39;device=TFRT_CPU_1 index=(slice(8, 16, None),)&#39;]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can call `exp` with some other 4 devices and another</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># mesh with a different shape, as long as the number of devices is</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># the same.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">other_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res2</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">NamedSharding</span><span class="p">(</span><span class="n">other_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">))))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check out the first 2 shards of the result. Notice that the output is</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># sharded similarly; this means that the input was resharded according to the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># exp.in_shardings.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;device=</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2"> index=</span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">res2</span><span class="o">.</span><span class="n">addressable_shards</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]</span>
+<span class="go">[&#39;device=TFRT_CPU_2 index=(slice(0, 8, None),)&#39;,</span>
+<span class="go"> &#39;device=TFRT_CPU_3 index=(slice(8, 16, None),)&#39;]</span>
+
+</pre></div>
+</div>
+<p>It is an error to try to invoke an exported artifact with a different number
+of devices than it was exported for:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">NamedSharding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export_devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">export_devices</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span>
+<span class="gp">... </span>   <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">export_devices</span><span class="p">),),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">sharding</span><span class="o">=</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">export_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arg</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">export_devices</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>  
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">Exported module f was lowered for 8 devices and is called in a context with 1 devices. This is disallowed because: the module was lowered for more than 1 device.</span>
+
+</pre></div>
+</div>
+<p>There are helper functions to shard the inputs for calling an exported
+artifacts using a new mesh constructed at the call site:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">NamedSharding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export_devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">export_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">export_devices</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span>
+<span class="gp">... </span>   <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">export_devices</span><span class="p">),),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">sharding</span><span class="o">=</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">export_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Prepare the mesh for calling `exp`.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calling_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">export_devices</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Shard the arg according to what `exp` expects.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arg</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">export_devices</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sharded_arg</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">exp</span><span class="o">.</span><span class="n">in_shardings_jax</span><span class="p">(</span><span class="n">calling_mesh</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">sharded_arg</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>As a special facility, if a function was exported for 1 device and if it contains no
+sharding annotations, then it can be invoked on an argument of the same shape but sharded
+on multiple devices, and the compiler will shard the function appropriately:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">```</span><span class="n">python</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">jax</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">NamedSharding</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="o">...</span>   <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">))(</span><span class="n">arg</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">exp</span><span class="o">.</span><span class="n">in_avals</span>
+<span class="p">(</span><span class="n">ShapedArray</span><span class="p">(</span><span class="n">int32</span><span class="p">[</span><span class="mi">4</span><span class="p">]),)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">exp</span><span class="o">.</span><span class="n">nr_devices</span>
+<span class="mi">1</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Prepare the mesh for calling `exp`.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calling_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()[:</span><span class="mi">4</span><span class="p">],</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,))</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># Shard the arg according to what `exp` expects.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sharded_arg</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span>
+<span class="o">...</span>                              <span class="n">NamedSharding</span><span class="p">(</span><span class="n">calling_mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">sharded_arg</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</section>
+<section id="calling-convention-versions">
+<h2>Calling convention versions<a class="headerlink" href="#calling-convention-versions" title="Link to this heading">#</a></h2>
+<p>The JAX export support has evolved over time, e.g., to support
+effects. In order to support compatibility (see <a class="reference internal" href="#compatibility-guarantees">compatibility guarantees</a>)
+we maintain a calling convention version for each <code class="docutils literal notranslate"><span class="pre">Exported</span></code>.
+As of June 2024, all function exported with version 9
+(the latest, see <a class="reference internal" href="#calling-convention-versions">all calling convention versions</a>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="p">:</span> <span class="n">export</span><span class="o">.</span><span class="n">Exported</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">)(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">calling_convention_version</span>
+<span class="go">9</span>
+
+</pre></div>
+</div>
+<p>At any given time, the export APIs may support a range
+of calling convention versions. You can control which calling convention
+version to use using the <code class="docutils literal notranslate"><span class="pre">--jax_export_calling_convention_version</span></code> flag
+or the <code class="docutils literal notranslate"><span class="pre">JAX_EXPORT_CALLING_CONVENTION_VERSION</span></code> environment variable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">export</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">export</span><span class="o">.</span><span class="n">minimum_supported_calling_convention_version</span><span class="p">,</span> <span class="n">export</span><span class="o">.</span><span class="n">maximum_supported_calling_convention_version</span><span class="p">)</span>
+<span class="go">(9, 9)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax._src</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">config</span><span class="o">.</span><span class="n">jax_export_calling_convention_version</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+<span class="gp">... </span> <span class="n">exp</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">)(</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">... </span> <span class="n">exp</span><span class="o">.</span><span class="n">calling_convention_version</span>
+<span class="go">9</span>
+
+</pre></div>
+</div>
+<p>We reserve the right to remove support for
+generating or consuming calling convention versions older than 6 months.</p>
+<section id="module-calling-convention">
+<h3>Module calling convention<a class="headerlink" href="#module-calling-convention" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Exported.mlir_module</span></code> has a <code class="docutils literal notranslate"><span class="pre">main</span></code> function that takes an optional first
+platform index argument if the module supports multiple platforms
+(<code class="docutils literal notranslate"><span class="pre">len(platforms)</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>), followed by the token arguments corresponding
+to the ordered effects, followed by the kept array
+arguments (corresponding to <code class="docutils literal notranslate"><span class="pre">module_kept_var_idx</span></code> and <code class="docutils literal notranslate"><span class="pre">in_avals</span></code>).
+The platform index is a i32 or i64 scalar encoding the index of the current
+compilation platform into the <code class="docutils literal notranslate"><span class="pre">platforms</span></code> sequence.</p>
+<p>Inner functions use a different calling convention: an optional
+platform index argument, optional dimension variable arguments
+(scalar tensors of type i32 or i64),
+followed by optional token arguments (in presence of ordered effects),
+followed by the regular array arguments.
+The dimension arguments correspond to the dimension variables appearing in
+the <code class="docutils literal notranslate"><span class="pre">args_avals</span></code>, in sorted order of their names.</p>
+<p>Consider the lowering of a function with one array argument of type
+<code class="docutils literal notranslate"><span class="pre">f32[w,</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">h]</span></code>, where <code class="docutils literal notranslate"><span class="pre">w</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code> are two dimension variables.
+Assume that we use multi-platform lowering, and we have
+one ordered effect. The <code class="docutils literal notranslate"><span class="pre">main</span></code> function will be as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      func public main(
+            platform_index: i32 {jax.global_constant=&quot;_platform_index&quot;},
+            token_in: token,
+            arg: f32[?, ?]) {
+         arg_w = hlo.get_dimension_size(arg, 0)
+         dim1 = hlo.get_dimension_size(arg, 1)
+         arg_h = hlo.floordiv(dim1, 2)
+         call _check_shape_assertions(arg)  # See below
+         token = new_token()
+         token_out, res = call _wrapped_jax_export_main(platform_index,
+                                                        arg_h,
+                                                        arg_w,
+                                                        token_in,
+                                                        arg)
+         return token_out, res
+      }
+</pre></div>
+</div>
+<p>The actual computation is in <code class="docutils literal notranslate"><span class="pre">_wrapped_jax_export_main</span></code>, taking also
+the values of <code class="docutils literal notranslate"><span class="pre">h</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code> dimension variables.</p>
+<p>The signature of the <code class="docutils literal notranslate"><span class="pre">_wrapped_jax_export_main</span></code> is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      func private _wrapped_jax_export_main(
+          platform_index: i32 {jax.global_constant=&quot;_platform_index&quot;},
+          arg_h: i32 {jax.global_constant=&quot;h&quot;},
+          arg_w: i32 {jax.global_constant=&quot;w&quot;},
+          arg_token: stablehlo.token {jax.token=True},
+          arg: f32[?, ?]) -&gt; (stablehlo.token, ...)
+</pre></div>
+</div>
+<p>Prior to calling convention version 9 the calling convention for effects was
+different: the <code class="docutils literal notranslate"><span class="pre">main</span></code> function does not take or return a token. Instead
+the function creates dummy tokens of type <code class="docutils literal notranslate"><span class="pre">i1[0]</span></code> and passes them to the
+<code class="docutils literal notranslate"><span class="pre">_wrapped_jax_export_main</span></code>. The <code class="docutils literal notranslate"><span class="pre">_wrapped_jax_export_main</span></code>
+takes dummy tokens of type <code class="docutils literal notranslate"><span class="pre">i1[0]</span></code> and will create internally real
+tokens to pass to the inner functions. The inner functions use real
+tokens (both before and after calling convention version 9)</p>
+<p>Also starting with calling convention version 9, function arguments that contain
+the platform index or the dimension variable values have a
+<code class="docutils literal notranslate"><span class="pre">jax.global_constant</span></code> string attribute whose value is the name of the
+global constant, either <code class="docutils literal notranslate"><span class="pre">_platform_index</span></code> or a dimension variable name.
+The global constant name may be empty if it is not known.
+Some global constant computations use inner functions, e.g., for
+<code class="docutils literal notranslate"><span class="pre">floor_divide</span></code>. The arguments of such functions have a <code class="docutils literal notranslate"><span class="pre">jax.global_constant</span></code>
+attribute for all attributes, meaning that the result of the function is
+also a global constant.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">main</span></code> contains a call to <code class="docutils literal notranslate"><span class="pre">_check_shape_assertions</span></code>.
+JAX tracing assumes that <code class="docutils literal notranslate"><span class="pre">arg.shape[1]</span></code> is even, and that both <code class="docutils literal notranslate"><span class="pre">w</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code>
+have values &gt;= 1. We must check these constraints when we invoke the
+module. We use a special custom call <code class="docutils literal notranslate"><span class="pre">&#64;shape_assertion</span></code> that takes
+a boolean first operand, a string <code class="docutils literal notranslate"><span class="pre">error_message</span></code> attribute that may contain
+format specifiers <code class="docutils literal notranslate"><span class="pre">{0}</span></code>, <code class="docutils literal notranslate"><span class="pre">{1}</span></code>, …, and a variadic number of integer
+scalar operands corresponding to the format specifiers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       func private _check_shape_assertions(arg: f32[?, ?]) {
+         # Check that w is &gt;= 1
+         arg_w = hlo.get_dimension_size(arg, 0)
+         custom_call @shape_assertion(arg_w &gt;= 1, arg_w,
+            error_message=&quot;Dimension variable &#39;w&#39; must have integer value &gt;= 1. Found {0}&quot;)
+         # Check that dim1 is even
+         dim1 = hlo.get_dimension_size(arg, 1)
+         custom_call @shape_assertion(dim1 % 2 == 0, dim1 % 2,
+            error_message=&quot;Division had remainder {0} when computing the value of &#39;h&#39;)
+         # Check that h &gt;= 1
+         arg_h = hlo.floordiv(dim1, 2)
+         custom_call @shape_assertion(arg_h &gt;= 1, arg_h,
+            error_message=&quot;&quot;Dimension variable &#39;h&#39; must have integer value &gt;= 1. Found {0}&quot;)
+</pre></div>
+</div>
+</section>
+<section id="export-calling-convention-version">
+<span id="id1"></span><h3>Calling convention versions<a class="headerlink" href="#export-calling-convention-version" title="Link to this heading">#</a></h3>
+<p>We list here a history of the calling convention version numbers:</p>
+<ul class="simple">
+<li><p>Version 1 used MHLO &amp; CHLO to serialize the code, not supported anymore.</p></li>
+<li><p>Version 2 supports StableHLO &amp; CHLO. Used from October 2022. Not supported
+anymore.</p></li>
+<li><p>Version 3 supports platform checking and multiple platforms.
+Used from February 2023. Not supported anymore.</p></li>
+<li><p>Version 4 supports StableHLO with compatibility guarantees.
+This is the earliest version at the time of the JAX native serialization
+launch.
+Used in JAX from March 15, 2023 (cl/516885716). Starting with
+March 28th, 2023 we stopped using <code class="docutils literal notranslate"><span class="pre">dim_args_spec</span></code> (cl/520033493).
+The support for this version was dropped on
+October 17th, 2023 (cl/573858283).</p></li>
+<li><p>Version 5 adds support for <code class="docutils literal notranslate"><span class="pre">call_tf_graph</span></code>. This is currently used
+for some specialized use cases. Used in JAX from May 3rd, 2023
+(cl/529106145).</p></li>
+<li><p>Version 6 adds support for the <code class="docutils literal notranslate"><span class="pre">disabled_checks</span></code> attribute. This version
+mandates a non-empty <code class="docutils literal notranslate"><span class="pre">platforms</span></code> attribute. Supported by XlaCallModule
+since June 7th, 2023 and available in JAX since
+June 13th, 2023 (JAX 0.4.13).</p></li>
+<li><p>Version 7 adds support for <code class="docutils literal notranslate"><span class="pre">stablehlo.shape_assertion</span></code> operations and
+for <code class="docutils literal notranslate"><span class="pre">shape_assertions</span></code> specified in <code class="docutils literal notranslate"><span class="pre">disabled_checks</span></code>.
+See <a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/experimental/jax2tf/README.md#errors-in-presence-of-shape-polymorphism">Errors in presence of shape polymorphism</a>. Supported by XlaCallModule
+since July 12th, 2023 (cl/547482522),
+available in JAX serialization since July 20th, 2023 (JAX 0.4.14),
+and the default since August 12th, 2023 (JAX 0.4.15).</p></li>
+<li><p>Version 8 adds support for the <code class="docutils literal notranslate"><span class="pre">jax.uses_shape_polymorphism</span></code> module
+attribute and enables the shape refinement pass only when the
+attribute is present. Supported by XlaCallModule since July 21st, 2023
+(cl/549973693), available in JAX since July 26th, 2023 (JAX 0.4.14),
+and the default since October 21st, 2023 (JAX 0.4.20).</p></li>
+<li><p>Version 9 adds support for effects.
+See the docstring for <code class="docutils literal notranslate"><span class="pre">export.Exported</span></code> for the precise calling convention.
+In this calling convention version we also tag the platform index and the
+dimension variables arguments with <code class="docutils literal notranslate"><span class="pre">jax.global_constant</span></code> attributes.
+Supported by XlaCallModule since October 27th, 2023,
+available in JAX since October 20th, 2023 (JAX 0.4.20),
+and the default since February 1st, 2024 (JAX 0.4.24).
+This is the only supported version as of 27th of March, 2024.</p></li>
+</ul>
+</section>
+</section>
+<section id="developer-documentation">
+<h2>Developer documentation<a class="headerlink" href="#developer-documentation" title="Link to this heading">#</a></h2>
+<section id="debugging">
+<span id="export-debugging"></span><h3>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h3>
+<p>You can log the exported modules, with somewhat different flags in OSS versus
+in Google. In OSS you can do the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log from python</span>
+python<span class="w"> </span>tests/export_test.py<span class="w"> </span>JaxExportTest.test_basic<span class="w"> </span>-v<span class="o">=</span><span class="m">3</span>
+<span class="c1"># Or, log from pytest to /tmp/mylog.txt</span>
+pytest<span class="w"> </span>tests/export_test.py<span class="w"> </span>-k<span class="w"> </span>test_basic<span class="w"> </span>--log-level<span class="o">=</span><span class="m">3</span><span class="w"> </span>--log-file<span class="o">=</span>/tmp/mylog.txt
+</pre></div>
+</div>
+<p>You will see a log line of the form:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>I0619<span class="w"> </span><span class="m">10</span>:54:18.978733<span class="w"> </span><span class="m">8299482112</span><span class="w"> </span>_export.py:606<span class="o">]</span><span class="w"> </span>Exported<span class="w"> </span>JAX<span class="w"> </span><span class="k">function</span>:<span class="w"> </span><span class="nv">fun_name</span><span class="o">=</span>sin<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">9</span><span class="w"> </span><span class="nv">lowering_platforms</span><span class="o">=(</span><span class="s1">&#39;cpu&#39;</span>,<span class="o">)</span><span class="w"> </span><span class="nv">disabled_checks</span><span class="o">=()</span>
+I0619<span class="w"> </span><span class="m">10</span>:54:18.978767<span class="w"> </span><span class="m">8299482112</span><span class="w"> </span>_export.py:607<span class="o">]</span><span class="w"> </span>Define<span class="w"> </span>JAX_DUMP_IR_TO<span class="w"> </span>to<span class="w"> </span>dump<span class="w"> </span>the<span class="w"> </span>module.
+</pre></div>
+</div>
+<p>If you set the environment variable <code class="docutils literal notranslate"><span class="pre">JAX_DUMP_IR_TO</span></code> to a directory, the exported (and the JIT compiled) HLO
+modules will be saved there.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">JAX_DUMP_IR_TO</span><span class="o">=</span>/tmp/export.dumps<span class="w"> </span>pytest<span class="w"> </span>tests/export_test.py<span class="w"> </span>-k<span class="w"> </span>test_basic<span class="w"> </span>--log-level<span class="o">=</span><span class="m">3</span><span class="w"> </span>--log-file<span class="o">=</span>/tmp/mylog.txt
+INFO<span class="w">     </span>absl:_export.py:606<span class="w"> </span>Exported<span class="w"> </span>JAX<span class="w"> </span><span class="k">function</span>:<span class="w"> </span><span class="nv">fun_name</span><span class="o">=</span>sin<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">9</span><span class="w"> </span><span class="nv">lowering_platforms</span><span class="o">=(</span><span class="s1">&#39;cpu&#39;</span>,<span class="o">)</span><span class="w"> </span><span class="nv">disabled_checks</span><span class="o">=()</span>
+INFO<span class="w">     </span>absl:_export.py:607<span class="w"> </span>The<span class="w"> </span>module<span class="w"> </span>was<span class="w"> </span>dumped<span class="w"> </span>to<span class="w"> </span>jax_ir0_jit_sin_export.mlir.
+</pre></div>
+</div>
+<p>You will see both the exported modules (named <code class="docutils literal notranslate"><span class="pre">..._export.mlir</span></code>
+and the JIT compiled modules (named <code class="docutils literal notranslate"><span class="pre">..._compile.mlir</span></code>):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>/tmp/export.dumps/
+total<span class="w"> </span><span class="m">32</span>
+-rw-rw-r--@<span class="w"> </span><span class="m">1</span><span class="w"> </span>necula<span class="w">  </span>wheel<span class="w">  </span><span class="m">2316</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">11</span>:04<span class="w"> </span>jax_ir0_jit_sin_export.mlir
+-rw-rw-r--@<span class="w"> </span><span class="m">1</span><span class="w"> </span>necula<span class="w">  </span>wheel<span class="w">  </span><span class="m">2279</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">11</span>:04<span class="w"> </span>jax_ir1_jit_sin_compile.mlir
+-rw-rw-r--@<span class="w"> </span><span class="m">1</span><span class="w"> </span>necula<span class="w">  </span>wheel<span class="w">  </span><span class="m">3377</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">11</span>:04<span class="w"> </span>jax_ir2_jit_call_exported_compile.mlir
+-rw-rw-r--@<span class="w"> </span><span class="m">1</span><span class="w"> </span>necula<span class="w">  </span>wheel<span class="w">  </span><span class="m">2333</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">11</span>:04<span class="w"> </span>jax_ir3_jit_my_fun_export.mlir
+</pre></div>
+</div>
+<p>Set <a class="reference external" href="https://docs.jax.dev/en/latest/config_options.html#jax_debug_log_modules"><code class="docutils literal notranslate"><span class="pre">JAX_DEBUG_LOG_MODULES=jax._src.export</span></code></a> to enable extra debugging logging.</p>
+</section>
+<section id="ensuring-forward-and-backward-compatibility">
+<span id="export-ensuring-compat"></span><h3>Ensuring forward and backward compatibility<a class="headerlink" href="#ensuring-forward-and-backward-compatibility" title="Link to this heading">#</a></h3>
+<p>This section discusses the process JAX developers
+should use to ensure the <a class="reference internal" href="#compatibility-guarantees">compatibility guarantees</a>.</p>
+<p>One complication is that external users install JAX and jaxlib
+in separate packages,
+and users often end up using an older jaxlib than JAX.
+We observe that the custom calls live in the jaxlib, and only the jaxlib is relevant
+for a consumer of an exported artifact.
+To simplify the process, we are setting the expectation for external users
+that the compatibility window is defined in terms of jaxlib releases,
+and it is their responsibility to ensure that they export with a new jaxlib
+even if JAX would function with an older version.</p>
+<p>Thus, we care only about jaxlib releases.
+We can start a backward-compatibility deprecation clock when we make a jaxlib release,
+even if we don’t force it to be the minimum allowed version.</p>
+<p>Let’s say that we need to add, delete, or change the semantics of a
+custom call target <code class="docutils literal notranslate"><span class="pre">T</span></code> used by the JAX lowering rules.
+Here is a possible chronology (for changing custom call targets
+that live in jaxlib):</p>
+<ol class="arabic">
+<li><p>Day “D - 1”, before the change. Say that the active internal JAX version is <code class="docutils literal notranslate"><span class="pre">0.4.31</span></code>
+(the version of the next JAX and jaxlib releases).
+The JAX lowering rules use a custom call <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p>Day “D”, we add the new custom call target <code class="docutils literal notranslate"><span class="pre">T_NEW</span></code>.
+We should create a new custom call target, and clean up the old
+target roughly after 6 months, rather than updating <code class="docutils literal notranslate"><span class="pre">T</span></code> in place:</p>
+<ul class="simple">
+<li><p>See the example <a class="reference external" href="https://github.com/jax-ml/jax/pull/20997">PR #20997</a>
+implementing the steps below.</p></li>
+<li><p>We add the custom call target <code class="docutils literal notranslate"><span class="pre">T_NEW</span></code>.</p></li>
+<li><p>We change the JAX lowering rules that were previous using <code class="docutils literal notranslate"><span class="pre">T</span></code>,
+to use <code class="docutils literal notranslate"><span class="pre">T_NEW</span></code>, conditionally as follows:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax._src</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">jax._src.lib</span> <span class="kn">import</span> <span class="n">version</span> <span class="k">as</span> <span class="n">jaxlib_version</span>
+
+<span class="k">def</span> <span class="nf">my_lowering_rule</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">LoweringRuleContext</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">is_forward_compat</span><span class="p">()</span> <span class="ow">or</span> <span class="n">jaxlib_version</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">31</span><span class="p">):</span>
+    <span class="c1"># this is the old lowering, using target T, while we</span>
+    <span class="c1"># are in forward compatibility mode for T, or we</span>
+    <span class="c1"># are in OSS and are using an old jaxlib.</span>
+    <span class="k">return</span> <span class="n">hlo</span><span class="o">.</span><span class="n">custom_call</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="c1"># This is the new lowering, using target T_NEW, for</span>
+    <span class="c1"># when we use a jaxlib with version `&gt;= (0, 4, 31)`</span>
+    <span class="c1"># (or when this is internal usage), and also we are</span>
+    <span class="c1"># in JIT mode.</span>
+    <span class="k">return</span> <span class="n">hlo</span><span class="o">.</span><span class="n">custom_call</span><span class="p">(</span><span class="s2">&quot;T_NEW&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Note that the forward compatibility mode is always false in JIT mode
+or if the user passes <code class="docutils literal notranslate"><span class="pre">--jax_export_ignore_forward_compatibility=true</span></code></p></li>
+<li><p>We add <code class="docutils literal notranslate"><span class="pre">T_NEW</span></code> to the list of
+<a class="reference external" href="https://github.com/search?q=repo%3Ajax-ml%2Fjax++%22_CUSTOM_CALL_TARGETS_GUARANTEED_STABLE+%3D%22+path%3A_export.py&amp;amp;amp%3Btype=code&amp;amp;type=code"><code class="docutils literal notranslate"><span class="pre">_CUSTOM_CALL_TARGETS_GUARANTEED_STABLE</span></code></a>
+in <code class="docutils literal notranslate"><span class="pre">_export.py</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Day “D + 21” (end of forward compatibility window; can be even later than 21 days):
+We remove the <code class="docutils literal notranslate"><span class="pre">forward_compat_mode</span></code> in the lowering code, so now exporting
+will start using the new custom call target <code class="docutils literal notranslate"><span class="pre">T_NEW</span></code> as long as we are using a new <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code>.</p>
+<ul class="simple">
+<li><p>We add a backwards compatibility test for <code class="docutils literal notranslate"><span class="pre">T_NEW</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Day “RELEASE &gt; D” (the first JAX release date after <code class="docutils literal notranslate"><span class="pre">D</span></code>, when we release version <code class="docutils literal notranslate"><span class="pre">0.4.31</span></code>):
+we start the clock for the 6 months backwards compatibility.
+Note that this is relevant only if <code class="docutils literal notranslate"><span class="pre">T</span></code> is among the custom call targets for which
+we already guarantee stability, i.e., are listed in
+<a class="reference external" href="https://github.com/search?q=repo%3Ajax-ml%2Fjax++%22_CUSTOM_CALL_TARGETS_GUARANTEED_STABLE+%3D%22+path%3A_export.py&amp;amp;amp%3Btype=code&amp;amp;type=code"><code class="docutils literal notranslate"><span class="pre">_CUSTOM_CALL_TARGETS_GUARANTEED_STABLE</span></code></a>.</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">RELEASE</span></code> is in the forward compatibility window <code class="docutils literal notranslate"><span class="pre">[D,</span> <span class="pre">D</span> <span class="pre">+</span> <span class="pre">21]</span></code> and if
+we make <code class="docutils literal notranslate"><span class="pre">RELEASE</span></code> the minimum allowed jaxlib version then we can
+remove the <code class="docutils literal notranslate"><span class="pre">jaxlib_version</span> <span class="pre">&lt;</span> <span class="pre">(0,</span> <span class="pre">4,</span> <span class="pre">31)</span></code> conditional in the
+JIT branch.</p></li>
+</ul>
+</li>
+<li><p>Day “RELEASE + 180” (end of backward compatibility window,
+can be even later than 180 days): By now, we must have bumped
+the minimum jaxlib so that the lowering conditional <code class="docutils literal notranslate"><span class="pre">jaxlib_version</span> <span class="pre">&lt;</span> <span class="pre">(0,</span> <span class="pre">4,</span> <span class="pre">31)</span></code>
+was already removed and JAX lowering cannot generate custom calls to <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
+<ul class="simple">
+<li><p>We remove the C++ implementation of the old custom call target <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p></li>
+<li><p>We remove also the backwards compatibility test for <code class="docutils literal notranslate"><span class="pre">T</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="migration-guide-from-jax-experimental-export">
+<h2>Migration guide from jax.experimental.export<a class="headerlink" href="#migration-guide-from-jax-experimental-export" title="Link to this heading">#</a></h2>
+<p>On June 18, 2024 (JAX version 0.4.30)
+we deprecated the <code class="docutils literal notranslate"><span class="pre">jax.experimental.export</span></code> APIs
+in favor of <code class="docutils literal notranslate"><span class="pre">jax.export</span></code> APIs. There have been some minor changes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">jax.experimental.export.export</span></code>:</p>
+<ul>
+<li><p>The old function used to allow any Python callable, or the result of
+<code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>. Now only the latter is accepted. You have to manually apply
+<code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> to the function to export before calling <code class="docutils literal notranslate"><span class="pre">export</span></code>.</p></li>
+<li><p>The old <code class="docutils literal notranslate"><span class="pre">lowering_parameters</span></code> kwarg is now named <code class="docutils literal notranslate"><span class="pre">platforms</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jax.experimental.export.default_lowering_platform()</span></code> is now
+at <a class="reference internal" href="../_autosummary/jax.export.default_export_platform.html#jax.export.default_export_platform" title="jax.export.default_export_platform"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.export.default_export_platform()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jax.experimental.export.call</span></code> is now a method of the <a class="reference internal" href="../jax.export.html#jax.export.Exported" title="jax.export.Exported"><code class="xref py py-class docutils literal notranslate"><span class="pre">jax.export.Exported</span></code></a> object.
+Instead of <code class="docutils literal notranslate"><span class="pre">export.call(exp)</span></code> you should use <code class="docutils literal notranslate"><span class="pre">exp.call</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jax.experimental.export.serialize</span></code> is now a method of the <a class="reference internal" href="../jax.export.html#jax.export.Exported" title="jax.export.Exported"><code class="xref py py-class docutils literal notranslate"><span class="pre">jax.export.Exported</span></code></a>
+object. Instead of <code class="docutils literal notranslate"><span class="pre">export.serialize(exp)</span></code> you should use <code class="docutils literal notranslate"><span class="pre">exp.serialize()</span></code>.</p></li>
+<li><p>The configuration flag <code class="docutils literal notranslate"><span class="pre">--jax-serialization-version</span></code> is deprecated.
+Use <code class="docutils literal notranslate"><span class="pre">--jax-export-calling-convention-version</span></code>.</p></li>
+<li><p>The value <code class="docutils literal notranslate"><span class="pre">jax.experimental.export.minimum_supported_serialization_version</span></code>
+is now at <code class="docutils literal notranslate"><span class="pre">jax.export.minimum_supported_calling_convention_version</span></code>.</p></li>
+<li><p>The following fields of <a class="reference internal" href="../jax.export.html#jax.export.Exported" title="jax.export.Exported"><code class="xref py py-class docutils literal notranslate"><span class="pre">jax.export.Exported</span></code></a> have been renamed</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">uses_shape_polymorphism</span></code> is now <code class="docutils literal notranslate"><span class="pre">uses_global_constants</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mlir_module_serialization_version</span></code> is now <code class="docutils literal notranslate"><span class="pre">calling_convention_version</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lowering_platforms</span></code> is now <code class="docutils literal notranslate"><span class="pre">platforms</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exporting and serialization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="shape_poly.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Shape polymorphism</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-for-reverse-mode-ad">Support for reverse-mode AD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compatibility-guarantees">Compatibility guarantees</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compatibility-guarantees-for-custom-calls">Compatibility guarantees for custom calls</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-platform-and-multi-platform-export">Cross-platform and multi-platform export</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-polymorphic-export">Shape polymorphic export</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-polymorphic-export">Device-polymorphic export</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-convention-versions">Calling convention versions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-calling-convention">Module calling convention</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-calling-convention-version">Calling convention versions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-documentation">Developer documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensuring-forward-and-backward-compatibility">Ensuring forward and backward compatibility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migration-guide-from-jax-experimental-export">Migration guide from jax.experimental.export</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

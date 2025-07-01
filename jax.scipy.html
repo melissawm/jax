@@ -1,0 +1,1857 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>jax.scipy module &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=30646c52"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'jax.scipy';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="jax.scipy.cluster.vq.vq" href="_autosummary/jax.scipy.cluster.vq.vq.html" />
+    <link rel="prev" title="jax.numpy.linalg.vecdot" href="_autosummary/jax.numpy.linalg.vecdot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="pallas/quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="jax.html" class="nav-link">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><code...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/jax.scipy.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>jax.scipy module</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.cluster.vq">jax.scipy.cluster</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.fft">jax.scipy.fft</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.integrate">jax.scipy.integrate</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.interpolate">jax.scipy.interpolate</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.linalg">jax.scipy.linalg</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.ndimage">jax.scipy.ndimage</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.optimize">jax.scipy.optimize</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.signal">jax.scipy.signal</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.spatial.transform">jax.scipy.spatial.transform</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.sparse.linalg">jax.scipy.sparse.linalg</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.special">jax.scipy.special</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats">jax.scipy.stats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.bernoulli">jax.scipy.stats.bernoulli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.beta">jax.scipy.stats.beta</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.betabinom">jax.scipy.stats.betabinom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.binom">jax.scipy.stats.binom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.cauchy">jax.scipy.stats.cauchy</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.chi2">jax.scipy.stats.chi2</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.dirichlet">jax.scipy.stats.dirichlet</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.expon">jax.scipy.stats.expon</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.gamma">jax.scipy.stats.gamma</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.gennorm">jax.scipy.stats.gennorm</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.geom">jax.scipy.stats.geom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.laplace">jax.scipy.stats.laplace</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.logistic">jax.scipy.stats.logistic</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.multinomial">jax.scipy.stats.multinomial</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.multivariate_normal">jax.scipy.stats.multivariate_normal</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.nbinom">jax.scipy.stats.nbinom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.norm">jax.scipy.stats.norm</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.pareto">jax.scipy.stats.pareto</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.poisson">jax.scipy.stats.poisson</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.t">jax.scipy.stats.t</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.truncnorm">jax.scipy.stats.truncnorm</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.uniform">jax.scipy.stats.uniform</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-scipy-stats-gaussian-kde">jax.scipy.stats.gaussian_kde</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.vonmises">jax.scipy.stats.vonmises</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.wrapcauchy">jax.scipy.stats.wrapcauchy</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="jax-scipy-module">
+<h1><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module<a class="headerlink" href="#jax-scipy-module" title="Link to this heading">#</a></h1>
+<section id="module-jax.scipy.cluster.vq">
+<span id="jax-scipy-cluster"></span><h2>jax.scipy.cluster<a class="headerlink" href="#module-jax.scipy.cluster.vq" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.cluster.vq.vq.html#jax.scipy.cluster.vq.vq" title="jax.scipy.cluster.vq.vq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vq</span></code></a>(obs, code_book[, check_finite])</p></td>
+<td><p>Assign codes from a code book to a set of observations.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.fft">
+<span id="jax-scipy-fft"></span><h2>jax.scipy.fft<a class="headerlink" href="#module-jax.scipy.fft" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.fft.dct.html#jax.scipy.fft.dct" title="jax.scipy.fft.dct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dct</span></code></a>(x[, type, n, axis, norm])</p></td>
+<td><p>Computes the discrete cosine transform of the input</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.fft.dctn.html#jax.scipy.fft.dctn" title="jax.scipy.fft.dctn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dctn</span></code></a>(x[, type, s, axes, norm])</p></td>
+<td><p>Computes the multidimensional discrete cosine transform of the input</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.fft.idct.html#jax.scipy.fft.idct" title="jax.scipy.fft.idct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idct</span></code></a>(x[, type, n, axis, norm])</p></td>
+<td><p>Computes the inverse discrete cosine transform of the input</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.fft.idctn.html#jax.scipy.fft.idctn" title="jax.scipy.fft.idctn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idctn</span></code></a>(x[, type, s, axes, norm])</p></td>
+<td><p>Computes the multidimensional inverse discrete cosine transform of the input</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.integrate">
+<span id="jax-scipy-integrate"></span><h2>jax.scipy.integrate<a class="headerlink" href="#module-jax.scipy.integrate" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.integrate.trapezoid.html#jax.scipy.integrate.trapezoid" title="jax.scipy.integrate.trapezoid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trapezoid</span></code></a>(y[, x, dx, axis])</p></td>
+<td><p>Integrate along the given axis using the composite trapezoidal rule.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.interpolate">
+<span id="jax-scipy-interpolate"></span><h2>jax.scipy.interpolate<a class="headerlink" href="#module-jax.scipy.interpolate" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.interpolate.RegularGridInterpolator.html#jax.scipy.interpolate.RegularGridInterpolator" title="jax.scipy.interpolate.RegularGridInterpolator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegularGridInterpolator</span></code></a>(points, values[, ...])</p></td>
+<td><p>Interpolate points on a regular rectangular grid.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.linalg">
+<span id="jax-scipy-linalg"></span><h2>jax.scipy.linalg<a class="headerlink" href="#module-jax.scipy.linalg" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.block_diag.html#jax.scipy.linalg.block_diag" title="jax.scipy.linalg.block_diag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">block_diag</span></code></a>(*arrs)</p></td>
+<td><p>Create a block diagonal matrix from input arrays.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.cho_factor.html#jax.scipy.linalg.cho_factor" title="jax.scipy.linalg.cho_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cho_factor</span></code></a>(a[, lower, overwrite_a, check_finite])</p></td>
+<td><p>Factorization for Cholesky-based linear solves</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.cho_solve.html#jax.scipy.linalg.cho_solve" title="jax.scipy.linalg.cho_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cho_solve</span></code></a>(c_and_lower, b[, overwrite_b, ...])</p></td>
+<td><p>Solve a linear system using a Cholesky factorization</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.cholesky.html#jax.scipy.linalg.cholesky" title="jax.scipy.linalg.cholesky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cholesky</span></code></a>(a[, lower, overwrite_a, check_finite])</p></td>
+<td><p>Compute the Cholesky decomposition of a matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.det.html#jax.scipy.linalg.det" title="jax.scipy.linalg.det"><code class="xref py py-obj docutils literal notranslate"><span class="pre">det</span></code></a>(a[, overwrite_a, check_finite])</p></td>
+<td><p>Compute the determinant of a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.eigh.html#jax.scipy.linalg.eigh" title="jax.scipy.linalg.eigh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigh</span></code></a>()</p></td>
+<td><p>Compute eigenvalues and eigenvectors for a Hermitian matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.eigh_tridiagonal.html#jax.scipy.linalg.eigh_tridiagonal" title="jax.scipy.linalg.eigh_tridiagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigh_tridiagonal</span></code></a>(d, e, *[, eigvals_only, ...])</p></td>
+<td><p>Solve the eigenvalue problem for a symmetric real tridiagonal matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.expm.html#jax.scipy.linalg.expm" title="jax.scipy.linalg.expm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expm</span></code></a>(A, *[, upper_triangular, max_squarings])</p></td>
+<td><p>Compute the matrix exponential</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.expm_frechet.html#jax.scipy.linalg.expm_frechet" title="jax.scipy.linalg.expm_frechet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expm_frechet</span></code></a>()</p></td>
+<td><p>Compute the Frechet derivative of the matrix exponential.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.funm.html#jax.scipy.linalg.funm" title="jax.scipy.linalg.funm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">funm</span></code></a>(A, func[, disp])</p></td>
+<td><p>Evaluate a matrix-valued function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.hessenberg.html#jax.scipy.linalg.hessenberg" title="jax.scipy.linalg.hessenberg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hessenberg</span></code></a>()</p></td>
+<td><p>Compute the Hessenberg form of the matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.hilbert.html#jax.scipy.linalg.hilbert" title="jax.scipy.linalg.hilbert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hilbert</span></code></a>(n)</p></td>
+<td><p>Create a Hilbert matrix of order n.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.inv.html#jax.scipy.linalg.inv" title="jax.scipy.linalg.inv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inv</span></code></a>(a[, overwrite_a, check_finite])</p></td>
+<td><p>Return the inverse of a square matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.lu.html#jax.scipy.linalg.lu" title="jax.scipy.linalg.lu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lu</span></code></a>()</p></td>
+<td><p>Compute the LU decomposition</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.lu_factor.html#jax.scipy.linalg.lu_factor" title="jax.scipy.linalg.lu_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lu_factor</span></code></a>(a[, overwrite_a, check_finite])</p></td>
+<td><p>Factorization for LU-based linear solves</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.lu_solve.html#jax.scipy.linalg.lu_solve" title="jax.scipy.linalg.lu_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lu_solve</span></code></a>(lu_and_piv, b[, trans, ...])</p></td>
+<td><p>Solve a linear system using an LU factorization</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.pascal.html#jax.scipy.linalg.pascal" title="jax.scipy.linalg.pascal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pascal</span></code></a>(n[, kind])</p></td>
+<td><p>Create a Pascal matrix approximation of order n.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.polar.html#jax.scipy.linalg.polar" title="jax.scipy.linalg.polar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polar</span></code></a>(a[, side, method, eps, max_iterations])</p></td>
+<td><p>Computes the polar decomposition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.qr.html#jax.scipy.linalg.qr" title="jax.scipy.linalg.qr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qr</span></code></a>()</p></td>
+<td><p>Compute the QR decomposition of an array</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.rsf2csf.html#jax.scipy.linalg.rsf2csf" title="jax.scipy.linalg.rsf2csf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rsf2csf</span></code></a>(T, Z[, check_finite])</p></td>
+<td><p>Convert real Schur form to complex Schur form.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.schur.html#jax.scipy.linalg.schur" title="jax.scipy.linalg.schur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schur</span></code></a>(a[, output])</p></td>
+<td><p>Compute the Schur decomposition</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.solve.html#jax.scipy.linalg.solve" title="jax.scipy.linalg.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(a, b[, lower, overwrite_a, ...])</p></td>
+<td><p>Solve a linear system of equations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.solve_triangular.html#jax.scipy.linalg.solve_triangular" title="jax.scipy.linalg.solve_triangular"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_triangular</span></code></a>(a, b[, trans, lower, ...])</p></td>
+<td><p>Solve a triangular linear system of equations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.sqrtm.html#jax.scipy.linalg.sqrtm" title="jax.scipy.linalg.sqrtm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sqrtm</span></code></a>(A[, blocksize])</p></td>
+<td><p>Compute the matrix square root</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.svd.html#jax.scipy.linalg.svd" title="jax.scipy.linalg.svd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">svd</span></code></a>()</p></td>
+<td><p>Compute the singular value decomposition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.linalg.toeplitz.html#jax.scipy.linalg.toeplitz" title="jax.scipy.linalg.toeplitz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toeplitz</span></code></a>(c[, r])</p></td>
+<td><p>Construct a Toeplitz matrix.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.ndimage">
+<span id="jax-scipy-ndimage"></span><h2>jax.scipy.ndimage<a class="headerlink" href="#module-jax.scipy.ndimage" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.ndimage.map_coordinates.html#jax.scipy.ndimage.map_coordinates" title="jax.scipy.ndimage.map_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_coordinates</span></code></a>(input, coordinates, order[, ...])</p></td>
+<td><p>Map the input array to new coordinates using interpolation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.optimize">
+<span id="jax-scipy-optimize"></span><h2>jax.scipy.optimize<a class="headerlink" href="#module-jax.scipy.optimize" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.optimize.minimize.html#jax.scipy.optimize.minimize" title="jax.scipy.optimize.minimize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimize</span></code></a>(fun, x0[, args, tol, options])</p></td>
+<td><p>Minimization of scalar function of one or more variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.optimize.OptimizeResults.html#jax.scipy.optimize.OptimizeResults" title="jax.scipy.optimize.OptimizeResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimizeResults</span></code></a>(x, success, status, fun, ...)</p></td>
+<td><p>Object holding optimization results.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.signal">
+<span id="jax-scipy-signal"></span><h2>jax.scipy.signal<a class="headerlink" href="#module-jax.scipy.signal" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.fftconvolve.html#jax.scipy.signal.fftconvolve" title="jax.scipy.signal.fftconvolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftconvolve</span></code></a>(in1, in2[, mode, axes])</p></td>
+<td><p>Convolve two N-dimensional arrays using Fast Fourier Transform (FFT).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.convolve.html#jax.scipy.signal.convolve" title="jax.scipy.signal.convolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve</span></code></a>(in1, in2[, mode, method, precision])</p></td>
+<td><p>Convolution of two N-dimensional arrays.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.convolve2d.html#jax.scipy.signal.convolve2d" title="jax.scipy.signal.convolve2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve2d</span></code></a>(in1, in2[, mode, boundary, ...])</p></td>
+<td><p>Convolution of two 2-dimensional arrays.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.correlate.html#jax.scipy.signal.correlate" title="jax.scipy.signal.correlate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlate</span></code></a>(in1, in2[, mode, method, precision])</p></td>
+<td><p>Cross-correlation of two N-dimensional arrays.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.correlate2d.html#jax.scipy.signal.correlate2d" title="jax.scipy.signal.correlate2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlate2d</span></code></a>(in1, in2[, mode, boundary, ...])</p></td>
+<td><p>Cross-correlation of two 2-dimensional arrays.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.csd.html#jax.scipy.signal.csd" title="jax.scipy.signal.csd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csd</span></code></a>(x, y[, fs, window, nperseg, noverlap, ...])</p></td>
+<td><p>Estimate cross power spectral density (CSD) using Welch's method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.detrend.html#jax.scipy.signal.detrend" title="jax.scipy.signal.detrend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detrend</span></code></a>(data[, axis, type, bp, overwrite_data])</p></td>
+<td><p>Remove linear or piecewise linear trends from data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.istft.html#jax.scipy.signal.istft" title="jax.scipy.signal.istft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">istft</span></code></a>(Zxx[, fs, window, nperseg, noverlap, ...])</p></td>
+<td><p>Perform the inverse short-time Fourier transform (ISTFT).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.stft.html#jax.scipy.signal.stft" title="jax.scipy.signal.stft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stft</span></code></a>(x[, fs, window, nperseg, noverlap, ...])</p></td>
+<td><p>Compute the short-time Fourier transform (STFT).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.signal.welch.html#jax.scipy.signal.welch" title="jax.scipy.signal.welch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">welch</span></code></a>(x[, fs, window, nperseg, noverlap, ...])</p></td>
+<td><p>Estimate power spectral density (PSD) using Welch's method.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.spatial.transform">
+<span id="jax-scipy-spatial-transform"></span><h2>jax.scipy.spatial.transform<a class="headerlink" href="#module-jax.scipy.spatial.transform" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.spatial.transform.Rotation.html#jax.scipy.spatial.transform.Rotation" title="jax.scipy.spatial.transform.Rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Rotation</span></code></a>(quat)</p></td>
+<td><p>Rotation in 3 dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.spatial.transform.Slerp.html#jax.scipy.spatial.transform.Slerp" title="jax.scipy.spatial.transform.Slerp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Slerp</span></code></a>(times, timedelta, rotations, rotvecs)</p></td>
+<td><p>Spherical Linear Interpolation of Rotations.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.sparse.linalg">
+<span id="jax-scipy-sparse-linalg"></span><h2>jax.scipy.sparse.linalg<a class="headerlink" href="#module-jax.scipy.sparse.linalg" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.sparse.linalg.bicgstab.html#jax.scipy.sparse.linalg.bicgstab" title="jax.scipy.sparse.linalg.bicgstab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bicgstab</span></code></a>(A, b[, x0, tol, atol, maxiter, M])</p></td>
+<td><p>Use Bi-Conjugate Gradient Stable iteration to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.sparse.linalg.cg.html#jax.scipy.sparse.linalg.cg" title="jax.scipy.sparse.linalg.cg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cg</span></code></a>(A, b[, x0, tol, atol, maxiter, M])</p></td>
+<td><p>Use Conjugate Gradient iteration to solve <code class="docutils literal notranslate"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.sparse.linalg.gmres.html#jax.scipy.sparse.linalg.gmres" title="jax.scipy.sparse.linalg.gmres"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gmres</span></code></a>(A, b[, x0, tol, atol, restart, ...])</p></td>
+<td><p>GMRES solves the linear system A x = b for x, given A and b.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.special">
+<span id="jax-scipy-special"></span><h2>jax.scipy.special<a class="headerlink" href="#module-jax.scipy.special" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.bernoulli.html#jax.scipy.special.bernoulli" title="jax.scipy.special.bernoulli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bernoulli</span></code></a>(n)</p></td>
+<td><p>Generate the first N Bernoulli numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.beta.html#jax.scipy.special.beta" title="jax.scipy.special.beta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">beta</span></code></a>(a, b)</p></td>
+<td><p>The beta function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.betainc.html#jax.scipy.special.betainc" title="jax.scipy.special.betainc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">betainc</span></code></a>(a, b, x)</p></td>
+<td><p>The regularized incomplete beta function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.betaln.html#jax.scipy.special.betaln" title="jax.scipy.special.betaln"><code class="xref py py-obj docutils literal notranslate"><span class="pre">betaln</span></code></a>(a, b)</p></td>
+<td><p>Natural log of the absolute value of the beta function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.digamma.html#jax.scipy.special.digamma" title="jax.scipy.special.digamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">digamma</span></code></a>(x)</p></td>
+<td><p>The digamma function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.entr.html#jax.scipy.special.entr" title="jax.scipy.special.entr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">entr</span></code></a>(x)</p></td>
+<td><p>The entropy function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.erf.html#jax.scipy.special.erf" title="jax.scipy.special.erf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">erf</span></code></a>(x)</p></td>
+<td><p>The error function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.erfc.html#jax.scipy.special.erfc" title="jax.scipy.special.erfc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">erfc</span></code></a>(x)</p></td>
+<td><p>The complement of the error function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.erfinv.html#jax.scipy.special.erfinv" title="jax.scipy.special.erfinv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">erfinv</span></code></a>(x)</p></td>
+<td><p>The inverse of the error function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.exp1.html#jax.scipy.special.exp1" title="jax.scipy.special.exp1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exp1</span></code></a>(x)</p></td>
+<td><p>Exponential integral function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.expi.html#jax.scipy.special.expi" title="jax.scipy.special.expi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expi</span></code></a></p></td>
+<td><p>Exponential integral function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.expit.html#jax.scipy.special.expit" title="jax.scipy.special.expit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expit</span></code></a>(x)</p></td>
+<td><p>The logistic sigmoid (expit) function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.expn.html#jax.scipy.special.expn" title="jax.scipy.special.expn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expn</span></code></a></p></td>
+<td><p>Generalized exponential integral function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.factorial.html#jax.scipy.special.factorial" title="jax.scipy.special.factorial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factorial</span></code></a>(n[, exact])</p></td>
+<td><p>Factorial function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.fresnel.html#jax.scipy.special.fresnel" title="jax.scipy.special.fresnel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fresnel</span></code></a></p></td>
+<td><p>The Fresnel integrals</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.gamma.html#jax.scipy.special.gamma" title="jax.scipy.special.gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gamma</span></code></a>(x)</p></td>
+<td><p>The gamma function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.gammainc.html#jax.scipy.special.gammainc" title="jax.scipy.special.gammainc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gammainc</span></code></a>(a, x)</p></td>
+<td><p>The regularized lower incomplete gamma function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.gammaincc.html#jax.scipy.special.gammaincc" title="jax.scipy.special.gammaincc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gammaincc</span></code></a>(a, x)</p></td>
+<td><p>The regularized upper incomplete gamma function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.gammaln.html#jax.scipy.special.gammaln" title="jax.scipy.special.gammaln"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gammaln</span></code></a>(x)</p></td>
+<td><p>Natural log of the absolute value of the gamma function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.gammasgn.html#jax.scipy.special.gammasgn" title="jax.scipy.special.gammasgn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gammasgn</span></code></a>(x)</p></td>
+<td><p>Sign of the gamma function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.hyp1f1.html#jax.scipy.special.hyp1f1" title="jax.scipy.special.hyp1f1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hyp1f1</span></code></a></p></td>
+<td><p>The 1F1 hypergeometric function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.i0.html#jax.scipy.special.i0" title="jax.scipy.special.i0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i0</span></code></a>(x)</p></td>
+<td><p>Modified bessel function of zeroth order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.i0e.html#jax.scipy.special.i0e" title="jax.scipy.special.i0e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i0e</span></code></a>(x)</p></td>
+<td><p>Exponentially scaled modified bessel function of zeroth order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.i1.html#jax.scipy.special.i1" title="jax.scipy.special.i1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i1</span></code></a>(x)</p></td>
+<td><p>Modified bessel function of first order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.i1e.html#jax.scipy.special.i1e" title="jax.scipy.special.i1e"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i1e</span></code></a>(x)</p></td>
+<td><p>Exponentially scaled modified bessel function of first order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.kl_div.html#jax.scipy.special.kl_div" title="jax.scipy.special.kl_div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kl_div</span></code></a>(p, q)</p></td>
+<td><p>The Kullback-Leibler divergence.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.log_ndtr.html#jax.scipy.special.log_ndtr" title="jax.scipy.special.log_ndtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_ndtr</span></code></a></p></td>
+<td><p>Log Normal distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.log_softmax.html#jax.scipy.special.log_softmax" title="jax.scipy.special.log_softmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_softmax</span></code></a>(x, /, *[, axis])</p></td>
+<td><p>Log-Softmax function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.logit.html#jax.scipy.special.logit" title="jax.scipy.special.logit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logit</span></code></a></p></td>
+<td><p>The logit function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.logsumexp.html#jax.scipy.special.logsumexp" title="jax.scipy.special.logsumexp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsumexp</span></code></a>()</p></td>
+<td><p>Log-sum-exp reduction.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.lpmn.html#jax.scipy.special.lpmn" title="jax.scipy.special.lpmn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lpmn</span></code></a>(m, n, z)</p></td>
+<td><p>The associated Legendre functions (ALFs) of the first kind.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.lpmn_values.html#jax.scipy.special.lpmn_values" title="jax.scipy.special.lpmn_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lpmn_values</span></code></a>(m, n, z, is_normalized)</p></td>
+<td><p>The associated Legendre functions (ALFs) of the first kind.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.multigammaln.html#jax.scipy.special.multigammaln" title="jax.scipy.special.multigammaln"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multigammaln</span></code></a>(a, d)</p></td>
+<td><p>The natural log of the multivariate gamma function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.ndtr.html#jax.scipy.special.ndtr" title="jax.scipy.special.ndtr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndtr</span></code></a>(x)</p></td>
+<td><p>Normal distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.ndtri.html#jax.scipy.special.ndtri" title="jax.scipy.special.ndtri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndtri</span></code></a>(p)</p></td>
+<td><p>The inverse of the CDF of the Normal distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.poch.html#jax.scipy.special.poch" title="jax.scipy.special.poch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">poch</span></code></a></p></td>
+<td><p>The Pochammer symbol.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.polygamma.html#jax.scipy.special.polygamma" title="jax.scipy.special.polygamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polygamma</span></code></a>(n, x)</p></td>
+<td><p>The polygamma function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.rel_entr.html#jax.scipy.special.rel_entr" title="jax.scipy.special.rel_entr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rel_entr</span></code></a>(p, q)</p></td>
+<td><p>The relative entropy function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.softmax.html#jax.scipy.special.softmax" title="jax.scipy.special.softmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">softmax</span></code></a>(x, /, *[, axis])</p></td>
+<td><p>Softmax function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.spence.html#jax.scipy.special.spence" title="jax.scipy.special.spence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spence</span></code></a>(x)</p></td>
+<td><p>Spence's function, also known as the dilogarithm for real values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.sph_harm.html#jax.scipy.special.sph_harm" title="jax.scipy.special.sph_harm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sph_harm</span></code></a>(m, n, theta, phi[, n_max])</p></td>
+<td><p>Computes the spherical harmonics.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.xlog1py.html#jax.scipy.special.xlog1py" title="jax.scipy.special.xlog1py"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xlog1py</span></code></a></p></td>
+<td><p>Compute x*log(1 + y), returning 0 for x=0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.xlogy.html#jax.scipy.special.xlogy" title="jax.scipy.special.xlogy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xlogy</span></code></a></p></td>
+<td><p>Compute x*log(y), returning 0 for x=0.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.special.zeta.html#jax.scipy.special.zeta" title="jax.scipy.special.zeta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeta</span></code></a></p></td>
+<td><p>The Hurwitz zeta function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats">
+<span id="jax-scipy-stats"></span><h2>jax.scipy.stats<a class="headerlink" href="#module-jax.scipy.stats" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.mode.html#jax.scipy.stats.mode" title="jax.scipy.stats.mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mode</span></code></a>(a[, axis, nan_policy, keepdims])</p></td>
+<td><p>Compute the mode (most common value) along an axis of an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.rankdata.html#jax.scipy.stats.rankdata" title="jax.scipy.stats.rankdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rankdata</span></code></a>(a[, method, axis, nan_policy])</p></td>
+<td><p>Compute the rank of data along an array axis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.sem.html#jax.scipy.stats.sem" title="jax.scipy.stats.sem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sem</span></code></a>(a[, axis, ddof, nan_policy, keepdims])</p></td>
+<td><p>Compute the standard error of the mean.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="module-jax.scipy.stats.bernoulli">
+<span id="jax-scipy-stats-bernoulli"></span><h3>jax.scipy.stats.bernoulli<a class="headerlink" href="#module-jax.scipy.stats.bernoulli" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.logpmf.html#jax.scipy.stats.bernoulli.logpmf" title="jax.scipy.stats.bernoulli.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(k, p[, loc])</p></td>
+<td><p>Bernoulli log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.pmf.html#jax.scipy.stats.bernoulli.pmf" title="jax.scipy.stats.bernoulli.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(k, p[, loc])</p></td>
+<td><p>Bernoulli probability mass function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.cdf.html#jax.scipy.stats.bernoulli.cdf" title="jax.scipy.stats.bernoulli.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(k, p)</p></td>
+<td><p>Bernoulli cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.ppf.html#jax.scipy.stats.bernoulli.ppf" title="jax.scipy.stats.bernoulli.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(q, p)</p></td>
+<td><p>Bernoulli percent point function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.beta">
+<span id="jax-scipy-stats-beta"></span><h3>jax.scipy.stats.beta<a class="headerlink" href="#module-jax.scipy.stats.beta" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.beta.logpdf.html#jax.scipy.stats.beta.logpdf" title="jax.scipy.stats.beta.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Beta log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.beta.pdf.html#jax.scipy.stats.beta.pdf" title="jax.scipy.stats.beta.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Beta probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.beta.cdf.html#jax.scipy.stats.beta.cdf" title="jax.scipy.stats.beta.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Beta cumulative distribution function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.beta.logcdf.html#jax.scipy.stats.beta.logcdf" title="jax.scipy.stats.beta.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Beta log cumulative distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.beta.sf.html#jax.scipy.stats.beta.sf" title="jax.scipy.stats.beta.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Beta distribution survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.beta.logsf.html#jax.scipy.stats.beta.logsf" title="jax.scipy.stats.beta.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Beta distribution log survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.betabinom">
+<span id="jax-scipy-stats-betabinom"></span><h3>jax.scipy.stats.betabinom<a class="headerlink" href="#module-jax.scipy.stats.betabinom" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.betabinom.logpmf.html#jax.scipy.stats.betabinom.logpmf" title="jax.scipy.stats.betabinom.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(k, n, a, b[, loc])</p></td>
+<td><p>Beta-binomial log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.betabinom.pmf.html#jax.scipy.stats.betabinom.pmf" title="jax.scipy.stats.betabinom.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(k, n, a, b[, loc])</p></td>
+<td><p>Beta-binomial probability mass function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.binom">
+<span id="jax-scipy-stats-binom"></span><h3>jax.scipy.stats.binom<a class="headerlink" href="#module-jax.scipy.stats.binom" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.binom.logpmf.html#jax.scipy.stats.binom.logpmf" title="jax.scipy.stats.binom.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(k, n, p[, loc])</p></td>
+<td><p>Binomial log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.binom.pmf.html#jax.scipy.stats.binom.pmf" title="jax.scipy.stats.binom.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(k, n, p[, loc])</p></td>
+<td><p>Binomial probability mass function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.cauchy">
+<span id="jax-scipy-stats-cauchy"></span><h3>jax.scipy.stats.cauchy<a class="headerlink" href="#module-jax.scipy.stats.cauchy" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.logpdf.html#jax.scipy.stats.cauchy.logpdf" title="jax.scipy.stats.cauchy.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Cauchy log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.pdf.html#jax.scipy.stats.cauchy.pdf" title="jax.scipy.stats.cauchy.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Cauchy probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.cdf.html#jax.scipy.stats.cauchy.cdf" title="jax.scipy.stats.cauchy.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Cauchy cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.logcdf.html#jax.scipy.stats.cauchy.logcdf" title="jax.scipy.stats.cauchy.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Cauchy log cumulative distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.sf.html#jax.scipy.stats.cauchy.sf" title="jax.scipy.stats.cauchy.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Cauchy distribution log survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.logsf.html#jax.scipy.stats.cauchy.logsf" title="jax.scipy.stats.cauchy.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Cauchy distribution log survival function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.isf.html#jax.scipy.stats.cauchy.isf" title="jax.scipy.stats.cauchy.isf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isf</span></code></a>(q[, loc, scale])</p></td>
+<td><p>Cauchy distribution inverse survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.cauchy.ppf.html#jax.scipy.stats.cauchy.ppf" title="jax.scipy.stats.cauchy.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(q[, loc, scale])</p></td>
+<td><p>Cauchy distribution percent point function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.chi2">
+<span id="jax-scipy-stats-chi2"></span><h3>jax.scipy.stats.chi2<a class="headerlink" href="#module-jax.scipy.stats.chi2" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.chi2.logpdf.html#jax.scipy.stats.chi2.logpdf" title="jax.scipy.stats.chi2.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Chi-square log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.chi2.pdf.html#jax.scipy.stats.chi2.pdf" title="jax.scipy.stats.chi2.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Chi-square probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.chi2.cdf.html#jax.scipy.stats.chi2.cdf" title="jax.scipy.stats.chi2.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Chi-square cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.chi2.logcdf.html#jax.scipy.stats.chi2.logcdf" title="jax.scipy.stats.chi2.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Chi-square log cumulative distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.chi2.sf.html#jax.scipy.stats.chi2.sf" title="jax.scipy.stats.chi2.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Chi-square survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.chi2.logsf.html#jax.scipy.stats.chi2.logsf" title="jax.scipy.stats.chi2.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Chi-square log survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.dirichlet">
+<span id="jax-scipy-stats-dirichlet"></span><h3>jax.scipy.stats.dirichlet<a class="headerlink" href="#module-jax.scipy.stats.dirichlet" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.dirichlet.logpdf.html#jax.scipy.stats.dirichlet.logpdf" title="jax.scipy.stats.dirichlet.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, alpha)</p></td>
+<td><p>Dirichlet log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.dirichlet.pdf.html#jax.scipy.stats.dirichlet.pdf" title="jax.scipy.stats.dirichlet.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, alpha)</p></td>
+<td><p>Dirichlet probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.expon">
+<span id="jax-scipy-stats-expon"></span><h3>jax.scipy.stats.expon<a class="headerlink" href="#module-jax.scipy.stats.expon" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.logpdf.html#jax.scipy.stats.expon.logpdf" title="jax.scipy.stats.expon.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Exponential log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.pdf.html#jax.scipy.stats.expon.pdf" title="jax.scipy.stats.expon.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Exponential probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.logcdf.html#jax.scipy.stats.expon.logcdf" title="jax.scipy.stats.expon.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Exponential log cumulative density function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.cdf.html#jax.scipy.stats.expon.cdf" title="jax.scipy.stats.expon.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Exponential cumulative density function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.logsf.html#jax.scipy.stats.expon.logsf" title="jax.scipy.stats.expon.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Exponential log survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.sf.html#jax.scipy.stats.expon.sf" title="jax.scipy.stats.expon.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Exponential survival function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.expon.ppf.html#jax.scipy.stats.expon.ppf" title="jax.scipy.stats.expon.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(q[, loc, scale])</p></td>
+<td><p>Exponential survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.gamma">
+<span id="jax-scipy-stats-gamma"></span><h3>jax.scipy.stats.gamma<a class="headerlink" href="#module-jax.scipy.stats.gamma" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gamma.logpdf.html#jax.scipy.stats.gamma.logpdf" title="jax.scipy.stats.gamma.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, a[, loc, scale])</p></td>
+<td><p>Gamma log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gamma.pdf.html#jax.scipy.stats.gamma.pdf" title="jax.scipy.stats.gamma.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, a[, loc, scale])</p></td>
+<td><p>Gamma probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gamma.cdf.html#jax.scipy.stats.gamma.cdf" title="jax.scipy.stats.gamma.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x, a[, loc, scale])</p></td>
+<td><p>Gamma cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gamma.logcdf.html#jax.scipy.stats.gamma.logcdf" title="jax.scipy.stats.gamma.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x, a[, loc, scale])</p></td>
+<td><p>Gamma log cumulative distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gamma.sf.html#jax.scipy.stats.gamma.sf" title="jax.scipy.stats.gamma.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x, a[, loc, scale])</p></td>
+<td><p>Gamma survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gamma.logsf.html#jax.scipy.stats.gamma.logsf" title="jax.scipy.stats.gamma.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x, a[, loc, scale])</p></td>
+<td><p>Gamma log survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.gennorm">
+<span id="jax-scipy-stats-gennorm"></span><h3>jax.scipy.stats.gennorm<a class="headerlink" href="#module-jax.scipy.stats.gennorm" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gennorm.cdf.html#jax.scipy.stats.gennorm.cdf" title="jax.scipy.stats.gennorm.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x, beta)</p></td>
+<td><p>Generalized normal cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gennorm.logpdf.html#jax.scipy.stats.gennorm.logpdf" title="jax.scipy.stats.gennorm.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, beta)</p></td>
+<td><p>Generalized normal log probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gennorm.pdf.html#jax.scipy.stats.gennorm.pdf" title="jax.scipy.stats.gennorm.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, beta)</p></td>
+<td><p>Generalized normal probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.geom">
+<span id="jax-scipy-stats-geom"></span><h3>jax.scipy.stats.geom<a class="headerlink" href="#module-jax.scipy.stats.geom" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.geom.logpmf.html#jax.scipy.stats.geom.logpmf" title="jax.scipy.stats.geom.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(k, p[, loc])</p></td>
+<td><p>Geometric log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.geom.pmf.html#jax.scipy.stats.geom.pmf" title="jax.scipy.stats.geom.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(k, p[, loc])</p></td>
+<td><p>Geometric probability mass function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.laplace">
+<span id="jax-scipy-stats-laplace"></span><h3>jax.scipy.stats.laplace<a class="headerlink" href="#module-jax.scipy.stats.laplace" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.laplace.cdf.html#jax.scipy.stats.laplace.cdf" title="jax.scipy.stats.laplace.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Laplace cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.laplace.logpdf.html#jax.scipy.stats.laplace.logpdf" title="jax.scipy.stats.laplace.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Laplace log probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.laplace.pdf.html#jax.scipy.stats.laplace.pdf" title="jax.scipy.stats.laplace.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Laplace probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.logistic">
+<span id="jax-scipy-stats-logistic"></span><h3>jax.scipy.stats.logistic<a class="headerlink" href="#module-jax.scipy.stats.logistic" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.logistic.cdf.html#jax.scipy.stats.logistic.cdf" title="jax.scipy.stats.logistic.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Logistic cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.logistic.isf.html#jax.scipy.stats.logistic.isf" title="jax.scipy.stats.logistic.isf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Logistic distribution inverse survival function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.logistic.logpdf.html#jax.scipy.stats.logistic.logpdf" title="jax.scipy.stats.logistic.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Logistic log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.logistic.pdf.html#jax.scipy.stats.logistic.pdf" title="jax.scipy.stats.logistic.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Logistic probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.logistic.ppf.html#jax.scipy.stats.logistic.ppf" title="jax.scipy.stats.logistic.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Logistic distribution percent point function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.logistic.sf.html#jax.scipy.stats.logistic.sf" title="jax.scipy.stats.logistic.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Logistic distribution survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.multinomial">
+<span id="jax-scipy-stats-multinomial"></span><h3>jax.scipy.stats.multinomial<a class="headerlink" href="#module-jax.scipy.stats.multinomial" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.multinomial.logpmf.html#jax.scipy.stats.multinomial.logpmf" title="jax.scipy.stats.multinomial.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(x, n, p)</p></td>
+<td><p>Multinomial log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.multinomial.pmf.html#jax.scipy.stats.multinomial.pmf" title="jax.scipy.stats.multinomial.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(x, n, p)</p></td>
+<td><p>Multinomial probability mass function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.multivariate_normal">
+<span id="jax-scipy-stats-multivariate-normal"></span><h3>jax.scipy.stats.multivariate_normal<a class="headerlink" href="#module-jax.scipy.stats.multivariate_normal" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.multivariate_normal.logpdf.html#jax.scipy.stats.multivariate_normal.logpdf" title="jax.scipy.stats.multivariate_normal.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, mean, cov[, allow_singular])</p></td>
+<td><p>Multivariate normal log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.multivariate_normal.pdf.html#jax.scipy.stats.multivariate_normal.pdf" title="jax.scipy.stats.multivariate_normal.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, mean, cov)</p></td>
+<td><p>Multivariate normal probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.nbinom">
+<span id="jax-scipy-stats-nbinom"></span><h3>jax.scipy.stats.nbinom<a class="headerlink" href="#module-jax.scipy.stats.nbinom" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.nbinom.logpmf.html#jax.scipy.stats.nbinom.logpmf" title="jax.scipy.stats.nbinom.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(k, n, p[, loc])</p></td>
+<td><p>Negative-binomial log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.nbinom.pmf.html#jax.scipy.stats.nbinom.pmf" title="jax.scipy.stats.nbinom.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(k, n, p[, loc])</p></td>
+<td><p>Negative-binomial probability mass function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.norm">
+<span id="jax-scipy-stats-norm"></span><h3>jax.scipy.stats.norm<a class="headerlink" href="#module-jax.scipy.stats.norm" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.logpdf.html#jax.scipy.stats.norm.logpdf" title="jax.scipy.stats.norm.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Normal log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.pdf.html#jax.scipy.stats.norm.pdf" title="jax.scipy.stats.norm.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Normal probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.cdf.html#jax.scipy.stats.norm.cdf" title="jax.scipy.stats.norm.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Normal cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.logcdf.html#jax.scipy.stats.norm.logcdf" title="jax.scipy.stats.norm.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Normal log cumulative distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.ppf.html#jax.scipy.stats.norm.ppf" title="jax.scipy.stats.norm.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(q[, loc, scale])</p></td>
+<td><p>Normal distribution percent point function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.sf.html#jax.scipy.stats.norm.sf" title="jax.scipy.stats.norm.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Normal distribution survival function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.logsf.html#jax.scipy.stats.norm.logsf" title="jax.scipy.stats.norm.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Normal distribution log survival function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.norm.isf.html#jax.scipy.stats.norm.isf" title="jax.scipy.stats.norm.isf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isf</span></code></a>(q[, loc, scale])</p></td>
+<td><p>Normal distribution inverse survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.pareto">
+<span id="jax-scipy-stats-pareto"></span><h3>jax.scipy.stats.pareto<a class="headerlink" href="#module-jax.scipy.stats.pareto" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.pareto.logpdf.html#jax.scipy.stats.pareto.logpdf" title="jax.scipy.stats.pareto.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, b[, loc, scale])</p></td>
+<td><p>Pareto log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.pareto.pdf.html#jax.scipy.stats.pareto.pdf" title="jax.scipy.stats.pareto.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, b[, loc, scale])</p></td>
+<td><p>Pareto probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.poisson">
+<span id="jax-scipy-stats-poisson"></span><h3>jax.scipy.stats.poisson<a class="headerlink" href="#module-jax.scipy.stats.poisson" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.poisson.logpmf.html#jax.scipy.stats.poisson.logpmf" title="jax.scipy.stats.poisson.logpmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpmf</span></code></a>(k, mu[, loc])</p></td>
+<td><p>Poisson log probability mass function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.poisson.pmf.html#jax.scipy.stats.poisson.pmf" title="jax.scipy.stats.poisson.pmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pmf</span></code></a>(k, mu[, loc])</p></td>
+<td><p>Poisson probability mass function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.poisson.cdf.html#jax.scipy.stats.poisson.cdf" title="jax.scipy.stats.poisson.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(k, mu[, loc])</p></td>
+<td><p>Poisson cumulative distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.t">
+<span id="jax-scipy-stats-t"></span><h3>jax.scipy.stats.t<a class="headerlink" href="#module-jax.scipy.stats.t" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.t.logpdf.html#jax.scipy.stats.t.logpdf" title="jax.scipy.stats.t.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Student's T log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.t.pdf.html#jax.scipy.stats.t.pdf" title="jax.scipy.stats.t.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, df[, loc, scale])</p></td>
+<td><p>Student's T probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.truncnorm">
+<span id="jax-scipy-stats-truncnorm"></span><h3>jax.scipy.stats.truncnorm<a class="headerlink" href="#module-jax.scipy.stats.truncnorm" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.truncnorm.cdf.html#jax.scipy.stats.truncnorm.cdf" title="jax.scipy.stats.truncnorm.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Truncated normal cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.truncnorm.logcdf.html#jax.scipy.stats.truncnorm.logcdf" title="jax.scipy.stats.truncnorm.logcdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Truncated normal log cumulative distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.truncnorm.logpdf.html#jax.scipy.stats.truncnorm.logpdf" title="jax.scipy.stats.truncnorm.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Truncated normal log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.truncnorm.logsf.html#jax.scipy.stats.truncnorm.logsf" title="jax.scipy.stats.truncnorm.logsf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logsf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Truncated normal distribution log survival function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.truncnorm.pdf.html#jax.scipy.stats.truncnorm.pdf" title="jax.scipy.stats.truncnorm.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Truncated normal probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.truncnorm.sf.html#jax.scipy.stats.truncnorm.sf" title="jax.scipy.stats.truncnorm.sf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sf</span></code></a>(x, a, b[, loc, scale])</p></td>
+<td><p>Truncated normal distribution log survival function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.uniform">
+<span id="jax-scipy-stats-uniform"></span><h3>jax.scipy.stats.uniform<a class="headerlink" href="#module-jax.scipy.stats.uniform" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.uniform.logpdf.html#jax.scipy.stats.uniform.logpdf" title="jax.scipy.stats.uniform.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Uniform log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.uniform.pdf.html#jax.scipy.stats.uniform.pdf" title="jax.scipy.stats.uniform.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Uniform probability distribution function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.uniform.cdf.html#jax.scipy.stats.uniform.cdf" title="jax.scipy.stats.uniform.cdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cdf</span></code></a>(x[, loc, scale])</p></td>
+<td><p>Uniform cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.uniform.ppf.html#jax.scipy.stats.uniform.ppf" title="jax.scipy.stats.uniform.ppf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ppf</span></code></a>(q[, loc, scale])</p></td>
+<td><p>Uniform distribution percent point function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="jax-scipy-stats-gaussian-kde">
+<h3>jax.scipy.stats.gaussian_kde<a class="headerlink" href="#jax-scipy-stats-gaussian-kde" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.html#jax.scipy.stats.gaussian_kde" title="jax.scipy.stats.gaussian_kde"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde</span></code></a>(dataset[, bw_method, weights])</p></td>
+<td><p>Gaussian Kernel Density Estimator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.evaluate.html#jax.scipy.stats.gaussian_kde.evaluate" title="jax.scipy.stats.gaussian_kde.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.evaluate</span></code></a>(points)</p></td>
+<td><p>Evaluate the Gaussian KDE on the given points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.integrate_gaussian.html#jax.scipy.stats.gaussian_kde.integrate_gaussian" title="jax.scipy.stats.gaussian_kde.integrate_gaussian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.integrate_gaussian</span></code></a>(mean, cov)</p></td>
+<td><p>Integrate the distribution weighted by a Gaussian.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.integrate_box_1d.html#jax.scipy.stats.gaussian_kde.integrate_box_1d" title="jax.scipy.stats.gaussian_kde.integrate_box_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.integrate_box_1d</span></code></a>(low, high)</p></td>
+<td><p>Integrate the distribution over the given limits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.integrate_kde.html#jax.scipy.stats.gaussian_kde.integrate_kde" title="jax.scipy.stats.gaussian_kde.integrate_kde"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.integrate_kde</span></code></a>(other)</p></td>
+<td><p>Integrate the product of two Gaussian KDE distributions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.resample.html#jax.scipy.stats.gaussian_kde.resample" title="jax.scipy.stats.gaussian_kde.resample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.resample</span></code></a>(key[, shape])</p></td>
+<td><p>Randomly sample a dataset from the estimated pdf</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.pdf.html#jax.scipy.stats.gaussian_kde.pdf" title="jax.scipy.stats.gaussian_kde.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.pdf</span></code></a>(x)</p></td>
+<td><p>Probability density function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.gaussian_kde.logpdf.html#jax.scipy.stats.gaussian_kde.logpdf" title="jax.scipy.stats.gaussian_kde.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_kde.logpdf</span></code></a>(x)</p></td>
+<td><p>Log probability density function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.vonmises">
+<span id="jax-scipy-stats-vonmises"></span><h3>jax.scipy.stats.vonmises<a class="headerlink" href="#module-jax.scipy.stats.vonmises" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.vonmises.logpdf.html#jax.scipy.stats.vonmises.logpdf" title="jax.scipy.stats.vonmises.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, kappa)</p></td>
+<td><p>von Mises log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.vonmises.pdf.html#jax.scipy.stats.vonmises.pdf" title="jax.scipy.stats.vonmises.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, kappa)</p></td>
+<td><p>von Mises probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-jax.scipy.stats.wrapcauchy">
+<span id="jax-scipy-stats-wrapcauchy"></span><h3>jax.scipy.stats.wrapcauchy<a class="headerlink" href="#module-jax.scipy.stats.wrapcauchy" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.wrapcauchy.logpdf.html#jax.scipy.stats.wrapcauchy.logpdf" title="jax.scipy.stats.wrapcauchy.logpdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logpdf</span></code></a>(x, c)</p></td>
+<td><p>Wrapped Cauchy log probability distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/jax.scipy.stats.wrapcauchy.pdf.html#jax.scipy.stats.wrapcauchy.pdf" title="jax.scipy.stats.wrapcauchy.pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf</span></code></a>(x, c)</p></td>
+<td><p>Wrapped Cauchy probability distribution function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_autosummary/jax.numpy.linalg.vecdot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">jax.numpy.linalg.vecdot</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_autosummary/jax.scipy.cluster.vq.vq.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">jax.scipy.cluster.vq.vq</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.cluster.vq">jax.scipy.cluster</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.fft">jax.scipy.fft</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.integrate">jax.scipy.integrate</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.interpolate">jax.scipy.interpolate</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.linalg">jax.scipy.linalg</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.ndimage">jax.scipy.ndimage</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.optimize">jax.scipy.optimize</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.signal">jax.scipy.signal</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.spatial.transform">jax.scipy.spatial.transform</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.sparse.linalg">jax.scipy.sparse.linalg</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.special">jax.scipy.special</a><ul class="simple visible nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats">jax.scipy.stats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.bernoulli">jax.scipy.stats.bernoulli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.beta">jax.scipy.stats.beta</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.betabinom">jax.scipy.stats.betabinom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.binom">jax.scipy.stats.binom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.cauchy">jax.scipy.stats.cauchy</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.chi2">jax.scipy.stats.chi2</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.dirichlet">jax.scipy.stats.dirichlet</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.expon">jax.scipy.stats.expon</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.gamma">jax.scipy.stats.gamma</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.gennorm">jax.scipy.stats.gennorm</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.geom">jax.scipy.stats.geom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.laplace">jax.scipy.stats.laplace</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.logistic">jax.scipy.stats.logistic</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.multinomial">jax.scipy.stats.multinomial</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.multivariate_normal">jax.scipy.stats.multivariate_normal</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.nbinom">jax.scipy.stats.nbinom</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.norm">jax.scipy.stats.norm</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.pareto">jax.scipy.stats.pareto</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.poisson">jax.scipy.stats.poisson</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.t">jax.scipy.stats.t</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.truncnorm">jax.scipy.stats.truncnorm</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.uniform">jax.scipy.stats.uniform</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-scipy-stats-gaussian-kde">jax.scipy.stats.gaussian_kde</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.vonmises">jax.scipy.stats.vonmises</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-jax.scipy.stats.wrapcauchy">jax.scipy.stats.wrapcauchy</a><ul class="simple nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

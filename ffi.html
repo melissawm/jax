@@ -1,0 +1,1641 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Foreign function interface (FFI) &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=30646c52"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ffi';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Gradient checkpointing with jax.checkpoint (jax.remat)" href="gradient-checkpointing.html" />
+    <link rel="prev" title="External callbacks" href="external-callbacks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="pallas/quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Foreign...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ffi.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Foreign function interface (FFI)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backend-code">Backend code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-interface">C++ interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-and-registering-an-ffi-handler">Building and registering an FFI handler</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frontend-code">Frontend code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching-with-vmap">Batching with <code class="docutils literal notranslate"><span class="pre">vmap</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiation">Differentiation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ffi-calls-on-a-gpu">FFI calls on a GPU</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supporting-multiple-platforms">Supporting multiple platforms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharding">Sharding</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-shard-map">Using <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-custom-partitioning">Using <code class="docutils literal notranslate"><span class="pre">custom</span> <span class="pre">partitioning</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-topics">Advanced topics</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="foreign-function-interface-ffi">
+<span id="ffi-tutorial"></span><h1>Foreign function interface (FFI)<a class="headerlink" href="#foreign-function-interface-ffi" title="Link to this heading">#</a></h1>
+<p><em>This tutorial requires JAX v0.4.31 or newer.</em></p>
+<p>While a wide range of numerical operations can be easily and efficiently implemented using JAX’s built in <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> interfaces, it can sometimes be useful to explicitly call out to external compiled libraries via a “foreign function interface” (FFI).
+This can be particularly useful when particular operations have been previously implemented in an optimized C or CUDA library, and it would be non-trivial to reimplement these computations directly using JAX, but it can also be useful for optimizing runtime or memory performance of JAX programs.
+That being said, the FFI should typically be considered a last resort option because the XLA compiler that sits in the backend, or the Pallas kernel language, which provides lower level control, typically produce performant code with a lower development and maintenance cost.</p>
+<p>One point that should be taken into account when considering use of the FFI is that <em>JAX doesn’t automatically know how to differentiate through foreign functions</em>.
+This means that if you want to use JAX’s autodifferentiation capabilities alongside a foreign function, you’ll also need to provide an implementation of the relevant differentiation rules.
+We will discuss some possible approaches below, but it is important to call this limitation out right from the start!</p>
+<p>JAX’s FFI support is provided in two parts:</p>
+<ol class="arabic simple">
+<li><p>A header-only C++ library from XLA which is packaged as part of JAX as of v0.4.29 or available from the <a class="reference external" href="https://github.com/openxla/xla">openxla/xla</a> project, and</p></li>
+<li><p>A Python front end, available in the <code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> submodule.</p></li>
+</ol>
+<p>In this tutorial we demonstrate the use of both of these components using a simple example, and then go on to discuss some lower-level extensions for more complicated use cases.
+We start by presenting the FFI on CPU, and discuss generalizations to GPU or multi-device environments below.</p>
+<p>The end-to-end code for this example and some other more advanced use cases can be found in the JAX FFI examples project on GitHub at <a class="reference external" href="https://github.com/jax-ml/jax/tree/main/examples/ffi"><code class="docutils literal notranslate"><span class="pre">examples/ffi</span></code> in the JAX repository</a>.</p>
+<p>Because we demonstrate how FFI calls can be sharded at the end of this tutorial, let’s first set up our environment to be treated by JAX as having multiple CPUs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;XLA_FLAGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;--xla_force_host_platform_device_count=4&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-simple-example">
+<h2>A simple example<a class="headerlink" href="#a-simple-example" title="Link to this heading">#</a></h2>
+<p>To demonstrate the use of the FFI interface, we will implement a simple “root-mean-square (RMS)” normalization function.
+RMS normalization takes an array <span class="math notranslate nohighlight">\(x\)</span> with shape <span class="math notranslate nohighlight">\((N,)\)</span> and returns</p>
+<div class="math notranslate nohighlight">
+\[
+y_n = \frac{x_n}{\sqrt{\frac{1}{N}\sum_{n=1}^N {x_n}^2 + \epsilon}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a tuning parameter used for numerical stability.</p>
+<p>This is a somewhat silly example, because it can be easily implemented using JAX as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+
+<span class="k">def</span> <span class="nf">rms_norm_ref</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+  <span class="n">scale</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">scale</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But, it’s just non-trivial enough to be useful for demonstrating some key details of the FFI, while still being straightforward to understand.
+We will use this reference implementation to test our FFI version below.</p>
+</section>
+<section id="backend-code">
+<h2>Backend code<a class="headerlink" href="#backend-code" title="Link to this heading">#</a></h2>
+<p>To begin with, we need an implementation of RMS normalization in C++ that we will expose using the FFI.
+This isn’t meant to be particularly performant, but you could imagine that if you had some new better implementation of RMS normalization in a C++ library, it might have an interface like the following.
+So, here’s a simple implementation of RMS normalization in C++:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdint&gt;</span>
+
+<span class="kt">float</span><span class="w"> </span><span class="nf">ComputeRmsNorm</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">sm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">sm</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sm</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kt">float</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and, for our example, this is the function that we want to expose to JAX via the FFI.</p>
+<section id="c-interface">
+<h3>C++ interface<a class="headerlink" href="#c-interface" title="Link to this heading">#</a></h3>
+<p>To expose our library function to JAX and XLA, we need to write a thin wrapper using the APIs provided by the header-only library in the <a class="reference external" href="https://github.com/openxla/xla/tree/main/xla/ffi/api"><code class="docutils literal notranslate"><span class="pre">xla/ffi/api</span></code></a> directory of the <a class="reference external" href="https://github.com/openxla/xla">XLA project</a>.
+For more information about this interface, take a look at <a class="reference external" href="https://openxla.org/xla/custom_call">the XLA custom call documentation</a>.
+The full source listing can be downloaded <a class="reference external" href="https://github.com/jax-ml/jax/blob/main/examples/ffi/src/jax_ffi_example/rms_norm.cc">here</a>, but the key implementation details are reproduced here:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xla/ffi/api/c_api.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xla/ffi/api/ffi.h&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">ffi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">xla</span><span class="o">::</span><span class="nn">ffi</span><span class="p">;</span>
+
+<span class="c1">// A helper function for extracting the relevant dimensions from `ffi::Buffer`s.</span>
+<span class="c1">// In this example, we treat all leading dimensions as batch dimensions, so this</span>
+<span class="c1">// function returns the total number of elements in the buffer, and the size of</span>
+<span class="c1">// the last dimension.</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">DataType</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="p">,</span><span class="w"> </span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetDims</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buffer</span><span class="p">.</span><span class="n">dimensions</span><span class="p">();</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="n">element_count</span><span class="p">(),</span><span class="w"> </span><span class="n">dims</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// A wrapper function providing the interface between the XLA FFI call and our</span>
+<span class="c1">// library function `ComputeRmsNorm` above. This function handles the batch</span>
+<span class="c1">// dimensions by calling `ComputeRmsNorm` within a loop.</span>
+<span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="w"> </span><span class="n">RmsNormImpl</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">ffi</span><span class="o">::</span><span class="n">ResultBuffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">totalSize</span><span class="p">,</span><span class="w"> </span><span class="n">lastDim</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetDims</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lastDim</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="o">::</span><span class="n">InvalidArgument</span><span class="p">(</span><span class="s">&quot;RmsNorm input must be an array&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int64_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">totalSize</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">lastDim</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ComputeRmsNorm</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">lastDim</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">typed_data</span><span class="p">()[</span><span class="n">n</span><span class="p">]),</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">y</span><span class="o">-&gt;</span><span class="n">typed_data</span><span class="p">()[</span><span class="n">n</span><span class="p">]));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="o">::</span><span class="n">Success</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Wrap `RmsNormImpl` and specify the interface to XLA. If you need to declare</span>
+<span class="c1">// this handler in a header, you can use the `XLA_FFI_DECLARE_HANDLER_SYMBOL`</span>
+<span class="c1">// macro: `XLA_FFI_DECLARE_HANDLER_SYMBOL(RmsNorm)`.</span>
+<span class="n">XLA_FFI_DEFINE_HANDLER_SYMBOL</span><span class="p">(</span>
+<span class="w">    </span><span class="n">RmsNorm</span><span class="p">,</span><span class="w"> </span><span class="n">RmsNormImpl</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ffi</span><span class="o">::</span><span class="n">Ffi</span><span class="o">::</span><span class="n">Bind</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Attr</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eps&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Arg</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w">  </span><span class="c1">// x</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Ret</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w">  </span><span class="c1">// y</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Starting at the bottom, we’re using the XLA-provided macro <code class="docutils literal notranslate"><span class="pre">XLA_FFI_DEFINE_HANDLER_SYMBOL</span></code> to generate some boilerplate which will expand into a function called <code class="docutils literal notranslate"><span class="pre">RmsNorm</span></code> with the appropriate signature.
+But, the important stuff here is all in the call to <code class="docutils literal notranslate"><span class="pre">ffi::Ffi::Bind()</span></code>, where we define the input and output types, and the types of any parameters.</p>
+<p>Then, in <code class="docutils literal notranslate"><span class="pre">RmsNormImpl</span></code>, we accept <code class="docutils literal notranslate"><span class="pre">ffi::Buffer</span></code> arguments which include information about the buffer shape, and pointers to the underlying data.
+In this implementation, we treat all leading dimensions of the buffer as batch dimensions, and perform RMS normalization over the last axis.
+<code class="docutils literal notranslate"><span class="pre">GetDims</span></code> is a helper function providing support for this batching behavior.
+We discuss this batching behavior in more detail <a class="reference internal" href="#ffi-call-vmap"><span class="std std-ref">below</span></a>, but the general idea is that it can be useful to transparently handle batching in the left-most dimensions of the input arguments.
+In this case, we treat all but the last axis as batch dimensions, but other foreign functions may require a different number of non-batch dimensions.</p>
+</section>
+<section id="building-and-registering-an-ffi-handler">
+<h3>Building and registering an FFI handler<a class="headerlink" href="#building-and-registering-an-ffi-handler" title="Link to this heading">#</a></h3>
+<p>Now that we have our minimal FFI wrapper implemented, we need to expose this function (<code class="docutils literal notranslate"><span class="pre">RmsNorm</span></code>) to Python.
+In this tutorial, we compile <code class="docutils literal notranslate"><span class="pre">RmsNorm</span></code> into a shared library and load it using <a class="reference external" href="https://docs.python.org/3/library/ctypes.html">ctypes</a>, but another common pattern is to use <a class="reference external" href="https://nanobind.readthedocs.io/">nanobind</a> or <a class="reference external" href="https://pybind11.readthedocs.io/">pybind11</a> as discussed below.</p>
+<p>To compile the shared library, we’re using CMake here, but you should be able to use your favorite build system without too much trouble.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-B<span class="w"> </span>ffi/_build<span class="w"> </span>ffi
+<span class="o">!</span>cmake<span class="w"> </span>--build<span class="w"> </span>ffi/_build
+<span class="o">!</span>cmake<span class="w"> </span>--install<span class="w"> </span>ffi/_build
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-- XLA include directory: /home/melissa/micromamba/envs/jax-dev/lib/python3.11/site-packages/jaxlib/include
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/melissa/projects/jax/docs/ffi/_build
+[100%] Built target rms_norm
+-- Install configuration: &quot;Release&quot;
+-- Up-to-date: /home/melissa/projects/jax/docs/ffi/librms_norm.so
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>With this compiled library in hand, we now need to register this handler with XLA via the <a class="reference internal" href="_autosummary/jax.ffi.register_ffi_target.html#jax.ffi.register_ffi_target" title="jax.ffi.register_ffi_target"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_ffi_target()</span></code></a> function.
+This function expects our handler (a function pointer to the C++ function <code class="docutils literal notranslate"><span class="pre">RmsNorm</span></code>) to be wrapped in a <a class="reference external" href="https://docs.python.org/3/c-api/capsule.html"><code class="docutils literal notranslate"><span class="pre">PyCapsule</span></code></a>.
+JAX provides a helper function <a class="reference internal" href="_autosummary/jax.ffi.pycapsule.html#jax.ffi.pycapsule" title="jax.ffi.pycapsule"><code class="xref py py-func docutils literal notranslate"><span class="pre">pycapsule()</span></code></a> to help with this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ffi&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;librms_norm*&quot;</span><span class="p">))</span>
+<span class="n">rms_norm_lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">register_ffi_target</span><span class="p">(</span>
+    <span class="s2">&quot;rms_norm&quot;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">pycapsule</span><span class="p">(</span><span class="n">rms_norm_lib</span><span class="o">.</span><span class="n">RmsNorm</span><span class="p">),</span> <span class="n">platform</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you’re familiar with the legacy “custom call” API, it’s worth noting that you can also use <a class="reference internal" href="_autosummary/jax.ffi.register_ffi_target.html#jax.ffi.register_ffi_target" title="jax.ffi.register_ffi_target"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_ffi_target()</span></code></a> to register a custom call target by manually specifying the keyword argument <code class="docutils literal notranslate"><span class="pre">api_version=0</span></code>. The default <code class="docutils literal notranslate"><span class="pre">api_version</span></code> for <a class="reference internal" href="_autosummary/jax.ffi.register_ffi_target.html#jax.ffi.register_ffi_target" title="jax.ffi.register_ffi_target"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_ffi_target()</span></code></a> is <code class="docutils literal notranslate"><span class="pre">1</span></code>, the new “typed” FFI API that we’re using here.</p>
+</div>
+<p><strong>An alternative approach</strong>:
+A common alternative pattern for exposing handlers to Python is to use <a class="reference external" href="https://nanobind.readthedocs.io/">nanobind</a> or <a class="reference external" href="https://pybind11.readthedocs.io/">pybind11</a> to define a tiny Python extension which can be imported.
+For our example here, the nanobind code would be:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;type_traits&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;nanobind/nanobind.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;xla/ffi/api/c_api.h&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">nb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">nanobind</span><span class="p">;</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">nb</span><span class="o">::</span><span class="n">capsule</span><span class="w"> </span><span class="n">EncapsulateFfiCall</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// This check is optional, but it can be helpful for avoiding invalid handlers.</span>
+<span class="w">  </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_invocable_r_v</span><span class="o">&lt;</span><span class="n">XLA_FFI_Error</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">XLA_FFI_CallFrame</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Encapsulated function must be and XLA FFI handler&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">nb</span><span class="o">::</span><span class="n">capsule</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="n">fn</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="n">NB_MODULE</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">m</span><span class="p">.</span><span class="n">def</span><span class="p">(</span><span class="s">&quot;rms_norm&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">EncapsulateFfiCall</span><span class="p">(</span><span class="n">RmsNorm</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, in Python we can register this handler using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming that we compiled a nanobind extension called `rms_norm`:</span>
+<span class="kn">import</span> <span class="nn">rms_norm</span> <span class="k">as</span> <span class="nn">rms_norm_lib</span>
+
+<span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">register_ffi_target</span><span class="p">(</span><span class="s2">&quot;rms_norm&quot;</span><span class="p">,</span> <span class="n">rms_norm_lib</span><span class="o">.</span><span class="n">rms_norm</span><span class="p">(),</span> <span class="n">platform</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="frontend-code">
+<h2>Frontend code<a class="headerlink" href="#frontend-code" title="Link to this heading">#</a></h2>
+<p>Now that we have registered our FFI handler, it is straightforward to call our C++ library from JAX using the <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">rms_norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+  <span class="c1"># We only implemented the `float32` version of this function, so we start by</span>
+  <span class="c1"># checking the dtype. This check isn&#39;t strictly necessary because type</span>
+  <span class="c1"># checking is also performed by the FFI when decoding input and output</span>
+  <span class="c1"># buffers, but it can be useful to check types in Python to raise more</span>
+  <span class="c1"># informative errors.</span>
+  <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only the float32 dtype is implemented by rms_norm&quot;</span><span class="p">)</span>
+
+  <span class="n">call</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">ffi_call</span><span class="p">(</span>
+    <span class="c1"># The target name must be the same string as we used to register the target</span>
+    <span class="c1"># above in `register_custom_call_target`</span>
+    <span class="s2">&quot;rms_norm&quot;</span><span class="p">,</span>
+
+    <span class="c1"># In this case, the output of our FFI function is just a single array with</span>
+    <span class="c1"># the same shape and dtype as the input. We discuss a case with a more</span>
+    <span class="c1"># interesting output type below.</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+
+    <span class="c1"># The `vmap_method` parameter controls this function&#39;s behavior under `vmap`</span>
+    <span class="c1"># as discussed below.</span>
+    <span class="n">vmap_method</span><span class="o">=</span><span class="s2">&quot;broadcast_all&quot;</span><span class="p">,</span>
+  <span class="p">)</span>
+
+  <span class="c1"># Note that here we&#39;re use `numpy` (not `jax.numpy`) to specify a dtype for</span>
+  <span class="c1"># the attribute `eps`. Our FFI function expects this to have the C++ `float`</span>
+  <span class="c1"># type (which corresponds to numpy&#39;s `float32` type), and it must be a</span>
+  <span class="c1"># static parameter (i.e. not a JAX array).</span>
+  <span class="k">return</span> <span class="n">call</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span>
+
+
+<span class="c1"># Test that this gives the same result as our reference implementation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rms_norm_ref</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code cell includes a lot of inline comments which should explain most of what is happening here, but there are a few points that are worth explicitly highlighting.
+Most of the heavy lifting here is done by the <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> function, which tells JAX how to call the foreign function for a particular set of inputs.
+It’s important to note that the first argument to <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> must be a string that matches the target name that we used when calling <code class="docutils literal notranslate"><span class="pre">register_custom_call_target</span></code> above.</p>
+<p>Any attributes (defined using <code class="docutils literal notranslate"><span class="pre">Attr</span></code> in the C++ wrapper above) should be passed as keyword arguments to <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a>.
+Note that we explicitly cast <code class="docutils literal notranslate"><span class="pre">eps</span></code> to <code class="docutils literal notranslate"><span class="pre">np.float32</span></code> because our FFI library expects a C <code class="docutils literal notranslate"><span class="pre">float</span></code>, and we can’t use <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> here, because these parameters must be static arguments.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">vmap_method</span></code> argument to <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> defines how this FFI call interacts with <a class="reference internal" href="_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> as described next.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are familiar with the earlier “custom call” interface, you might be surprised that we’re not passing the problem dimensions as parameters (batch size, etc.) to <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a>.
+In this earlier API, the backend had no mechanism for receiving metadata about the input arrays, but since the FFI includes dimension information with the <code class="docutils literal notranslate"><span class="pre">Buffer</span></code> objects, we no longer need to compute this using Python when lowering.
+One major perk of this change is <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> can support some simple <a class="reference internal" href="_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> semantics out of the box, as discussed below.</p>
+</div>
+<section id="batching-with-vmap">
+<span id="ffi-call-vmap"></span><h3>Batching with <code class="docutils literal notranslate"><span class="pre">vmap</span></code><a class="headerlink" href="#batching-with-vmap" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> supports some simple <a class="reference internal" href="_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> semantics out of the box using the <code class="docutils literal notranslate"><span class="pre">vmap_method</span></code> parameter.
+The docs for <a class="reference internal" href="_autosummary/jax.pure_callback.html#jax.pure_callback" title="jax.pure_callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">pure_callback()</span></code></a> provide more details about the <code class="docutils literal notranslate"><span class="pre">vmap_method</span></code> parameter, and the same behavior applies to <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a>.</p>
+<p>The simplest <code class="docutils literal notranslate"><span class="pre">vmap_method</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;sequential&quot;</span></code>.
+In this case, when <code class="docutils literal notranslate"><span class="pre">vmap</span></code>ped, an <code class="docutils literal notranslate"><span class="pre">ffi_call</span></code> will be rewritten as a <a class="reference internal" href="_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">scan()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">ffi_call</span></code> in the body.
+This implementation is general purpose, but it doesn’t parallelize very well.
+Many FFI calls provide more efficient batching behavior and, in some simple cases, the <code class="docutils literal notranslate"><span class="pre">&quot;expand_dims&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;broadcast_all&quot;</span></code> methods can be used to expose a better implementation.</p>
+<p>In this case, since we only have one input argument, <code class="docutils literal notranslate"><span class="pre">&quot;expand_dims&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;broadcast_all&quot;</span></code> actually have the same behavior.
+The specific assumption required to use these methods is that the foreign function knows how to handle batch dimensions.
+Another way of saying this is that the result of calling <code class="docutils literal notranslate"><span class="pre">ffi_call</span></code> on the batched inputs is assumed to be equal to stacking the repeated application of <code class="docutils literal notranslate"><span class="pre">ffi_call</span></code> to each element in the batched input, roughly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ffi_call</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">ffi_call</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Note that things get a bit more complicated when we have multiple input arguments.
+For simplicity, we will use the <code class="docutils literal notranslate"><span class="pre">&quot;broadcast_all&quot;</span></code> throughout this tutorial, which guarantees that all inputs will be broadcasted to have the same batch dimensions, but it would also be possible to implement a foreign function to handle the <code class="docutils literal notranslate"><span class="pre">&quot;expand_dims&quot;</span></code> method.
+The documentation for <a class="reference internal" href="_autosummary/jax.pure_callback.html#jax.pure_callback" title="jax.pure_callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">pure_callback()</span></code></a> includes some examples of this</p>
+</div>
+<p>Our implementation of <code class="docutils literal notranslate"><span class="pre">rms_norm</span></code> has the appropriate semantics, and it supports <code class="docutils literal notranslate"><span class="pre">vmap</span></code> with <code class="docutils literal notranslate"><span class="pre">vmap_method=&quot;broadcast_all&quot;</span></code> out of the box:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">)(</span><span class="n">x</span><span class="p">),</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">rms_norm_ref</span><span class="p">)(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can inspect the <a class="reference internal" href="jaxpr.html#jax-internals-jaxpr"><span class="std std-ref">jaxpr</span></a> of the <a class="reference internal" href="_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> of <code class="docutils literal notranslate"><span class="pre">rms_norm</span></code> to confirm that it isn’t being rewritten using <a class="reference internal" href="_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">scan()</span></code></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">make_jaxpr</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:f32[8,4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">    </span>b<span class=" -Color -Color-Magenta">:f32[8,4]</span> = ffi_call[
+      attributes=((&#39;eps&#39;, np.float32(1e-05)),)
+      custom_call_api_version=4
+      has_side_effect=False
+      input_layouts=((1, 0),)
+      input_output_aliases=()
+      legacy_backend_config=None
+      output_layouts=((1, 0),)
+      result_avals=(ShapedArray(float32[8,4]),)
+      target_name=rms_norm
+      vmap_method=broadcast_all
+    ] a
+  <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(b,) }
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">vmap_method=&quot;sequential&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">vmap</span></code>ping a <code class="docutils literal notranslate"><span class="pre">ffi_call</span></code> will fall back on a <a class="reference internal" href="_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.scan()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">ffi_call</span></code> in the body:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rms_norm_sequential</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">ffi_call</span><span class="p">(</span>
+    <span class="s2">&quot;rms_norm&quot;</span><span class="p">,</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+    <span class="n">vmap_method</span><span class="o">=</span><span class="s2">&quot;sequential&quot;</span><span class="p">,</span>
+  <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span>
+
+
+<span class="n">jax</span><span class="o">.</span><span class="n">make_jaxpr</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">rms_norm_sequential</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:f32[8,4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">    </span>b<span class=" -Color -Color-Magenta">:f32[8,4]</span> = scan[
+      _split_transpose=False
+      jaxpr={ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; c<span class=" -Color -Color-Magenta">:f32[4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">          </span>d<span class=" -Color -Color-Magenta">:f32[4]</span> = ffi_call[
+            attributes=((&#39;eps&#39;, np.float32(1e-05)),)
+            custom_call_api_version=4
+            has_side_effect=False
+            input_layouts=((0,),)
+            input_output_aliases=()
+            legacy_backend_config=None
+            output_layouts=((0,),)
+            result_avals=(ShapedArray(float32[4]),)
+            target_name=rms_norm
+            vmap_method=sequential
+          ] c
+        <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(d,) }
+      length=8
+      linear=(False,)
+      num_carry=0
+      num_consts=0
+      reverse=False
+      unroll=1
+    ] a
+  <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(b,) }
+</pre></div>
+</div>
+</div>
+</div>
+<p>If your foreign function provides an efficient batching rule that isn’t supported by this simple <code class="docutils literal notranslate"><span class="pre">vmap_method</span></code> parameter, it might also be possible to define more flexible custom <code class="docutils literal notranslate"><span class="pre">vmap</span></code> rules using the experimental <code class="docutils literal notranslate"><span class="pre">custom_vmap</span></code> interface, but it’s worth also opening an issue describing your use case on <a class="reference external" href="https://github.com/jax-ml/jax/issues">the JAX issue tracker</a>.</p>
+</section>
+<section id="differentiation">
+<h3>Differentiation<a class="headerlink" href="#differentiation" title="Link to this heading">#</a></h3>
+<p>Unlike with batching, <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> doesn’t provide any default support for automatic differentiation (AD) of foreign functions.
+As far as JAX is concerned, the foreign function is a black box that can’t be inspected to determine the appropriate behavior when differentiated.
+Therefore, it is the <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> user’s responsibility to define a custom derivative rule.</p>
+<p>More details about custom derivative rules can be found in the <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Custom_derivative_rules_for_Python_code.html">custom derivatives tutorial</a>, but the most common pattern used for implementing differentiation for foreign functions is to define a <a class="reference internal" href="_autosummary/jax.custom_vjp.html#jax.custom_vjp" title="jax.custom_vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_vjp()</span></code></a> which itself calls a foreign function.
+In this case, we actually define two new FFI calls:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rms_norm_fwd</span></code> returns two outputs: (a) the “primal” result, and (b) the “residuals” which are used in the backwards pass.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rms_norm_bwd</span></code> takes the residuals and the output co-tangents, and returns the input co-tangents.</p></li>
+</ol>
+<p>We won’t get into the details of the RMS normalization backwards pass, but take a look at the <a class="reference external" href="https://github.com/jax-ml/jax/blob/main/examples/ffi/src/jax_ffi_example/rms_norm.cc">C++ source code</a> to see how these functions are implemented on the back end.
+The main point to emphasize here is that the “residual” computed has a different shape than the primal output, therefore, in the <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">ffi_call()</span></code></a> to <code class="docutils literal notranslate"><span class="pre">res_norm_fwd</span></code>, the output type has two elements with different shapes.</p>
+<p>This custom derivative rule can be wired in as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">register_ffi_target</span><span class="p">(</span>
+  <span class="s2">&quot;rms_norm_fwd&quot;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">pycapsule</span><span class="p">(</span><span class="n">rms_norm_lib</span><span class="o">.</span><span class="n">RmsNormFwd</span><span class="p">),</span> <span class="n">platform</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span>
+<span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">register_ffi_target</span><span class="p">(</span>
+  <span class="s2">&quot;rms_norm_bwd&quot;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">pycapsule</span><span class="p">(</span><span class="n">rms_norm_lib</span><span class="o">.</span><span class="n">RmsNormBwd</span><span class="p">),</span> <span class="n">platform</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">rms_norm_fwd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+  <span class="n">y</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">ffi_call</span><span class="p">(</span>
+    <span class="s2">&quot;rms_norm_fwd&quot;</span><span class="p">,</span>
+    <span class="p">(</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">vmap_method</span><span class="o">=</span><span class="s2">&quot;broadcast_all&quot;</span><span class="p">,</span>
+  <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">rms_norm_bwd</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">ct</span><span class="p">):</span>
+  <span class="k">del</span> <span class="n">eps</span>
+  <span class="n">res</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">res</span>
+  <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">ct</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">ct</span><span class="o">.</span><span class="n">shape</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">ffi_call</span><span class="p">(</span>
+      <span class="s2">&quot;rms_norm_bwd&quot;</span><span class="p">,</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+      <span class="n">vmap_method</span><span class="o">=</span><span class="s2">&quot;broadcast_all&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">res</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ct</span><span class="p">),</span>
+  <span class="p">)</span>
+
+
+<span class="n">rms_norm</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">custom_vjp</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">,</span> <span class="n">nondiff_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+<span class="n">rms_norm</span><span class="o">.</span><span class="n">defvjp</span><span class="p">(</span><span class="n">rms_norm_fwd</span><span class="p">,</span> <span class="n">rms_norm_bwd</span><span class="p">)</span>
+
+<span class="c1"># Check that this gives the right answer when compared to the reference version</span>
+<span class="n">ct_y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span>
+  <span class="n">jax</span><span class="o">.</span><span class="n">vjp</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">](</span><span class="n">ct_y</span><span class="p">),</span> <span class="n">jax</span><span class="o">.</span><span class="n">vjp</span><span class="p">(</span><span class="n">rms_norm_ref</span><span class="p">,</span> <span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">](</span><span class="n">ct_y</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>At this point, we can use our new <code class="docutils literal notranslate"><span class="pre">rms_norm</span></code> function transparently for many JAX applications, and it will transform appropriately under the standard JAX function transformations like <a class="reference internal" href="_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> and <a class="reference internal" href="_autosummary/jax.grad.html#jax.grad" title="jax.grad"><code class="xref py py-func docutils literal notranslate"><span class="pre">grad()</span></code></a>.
+One thing that this example doesn’t support is forward-mode AD (<a class="reference internal" href="_autosummary/jax.jvp.html#jax.jvp" title="jax.jvp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jvp()</span></code></a>, for example) since <a class="reference internal" href="_autosummary/jax.custom_vjp.html#jax.custom_vjp" title="jax.custom_vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_vjp()</span></code></a> is restricted to reverse-mode.
+JAX doesn’t currently expose a public API for simultaneously customizing both forward-mode and reverse-mode AD, but such an API is on the roadmap, so please <a class="reference external" href="https://github.com/jax-ml/jax/issues">open an issue</a> describing you use case if you hit this limitation in practice.</p>
+<p>One other JAX feature that this example doesn’t support is higher-order AD.
+It would be possible to work around this by wrapping the <code class="docutils literal notranslate"><span class="pre">res_norm_bwd</span></code> function above in a <a class="reference internal" href="_autosummary/jax.custom_jvp.html#jax.custom_jvp" title="jax.custom_jvp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.custom_jvp()</span></code></a> or <a class="reference internal" href="_autosummary/jax.custom_vjp.html#jax.custom_vjp" title="jax.custom_vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.custom_vjp()</span></code></a> decorator, but we won’t go into the details of that advanced use case here.</p>
+</section>
+</section>
+<section id="ffi-calls-on-a-gpu">
+<h2>FFI calls on a GPU<a class="headerlink" href="#ffi-calls-on-a-gpu" title="Link to this heading">#</a></h2>
+<p>So far, we have been interfacing only with foreign functions running on the CPU, but JAX’s FFI also supports calls to GPU code.
+Since this documentation page is automatically generated on a machine without access to a GPU, we can’t execute any GPU-specific examples here, but we will go over the key points.</p>
+<p>When defining our FFI wrapper for CPU, the function signature that we used was:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="w"> </span><span class="n">RmsNormImpl</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">ffi</span><span class="o">::</span><span class="n">ResultBuffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To update this to interface with a CUDA kernel, this signature becomes:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ffi</span><span class="o">::</span><span class="n">Error</span><span class="w"> </span><span class="n">RmsNormImpl</span><span class="p">(</span><span class="n">cudaStream_t</span><span class="w"> </span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span>
+<span class="w">                       </span><span class="n">ffi</span><span class="o">::</span><span class="n">ResultBuffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And the handler definition is updated to include a <code class="docutils literal notranslate"><span class="pre">Ctx</span></code> in its binding:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">XLA_FFI_DEFINE_HANDLER</span><span class="p">(</span>
+<span class="w">    </span><span class="n">RmsNorm</span><span class="p">,</span><span class="w"> </span><span class="n">RmsNormImpl</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ffi</span><span class="o">::</span><span class="n">Ffi</span><span class="o">::</span><span class="n">Bind</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Ctx</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">PlatformStream</span><span class="o">&lt;</span><span class="n">cudaStream_t</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Attr</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;eps&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Arg</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w">  </span><span class="c1">// x</span>
+<span class="w">        </span><span class="p">.</span><span class="n">Ret</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">F32</span><span class="o">&gt;&gt;</span><span class="p">()</span><span class="w">  </span><span class="c1">// y</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Then, the <code class="docutils literal notranslate"><span class="pre">RmsNormImpl</span></code> can use the CUDA stream to launch CUDA kernels.</p>
+<p>On the front end, the registration code would be updated to specify the appropriate platform:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">register_ffi_target</span><span class="p">(</span>
+  <span class="s2">&quot;rms_norm_cuda&quot;</span><span class="p">,</span> <span class="n">rms_norm_lib_cuda</span><span class="o">.</span><span class="n">rms_norm</span><span class="p">(),</span> <span class="n">platform</span><span class="o">=</span><span class="s2">&quot;CUDA&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="supporting-multiple-platforms">
+<h3>Supporting multiple platforms<a class="headerlink" href="#supporting-multiple-platforms" title="Link to this heading">#</a></h3>
+<p>To support running our <code class="docutils literal notranslate"><span class="pre">rms_norm</span></code> function on both GPU and CPU, we can combine our implementation above with the <a class="reference internal" href="_autosummary/jax.lax.platform_dependent.html#jax.lax.platform_dependent" title="jax.lax.platform_dependent"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.platform_dependent()</span></code></a> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rms_norm_cross_platform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+  <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span>
+  <span class="n">out_type</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">impl</span><span class="p">(</span><span class="n">target_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">ffi</span><span class="o">.</span><span class="n">ffi_call</span><span class="p">(</span>
+      <span class="n">target_name</span><span class="p">,</span>
+      <span class="n">out_type</span><span class="p">,</span>
+      <span class="n">vmap_method</span><span class="o">=</span><span class="s2">&quot;broadcast_all&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">platform_dependent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cpu</span><span class="o">=</span><span class="n">impl</span><span class="p">(</span><span class="s2">&quot;rms_norm&quot;</span><span class="p">),</span> <span class="n">cuda</span><span class="o">=</span><span class="n">impl</span><span class="p">(</span><span class="s2">&quot;rms_norm_cuda&quot;</span><span class="p">))</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">rms_norm_cross_platform</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rms_norm_ref</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This version of the function will call the appropriate FFI target depending on the runtime platform.</p>
+<p>As an aside, it may be interesting to note that while the jaxpr and lowered HLO both contain a reference to both FFI targets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">make_jaxpr</span><span class="p">(</span><span class="n">rms_norm_cross_platform</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:f32[8,4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">    </span>b<span class=" -Color -Color-Magenta">:i32[]</span> = platform_index[platforms=((&#39;cpu&#39;,), (&#39;cuda&#39;,))] 
+    c<span class=" -Color -Color-Magenta">:f32[8,4]</span> = cond[
+      branches=(
+        { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; d<span class=" -Color -Color-Magenta">:f32[8,4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">            </span>e<span class=" -Color -Color-Magenta">:f32[8,4]</span> = ffi_call[
+              attributes=((&#39;eps&#39;, np.float32(1e-05)),)
+              custom_call_api_version=4
+              has_side_effect=False
+              input_layouts=((1, 0),)
+              input_output_aliases=()
+              legacy_backend_config=None
+              output_layouts=((1, 0),)
+              result_avals=(ShapedArray(float32[8,4]),)
+              target_name=rms_norm
+              vmap_method=broadcast_all
+            ] d
+          <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(e,) }
+        { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; f<span class=" -Color -Color-Magenta">:f32[8,4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">            </span>g<span class=" -Color -Color-Magenta">:f32[8,4]</span> = ffi_call[
+              attributes=((&#39;eps&#39;, np.float32(1e-05)),)
+              custom_call_api_version=4
+              has_side_effect=False
+              input_layouts=((1, 0),)
+              input_output_aliases=()
+              legacy_backend_config=None
+              output_layouts=((1, 0),)
+              result_avals=(ShapedArray(float32[8,4]),)
+              target_name=rms_norm_cuda
+              vmap_method=broadcast_all
+            ] f
+          <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(g,) }
+      )
+      branches_platforms=((&#39;cpu&#39;,), (&#39;cuda&#39;,))
+    ] b a
+  <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(c,) }
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_cross_platform</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module @jit_rms_norm_cross_platform attributes {mhlo.num_partitions = 1 : i32, mhlo.num_replicas = 1 : i32} {
+  func.func public @main(%arg0: tensor&lt;8x4xf32&gt;) -&gt; (tensor&lt;8x4xf32&gt; {jax.result_info = &quot;result&quot;}) {
+    %c = stablehlo.constant dense&lt;0&gt; : tensor&lt;i32&gt;
+    %0 = &quot;stablehlo.case&quot;(%c) ({
+      %c_0 = stablehlo.constant dense&lt;0&gt; : tensor&lt;i32&gt;
+      stablehlo.return %c_0 : tensor&lt;i32&gt;
+    }, {
+      %c_0 = stablehlo.constant dense&lt;0&gt; : tensor&lt;i32&gt;
+      stablehlo.return %c_0 : tensor&lt;i32&gt;
+    }) : (tensor&lt;i32&gt;) -&gt; tensor&lt;i32&gt;
+    %1 = &quot;stablehlo.case&quot;(%0) ({
+      %2 = stablehlo.custom_call @rms_norm(%arg0) {backend_config = &quot;&quot;, mhlo.backend_config = {eps = 9.99999974E-6 : f32}, operand_layouts = [dense&lt;[1, 0]&gt; : tensor&lt;2xindex&gt;], result_layouts = [dense&lt;[1, 0]&gt; : tensor&lt;2xindex&gt;]} : (tensor&lt;8x4xf32&gt;) -&gt; tensor&lt;8x4xf32&gt;
+      stablehlo.return %2 : tensor&lt;8x4xf32&gt;
+    }) : (tensor&lt;i32&gt;) -&gt; tensor&lt;8x4xf32&gt;
+    return %1 : tensor&lt;8x4xf32&gt;
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>by the time the function is compiled, the appropriate FFI has been selected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_cross_platform</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">as_text</span><span class="p">(</span><span class="n">dialect</span><span class="o">=</span><span class="s2">&quot;hlo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HloModule jit_rms_norm_cross_platform, entry_computation_layout={(f32[8,4]{1,0})-&gt;f32[8,4]{1,0}}
+
+ENTRY main.3 {
+  Arg_0.1 = f32[8,4]{1,0} parameter(0)
+  ROOT custom-call.2 = f32[8,4]{1,0} custom-call(Arg_0.1), custom_call_target=&quot;rms_norm&quot;, operand_layout_constraints={f32[8,4]{1,0}}, api_version=API_VERSION_TYPED_FFI
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>and there will be no runtime overhead to using <a class="reference internal" href="_autosummary/jax.lax.platform_dependent.html#jax.lax.platform_dependent" title="jax.lax.platform_dependent"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.platform_dependent()</span></code></a>, and the compiled program won’t include any references to unavailable FFI targets.</p>
+</section>
+</section>
+<section id="sharding">
+<h2>Sharding<a class="headerlink" href="#sharding" title="Link to this heading">#</a></h2>
+<p>Most large scale users of JAX use its APIs for distributed computation across multiple devices.
+As discussed in <a class="reference internal" href="sharded-computation.html#sharded-computation"><span class="std std-ref">Introduction to parallel programming</span></a>, parallelism in JAX is controlled by sharding data across devices, and most JAX operations can be used within any of the supported parallel programming paradigms (from automatic to fully manual).
+But, the story is a little bit more complicated for FFI calls.
+Since the internals of an FFI call are opaque to both JAX and XLA, FFI calls won’t typically show optimal (or even good) performance when the data are sharded.</p>
+<p>Before getting into the FFI details, let’s consider the behavior of our pure-JAX reference implementation of RMS normalization (the <code class="docutils literal notranslate"><span class="pre">rms_norm_ref</span></code> function defined at the top of this document) with a sharded input.
+As discussed above, our implementation treats all leading axes of the input as <em>batch</em> dimensions, and the normalization is performed along the last axis.
+This means that if the data are sharded along any batch dimensions, but replicated on the last dimension, no communication is required.
+This can be seen by sharding our 2-dimensional test data from above along its first dimension and checking the compiled HLO for operations like <code class="docutils literal notranslate"><span class="pre">all-gather</span></code>, <code class="docutils literal notranslate"><span class="pre">all-reduce</span></code>, etc.:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span>
+
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">())</span> <span class="o">==</span> <span class="mi">4</span>  <span class="c1"># Set using the XLA_FLAGS environment variable</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,),</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
+
+<span class="n">batch_shd</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">x_batch_shd</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch_shd</span><span class="p">)</span>
+<span class="n">hlo_batch</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_ref</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span>
+<span class="k">assert</span> <span class="s2">&quot;all-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hlo_batch</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, if the data are sharded along the last axis, communication (in this case an <code class="docutils literal notranslate"><span class="pre">all-reduce</span></code>) is required to compute the sum in the normalization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_shd</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">))</span>
+<span class="n">x_data_shd</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">data_shd</span><span class="p">)</span>
+<span class="n">hlo_data</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_ref</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">data_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_data_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span>
+<span class="k">assert</span> <span class="s2">&quot;all-reduce&quot;</span> <span class="ow">in</span> <span class="n">hlo_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, if we try to naively use our FFI version of the same model, it runs fine and gets the right answer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">batch_shd</span><span class="p">)(</span><span class="n">x_batch_shd</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">rms_norm_ref</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But, if you look at the compiled HLO (omitting a helper functions for clarity), you’ll see that</p>
+<ol class="arabic simple">
+<li><p>the data are first fully replicated onto each device via an <code class="docutils literal notranslate"><span class="pre">all-gather</span></code> operation,</p></li>
+<li><p>the FFI call is executed on the full dataset on each device, and</p></li>
+<li><p>the output is sliced to discard the unused portions.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hlo</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hlo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ENTRY %main.5_spmd (param: f32[2,4]) -&gt; f32[2,4] {
+  %partition-id = u32[] partition-id()
+  %param = f32[2,4]{1,0} parameter(0), sharding={devices=[4,1]&lt;=[4]}, metadata={op_name=&quot;x&quot;}
+  %all-gather = f32[8,4]{1,0} all-gather(%param), channel_id=1, replica_groups=[1,4]&lt;=[4], dimensions={0}, use_global_device_ids=true, metadata={op_name=&quot;jit(rms_norm)/jit(main)/ffi_call&quot; source_file=&quot;/tmp/ipykernel_228273/3540880311.py&quot; source_line=32}
+  %custom-call.0 = f32[8,4]{1,0} custom-call(%all-gather), custom_call_target=&quot;rms_norm&quot;, operand_layout_constraints={f32[8,4]{1,0}}, api_version=API_VERSION_TYPED_FFI, metadata={op_name=&quot;jit(rms_norm)/jit(main)/ffi_call&quot; source_file=&quot;/tmp/ipykernel_228273/3540880311.py&quot; source_line=32}, backend_config={eps = 9.99999974E-6 : f32}
+  ROOT %multiply_dynamic-slice_fusion = f32[2,4]{1,0} fusion(%custom-call.0, %partition-id), kind=kLoop, calls=%fused_computation
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This clearly (to us!) isn’t the optimal partitioning of this function, but it’s the best that JAX/XLA can do with the information given.</p>
+<p>To generate better partitioning logic, we can use <a class="reference internal" href="_autosummary/jax.shard_map.html#jax.shard_map" title="jax.shard_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">shard_map()</span></code></a> or <a class="reference internal" href="jax.experimental.custom_partitioning.html#jax.experimental.custom_partitioning.custom_partitioning" title="jax.experimental.custom_partitioning.custom_partitioning"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_partitioning()</span></code></a>, and we discuss both options here.
+That being said, it’s not straightforward to generate <em>optimal</em> partitioning for all inputs, because sometimes this would require algorithmic changes.
+Specifically, let’s add support for “batch partitioning”, which handles the case where the data are sharded on batch dimensions, but sharding on the last dimension will always require in re-sharding.</p>
+<section id="using-shard-map">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">shard_map</span></code><a class="headerlink" href="#using-shard-map" title="Link to this heading">#</a></h3>
+<p>If you are using manual sharding control via <a class="reference internal" href="_autosummary/jax.shard_map.html#jax.shard_map" title="jax.shard_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">shard_map()</span></code></a>, any FFI calls in your program should already partition appropriately:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">rms_norm_shmap</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">rms_norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">rms_norm_shmap</span><span class="p">(</span><span class="n">x_batch_shd</span><span class="p">),</span> <span class="n">rms_norm_ref</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_shmap</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HloModule jit_rms_norm_shmap, is_scheduled=true, entry_computation_layout={(f32[2,4]{1,0})-&gt;f32[2,4]{1,0}}, num_partitions=4
+
+ENTRY %main.12_spmd (param: f32[2,4]) -&gt; f32[2,4] {
+  %param = f32[2,4]{1,0} parameter(0), sharding={devices=[4,1]&lt;=[4]}, metadata={op_name=&quot;x&quot;}
+  ROOT %custom-call.1 = f32[2,4]{1,0} custom-call(%param), custom_call_target=&quot;rms_norm&quot;, operand_layout_constraints={f32[2,4]{1,0}}, api_version=API_VERSION_TYPED_FFI, metadata={op_name=&quot;jit(rms_norm_shmap)/jit(main)/jit(shmap_body)/ffi_call&quot; source_file=&quot;/tmp/ipykernel_228273/3540880311.py&quot; source_line=32}, backend_config={eps = 9.99999974E-6 : f32}
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see in this program, if the input and output shardings match the <code class="docutils literal notranslate"><span class="pre">shard_map</span></code> specs, no communication is required and the FFI call is executed on the appropriately sharded subset of the data.</p>
+<p>You can also use inputs and outputs with shardings that don’t match the <code class="docutils literal notranslate"><span class="pre">shard_map</span></code> specs, but (unrelated to the FFI) this will require re-sharding, as seen by the <code class="docutils literal notranslate"><span class="pre">all-to-all</span></code> operations in the compiled HLO:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hlo_data_shmap</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_shmap</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">data_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_data_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span>
+<span class="k">assert</span> <span class="s2">&quot;all-to-all&quot;</span> <span class="ow">in</span> <span class="n">hlo_data_shmap</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-custom-partitioning">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">custom</span> <span class="pre">partitioning</span></code><a class="headerlink" href="#using-custom-partitioning" title="Link to this heading">#</a></h3>
+<p>If you can’t use <a class="reference internal" href="_autosummary/jax.shard_map.html#jax.shard_map" title="jax.shard_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">shard_map()</span></code></a>, an alternative approach is to use <a class="reference internal" href="jax.experimental.custom_partitioning.html#jax.experimental.custom_partitioning.custom_partitioning" title="jax.experimental.custom_partitioning.custom_partitioning"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_partitioning()</span></code></a>, which supports automatic parallelization via <a class="reference internal" href="_autosummary/jax.jit.html#jax.jit" title="jax.jit"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jit()</span></code></a>.
+<a class="reference internal" href="jax.experimental.custom_partitioning.html#jax.experimental.custom_partitioning.custom_partitioning" title="jax.experimental.custom_partitioning.custom_partitioning"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_partitioning()</span></code></a> works by adding Python callbacks into the XLA compiler’s partitioning pass, which allows very flexible logic, but also comes with some rough edges.
+We won’t go into too much detail on the caveats here, but the main issues that you should be aware of are:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">custom_partitioning</span></code> can cause unexpected cache misses when used with the JAX’s <a class="reference external" href="https://docs.jax.dev/en/latest/persistent_compilation_cache.html">Persistent compilation cache</a>. This can be mitigated using the <code class="docutils literal notranslate"><span class="pre">jax_remove_custom_partitioning_ptr_from_cache_key</span></code> configuration flag, but that isn’t always appropriate either.</p></li>
+<li><p>Debugging <code class="docutils literal notranslate"><span class="pre">custom_partitioning</span></code> logic can be tedious because Python errors don’t always get propagated, instead causing your Python process to exit. That being said, any exceptions will show up in the process logs, so you should be able to track them down there.</p></li>
+</ol>
+<p>All that being said, here’s how we can wrap our FFI implementation of <code class="docutils literal notranslate"><span class="pre">rms_norm</span></code> using <a class="reference internal" href="jax.experimental.custom_partitioning.html#jax.experimental.custom_partitioning.custom_partitioning" title="jax.experimental.custom_partitioning.custom_partitioning"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_partitioning()</span></code></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.experimental.custom_partitioning</span> <span class="kn">import</span> <span class="n">custom_partitioning</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">custom_partitioning</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+<span class="k">def</span> <span class="nf">rms_norm_partitioned</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">rms_norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">replicate_sharding_on_last_dim</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">sharding</span><span class="p">,</span> <span class="n">target_info</span><span class="p">):</span>
+  <span class="c1"># Our implementation supports trivial sharding on any batch dimensions, but the data</span>
+  <span class="c1"># must be replicated on the last (non-batch) dimension.</span>
+  <span class="n">rank</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_info</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="n">num_batch_dims</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sharding</span><span class="o">.</span><span class="n">spec</span><span class="p">),</span> <span class="n">rank</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+  <span class="c1"># The Nones here indicate which dimensions should be replicated.</span>
+  <span class="n">names</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sharding</span><span class="o">.</span><span class="n">spec</span><span class="p">[:</span><span class="n">num_batch_dims</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="kc">None</span><span class="p">,)</span> <span class="o">*</span> <span class="p">(</span><span class="n">rank</span> <span class="o">-</span> <span class="n">num_batch_dims</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">NamedSharding</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">rms_norm_infer_sharding_from_operands</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">args_info</span><span class="p">,</span> <span class="n">result_info</span><span class="p">):</span>
+  <span class="k">del</span> <span class="n">eps</span>  <span class="c1"># unused</span>
+  <span class="n">arg_info</span><span class="p">,</span> <span class="o">=</span> <span class="n">args_info</span>
+  <span class="n">result_sharding</span> <span class="o">=</span> <span class="n">replicate_sharding_on_last_dim</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">arg_info</span><span class="o">.</span><span class="n">sharding</span><span class="p">,</span> <span class="n">result_info</span><span class="p">)</span>
+
+  <span class="c1"># In this case, we only have a single output, but the return value from this function</span>
+  <span class="c1"># must have the same pytree structure as the output from the underlying function</span>
+  <span class="c1"># (`rms_norm` in this case).</span>
+  <span class="k">return</span> <span class="n">result_sharding</span>
+
+<span class="k">def</span> <span class="nf">rms_norm_partition</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">args_info</span><span class="p">,</span> <span class="n">result_info</span><span class="p">):</span>
+  <span class="n">arg_info</span><span class="p">,</span> <span class="o">=</span> <span class="n">args_info</span>
+  <span class="n">arg_sharding</span> <span class="o">=</span> <span class="n">replicate_sharding_on_last_dim</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">arg_info</span><span class="o">.</span><span class="n">sharding</span><span class="p">,</span> <span class="n">arg_info</span><span class="p">)</span>
+  <span class="n">result_sharding</span> <span class="o">=</span> <span class="n">replicate_sharding_on_last_dim</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">arg_info</span><span class="o">.</span><span class="n">sharding</span><span class="p">,</span> <span class="n">result_info</span><span class="p">)</span>
+
+  <span class="c1"># This is the function that computes the partitioned model on the appropriate subset</span>
+  <span class="c1"># of the data.</span>
+  <span class="k">def</span> <span class="nf">partitioned_rms_norm</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">rms_norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+
+  <span class="c1"># Note that the third element of our returned tuple must be the shardings for the</span>
+  <span class="c1"># _outputs_ and its pytree structure must match the output of `rms_norm`. Similarly,</span>
+  <span class="c1"># the fourth element must have the same pytree structure as the _inputs_ to</span>
+  <span class="c1"># `rms_norm`. In this case, there is only one input, but it must be returned within</span>
+  <span class="c1"># a `tuple` anyways.</span>
+  <span class="k">return</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">partitioned_rms_norm</span><span class="p">,</span> <span class="n">result_sharding</span><span class="p">,</span> <span class="p">(</span><span class="n">arg_sharding</span><span class="p">,)</span>
+
+<span class="n">rms_norm_partitioned</span><span class="o">.</span><span class="n">def_partition</span><span class="p">(</span>
+    <span class="n">infer_sharding_from_operands</span><span class="o">=</span><span class="n">rms_norm_infer_sharding_from_operands</span><span class="p">,</span>
+    <span class="n">partition</span><span class="o">=</span><span class="n">rms_norm_partition</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_partitioned</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">batch_shd</span><span class="p">)(</span><span class="n">x_batch_shd</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">rms_norm_ref</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_partitioned</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_batch_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HloModule jit__unnamed_wrapped_function_, is_scheduled=true, entry_computation_layout={(f32[2,4]{1,0})-&gt;f32[2,4]{1,0}}, num_partitions=4
+
+ENTRY %main.5_spmd (param: f32[2,4]) -&gt; f32[2,4] {
+  %param = f32[2,4]{1,0} parameter(0), sharding={devices=[4,1]&lt;=[4]}, metadata={op_name=&quot;args[0]&quot;}
+  ROOT %custom-call.0 = f32[2,4]{1,0} custom-call(%param), custom_call_target=&quot;rms_norm&quot;, operand_layout_constraints={f32[2,4]{1,0}}, api_version=API_VERSION_TYPED_FFI, metadata={op_name=&quot;jit(&lt;unnamed wrapped function&gt;)/jit(main)/custom_partitioning&quot; source_file=&quot;/tmp/ipykernel_228273/1708142274.py&quot; source_line=49}, backend_config={eps = 9.99999974E-6 : f32}
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see from the compiled program above, this <code class="docutils literal notranslate"><span class="pre">custom_partitioning</span></code> logic produces exactly the same program as the <code class="docutils literal notranslate"><span class="pre">shard_map</span></code> version above when the input is sharded on the batch dimension.</p>
+<p>However, it’s worth noting that the behavior is <em>different</em> when the input is sharded along the data dimension.
+When used under <code class="docutils literal notranslate"><span class="pre">shard_map</span></code>, the data are resharded on the batch dimension, whereas with <code class="docutils literal notranslate"><span class="pre">custom_partitioning</span></code> the data are gathered onto each device.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hlo_data_partitioned</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">rms_norm_partitioned</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">data_shd</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">x_data_shd</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span><span class="o">.</span><span class="n">as_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="k">assert</span> <span class="s2">&quot;all-gather&quot;</span> <span class="ow">in</span> <span class="n">hlo_data_partitioned</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To also support automatic parallelization of the backwards pass, we would also need to write (similar) <a class="reference internal" href="jax.experimental.custom_partitioning.html#jax.experimental.custom_partitioning.custom_partitioning" title="jax.experimental.custom_partitioning.custom_partitioning"><code class="xref py py-func docutils literal notranslate"><span class="pre">custom_partitioning()</span></code></a> rules for <code class="docutils literal notranslate"><span class="pre">rms_norm_fwd</span></code> and <code class="docutils literal notranslate"><span class="pre">rms_norm_bwd</span></code>, but we leave those as an exercise for the reader.</p>
+</section>
+</section>
+<section id="advanced-topics">
+<h2>Advanced topics<a class="headerlink" href="#advanced-topics" title="Link to this heading">#</a></h2>
+<p>This tutorial covers most of the basic steps that are required to get up and running with JAX’s FFI, but advanced use cases may require more features.
+We will leave these topics to future tutorials, but here are some possibly useful references:</p>
+<ul class="simple">
+<li><p><strong>Supporting multiple dtypes</strong>: In this tutorial’s example, we restricted to only support <code class="docutils literal notranslate"><span class="pre">float32</span></code> inputs and outputs, but many use cases require supporting multiple different input types. One option to handle this is to register different FFI targets for all supported input types and then use Python to select the appropriate target for <a class="reference internal" href="_autosummary/jax.ffi.ffi_call.html#jax.ffi.ffi_call" title="jax.ffi.ffi_call"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.ffi.ffi_call()</span></code></a> depending on the input types. But, this approach could get quickly unwieldy depending on the combinatorics of the supported cases. So it is also possible to define the C++ handler to accept <code class="docutils literal notranslate"><span class="pre">ffi::AnyBuffer</span></code> instead of <code class="docutils literal notranslate"><span class="pre">ffi::Buffer&lt;Dtype&gt;</span></code>. Then, the input buffer will include a <code class="docutils literal notranslate"><span class="pre">element_type()</span></code> method which can be used to define the appropriate dtype dispatching logic in the backend.</p></li>
+<li><p><strong>Stateful foreign functions</strong>: It is also possible to use the FFI to wrap functions with associated state. There is a <a class="reference external" href="https://github.com/openxla/xla/blob/737a7da3c5405583dc95773ac0bb11b1349fc9ea/xla/service/gpu/custom_call_test.cc#L794-L845">low-level example included in the XLA test suite</a>, and a future tutorial will include more details.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="external-callbacks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">External callbacks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gradient-checkpointing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backend-code">Backend code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-interface">C++ interface</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-and-registering-an-ffi-handler">Building and registering an FFI handler</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frontend-code">Frontend code</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching-with-vmap">Batching with <code class="docutils literal notranslate"><span class="pre">vmap</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiation">Differentiation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ffi-calls-on-a-gpu">FFI calls on a GPU</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supporting-multiple-platforms">Supporting multiple platforms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharding">Sharding</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-shard-map">Using <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-custom-partitioning">Using <code class="docutils literal notranslate"><span class="pre">custom</span> <span class="pre">partitioning</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-topics">Advanced topics</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

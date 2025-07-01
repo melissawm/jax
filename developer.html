@@ -1,0 +1,1584 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Building from source &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=30646c52"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'developer';</script>
+    <link rel="icon" href="_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Investigating a regression" href="investigating_a_regression.html" />
+    <link rel="prev" title="Contributing to JAX" href="contributing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="pallas/quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="pallas/design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pallas/CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contributor_guide.html">Developer notes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="contributor_guide.html" class="nav-link">Developer notes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Building from source</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/developer.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Building from source</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-or-installing-jaxlib">Building or installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jaxlib-with-pip">Installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> with pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-jaxlib-from-source">Building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-jaxlib-from-source-with-a-modified-xla-repository">Building jaxlib from source with a modified XLA repository.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-building-jaxlib-from-source-on-windows">Additional Notes for Building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source on Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-building-a-rocm-jaxlib-for-amd-gpus">Additional notes for building a ROCM <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> for AMD GPUs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-hermetic-python">Managing hermetic Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-python-version">Specifying Python version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-python-dependencies">Specifying Python dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-dependencies-on-local-wheels">Specifying dependencies on local wheels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-dependencies-on-nightly-wheels">Specifying dependencies on nightly wheels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-hermetic-python-advanced-usage">Customizing hermetic Python (Advanced Usage)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-hermetic-python-examples">Custom hermetic Python examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jax">Installing <code class="docutils literal notranslate"><span class="pre">jax</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-tests">Running the tests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-bazel">Using Bazel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytest">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-test-behavior">Controlling test behavior</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-tests">Hypothesis tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doctests">Doctests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-checking">Type checking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linting">Linting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-documentation">Update documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-notebooks">Update notebooks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-ipynb">Editing <code class="docutils literal notranslate"><span class="pre">ipynb</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-md">Editing <code class="docutils literal notranslate"><span class="pre">md</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#syncing-notebooks">Syncing notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-notebooks">Creating new notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-within-the-sphinx-build">Notebooks within the Sphinx build</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-building-on-readthedocs-io">Documentation building on <code class="docutils literal notranslate"><span class="pre">readthedocs.io</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="building-from-source">
+<span id="id1"></span><h1>Building from source<a class="headerlink" href="#building-from-source" title="Link to this heading">#</a></h1>
+<!--* freshness: { reviewed: '2025-03-27' } *-->
+<p>First, obtain the JAX source code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jax</span><span class="o">-</span><span class="n">ml</span><span class="o">/</span><span class="n">jax</span>
+<span class="n">cd</span> <span class="n">jax</span>
+</pre></div>
+</div>
+<p>Building JAX involves two steps:</p>
+<ol class="arabic simple">
+<li><p>Building or installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code>, the C++ support library for <code class="docutils literal notranslate"><span class="pre">jax</span></code>.</p></li>
+<li><p>Installing the <code class="docutils literal notranslate"><span class="pre">jax</span></code> Python package.</p></li>
+</ol>
+<section id="building-or-installing-jaxlib">
+<h2>Building or installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code><a class="headerlink" href="#building-or-installing-jaxlib" title="Link to this heading">#</a></h2>
+<section id="installing-jaxlib-with-pip">
+<h3>Installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> with pip<a class="headerlink" href="#installing-jaxlib-with-pip" title="Link to this heading">#</a></h3>
+<p>If you’re only modifying Python portions of JAX, we recommend installing
+<code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from a prebuilt wheel using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jaxlib</span>
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="https://github.com/jax-ml/jax#installation">JAX readme</a> for full
+guidance on pip installation (e.g., for GPU and TPU support).</p>
+</section>
+<section id="building-jaxlib-from-source">
+<h3>Building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source<a class="headerlink" href="#building-jaxlib-from-source" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While it should typically be possible to compile <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source using
+most modern compilers, the builds are only tested using clang. Pull requests
+are welcomed to improve support for different toolchains, but other compilers
+are not actively supported.</p>
+</div>
+<p>To build <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source, you must also install some prerequisites:</p>
+<ul>
+<li><p>A C++ compiler:</p>
+<p>As mentioned in the box above, it is best to use a recent version of clang
+(at the time of writing, the version we test is 18), but other compilers (e.g.
+g++ or MSVC) may work.</p>
+<p>On Ubuntu or Debian you can follow the instructions from the
+<a class="reference external" href="https://apt.llvm.org/">LLVM</a> documentation to install the latest stable
+version of clang.</p>
+<p>If you are building on a Mac, make sure XCode and the XCode command line tools
+are installed.</p>
+<p>See below for Windows build instructions.</p>
+</li>
+<li><p>Python: for running the build helper script. Note that there is no need to
+install Python dependencies locally, as your system Python will be ignored
+during the build; please check
+<a class="reference internal" href="#managing-hermetic-python">Managing hermetic Python</a> for details.</p></li>
+</ul>
+<p>To build <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> for CPU or TPU, you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span> <span class="o">--</span><span class="n">verbose</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">dist</span><span class="o">/*.</span><span class="n">whl</span>  <span class="c1"># installs jaxlib (includes XLA)</span>
+</pre></div>
+</div>
+<p>To build a wheel for a version of Python different from your current system
+installation pass <code class="docutils literal notranslate"><span class="pre">--python_version</span></code> flag to the build command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span> <span class="o">--</span><span class="n">python_version</span><span class="o">=</span><span class="mf">3.12</span> <span class="o">--</span><span class="n">verbose</span>
+</pre></div>
+</div>
+<p>The rest of this document assumes that you are building for Python version
+matching your current system installation. If you need to build for a different
+version, simply append <code class="docutils literal notranslate"><span class="pre">--python_version=&lt;py</span> <span class="pre">version&gt;</span></code> flag every time you call
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">build/build.py</span></code>. Note, the Bazel build will always use a hermetic Python
+installation regardless of whether the <code class="docutils literal notranslate"><span class="pre">--python_version</span></code> parameter is passed or
+not.</p>
+<p>If you would like to build <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> and the CUDA plugins: Run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span><span class="p">,</span><span class="n">jax</span><span class="o">-</span><span class="n">cuda</span><span class="o">-</span><span class="n">plugin</span><span class="p">,</span><span class="n">jax</span><span class="o">-</span><span class="n">cuda</span><span class="o">-</span><span class="n">pjrt</span>
+</pre></div>
+</div>
+<p>to generate three wheels (jaxlib without cuda, jax-cuda-plugin, and
+jax-cuda-pjrt). By default all CUDA compilation steps performed by NVCC and
+clang, but it can be restricted to clang via the <code class="docutils literal notranslate"><span class="pre">--build_cuda_with_clang</span></code> flag.</p>
+<p>See <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">build/build.py</span> <span class="pre">--help</span></code> for configuration options. Here
+<code class="docutils literal notranslate"><span class="pre">python</span></code> should be the name of your Python 3 interpreter; on some systems, you
+may need to use <code class="docutils literal notranslate"><span class="pre">python3</span></code> instead. Despite calling the script with <code class="docutils literal notranslate"><span class="pre">python</span></code>,
+Bazel will always use its own hermetic Python interpreter and dependencies, only
+the <code class="docutils literal notranslate"><span class="pre">build/build.py</span></code> script itself will be processed by your system Python
+interpreter. By default, the wheel is written to the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> subdirectory of the
+current directory.</p>
+<ul>
+<li><p>JAX versions starting from v.0.4.32: you can provide custom CUDA and CUDNN
+versions in the configuration options. Bazel will download them and use as
+target dependencies.</p>
+<p>To download the specific versions of CUDA/CUDNN redistributions, you can use
+the <code class="docutils literal notranslate"><span class="pre">--cuda_version</span></code> and <code class="docutils literal notranslate"><span class="pre">--cudnn_version</span></code> flags:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>build/build.py<span class="w"> </span>build<span class="w"> </span>--wheels<span class="o">=</span>jax-cuda-plugin<span class="w"> </span>--cuda_version<span class="o">=</span><span class="m">12</span>.3.2<span class="w"> </span><span class="se">\</span>
+--cudnn_version<span class="o">=</span><span class="m">9</span>.1.1
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>build/build.py<span class="w"> </span>build<span class="w"> </span>--wheels<span class="o">=</span>jax-cuda-pjrt<span class="w"> </span>--cuda_version<span class="o">=</span><span class="m">12</span>.3.2<span class="w"> </span><span class="se">\</span>
+--cudnn_version<span class="o">=</span><span class="m">9</span>.1.1
+</pre></div>
+</div>
+<p>Please note that these parameters are optional: by default Bazel will
+download CUDA and CUDNN redistribution versions provided in <code class="docutils literal notranslate"><span class="pre">.bazelrc</span></code> in the
+environment variables <code class="docutils literal notranslate"><span class="pre">HERMETIC_CUDA_VERSION</span></code> and <code class="docutils literal notranslate"><span class="pre">HERMETIC_CUDNN_VERSION</span></code>
+respectively.</p>
+<p>To point to CUDA/CUDNN/NCCL redistributions on local file system, you can use
+the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>build/build.py<span class="w"> </span>build<span class="w"> </span>--wheels<span class="o">=</span>jax-cuda-plugin<span class="w"> </span><span class="se">\</span>
+--bazel_options<span class="o">=</span>--repo_env<span class="o">=</span><span class="nv">LOCAL_CUDA_PATH</span><span class="o">=</span><span class="s2">&quot;/foo/bar/nvidia/cuda&quot;</span><span class="w"> </span><span class="se">\</span>
+--bazel_options<span class="o">=</span>--repo_env<span class="o">=</span><span class="nv">LOCAL_CUDNN_PATH</span><span class="o">=</span><span class="s2">&quot;/foo/bar/nvidia/cudnn&quot;</span><span class="w"> </span><span class="se">\</span>
+--bazel_options<span class="o">=</span>--repo_env<span class="o">=</span><span class="nv">LOCAL_NCCL_PATH</span><span class="o">=</span><span class="s2">&quot;/foo/bar/nvidia/nccl&quot;</span>
+</pre></div>
+</div>
+<p>Please see the full list of instructions in <a class="reference external" href="https://github.com/openxla/xla/blob/main/docs/hermetic_cuda.md">XLA documentation</a>.</p>
+</li>
+<li><p>JAX versions prior v.0.4.32: you must have CUDA and CUDNN installed and
+provide paths to them using configuration options.</p></li>
+</ul>
+</section>
+<section id="building-jaxlib-from-source-with-a-modified-xla-repository">
+<h3>Building jaxlib from source with a modified XLA repository.<a class="headerlink" href="#building-jaxlib-from-source-with-a-modified-xla-repository" title="Link to this heading">#</a></h3>
+<p>JAX depends on XLA, whose source code is in the
+<a class="reference external" href="https://github.com/openxla/xla">XLA GitHub repository</a>.
+By default JAX uses a pinned copy of the XLA repository, but we often
+want to use a locally-modified copy of XLA when working on JAX. There are two
+ways to do this:</p>
+<ul>
+<li><p>use Bazel’s <code class="docutils literal notranslate"><span class="pre">override_repository</span></code> feature, which you can pass as a command
+line flag to <code class="docutils literal notranslate"><span class="pre">build.py</span></code> as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span> <span class="o">--</span><span class="n">local_xla_path</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">xla</span>
+</pre></div>
+</div>
+</li>
+<li><p>modify the <code class="docutils literal notranslate"><span class="pre">WORKSPACE</span></code> file in the root of the JAX source tree to point to
+a different XLA tree.</p></li>
+</ul>
+<p>To contribute changes back to XLA, send PRs to the XLA repository.</p>
+<p>The version of XLA pinned by JAX is regularly updated, but is updated in
+particular before each <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> release.</p>
+</section>
+<section id="additional-notes-for-building-jaxlib-from-source-on-windows">
+<h3>Additional Notes for Building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source on Windows<a class="headerlink" href="#additional-notes-for-building-jaxlib-from-source-on-windows" title="Link to this heading">#</a></h3>
+<p>Note: JAX does not support CUDA on Windows; use WSL2 for CUDA support.</p>
+<p>On Windows, follow <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019">Install Visual Studio</a>
+to set up a C++ toolchain. Visual Studio 2019 version 16.5 or newer is required.</p>
+<p>JAX builds use symbolic links, which require that you activate
+<a class="reference external" href="https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development">Developer Mode</a>.</p>
+<p>You can either install Python using its
+<a class="reference external" href="https://www.python.org/downloads/">Windows installer</a>, or if you prefer, you
+can use <a class="reference external" href="https://docs.anaconda.com/anaconda/install/windows/">Anaconda</a>
+or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html#windows-installers">Miniconda</a>
+to set up a Python environment.</p>
+<p>Some targets of Bazel use bash utilities to do scripting, so <a class="reference external" href="https://www.msys2.org">MSYS2</a>
+is needed. See <a class="reference external" href="https://bazel.build/install/windows#install-compilers">Installing Bazel on Windows</a>
+for more details. Install the following packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">patch</span> <span class="n">coreutils</span>
+</pre></div>
+</div>
+<p>Once coreutils is installed, the realpath command should be present in your shell’s path.</p>
+<p>Once everything is installed. Open PowerShell, and make sure MSYS2 is in the
+path of the current session. Ensure <code class="docutils literal notranslate"><span class="pre">bazel</span></code>, <code class="docutils literal notranslate"><span class="pre">patch</span></code> and <code class="docutils literal notranslate"><span class="pre">realpath</span></code> are
+accessible. Activate the conda environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">.</span>\<span class="n">build</span>\<span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span>
+</pre></div>
+</div>
+<p>To build with debug information, add the flag <code class="docutils literal notranslate"><span class="pre">--bazel_options='--copt=/Z7'</span></code>.</p>
+</section>
+<section id="additional-notes-for-building-a-rocm-jaxlib-for-amd-gpus">
+<h3>Additional notes for building a ROCM <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> for AMD GPUs<a class="headerlink" href="#additional-notes-for-building-a-rocm-jaxlib-for-amd-gpus" title="Link to this heading">#</a></h3>
+<p>For detailed instructions on building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> with ROCm support, refer to the official guide:
+<a class="reference external" href="https://github.com/jax-ml/jax/blob/main/build/rocm/README.md">Build ROCm JAX from Source</a></p>
+</section>
+</section>
+<section id="managing-hermetic-python">
+<h2>Managing hermetic Python<a class="headerlink" href="#managing-hermetic-python" title="Link to this heading">#</a></h2>
+<p>To make sure that JAX’s build is reproducible, behaves uniformly across
+supported platforms (Linux, Windows, MacOS) and is properly isolated from
+specifics of a local system, we rely on hermetic Python (provided by
+<a class="reference external" href="https://github.com/bazelbuild/rules_python">rules_python</a>, see
+<a class="reference external" href="https://rules-python.readthedocs.io/en/latest/toolchains.html#workspace-toolchain-registration">Toolchain Registration</a>
+for details) for all build and test commands executed via Bazel. This means that
+your system Python installation will be ignored during the build and Python
+interpreter itself as well as all the Python dependencies will be managed by
+bazel directly.</p>
+<section id="specifying-python-version">
+<h3>Specifying Python version<a class="headerlink" href="#specifying-python-version" title="Link to this heading">#</a></h3>
+<p>When you run <code class="docutils literal notranslate"><span class="pre">build/build.py</span></code> tool, the version of hermetic Python is set
+automatically to match the version of the Python you used to
+run <code class="docutils literal notranslate"><span class="pre">build/build.py</span></code> script. To choose a specific version explicitly you may
+pass <code class="docutils literal notranslate"><span class="pre">--python_version</span></code> argument to the tool:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">python_version</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+<p>Under the hood, the hermetic Python version is controlled
+by <code class="docutils literal notranslate"><span class="pre">HERMETIC_PYTHON_VERSION</span></code> environment variable, which is set automatically
+when you run <code class="docutils literal notranslate"><span class="pre">build/build.py</span></code>. In case you run bazel directly you may need to
+set the variable explicitly in one of the following ways:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Either add an entry to your `.bazelrc` file</span>
+<span class="n">build</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.12</span>
+
+<span class="c1"># OR pass it directly to your specific build command</span>
+<span class="n">bazel</span> <span class="n">build</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.12</span>
+
+<span class="c1"># OR set the environment variable globally in your shell:</span>
+<span class="n">export</span> <span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+<p>You may run builds and tests against different versions of Python sequentially
+on the same machine by simply switching the value of <code class="docutils literal notranslate"><span class="pre">--python_version</span></code> between
+the runs. All the python-agnostic parts of the build cache from the previous
+build will be preserved and reused for the subsequent builds.</p>
+</section>
+<section id="specifying-python-dependencies">
+<h3>Specifying Python dependencies<a class="headerlink" href="#specifying-python-dependencies" title="Link to this heading">#</a></h3>
+<p>During bazel build all JAX’s Python dependencies are pinned to their specific
+versions. This is necessary to ensure reproducibility of the build.
+The pinned versions of the full transitive closure of JAX’s dependencies
+together with their corresponding hashes are specified in
+<code class="docutils literal notranslate"><span class="pre">build/requirements_lock_&lt;python</span> <span class="pre">version&gt;.txt</span></code> files (
+e.g. <code class="docutils literal notranslate"><span class="pre">build/requirements_lock_3_12.txt</span></code> for <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.12</span></code>).</p>
+<p>To update the lock files, make sure <code class="docutils literal notranslate"><span class="pre">build/requirements.in</span></code> contains the desired
+direct dependencies list and then execute the following command (which will call
+<a class="reference external" href="https://pypi.org/project/pip-tools/">pip-compile</a> under the hood):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">requirements_update</span> <span class="o">--</span><span class="n">python_version</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+<p>Alternatively, if you need more control, you may run the bazel command
+directly (the two commands are equivalent):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">run</span> <span class="o">//</span><span class="n">build</span><span class="p">:</span><span class="n">requirements</span><span class="o">.</span><span class="n">update</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">3.12</span></code> is the <code class="docutils literal notranslate"><span class="pre">Python</span></code> version you wish to update.</p>
+<p>Note, since it is still <code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">pip-compile</span></code> tools used under the hood, so
+most of the command line arguments and features supported by those tools will be
+acknowledged by the Bazel requirements updater command as well. For example, if
+you wish the updater to consider pre-release versions simply pass <code class="docutils literal notranslate"><span class="pre">--pre</span></code>
+argument to the bazel command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">run</span> <span class="o">//</span><span class="n">build</span><span class="p">:</span><span class="n">requirements</span><span class="o">.</span><span class="n">update</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.12</span> <span class="o">--</span> <span class="o">--</span><span class="n">pre</span>
+</pre></div>
+</div>
+</section>
+<section id="specifying-dependencies-on-local-wheels">
+<h3>Specifying dependencies on local wheels<a class="headerlink" href="#specifying-dependencies-on-local-wheels" title="Link to this heading">#</a></h3>
+<p>By default the build scans <code class="docutils literal notranslate"><span class="pre">dist</span></code> directory in the repository root for any local
+<code class="docutils literal notranslate"><span class="pre">.whl</span></code> files to be included in the list of dependencies. If the wheel is Python
+version specific, only the wheels that match the selected Python version will
+be included.</p>
+<p>The overall local wheel search and selection logic is controlled by the
+arguments to <code class="docutils literal notranslate"><span class="pre">python_init_repositories()</span></code> macro (called directly from the
+<code class="docutils literal notranslate"><span class="pre">WORKSPACE</span></code> file). You may use <code class="docutils literal notranslate"><span class="pre">local_wheel_dist_folder</span></code> to change the location
+of the folder with local wheels. Use <code class="docutils literal notranslate"><span class="pre">local_wheel_inclusion_list</span></code> and
+<code class="docutils literal notranslate"><span class="pre">local_wheel_exclusion_list</span></code> arguments to specify which wheels should be
+included and/or excluded from the search (it supports basic wildcard matching).</p>
+<p>If necessary, you can also depend on a local <code class="docutils literal notranslate"><span class="pre">.whl</span></code> file manually, bypassing the
+automatic local wheel search mechanism. For example to depend on your newly
+built jaxlib wheel, you may add a path to the wheel in <code class="docutils literal notranslate"><span class="pre">build/requirements.in</span></code>
+and re-run the requirements updater command for a selected version of Python.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">$(realpath jaxlib-0.4.27.dev20240416-cp312-cp312-manylinux2014_x86_64.whl)&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">build</span><span class="o">/</span><span class="n">requirements</span><span class="o">.</span><span class="ow">in</span>
+<span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">requirements_update</span> <span class="o">--</span><span class="n">python_version</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+</section>
+<section id="specifying-dependencies-on-nightly-wheels">
+<h3>Specifying dependencies on nightly wheels<a class="headerlink" href="#specifying-dependencies-on-nightly-wheels" title="Link to this heading">#</a></h3>
+<p>To build and test against the very latest, potentially unstable, set of Python
+dependencies we provide a special version of the dependency updater command as
+follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">requirements_update</span> <span class="o">--</span><span class="n">python_version</span><span class="o">=</span><span class="mf">3.12</span> <span class="o">--</span><span class="n">nightly_update</span>
+</pre></div>
+</div>
+<p>Or, if you run <code class="docutils literal notranslate"><span class="pre">bazel</span></code> directly (the two commands are equivalent):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">run</span> <span class="o">//</span><span class="n">build</span><span class="p">:</span><span class="n">requirements_nightly</span><span class="o">.</span><span class="n">update</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+<p>The difference between this and the regular updater is that by default it would
+accept pre-release, dev and nightly packages, it will also
+search https://pypi.anaconda.org/scientific-python-nightly-wheels/simple as an
+extra index url and will not put hashes in the resultant requirements lock file.</p>
+</section>
+<section id="customizing-hermetic-python-advanced-usage">
+<h3>Customizing hermetic Python (Advanced Usage)<a class="headerlink" href="#customizing-hermetic-python-advanced-usage" title="Link to this heading">#</a></h3>
+<p>We support all of the current versions of Python out of the box, so unless your
+workflow has very special requirements (such as ability to use your own custom
+Python interpreter) you may safely skip this section entirely.</p>
+<p>In short, if you rely on a non-standard Python workflow you still can achieve
+the great level of flexibility in hermetic Python setup. Conceptually there will
+be only one difference compared to non-hermetic case: you will need to think in
+terms of files, not installations (i.e. think what files your build actually
+depends on, not what files need to be installed on your system), the rest is
+pretty much the same.</p>
+<p>So, in practice, to gain full control over your Python environment, hermetic or
+not you need to be able to do the following three things:</p>
+<ol class="arabic simple">
+<li><p>Specify which python interpreter to use (i.e. pick actual <code class="docutils literal notranslate"><span class="pre">python</span></code> or
+<code class="docutils literal notranslate"><span class="pre">python3</span></code> binary and libs that come with it in the same folder).</p></li>
+<li><p>Specify a list of Python dependencies (e.g. <code class="docutils literal notranslate"><span class="pre">numpy</span></code>) and their actual
+versions.</p></li>
+<li><p>Be able to add/remove/update dependencies in the list easily. Each
+dependency itself could be custom too (self-built for example).</p></li>
+</ol>
+<p>You already know how to do all of the steps above in a non-hermetic Python
+environment, here is how you do the same in the hermetic one (by approaching it
+in terms of files, not installations):</p>
+<ol class="arabic">
+<li><p>Instead of installing Python, get Python interpreter in a <code class="docutils literal notranslate"><span class="pre">tar</span></code> or <code class="docutils literal notranslate"><span class="pre">zip</span></code>
+file. Depending on your case you may simply pull one of many existing ones
+(such as <a class="reference external" href="https://github.com/indygreg/python-build-standalone/releases">python-build-standalone</a>),
+or build your own and pack it in an archive (following official
+<a class="reference external" href="https://devguide.python.org/getting-started/setup-building/#compile-and-build">build instructions</a>
+will do just fine). E.g. on Linux it will look something like the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span> <span class="n">python</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j12</span>
+<span class="n">make</span> <span class="n">altinstall</span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">czpf</span> <span class="n">my_python</span><span class="o">.</span><span class="n">tgz</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>Once you have the tarball ready, plug it in the build by pointing
+<code class="docutils literal notranslate"><span class="pre">HERMETIC_PYTHON_URL</span></code> env var to the archive (either local one or from the
+internet):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_URL</span><span class="o">=</span><span class="s2">&quot;file:///local/path/to/my_python.tgz&quot;</span>
+<span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_SHA256</span><span class="o">=&lt;</span><span class="n">file</span><span class="s1">&#39;s_sha256_sum&gt;</span>
+
+<span class="c1"># OR</span>
+<span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_URL</span><span class="o">=</span><span class="s2">&quot;https://remote/url/to/my_python.tgz&quot;</span>
+<span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_SHA256</span><span class="o">=&lt;</span><span class="n">file</span><span class="s1">&#39;s_sha256_sum&gt;</span>
+
+<span class="c1"># We assume that top-level folder in the tarball is called &quot;python&quot;, if it is</span>
+<span class="c1"># something different just pass additional HERMETIC_PYTHON_PREFIX parameter</span>
+<span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_URL</span><span class="o">=</span><span class="s2">&quot;https://remote/url/to/my_python.tgz&quot;</span>
+<span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_SHA256</span><span class="o">=&lt;</span><span class="n">file</span><span class="s1">&#39;s_sha256_sum&gt;</span>
+<span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_PREFIX</span><span class="o">=</span><span class="s2">&quot;my_python/install&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Instead of doing <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> create <code class="docutils literal notranslate"><span class="pre">requirements_lock.txt</span></code> file with
+full transitive closure of your dependencies. You may also depend on the
+existing ones already checked in this repo (as long as they work with your
+custom Python version). There are no special instructions on how you do it,
+you may follow steps recommended in <a class="reference internal" href="#specifying-python-dependencies">Specifying Python dependencies</a>
+from this doc, just call pip-compile directly (note, the lock file must be
+hermetic, but you can always generate it from non-hermetic python if you’d
+like) or even create it manually (note, hashes are optional in lock files).</p></li>
+<li><p>If you need to update or customize your dependencies list, you may once again
+follow the <a class="reference internal" href="#specifying-python-dependencies">Specifying Python dependencies</a>
+instructions to update <code class="docutils literal notranslate"><span class="pre">requirements_lock.txt</span></code>, call pip-compile directly or
+modify it manually. If you have a custom package you want to use just point
+to its <code class="docutils literal notranslate"><span class="pre">.whl</span></code> file directly (remember, work in terms of files, not
+installations) from your lock (note, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> and
+<code class="docutils literal notranslate"><span class="pre">requirements_lock.txt</span></code> files support local wheel references). If your
+<code class="docutils literal notranslate"><span class="pre">requirements_lock.txt</span></code> is already specified as a dependency to
+<code class="docutils literal notranslate"><span class="pre">python_init_repositories()</span></code> in <code class="docutils literal notranslate"><span class="pre">WORKSPACE</span></code> file you don’t have to do
+anything else. Otherwise you can point to your custom file as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_REQUIREMENTS_LOCK</span><span class="o">=</span><span class="s2">&quot;/absolute/path/to/custom_requirements_lock.txt&quot;</span>
+</pre></div>
+</div>
+<p>Also note if you use <code class="docutils literal notranslate"><span class="pre">HERMETIC_REQUIREMENTS_LOCK</span></code> then it fully controls list
+of your dependencies and the automatic local wheels resolution logic
+described in <a class="reference internal" href="#specifying-dependencies-on-local-wheels">Specifying dependencies on local wheels</a>
+gets disabled to not interfere with it.</p>
+</li>
+</ol>
+<p>That is it. To summarize: if you have an archive with Python interpreter in it
+and a requirements_lock.txt file with full transitive closure of your
+dependencies then you fully control your Python environment.</p>
+<section id="custom-hermetic-python-examples">
+<h4>Custom hermetic Python examples<a class="headerlink" href="#custom-hermetic-python-examples" title="Link to this heading">#</a></h4>
+<p>Note, for all of the examples below you may also set the environment variables
+globally (i.e. <code class="docutils literal notranslate"><span class="pre">export</span></code> in your shell instead of <code class="docutils literal notranslate"><span class="pre">--repo_env</span></code> argument to your
+command) so calling bazel via <code class="docutils literal notranslate"><span class="pre">build/build.py</span></code> will work just fine.</p>
+<p>Build with custom <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.13</span></code> from the internet, using default
+<code class="docutils literal notranslate"><span class="pre">requirements_lock_3_13.txt</span></code> already checked in this repo (i.e. custom
+interpreter but default dependencies):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">build</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/indygreg/python-build-standalone/releases/download/20241016/cpython-3.13.0+20241016-x86_64-unknown-linux-gnu-install_only.tar.gz&quot;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_SHA256</span><span class="o">=</span><span class="s2">&quot;2c8cb15c6a2caadaa98af51df6fe78a8155b8471cb3dd7b9836038e0d3657fb4&quot;</span>
+</pre></div>
+</div>
+<p>Build with custom Python 3.13 from local file system and custom lock file
+(assuming the lock file was put in <code class="docutils literal notranslate"><span class="pre">jax/build</span></code> folder of this repo before
+running the command):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_URL</span><span class="o">=</span><span class="s2">&quot;file:///path/to/cpython.tar.gz&quot;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_PREFIX</span><span class="o">=</span><span class="s2">&quot;prefix/to/strip/in/cython/tar/gz/archive&quot;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_SHA256</span><span class="o">=&lt;</span><span class="n">sha256_sum</span><span class="o">&gt;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_REQUIREMENTS_LOCK</span><span class="o">=</span><span class="s2">&quot;/absolute/path/to/build:custom_requirements_lock.txt&quot;</span>
+</pre></div>
+</div>
+<p>If default python interpreter is good enough for you and you just need a custom
+set of dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_REQUIREMENTS_LOCK</span><span class="o">=</span><span class="s2">&quot;/absolute/path/to/build:custom_requirements_lock.txt&quot;</span>
+</pre></div>
+</div>
+<p>Note, you can have multiple different <code class="docutils literal notranslate"><span class="pre">requirement_lock.txt</span></code> files corresponding
+to the same Python version to support different scenarios. You can control
+which one is selected by specifying <code class="docutils literal notranslate"><span class="pre">HERMETIC_PYTHON_VERSION</span></code>. For example in
+<code class="docutils literal notranslate"><span class="pre">WORKSPACE</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">requirements</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;3.10&quot;</span><span class="p">:</span> <span class="s2">&quot;//build:requirements_lock_3_10.txt&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;3.11&quot;</span><span class="p">:</span> <span class="s2">&quot;//build:requirements_lock_3_11.txt&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;3.12&quot;</span><span class="p">:</span> <span class="s2">&quot;//build:requirements_lock_3_12.txt&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;3.13&quot;</span><span class="p">:</span> <span class="s2">&quot;//build:requirements_lock_3_13.txt&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;3.13-scenario1&quot;</span><span class="p">:</span> <span class="s2">&quot;//build:scenario1_requirements_lock_3_13.txt&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;3.13-scenario2&quot;</span><span class="p">:</span> <span class="s2">&quot;//build:scenario2_requirements_lock_3_13.txt&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>Then you can build and test different combinations of stuff without changing
+anything in your environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># To build with scenario1 dependencies:</span>
+<span class="n">bazel</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span><span class="o">-</span><span class="n">scenario1</span>
+
+<span class="c1"># To build with scenario2 dependencies:</span>
+<span class="n">bazel</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span><span class="o">-</span><span class="n">scenario2</span>
+
+<span class="c1"># To build with default dependencies:</span>
+<span class="n">bazel</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span>
+
+<span class="c1"># To build with scenario1 dependencies and custom Python 3.13 interpreter:</span>
+<span class="n">bazel</span> <span class="n">test</span> <span class="o">&lt;</span><span class="n">target</span><span class="o">&gt;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_VERSION</span><span class="o">=</span><span class="mf">3.13</span><span class="o">-</span><span class="n">scenario1</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_URL</span><span class="o">=</span><span class="s2">&quot;file:///path/to/cpython.tar.gz&quot;</span>
+  <span class="o">--</span><span class="n">repo_env</span><span class="o">=</span><span class="n">HERMETIC_PYTHON_SHA256</span><span class="o">=&lt;</span><span class="n">sha256_sum</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="installing-jax">
+<h2>Installing <code class="docutils literal notranslate"><span class="pre">jax</span></code><a class="headerlink" href="#installing-jax" title="Link to this heading">#</a></h2>
+<p>Once <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> has been installed, you can install <code class="docutils literal notranslate"><span class="pre">jax</span></code> by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>  <span class="c1"># installs jax</span>
+</pre></div>
+</div>
+<p>To upgrade to the latest version from GitHub, just run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> from the JAX
+repository root, and rebuild by running <code class="docutils literal notranslate"><span class="pre">build.py</span></code> or upgrading <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> if
+necessary. You shouldn’t have to reinstall <code class="docutils literal notranslate"><span class="pre">jax</span></code> because <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span></code>
+sets up symbolic links from site-packages into the repository.</p>
+</section>
+<section id="running-the-tests">
+<span id="running-tests"></span><h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Link to this heading">#</a></h2>
+<p>There are two supported mechanisms for running the JAX tests, either using Bazel
+or using pytest.</p>
+<section id="using-bazel">
+<h3>Using Bazel<a class="headerlink" href="#using-bazel" title="Link to this heading">#</a></h3>
+<p>First, configure the JAX build by using the <code class="docutils literal notranslate"><span class="pre">--configure_only</span></code> flag. Pass
+<code class="docutils literal notranslate"><span class="pre">--wheel_list=jaxlib</span></code> for CPU tests and CUDA/ROCM for GPU for GPU tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span> <span class="o">--</span><span class="n">configure_only</span>
+<span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jax</span><span class="o">-</span><span class="n">cuda</span><span class="o">-</span><span class="n">plugin</span> <span class="o">--</span><span class="n">configure_only</span>
+<span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jax</span><span class="o">-</span><span class="n">rocm</span><span class="o">-</span><span class="n">plugin</span> <span class="o">--</span><span class="n">configure_only</span>
+</pre></div>
+</div>
+<p>You may pass additional options to <code class="docutils literal notranslate"><span class="pre">build.py</span></code> to configure the build; see the
+<code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> build documentation for details.</p>
+<p>By default the Bazel build runs the JAX tests using <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> built from source.
+To run JAX tests, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">test</span> <span class="o">//</span><span class="n">tests</span><span class="p">:</span><span class="n">cpu_tests</span> <span class="o">//</span><span class="n">tests</span><span class="p">:</span><span class="n">backend_independent_tests</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">//tests:gpu_tests</span></code> and <code class="docutils literal notranslate"><span class="pre">//tests:tpu_tests</span></code> are also available, if you have the
+necessary hardware.</p>
+<p>You need to configure <code class="docutils literal notranslate"><span class="pre">cuda</span></code> to run <code class="docutils literal notranslate"><span class="pre">gpu</span></code> tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span> <span class="o">--</span><span class="n">wheels</span><span class="o">=</span><span class="n">jaxlib</span><span class="p">,</span><span class="n">jax</span><span class="o">-</span><span class="n">cuda</span><span class="o">-</span><span class="n">plugin</span><span class="p">,</span><span class="n">jax</span><span class="o">-</span><span class="n">cuda</span><span class="o">-</span><span class="n">pjrt</span> <span class="o">--</span><span class="n">configure_only</span>
+</pre></div>
+</div>
+<p>To use a preinstalled <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> instead of building it you first need to
+make it available in the hermetic Python. To install a specific version of
+<code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> within hermetic Python run (using <code class="docutils literal notranslate"><span class="pre">jaxlib</span> <span class="pre">&gt;=</span> <span class="pre">0.4.26</span></code> as an example):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">jaxlib &gt;= 0.4.26&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">build</span><span class="o">/</span><span class="n">requirements</span><span class="o">.</span><span class="ow">in</span>
+<span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">requirements_update</span>
+</pre></div>
+</div>
+<p>Alternatively, to install <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from a local wheel (assuming Python 3.12):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">$(realpath jaxlib-0.4.26-cp312-cp312-manylinux2014_x86_64.whl)&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">build</span><span class="o">/</span><span class="n">requirements</span><span class="o">.</span><span class="ow">in</span>
+<span class="n">python</span> <span class="n">build</span><span class="o">/</span><span class="n">build</span><span class="o">.</span><span class="n">py</span> <span class="n">requirements_update</span> <span class="o">--</span><span class="n">python_version</span><span class="o">=</span><span class="mf">3.12</span>
+</pre></div>
+</div>
+<p>Once you have <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> installed hermetically, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">test</span> <span class="o">--//</span><span class="n">jax</span><span class="p">:</span><span class="n">build_jaxlib</span><span class="o">=</span><span class="n">false</span> <span class="o">//</span><span class="n">tests</span><span class="p">:</span><span class="n">cpu_tests</span> <span class="o">//</span><span class="n">tests</span><span class="p">:</span><span class="n">backend_independent_tests</span>
+</pre></div>
+</div>
+<p>A number of test behaviors can be controlled using environment variables (see
+below). Environment variables may be passed to JAX tests using the
+<code class="docutils literal notranslate"><span class="pre">--test_env=FLAG=value</span></code> flag to Bazel.</p>
+<p>Some of JAX tests are for multiple accelerators (i.e. GPUs, TPUs). When JAX is
+already installed, you can run GPUs tests like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bazel</span> <span class="n">test</span> <span class="o">//</span><span class="n">tests</span><span class="p">:</span><span class="n">gpu_tests</span> <span class="o">--</span><span class="n">local_test_jobs</span><span class="o">=</span><span class="mi">4</span> <span class="o">--</span><span class="n">test_tag_filters</span><span class="o">=</span><span class="n">multiaccelerator</span> <span class="o">--//</span><span class="n">jax</span><span class="p">:</span><span class="n">build_jaxlib</span><span class="o">=</span><span class="n">false</span> <span class="o">--</span><span class="n">test_env</span><span class="o">=</span><span class="n">XLA_PYTHON_CLIENT_ALLOCATOR</span><span class="o">=</span><span class="n">platform</span>
+</pre></div>
+</div>
+<p>You can speed up single accelerator tests by running them in parallel on
+multiple accelerators. This also triggers multiple concurrent tests per
+accelerator. For GPUs, you can do it like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>NB_GPUS=2
+JOBS_PER_ACC=4
+J=$((NB_GPUS * JOBS_PER_ACC))
+MULTI_GPU=&quot;--run_under $PWD/build/parallel_accelerator_execute.sh --test_env=JAX_ACCELERATOR_COUNT=${NB_GPUS} --test_env=JAX_TESTS_PER_ACCELERATOR=${JOBS_PER_ACC} --local_test_jobs=$J&quot;
+bazel test //tests:gpu_tests //tests:backend_independent_tests --test_env=XLA_PYTHON_CLIENT_PREALLOCATE=false --test_tag_filters=-multiaccelerator $MULTI_GPU
+</pre></div>
+</div>
+</section>
+<section id="using-pytest">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code><a class="headerlink" href="#using-pytest" title="Link to this heading">#</a></h3>
+<p>First, install the dependencies by
+running <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">build/test-requirements.txt</span></code>.</p>
+<p>To run all the JAX tests using <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, we recommend using <code class="docutils literal notranslate"><span class="pre">pytest-xdist</span></code>,
+which can run tests in parallel. It is installed as a part of
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">build/test-requirements.txt</span></code> command.</p>
+<p>From the repository root directory run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="o">-</span><span class="n">n</span> <span class="n">auto</span> <span class="n">tests</span>
+</pre></div>
+</div>
+</section>
+<section id="controlling-test-behavior">
+<h3>Controlling test behavior<a class="headerlink" href="#controlling-test-behavior" title="Link to this heading">#</a></h3>
+<p>JAX generates test cases combinatorially, and you can control the number of
+cases that are generated and checked for each test (default is 10) using the
+<code class="docutils literal notranslate"><span class="pre">JAX_NUM_GENERATED_CASES</span></code> environment variable. The automated tests
+currently use 25 by default.</p>
+<p>For example, one might write</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Bazel
+bazel test //tests/... --test_env=JAX_NUM_GENERATED_CASES=25`
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># pytest</span>
+<span class="n">JAX_NUM_GENERATED_CASES</span><span class="o">=</span><span class="mi">25</span> <span class="n">pytest</span> <span class="o">-</span><span class="n">n</span> <span class="n">auto</span> <span class="n">tests</span>
+</pre></div>
+</div>
+<p>The automated tests also run the tests with default 64-bit floats and ints
+(<code class="docutils literal notranslate"><span class="pre">JAX_ENABLE_X64</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JAX_ENABLE_X64</span><span class="o">=</span><span class="mi">1</span> <span class="n">JAX_NUM_GENERATED_CASES</span><span class="o">=</span><span class="mi">25</span> <span class="n">pytest</span> <span class="o">-</span><span class="n">n</span> <span class="n">auto</span> <span class="n">tests</span>
+</pre></div>
+</div>
+<p>You can run a more specific set of tests using
+<a class="reference external" href="https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests">pytest</a>’s
+built-in selection mechanisms, or alternatively you can run a specific test
+file directly to see more detailed information about the cases being run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JAX_NUM_GENERATED_CASES</span><span class="o">=</span><span class="mi">5</span> <span class="n">python</span> <span class="n">tests</span><span class="o">/</span><span class="n">lax_numpy_test</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>You can skip a few tests known to be slow, by passing environment variable
+JAX_SKIP_SLOW_TESTS=1.</p>
+<p>To specify a particular set of tests to run from a test file, you can pass a string
+or regular expression via the <code class="docutils literal notranslate"><span class="pre">--test_targets</span></code> flag. For example, you can run all
+the tests of <code class="docutils literal notranslate"><span class="pre">jax.numpy.pad</span></code> using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">tests</span><span class="o">/</span><span class="n">lax_numpy_test</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">test_targets</span><span class="o">=</span><span class="s2">&quot;testPad&quot;</span>
+</pre></div>
+</div>
+<p>The Colab notebooks are tested for errors as part of the documentation build.</p>
+</section>
+<section id="hypothesis-tests">
+<h3>Hypothesis tests<a class="headerlink" href="#hypothesis-tests" title="Link to this heading">#</a></h3>
+<p>Some of the tests use <a class="reference external" href="https://hypothesis.readthedocs.io/en/latest">hypothesis</a>.
+Normally, hypothesis will test using multiple example inputs, and on a test failure
+it will try to find a smaller example that still results in failure:
+Look through the test failure for a line like the one below, and add the decorator
+mentioned in the message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">can</span> <span class="n">reproduce</span> <span class="n">this</span> <span class="n">example</span> <span class="n">by</span> <span class="n">temporarily</span> <span class="n">adding</span> <span class="nd">@reproduce_failure</span><span class="p">(</span><span class="s1">&#39;6.97.4&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;AXicY2DAAAAAEwAB&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span> <span class="n">decorator</span> <span class="n">on</span> <span class="n">your</span> <span class="n">test</span> <span class="n">case</span>
+</pre></div>
+</div>
+<p>For interactive development, you can set the environment variable
+<code class="docutils literal notranslate"><span class="pre">JAX_HYPOTHESIS_PROFILE=interactive</span></code> (or the equivalent flag <code class="docutils literal notranslate"><span class="pre">--jax_hypothesis_profile=interactive</span></code>)
+in order to set the number of examples to 1, and skip the example
+minimization phase.</p>
+</section>
+<section id="doctests">
+<h3>Doctests<a class="headerlink" href="#doctests" title="Link to this heading">#</a></h3>
+<p>JAX uses pytest in doctest mode to test the code examples within the documentation.
+You can find the up-to-date command to run doctests in
+<a class="reference external" href="https://github.com/jax-ml/jax/blob/main/.github/workflows/ci-build.yaml"><code class="docutils literal notranslate"><span class="pre">ci-build.yaml</span></code></a>.
+E.g., you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JAX_TRACEBACK_FILTERING</span><span class="o">=</span><span class="n">off</span> <span class="n">XLA_FLAGS</span><span class="o">=--</span><span class="n">xla_force_host_platform_device_count</span><span class="o">=</span><span class="mi">8</span> <span class="n">pytest</span> <span class="o">-</span><span class="n">n</span> <span class="n">auto</span> <span class="o">--</span><span class="n">tb</span><span class="o">=</span><span class="n">short</span> <span class="o">--</span><span class="n">doctest</span><span class="o">-</span><span class="n">glob</span><span class="o">=</span><span class="s1">&#39;*.md&#39;</span> <span class="o">--</span><span class="n">doctest</span><span class="o">-</span><span class="n">glob</span><span class="o">=</span><span class="s1">&#39;*.rst&#39;</span> <span class="n">docs</span> <span class="o">--</span><span class="n">doctest</span><span class="o">-</span><span class="k">continue</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">failure</span> <span class="o">--</span><span class="n">ignore</span><span class="o">=</span><span class="n">docs</span><span class="o">/</span><span class="n">multi_process</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+<p>Additionally, JAX runs pytest in <code class="docutils literal notranslate"><span class="pre">doctest-modules</span></code> mode to ensure code examples in
+function docstrings will run correctly. You can run this locally using, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JAX_TRACEBACK_FILTERING</span><span class="o">=</span><span class="n">off</span> <span class="n">XLA_FLAGS</span><span class="o">=--</span><span class="n">xla_force_host_platform_device_count</span><span class="o">=</span><span class="mi">8</span> <span class="n">pytest</span> <span class="o">--</span><span class="n">doctest</span><span class="o">-</span><span class="n">modules</span> <span class="n">jax</span><span class="o">/</span><span class="n">_src</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">lax_numpy</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="type-checking">
+<h2>Type checking<a class="headerlink" href="#type-checking" title="Link to this heading">#</a></h2>
+<p>We use <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to check the type hints. To run <code class="docutils literal notranslate"><span class="pre">mypy</span></code> with the same configuration as the
+github CI checks, you can use the <a class="reference external" href="https://pre-commit.com/">pre-commit</a> framework:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span>
+<span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="n">mypy</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">files</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">mypy</span></code> can be somewhat slow when checking all files, it may be convenient to
+only check files you have modified. To do this, first stage the changes (i.e. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>
+the changed files) and then run this before committing the changes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="n">mypy</span>
+</pre></div>
+</div>
+</section>
+<section id="linting">
+<h2>Linting<a class="headerlink" href="#linting" title="Link to this heading">#</a></h2>
+<p>JAX uses the <a class="reference external" href="https://docs.astral.sh/ruff/">ruff</a> linter to ensure code
+quality. To run <code class="docutils literal notranslate"><span class="pre">ruff</span></code> with the same configuration as the
+github CI checks, you can use the <a class="reference external" href="https://pre-commit.com/">pre-commit</a> framework:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span>
+<span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="n">ruff</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">files</span>
+</pre></div>
+</div>
+</section>
+<section id="update-documentation">
+<h2>Update documentation<a class="headerlink" href="#update-documentation" title="Link to this heading">#</a></h2>
+<p>To rebuild the documentation, install several packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">docs</span><span class="o">/</span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>And then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="n">docs</span> <span class="n">docs</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">html</span> <span class="o">-</span><span class="n">j</span> <span class="n">auto</span>
+</pre></div>
+</div>
+<p>This can take a long time because it executes many of the notebooks in the documentation source;
+if you’d prefer to build the docs without executing the notebooks, you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="o">-</span><span class="n">D</span> <span class="n">nb_execution_mode</span><span class="o">=</span><span class="n">off</span> <span class="n">docs</span> <span class="n">docs</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">html</span> <span class="o">-</span><span class="n">j</span> <span class="n">auto</span>
+</pre></div>
+</div>
+<p>You can then see the generated documentation in <code class="docutils literal notranslate"><span class="pre">docs/build/html/index.html</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">auto</span></code> option controls the parallelism of the build. You can use a number
+in place of <code class="docutils literal notranslate"><span class="pre">auto</span></code> to control how many CPU cores to use.</p>
+<section id="update-notebooks">
+<span id="id2"></span><h3>Update notebooks<a class="headerlink" href="#update-notebooks" title="Link to this heading">#</a></h3>
+<p>We use <a class="reference external" href="https://jupytext.readthedocs.io/">jupytext</a> to maintain two synced copies of the notebooks
+in <code class="docutils literal notranslate"><span class="pre">docs/notebooks</span></code>: one in <code class="docutils literal notranslate"><span class="pre">ipynb</span></code> format, and one in <code class="docutils literal notranslate"><span class="pre">md</span></code> format. The advantage of the former
+is that it can be opened and executed directly in Colab; the advantage of the latter is that
+it makes it much easier to track diffs within version control.</p>
+<section id="editing-ipynb">
+<h4>Editing <code class="docutils literal notranslate"><span class="pre">ipynb</span></code><a class="headerlink" href="#editing-ipynb" title="Link to this heading">#</a></h4>
+<p>For making large changes that substantially modify code and outputs, it is easiest to
+edit the notebooks in Jupyter or in Colab. To edit notebooks in the Colab interface,
+open <a class="reference external" href="http://colab.research.google.com">http://colab.research.google.com</a> and <code class="docutils literal notranslate"><span class="pre">Upload</span></code> from your local repo.
+Update it as needed, <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">all</span> <span class="pre">cells</span></code> then <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">ipynb</span></code>.
+You may want to test that it executes properly, using <code class="docutils literal notranslate"><span class="pre">sphinx-build</span></code> as explained above.</p>
+</section>
+<section id="editing-md">
+<h4>Editing <code class="docutils literal notranslate"><span class="pre">md</span></code><a class="headerlink" href="#editing-md" title="Link to this heading">#</a></h4>
+<p>For making smaller changes to the text content of the notebooks, it is easiest to edit the
+<code class="docutils literal notranslate"><span class="pre">.md</span></code> versions using a text editor.</p>
+</section>
+<section id="syncing-notebooks">
+<h4>Syncing notebooks<a class="headerlink" href="#syncing-notebooks" title="Link to this heading">#</a></h4>
+<p>After editing either the ipynb or md versions of the notebooks, you can sync the two versions
+using <a class="reference external" href="https://jupytext.readthedocs.io/">jupytext</a> by running <code class="docutils literal notranslate"><span class="pre">jupytext</span> <span class="pre">--sync</span></code> on the updated
+notebooks; for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupytext</span><span class="o">==</span><span class="mf">1.16.4</span>
+<span class="n">jupytext</span> <span class="o">--</span><span class="n">sync</span> <span class="n">docs</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">thinking_in_jax</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+<p>The jupytext version should match that specified in
+<a class="reference external" href="https://github.com/jax-ml/jax/blob/main/.pre-commit-config.yaml">.pre-commit-config.yaml</a>.</p>
+<p>To check that the markdown and ipynb files are properly synced, you may use the
+<a class="reference external" href="https://pre-commit.com/">pre-commit</a> framework to perform the same check used
+by the github CI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span>
+<span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="n">jupytext</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">files</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-new-notebooks">
+<h4>Creating new notebooks<a class="headerlink" href="#creating-new-notebooks" title="Link to this heading">#</a></h4>
+<p>If you are adding a new notebook to the documentation and would like to use the <code class="docutils literal notranslate"><span class="pre">jupytext</span> <span class="pre">--sync</span></code>
+command discussed here, you can set up your notebook for jupytext by using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupytext</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">formats</span> <span class="n">ipynb</span><span class="p">,</span><span class="n">md</span><span class="p">:</span><span class="n">myst</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">notebook</span><span class="o">.</span><span class="n">ipynb</span>
+</pre></div>
+</div>
+<p>This works by adding a <code class="docutils literal notranslate"><span class="pre">&quot;jupytext&quot;</span></code> metadata field to the notebook file which specifies the
+desired formats, and which the <code class="docutils literal notranslate"><span class="pre">jupytext</span> <span class="pre">--sync</span></code> command recognizes when invoked.</p>
+</section>
+<section id="notebooks-within-the-sphinx-build">
+<h4>Notebooks within the Sphinx build<a class="headerlink" href="#notebooks-within-the-sphinx-build" title="Link to this heading">#</a></h4>
+<p>Some of the notebooks are built automatically as part of the pre-submit checks and
+as part of the <a class="reference external" href="https://docs.jax.dev/en/latest">Read the docs</a> build.
+The build will fail if cells raise errors. If the errors are intentional, you can either catch them,
+or tag the cell with <code class="docutils literal notranslate"><span class="pre">raises-exceptions</span></code> metadata (<a class="reference external" href="https://github.com/jax-ml/jax/pull/2402/files">example PR</a>).
+You have to add this metadata by hand in the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file. It will be preserved when somebody else
+re-saves the notebook.</p>
+<p>We exclude some notebooks from the build, e.g., because they contain long computations.
+See <code class="docutils literal notranslate"><span class="pre">exclude_patterns</span></code> in <a class="reference external" href="https://github.com/jax-ml/jax/blob/main/docs/conf.py">conf.py</a>.</p>
+</section>
+</section>
+<section id="documentation-building-on-readthedocs-io">
+<h3>Documentation building on <code class="docutils literal notranslate"><span class="pre">readthedocs.io</span></code><a class="headerlink" href="#documentation-building-on-readthedocs-io" title="Link to this heading">#</a></h3>
+<p>JAX’s auto-generated documentation is at <a class="reference external" href="https://docs.jax.dev/">https://docs.jax.dev/</a>.</p>
+<p>The documentation building is controlled for the entire project by the
+<a class="reference external" href="https://readthedocs.org/dashboard/jax">readthedocs JAX settings</a>. The current settings
+trigger a documentation build as soon as code is pushed to the GitHub <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.
+For each code version, the building process is driven by the
+<code class="docutils literal notranslate"><span class="pre">.readthedocs.yml</span></code> and the <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code> configuration files.</p>
+<p>For each automated documentation build you can see the
+<a class="reference external" href="https://readthedocs.org/projects/jax/builds/">documentation build logs</a>.</p>
+<p>If you want to test the documentation generation on Readthedocs, you can push code to the <code class="docutils literal notranslate"><span class="pre">test-docs</span></code>
+branch. That branch is also built automatically, and you can
+see the generated documentation <a class="reference external" href="https://docs.jax.dev/en/test-docs/">here</a>. If the documentation build
+fails you may want to <a class="reference external" href="https://docs.readthedocs.io/en/stable/guides/wipe-environment.html">wipe the build environment for test-docs</a>.</p>
+<p>For a local test, I was able to do it in a fresh directory by replaying the commands
+I saw in the Readthedocs logs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>mkvirtualenv jax-docs  # A new virtualenv
+mkdir jax-docs  # A new directory
+cd jax-docs
+git clone --no-single-branch --depth 50 https://github.com/jax-ml/jax
+cd jax
+git checkout --force origin/test-docs
+git clean -d -f -f
+workon jax-docs
+
+python -m pip install --upgrade --no-cache-dir pip
+python -m pip install --upgrade --no-cache-dir -I Pygments==2.3.1 setuptools==41.0.1 docutils==0.14 mock==1.0.1 pillow==5.4.1 alabaster&gt;=0.7,&lt;0.8,!=0.7.5 commonmark==0.8.1 recommonmark==0.5.0 &#39;sphinx&lt;2&#39; &#39;sphinx-rtd-theme&lt;0.5&#39; &#39;readthedocs-sphinx-ext&lt;1.1&#39;
+python -m pip install --exists-action=w --no-cache-dir -r docs/requirements.txt
+cd docs
+python `which sphinx-build` -T -E -b html -d _build/doctrees-readthedocs -D language=en . _build/html
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="contributing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Contributing to JAX</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="investigating_a_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Investigating a regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-or-installing-jaxlib">Building or installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jaxlib-with-pip">Installing <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> with pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-jaxlib-from-source">Building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-jaxlib-from-source-with-a-modified-xla-repository">Building jaxlib from source with a modified XLA repository.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-building-jaxlib-from-source-on-windows">Additional Notes for Building <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> from source on Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-building-a-rocm-jaxlib-for-amd-gpus">Additional notes for building a ROCM <code class="docutils literal notranslate"><span class="pre">jaxlib</span></code> for AMD GPUs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-hermetic-python">Managing hermetic Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-python-version">Specifying Python version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-python-dependencies">Specifying Python dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-dependencies-on-local-wheels">Specifying dependencies on local wheels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-dependencies-on-nightly-wheels">Specifying dependencies on nightly wheels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-hermetic-python-advanced-usage">Customizing hermetic Python (Advanced Usage)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-hermetic-python-examples">Custom hermetic Python examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-jax">Installing <code class="docutils literal notranslate"><span class="pre">jax</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-tests">Running the tests</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-bazel">Using Bazel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pytest">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-test-behavior">Controlling test behavior</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-tests">Hypothesis tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doctests">Doctests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-checking">Type checking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linting">Linting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-documentation">Update documentation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-notebooks">Update notebooks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-ipynb">Editing <code class="docutils literal notranslate"><span class="pre">ipynb</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-md">Editing <code class="docutils literal notranslate"><span class="pre">md</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#syncing-notebooks">Syncing notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-notebooks">Creating new notebooks</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-within-the-sphinx-build">Notebooks within the Sphinx build</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-building-on-readthedocs-io">Documentation building on <code class="docutils literal notranslate"><span class="pre">readthedocs.io</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

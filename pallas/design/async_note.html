@@ -1,0 +1,1411 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pallas Async Operations &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pallas/design/async_note';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pallas Changelog" href="../CHANGELOG.html" />
+    <link rel="prev" title="Pallas Design" href="design.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">Pallas: a JAX kernel language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">Pallas Design Notes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="design.html">Pallas Design</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pallas Design Notes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Pallas...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/pallas/design/async_note.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pallas Async Operations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-motivation">Background + Motivation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xla-async-decomposition">XLA Async Decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#async-ops-inside-kernels">Async ops inside kernels</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-implement-decomposed-pallas-async-operations-on-tpu">How do we implement decomposed Pallas async operations (on TPU)?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-doesnt-this-work">Why <em>doesn’t</em> this work?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scheduling">Scheduling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifetimes">Lifetimes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defensive-copies">Defensive copies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copies-with-downstream-ops">Copies with downstream ops</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-aliasing">Loop aliasing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-futures-across-loop-boundaries">Passing futures across loop boundaries</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revenge-of-the-state">Revenge of the State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pallas-async-operations">
+<span id="pallas-async"></span><h1>Pallas Async Operations<a class="headerlink" href="#pallas-async-operations" title="Link to this heading">#</a></h1>
+<section id="background-motivation">
+<h2>Background + Motivation<a class="headerlink" href="#background-motivation" title="Link to this heading">#</a></h2>
+<p>We’d like to expose APIs in Pallas to explicitly overlap computation and communication <em>across multiple kernels</em>.</p>
+<section id="xla-async-decomposition">
+<h3>XLA Async Decomposition<a class="headerlink" href="#xla-async-decomposition" title="Link to this heading">#</a></h3>
+<p>As motivation, consider the following JAX pseudocode:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>In this function, we could perform the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> at the same time as the <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>. This is an optimization XLA does automatically by:</p>
+<ol class="arabic simple">
+<li><p>decomposing <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> into a <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> and <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code> op, which are connected via a future.</p></li>
+<li><p>scheduling the <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> between the <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> and <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code>,</p></li>
+</ol>
+<p>resulting in the following program:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># happens at the same time as ppermute</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+</section>
+<section id="async-ops-inside-kernels">
+<h3>Async ops inside kernels<a class="headerlink" href="#async-ops-inside-kernels" title="Link to this heading">#</a></h3>
+<p>Now imagine we aren’t using XLA’s <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> but have our own custom Pallas <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ppermute_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">):</span>
+  <span class="n">right_neighbor</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="n">descriptor</span> <span class="o">=</span> <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_remote_copy</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">device_id</span><span class="o">=</span><span class="n">right_neighbor</span><span class="p">)</span>
+  <span class="n">descriptor</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+  <span class="n">descriptor</span><span class="o">.</span><span class="n">wait_send</span><span class="p">()</span>
+  <span class="n">descriptor</span><span class="o">.</span><span class="n">wait_recv</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ppermute</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span><span class="n">ppermute_kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="o">...</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Currently, we cannot decompose <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> into a <code class="docutils literal notranslate"><span class="pre">start/done</span></code> pair as XLA does, so instead we explicitly <strong>fuse</strong> the <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> into the kernel.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_one</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">z_ref</span><span class="p">):</span>
+  <span class="n">z_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">ppermute_add_one_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">z_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">):</span>
+  <span class="n">right_neighbor</span> <span class="o">=</span> <span class="o">...</span>
+  <span class="n">descriptor</span> <span class="o">=</span> <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_remote_copy</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">device_id</span><span class="o">=</span><span class="n">right_neighbor</span><span class="p">)</span>
+  <span class="n">descriptor</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+  <span class="c1"># Explicitly schedule inner kernel between start/wait</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">emit_pipeline</span><span class="p">(</span><span class="n">add_one</span><span class="p">)(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">z_ref</span><span class="p">)</span>
+
+  <span class="n">descriptor</span><span class="o">.</span><span class="n">wait_send</span><span class="p">()</span>
+  <span class="n">descriptor</span><span class="o">.</span><span class="n">wait_recv</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ppermute_and_add_one</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span><span class="n">ppermute_add_one_kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="o">...</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>The goal is to enable writing separate kernels for starting the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> and waiting on it to complete, so that we can use a regular old <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> in between (or whatever compute we want). This makes the code more readable, maintainable, and less bug-prone.</p>
+</section>
+</section>
+<section id="how-do-we-implement-decomposed-pallas-async-operations-on-tpu">
+<h2>How do we implement decomposed Pallas async operations (on TPU)?<a class="headerlink" href="#how-do-we-implement-decomposed-pallas-async-operations-on-tpu" title="Link to this heading">#</a></h2>
+<p>The main thing to figure out when implementing decomposed async operations in Pallas is what the <code class="docutils literal notranslate"><span class="pre">future</span></code> that is passed between them contains. Specifically, it must contain some important state about the operation happening in the background.</p>
+<p>If we look at the Pallas code, we can see that we need a “descriptor” to both start and wait on a remote copy. Can we plumb this descriptor out of the Pallas kernel, and then pass it into another one? Well kinda. The underlying TPU hardware tracks async op progress via a pair of semaphores: <code class="docutils literal notranslate"><span class="pre">send_sem</span></code> enables us to wait on when a device is done sending data to its neighbor and <code class="docutils literal notranslate"><span class="pre">recv_sem</span></code> tracks the data transfer sent to a device from their neighbor. If we imagine writing a start kernel and a done kernel, all we’d need to pass from the start to the done would be the semaphores and some information about how much to wait on those semaphores.</p>
+<p>We can do this via extending Pallas to support returning semaphores from kernels.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ppermute_start_kernel</span><span class="p">(</span>
+    <span class="n">in_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">out_ref</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">,</span>
+<span class="p">):</span>
+  <span class="n">axis_size</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span>
+  <span class="n">left_neighbor</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="n">axis_name</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">axis_size</span><span class="p">,</span> <span class="n">axis_size</span>
+  <span class="p">)</span>
+  <span class="n">right_neighbor</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="n">axis_name</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis_size</span><span class="p">)</span>
+  <span class="n">barrier_sem</span> <span class="o">=</span> <span class="n">pltpu</span><span class="o">.</span><span class="n">get_barrier_semaphore</span><span class="p">()</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">semaphore_signal</span><span class="p">(</span><span class="n">barrier_sem</span><span class="p">,</span> <span class="n">device_id</span><span class="o">=</span><span class="n">left_neighbor</span><span class="p">)</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">semaphore_wait</span><span class="p">(</span><span class="n">barrier_sem</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_remote_copy</span><span class="p">(</span>
+      <span class="n">in_ref</span><span class="p">,</span> <span class="n">out_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">device_id</span><span class="o">=</span><span class="n">right_neighbor</span>
+  <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Semaphore</span><span class="p">,</span> <span class="n">Semaphore</span><span class="p">,</span> <span class="n">Array</span><span class="p">]:</span>
+  <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+      <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">ppermute_start_kernel</span><span class="p">,</span> <span class="n">axis_name</span><span class="o">=</span><span class="n">axis_name</span><span class="p">),</span>
+      <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span>
+          <span class="n">pltpu</span><span class="o">.</span><span class="n">SemaphoreType</span><span class="o">.</span><span class="n">DMA</span><span class="p">(()),</span>
+          <span class="n">pltpu</span><span class="o">.</span><span class="n">SemaphoreType</span><span class="o">.</span><span class="n">DMA</span><span class="p">(()),</span>
+          <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span>
+              <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+              <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+          <span class="p">),</span>
+      <span class="p">),</span>
+      <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+      <span class="p">],</span>
+      <span class="n">out_specs</span><span class="o">=</span><span class="p">(</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+      <span class="p">),</span>
+  <span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p>Note that something subtle is happening here. Pallas is telling XLA that it would like some outputs to be semaphores (a.k.a. sync flags) and XLA will treat them as “reserved” (e.g. while they are alive in the XLA program, those sync flags cannot be allocated by other kernels). They behave similarly to barrier semaphores, which are reserved semaphores managed by XLA.</p>
+<p>Another thing to notice is that we return the output buffer <code class="docutils literal notranslate"><span class="pre">out</span></code> from the start kernel <em>while it’s being actively copied into</em>.</p>
+<p>Now we write the <code class="docutils literal notranslate"><span class="pre">done</span></code> kernel that performs the blocking operation. We pass <code class="docutils literal notranslate"><span class="pre">out</span></code> into the kernel to compute the shape needed to block on the semaphore.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ppermute_done_kernel</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_copy</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_copy</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ppermute_done</span><span class="p">(</span><span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">-&gt;</span><span class="n">Array</span><span class="p">:</span>
+  <span class="n">out</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+      <span class="n">ppermute_done_kernel</span><span class="p">,</span>
+      <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span>
+          <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span>
+              <span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+              <span class="n">dtype</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+          <span class="p">),</span>
+      <span class="p">),</span>
+      <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+      <span class="p">],</span>
+      <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+      <span class="n">input_output_aliases</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+  <span class="p">)(</span><span class="n">out</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p>Note: we i/o alias the output buffer here to guarantee that the consumers are downstream of the <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code>.</p>
+<p>We now can implement the decomposed collective permute.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># happens at the same time as ppermute</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p><em><strong>OR CAN WE?</strong></em></p>
+</section>
+<section id="why-doesnt-this-work">
+<h2>Why <em>doesn’t</em> this work?<a class="headerlink" href="#why-doesnt-this-work" title="Link to this heading">#</a></h2>
+<p>There are three remaining issues with this, each of which exists outside of Pallas to some degree. Here they are at a high level.</p>
+<ol class="arabic simple">
+<li><p>Scheduling - just because we write <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code>, then <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>, then <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code> doesn’t guarantee that they will happen in that order. XLA is responsible for scheduling, so when we write JAX programs, we are setting up data dependencies that XLA will respect but XLA will not respect the specific order of operations written in JAX.</p></li>
+<li><p>Lifetimes - XLA assumes that once a value is out of scope in the dependency graph, its memory can be freed for use by other values. If we have an op that asynchronously copies x -&gt; y, we need to ensure that x is alive until the copy is complete, otherwise we will be copying from garbage memory.</p></li>
+<li><p>Defensive copies - XLA reserves the right to create copies of values. We need to make sure we don’t introduce unnecessary copies to a) avoid unnecessary runtime overhead and b) ensure correctness.</p></li>
+</ol>
+<p>We will go over these issues one by one and suggest fixes.</p>
+<section id="scheduling">
+<h3>Scheduling<a class="headerlink" href="#scheduling" title="Link to this heading">#</a></h3>
+<p>How do we explicitly force ops to happen in a particular order in JAX? Note that this is not a Pallas specific problem, and if we had async ops implemented using an alternative method, we’d still run into this.</p>
+<p>One way is to introduce an optimization barrier into the XLA program. The optimization barrier will prevent XLA moving ops around it.</p>
+<p>Here’s our original code:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>XLA could choose to execute <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> in any of three places:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+
+<span class="c1"># OR</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+
+<span class="c1"># OR</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>To force the <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> to happen between the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> ops, we can use <code class="docutils literal notranslate"><span class="pre">optimization_barrier</span></code>, which is semantically the identity function (i.e. <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x</span></code>) but introduces an explicit data dependency between values. Specifically, if we make the <code class="docutils literal notranslate"><span class="pre">x</span></code> that is used in <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> dependent on the <code class="docutils literal notranslate"><span class="pre">fut</span></code> returned by <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code>, it must happen after <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code>.</p>
+<p>We also introduce a dependency that forces the output value <code class="docutils literal notranslate"><span class="pre">y</span></code> to depend on <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">fut</span> <span class="o">=</span> <span class="n">optimization_barrier</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">fut</span><span class="p">))</span>  <span class="c1"># x now depends on fut</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">z</span><span class="p">,</span> <span class="n">fut</span> <span class="o">=</span> <span class="n">optimization_barrier</span><span class="p">((</span><span class="n">z</span><span class="p">,</span> <span class="n">fut</span><span class="p">))</span> <span class="c1"># fut now depends on z</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">optimization_barrier</span></code> is a good enough hammer for us to explicitly write out schedules.</p>
+</section>
+<section id="lifetimes">
+<h3>Lifetimes<a class="headerlink" href="#lifetimes" title="Link to this heading">#</a></h3>
+<p>Let’s look at our original code again and assume the ops are happening in the correct order.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>Let’s look at which point in the program XLA believes it is okay to free the buffer for <code class="docutils literal notranslate"><span class="pre">x</span></code>. It would be the point after which <code class="docutils literal notranslate"><span class="pre">x</span></code> is no longer used, specifically after <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="c1"># XLA can free x here!</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>If XLA frees <code class="docutils literal notranslate"><span class="pre">x</span></code> after <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> has completed, we run into a very bad problem. The <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> could still be actively copying <code class="docutils literal notranslate"><span class="pre">x</span></code> to the neighbor after <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> which means if <code class="docutils literal notranslate"><span class="pre">x</span></code> is freed, the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> will be reading from garbage memory!</p>
+<p>How do we extend <code class="docutils literal notranslate"><span class="pre">x</span></code>’s lifetime to the <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code>? Well we can introduce a data dependency! We need to modify our kernels a little bit to make this happen.</p>
+<p>First, we rewrite <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> to return <code class="docutils literal notranslate"><span class="pre">x</span></code>, aliasing it through the kernel.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ppermute_start_kernel</span><span class="p">(</span>
+    <span class="n">in_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">out_ref</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">,</span>
+<span class="p">):</span>
+  <span class="n">axis_size</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span>
+  <span class="n">left_neighbor</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span>
+      <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="n">axis_name</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">axis_size</span><span class="p">,</span> <span class="n">axis_size</span>
+  <span class="p">)</span>
+  <span class="n">right_neighbor</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="n">axis_name</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis_size</span><span class="p">)</span>
+  <span class="n">barrier_sem</span> <span class="o">=</span> <span class="n">pltpu</span><span class="o">.</span><span class="n">get_barrier_semaphore</span><span class="p">()</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">semaphore_signal</span><span class="p">(</span><span class="n">barrier_sem</span><span class="p">,</span> <span class="n">device_id</span><span class="o">=</span><span class="n">left_neighbor</span><span class="p">)</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">semaphore_wait</span><span class="p">(</span><span class="n">barrier_sem</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_remote_copy</span><span class="p">(</span>
+      <span class="n">in_ref</span><span class="p">,</span> <span class="n">out_ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">device_id</span><span class="o">=</span><span class="n">right_neighbor</span>
+  <span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Semaphore</span><span class="p">,</span> <span class="n">Semaphore</span><span class="p">,</span> <span class="n">Array</span><span class="p">,</span> <span class="n">Array</span><span class="p">]:</span>
+  <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+      <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">ppermute_start_kernel</span><span class="p">,</span> <span class="n">axis_name</span><span class="o">=</span><span class="n">axis_name</span><span class="p">),</span>
+      <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span>
+          <span class="n">pltpu</span><span class="o">.</span><span class="n">SemaphoreType</span><span class="o">.</span><span class="n">DMA</span><span class="p">(()),</span>
+          <span class="n">pltpu</span><span class="o">.</span><span class="n">SemaphoreType</span><span class="o">.</span><span class="n">DMA</span><span class="p">(()),</span>
+          <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span>
+              <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+              <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+          <span class="p">),</span>
+	   <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span>
+              <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+              <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+          <span class="p">),</span>
+      <span class="p">),</span>
+      <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+      <span class="p">],</span>
+      <span class="n">out_specs</span><span class="o">=</span><span class="p">(</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+      <span class="p">),</span>
+      <span class="n">input_output_aliases</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+  <span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p>We then have <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code> take in <code class="docutils literal notranslate"><span class="pre">x</span></code> and do nothing with it.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ppermute_done_kernel</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_copy</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">make_async_copy</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ppermute_done</span><span class="p">(</span><span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">-&gt;</span><span class="n">Array</span><span class="p">:</span>
+  <span class="n">out</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+      <span class="n">ppermute_done_kernel</span><span class="p">,</span>
+      <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span>
+          <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span>
+              <span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+              <span class="n">dtype</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+          <span class="p">),</span>
+      <span class="p">),</span>
+      <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+          <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">SEMAPHORE</span><span class="p">),</span>
+      <span class="p">],</span>
+      <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">ANY</span><span class="p">),</span>
+      <span class="n">input_output_aliases</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+  <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">out</span>
+
+</pre></div>
+</div>
+<p>Now when we write</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span> <span class="p">,</span><span class="n">out</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>XLA can no longer free <code class="docutils literal notranslate"><span class="pre">x</span></code> because it is an input to <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code>! This means that <code class="docutils literal notranslate"><span class="pre">x</span></code>’s lifetime is tied to the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> and this code is now correct.</p>
+</section>
+<section id="defensive-copies">
+<h3>Defensive copies<a class="headerlink" href="#defensive-copies" title="Link to this heading">#</a></h3>
+<p>XLA, in its buffer assignment pass, analyzes which buffers are aliased to each other and inserts copies whenever an operation that aliases one of its inputs is not the final consumer of that input.</p>
+<section id="background">
+<h4>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h4>
+<p>Here’s a simple example. Let’s say we have an op <code class="docutils literal notranslate"><span class="pre">add_one_inplace</span></code> which takes in an array and adds one, but promises to do it in-place.</p>
+<p>The following code would be legal.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">add_one_inplace</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>However, if <code class="docutils literal notranslate"><span class="pre">x</span></code> had a separate consumer as well, the program may not execute correctly.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">add_one_inplace</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="c1"># another x consumer!</span>
+</pre></div>
+</div>
+<p>This is because <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">2</span></code> operates on the original <code class="docutils literal notranslate"><span class="pre">x</span></code> but <code class="docutils literal notranslate"><span class="pre">add_one_inplace</span></code> clobbers the value in <code class="docutils literal notranslate"><span class="pre">x</span></code>. <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">2</span></code> needs to make sure to read the original values of <code class="docutils literal notranslate"><span class="pre">x</span></code>, not the ones after we’ve incremented it by 1. XLA notices this and inserts a <code class="docutils literal notranslate"><span class="pre">copy</span></code> op (which is semantically the identity but the input and output buffers will be different).</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x2</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">add_one_inplace</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>This pass in XLA ensures correctness in the presence of ops that perform in-place updates by forcing them to effectively be out-of-place with <code class="docutils literal notranslate"><span class="pre">copy</span></code> ops.</p>
+</section>
+<section id="copies-with-downstream-ops">
+<h4>Copies with downstream ops<a class="headerlink" href="#copies-with-downstream-ops" title="Link to this heading">#</a></h4>
+<p>Let’s revisit our example where we add 1 while <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>ing.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>If we unpack the future into its components, we’ll see the the aliasing patterns:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>We know that <code class="docutils literal notranslate"><span class="pre">x</span></code> is left unchanged by <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> (that is, <code class="docutils literal notranslate"><span class="pre">x</span></code> is identical to <code class="docutils literal notranslate"><span class="pre">x2</span></code>), but XLA does not. In fact, it looks like our <code class="docutils literal notranslate"><span class="pre">add_one_inplace</span></code> example to XLA, where it conservatively assumes that <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> mutated <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">x2</span></code> is the new aliased result. Therefore, when we do <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>, we run into a consumer of the original buffer. XLA therefore introduces a copy!</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x2</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>This copy is unnecessary because we know that <code class="docutils literal notranslate"><span class="pre">x2</span></code> is unchanged from <code class="docutils literal notranslate"><span class="pre">x</span></code>. In order to remove this copy, we’d need some mechanism to inform XLA we are just forwarding a value. However, in the absence of that we can rewrite our program a bit to explicitly use <code class="docutils literal notranslate"><span class="pre">x2</span></code> instead of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>Now, XLA doesn’t see a separate consumer of <code class="docutils literal notranslate"><span class="pre">x</span></code> so no more copy is introduced. However, this comes at a major downside in that it forces us to unpack the future coming from <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code>. It couples the lifetime problem to the copying problem.</p>
+</section>
+<section id="loop-aliasing">
+<h4>Loop aliasing<a class="headerlink" href="#loop-aliasing" title="Link to this heading">#</a></h4>
+<p>Let’s consider a slightly more advanced example. Let’s implement a function that uses a <code class="docutils literal notranslate"><span class="pre">while_loop</span></code> with <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> to send values around a ring.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+  <span class="k">return</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>One implementation detail of <code class="docutils literal notranslate"><span class="pre">fori_loop</span></code> is that the inputs and outputs buffers are automatically aliased to each other. Note that we are setting up some additional aliasing in the <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> and <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code> ops. Let’s run our own “buffer assignment” by coloring each of the values in the program to determine how many unique buffers we need.</p>
+<p>First, we’ll unpack the <code class="docutils literal notranslate"><span class="pre">fut</span></code> tuple that has the aliased <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> buffers.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+  <span class="k">return</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s now color each of the values according to the unique buffer they are assigned. We have the input/output aliasing coming from <code class="docutils literal notranslate"><span class="pre">fori_loop</span></code>, the <code class="docutils literal notranslate"><span class="pre">x</span></code> aliasing coming from <code class="docutils literal notranslate"><span class="pre">ppermute_start</span></code> and the <code class="docutils literal notranslate"><span class="pre">y</span></code> aliasing coming from <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">y</span>
+  <span class="k">return</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you run the alias analysis, you’ll find that all of the buffers have been colored the same! Intuitively, this is problematic because if we are doing a loop of <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>s, we can’t write into the same buffer we are sending into. We generally need an extra (i.e. a “double”) buffer to receive, and then usually we will switch the send/recv buffers on the next iteration. What XLA will do in practice is that it will observe the buffer reuse and defensively insert a copy.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">y</span>
+  <span class="k">return</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This copy means <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are no longer aliased to each other and the program will be correct. However, do we need this copy? How do we introduce a double buffer to avoid expensive copies each iteration? The answer is unrolling!</p>
+<p>We’ll manually unroll our code.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">))</span>
+    
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">y</span>
+  <span class="k">return</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now if we were to run the same alias analysis, we’ll find that the buffers all no longer alias to each other and that we won’t need to insert defensive copies to be correct.</p>
+<p>Therefore, the simple solution to removing these copies is to use <code class="docutils literal notranslate"><span class="pre">fori_loop</span></code> with <code class="docutils literal notranslate"><span class="pre">unroll</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+  <span class="k">return</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">unroll</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That’s sufficient to implement this loop without extra copies!</p>
+</section>
+<section id="passing-futures-across-loop-boundaries">
+<h4>Passing futures across loop boundaries<a class="headerlink" href="#passing-futures-across-loop-boundaries" title="Link to this heading">#</a></h4>
+<p>Let’s now look at an even more advanced example. We’ll implement the same program as before but stagger the loop, where we begin the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> in a prologue before the loop, and wait on the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> at the beginning of the loop.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fut</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fut</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">fut</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, rather than passing a value <code class="docutils literal notranslate"><span class="pre">x</span></code> from one loop to another we are passing a future value.</p>
+<p>Let’s unpack the future again to see what’s happening.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fut</span><span class="p">):</span>
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">fut</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+  <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>So we’re explicitly threading the semaphores, the input buffer, and the target output buffer as a loop carry. What happens if we run alias analysis now? Well, we’ll run into the same aliasing issue as in the previous section where <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> will be aliased to each other. XLA will introduce a copy.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fut</span><span class="p">):</span>
+    <span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">fut</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+  <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">ppermute_done</span><span class="p">((</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In this case, we inserted a copy on <code class="docutils literal notranslate"><span class="pre">out</span></code>. However, this is a really bad scenario because <code class="docutils literal notranslate"><span class="pre">out</span></code> is being actively copied into! Even if we insert a copy on <code class="docutils literal notranslate"><span class="pre">x</span></code>, we will also run into issues because then <code class="docutils literal notranslate"><span class="pre">x</span></code>’s lifetime will not extend to the <code class="docutils literal notranslate"><span class="pre">ppermute_done</span></code>. This is very very bad! We will not only get copies, but we will also get incorrect results!</p>
+<p>The solution, as we observed before, is to avoid the copies by avoiding aliasing all the buffers via unrolling. So, if we do:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fut</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fut</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">unroll</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>our program should now be correct.</p>
+</section>
+</section>
+<section id="putting-it-all-together">
+<h3>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Link to this heading">#</a></h3>
+<p>So we’ve come up with some rules of thumb:</p>
+<ol class="arabic simple">
+<li><p>If we have operations dependent on the input value to the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>, unpack the future to use the aliased value instead of the original value.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">unroll</span> <span class="pre">&gt;=</span> <span class="pre">2</span></code> when doing <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>s in a loop body.</p></li>
+</ol>
+<p>Let’s combine everything into one function that does <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>s in a loop and accumulates the result.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">out</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">x</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">carry</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">,</span> <span class="n">fut</span> <span class="o">=</span> <span class="n">carry</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">sems</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span> <span class="o">=</span> <span class="n">ppermute_start</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">fut</span>
+  <span class="n">out</span><span class="p">,</span> <span class="n">fut</span> <span class="o">=</span> <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">fut</span><span class="p">),</span> <span class="n">unroll</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">ppermute_done</span><span class="p">(</span><span class="n">fut</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that in this example, we don’t need <code class="docutils literal notranslate"><span class="pre">optimization_barrier</span></code>s because the loop boundary acts as a scheduling barrier, splitting up the <code class="docutils literal notranslate"><span class="pre">start</span></code>s and <code class="docutils literal notranslate"><span class="pre">done</span></code>s.</p>
+<p>That’s it, we are done! This will be the official API for doing async ops in Pallas. Thank you everyone! Mission accomplished!</p>
+<p><em><strong>OR IS IT?</strong></em></p>
+</section>
+</section>
+<section id="revenge-of-the-state">
+<h2>Revenge of the State<a class="headerlink" href="#revenge-of-the-state" title="Link to this heading">#</a></h2>
+<p>While it seems we have worked around copies and incorrectness issues by using some clever tricks, we are still in an awkward position. This API is powerful, but has many many footguns and caveats. There are likely far many more edge cases we will need to deal with that  even require deep knowledge of XLA to predict or understand. Should we release an API like this? Or is there an alternative?</p>
+<p>Well, the answer may have been in front of us this whole time.</p>
+<p>Let’s run through this whole exercise one more time, <em>except</em>, let’s write the stateful version. This means each of our custom async ops now operate on <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s instead of values.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ppermute_start_stateful</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Semaphore</span><span class="p">,</span> <span class="n">Semaphore</span><span class="p">]:</span>
+  <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">ppermute_done_stateful</span><span class="p">(</span><span class="n">send_sem</span><span class="p">,</span> <span class="n">recv_sem</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>Let’s assume we can implement these in Pallas and see what our new programs will look like. Let’s start with a basic collective permute:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x_ref</span> <span class="o">=</span> <span class="n">make_ref</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y_ref</span> <span class="o">=</span> <span class="n">make_ref</span><span class="p">(</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start_stateful</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+  <span class="n">ppermute_done_stateful</span><span class="p">(</span><span class="o">*</span><span class="n">fut</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>It’s a little bit more verbose than our original value-based version, but it has a few key differences. The first is that we create an “empty” <code class="docutils literal notranslate"><span class="pre">Ref</span></code> to receive the result of the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>, unlike the value-based version, which creates a value for us. One neat thing is that the lifetime of <code class="docutils literal notranslate"><span class="pre">x_ref</span></code> is clear here: it lives until <code class="docutils literal notranslate"><span class="pre">ppermute_done_stateful</span></code>. We don’t need to “sneak” the <code class="docutils literal notranslate"><span class="pre">x</span></code> value into the op like we did before.</p>
+<p>Another difference becomes more clear when we try adding an op between the <code class="docutils literal notranslate"><span class="pre">start/done</span></code>.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x_ref</span> <span class="o">=</span> <span class="n">make_ref</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y_ref</span> <span class="o">=</span> <span class="n">make_ref</span><span class="p">(</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+  <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start_stateful</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+  <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="n">ppermute_done_stateful</span><span class="p">(</span><span class="o">*</span><span class="n">fut</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">y_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Before, we ran into scheduling ambiguity, where XLA could re-order the add w.r.t. the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>. With stateful semantics, we actually add in an ordering constraint! <code class="docutils literal notranslate"><span class="pre">x_ref[...]</span> <span class="pre">+=</span> <span class="pre">1</span></code> mutates <code class="docutils literal notranslate"><span class="pre">x_ref</span></code> so it can’t be moved wrt to <code class="docutils literal notranslate"><span class="pre">ppermute_done_stateful</span></code>. JAX can inject these scheduling constraints as part of the lowering to HLO.</p>
+<p>The final key difference is evident when we try our loop examples.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">x_ref</span> <span class="o">=</span> <span class="n">make_ref</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y_ref</span> <span class="o">=</span> <span class="n">make_ref</span><span class="p">(</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+  <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start_stateful</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+    <span class="n">ppermute_done_stateful</span><span class="p">(</span><span class="o">*</span><span class="n">fut</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+    <span class="c1"># Now switch to y_ref -&gt; x_ref</span>
+    <span class="n">fut</span> <span class="o">=</span> <span class="n">ppermute_start_stateful</span><span class="p">(</span><span class="n">y_ref</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">)</span>
+    <span class="n">ppermute_done_stateful</span><span class="p">(</span><span class="o">*</span><span class="n">fut</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">)</span>
+  <span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Because of the requirement that we have a separate buffer ready to receive the <code class="docutils literal notranslate"><span class="pre">ppermute</span></code>, we were forced to write our code in such a way that unrolls it! There is no way to write the version in XLA that requires copying because that would involve a <code class="docutils literal notranslate"><span class="pre">ppermute</span></code> that sends from a <code class="docutils literal notranslate"><span class="pre">Ref</span></code> into itself, which doesn’t really make sense.</p>
+<p>To handle this without the manual unrolling, we’d create a scratch buffer with a leading <code class="docutils literal notranslate"><span class="pre">2</span></code> dimension that acts as the send/recv target across iterations, switching each one. This is the same pattern we use internally in Pallas kernels when writing manually overlapped kernels.</p>
+<p>The realization here is that being stateful forces us to deal with a lot of the issues that pop up with value semantics earlier on. We define them away!</p>
+<ol class="arabic simple">
+<li><p>Scheduling - stateful ops that have <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s as inputs force an ordering of our program. Note that this will schedule operations on the same <code class="docutils literal notranslate"><span class="pre">Ref</span></code> wrt to each other. We might also need an <code class="docutils literal notranslate"><span class="pre">opt_barrier_stateful</span></code> to enforce more ordering constraints.</p></li>
+<li><p>Lifetimes - <code class="docutils literal notranslate"><span class="pre">Ref</span></code> lifetimes can be scoped via <code class="docutils literal notranslate"><span class="pre">run_state</span></code> or could be inputs to stateful ops.</p></li>
+<li><p>Defensive copies - Using <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s forces us to handle buffer assignment “manually” and the lowering can ensure the aliasing works out to avoid any copies.</p></li>
+</ol>
+<p>Another important fundamental limitation is that we eventually stage out an HLO program where the live buffers and semaphores are represented as array value types. XLA does not provide guarantees about buffer lifetimes or which memory spaces they live in for these intermediate values. <em>Therefore, it is possible XLA can copy array values even if they are actively being copied into by Pallas kernels.</em> This is easy to verify in HLO but it is a sharp edge of using custom calls to represent asynchronous operations in HLO.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>We’ve gone over some tricky challenges when it comes to async ops in Pallas and JAX. <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s seem like a promising way of representing these ops that circumvents some of the issues that come up with value semantics. However, a downside is that it puts stateful JAX front and center, which we haven’t done yet outside of Pallas. It’s worth thinking whether we should educate users about stateful ops, or provide a more dangerous API. We also don’t know if everything we want to do is expressible via <code class="docutils literal notranslate"><span class="pre">Ref</span></code>s as well. We should also brainstorm alternatives to state to flesh out the design space. For example, what if XLA offered a first-class futures API that respected lifetimes, and it could automatically do things like double buffer loops with futures in them? That might be a viable alternative but the tradeoff would be giving more control to the compiler vs explicit control from the user.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="design.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pallas Design</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../CHANGELOG.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pallas Changelog</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-motivation">Background + Motivation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xla-async-decomposition">XLA Async Decomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#async-ops-inside-kernels">Async ops inside kernels</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-implement-decomposed-pallas-async-operations-on-tpu">How do we implement decomposed Pallas async operations (on TPU)?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-doesnt-this-work">Why <em>doesn’t</em> this work?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scheduling">Scheduling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lifetimes">Lifetimes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defensive-copies">Defensive copies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copies-with-downstream-ops">Copies with downstream ops</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-aliasing">Loop aliasing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-futures-across-loop-boundaries">Passing futures across loop boundaries</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revenge-of-the-state">Revenge of the State</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

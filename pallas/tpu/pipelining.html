@@ -1,0 +1,969 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TPU Pipelining &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pallas/tpu/pipelining';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Matrix Multiplication" href="matmul.html" />
+    <link rel="prev" title="Writing TPU kernels with Pallas" href="details.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">Pallas: a JAX kernel language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">Pallas TPU</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pallas TPU</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">TPU Pipelining</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/pallas/tpu/pipelining.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TPU Pipelining</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-and-its-memory-spaces">TPU and its memory spaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-specific-pipelining-features">TPU-specific Pipelining Features</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-memory-spaces">TPU Memory Spaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tpus-in-megacore-configuration">TPUs in Megacore configuration</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tpu-pipelining">
+<span id="pallas-tpu-pipelining"></span><h1>TPU Pipelining<a class="headerlink" href="#tpu-pipelining" title="Link to this heading">#</a></h1>
+<!--* freshness: { reviewed: '2024-04-08' } *--><p>This guide serves as a reference for TPU-specific pipelining concerns.
+We’ll review the memory hierarchy and compute units on TPUs, and TPU-specific features of the pipelining API. For a more general-purpose overview of pipelining, see the <a class="reference internal" href="../pipelining.html#pallas-software-pipelining"><span class="std std-ref">Software Pipelining</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Imports</span>
+
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">pallas</span> <span class="k">as</span> <span class="n">pl</span>
+<span class="kn">from</span> <span class="nn">jax.experimental.pallas</span> <span class="kn">import</span> <span class="n">tpu</span> <span class="k">as</span> <span class="n">pltpu</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="tpu-and-its-memory-spaces">
+<span id="id1"></span><h2>TPU and its memory spaces<a class="headerlink" href="#tpu-and-its-memory-spaces" title="Link to this heading">#</a></h2>
+<p>A TPU and its TensorCore consist of memory spaces (where arrays can reside),
+registers (which temporarily store scalar and array values) and compute units
+(that do computation with values in registers).
+Below is a diagram of a TPU in which <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are arrays that live in
+high-bandwidth memory (HBM):</p>
+<p><img alt="TPU Memory Space Cartoon.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdoAAAG+CAYAAAA0gcXjAABHoklEQVR4Xu29B3wcV37n6RmHs8f2Opztj+/Oe+vb/axvbnZnfZ658633vDeazyiMpKHiQAC70d1ohEYiQQAMYCZIijlniBSjSIliFCWCpCgmMecgMYqSmMQgJkUmMbx7/wIKKrwCmigSBaC7v9/P5/sBqup1oau66v3wXr2q/p3fgVYjmp19r3379gobNhQKfWvus3iEQ+Fr5jrwe6PRnLvmPoPGiYRD1819iN+bk511x9xnAG0OOVj3nzyDjSj7x9xn8ZDyxz74HBvR6/5MdWR/qa93YyNyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUI2vhyPEFCQNDG1+uJTNDG1+v+THUeJmjvfrlLnTu+Wp08VK2ufb7Ftbw5fXvBRPWrX/1K3by8zbXMTzmeICFozqAt7lSq0tLT1eRZs13LbGcvXGyVyckvqJvXpUdPFcnJUbs++sRVvu+gwSoYDqstHx62prv17qN69Kt0lRN3Hf/UWvf0N950LXtQvZ7IXoJ26uTX1EtpGWrHpiOuZeKalTus5W/MWeZa9rBu3XBQHdh50jXfb73uz1TnQYN24dwx6sUXnrXCT3zyySfU6GE9fQtCghYgDs0ZtKFIlnWyhbKirmW2BR1LrDIvpr1UN2/F5q3q8ccfV4NGja5XdsnqterRRx9VY1+ZVjevsKREdSzv7FqvKEEt6548a45r2YPq9UT2ErQb1+yz3m/VxNmuZeLQQWOs/bJv+6euZQ+rtZ/Gz3TN91uv+zPVeZCgfXPOKOu8GTmku9q18XW1f+sCNWfaUH0sPaaGDuzqKt8cErQAcWjuoE0PBKwTbuXmba7lG/YesCoAKeMMWvHlkaOsUHl36w5res8nJ62WbDiarfZ9eqquXDIFrZgVzlGx3CLX/KMHLqjfvpimyjp1cy1rDgnaxOBBgjaQ8Vs1ZIA7UGe+Mtg6/74+t8m17GElaAHi0NxB27P/APXc88+rl0eMdC0fPaVKPfX006r/0GGuoJWQlG7fvMIia3rMlFfUo489pt7ZsKleuWQL2oljX7UqP7P7uPqt961tcXYbv7N4verUsYvVnRwMhNSgASMbbO3KawryO1jlMoMRNXLoBPXhnjPWsqULVqvePQZY686O5lm/vzl3ed1r167cqbp37aMy0gMq0D6k+vZ62epmdq5/YOVwtXj+KjVx3HTrfXQp7+l6D43pdX+mOg8StNJlPOzlbq7535zfpD47tqrevNtXd6g3Zo1U+XkhFWyfpjoURtWKJVPqlbnzxU6rlRzLrSkjZRe8Ntq6BmyXaShoj+17S/Xr1cl6TWYgTb1cWa5OH1lZb91jR/RSO9+fp+bNGK7/6cxQgyo711t+PzmeICFo9qCt7K8GDh+hnnvhhXotUbF9Zqa1XELYDFrxjXeqrZN1xIRJ6smnntKBPNxVJtmCdtv7h62gNbuPK/sMUb95up06uOcza1rC87FHH1OlJV3UK5PmqDEjpqjnnn3eCroPdp2qe93oEZOt9UlYyjr79x1i9RQUFZRYrWQ7hGU/SZjK7zOnvWm99q2Fa9Svf/1rFY3k6n8Apquxo15R7TMy1TPPPKs2rN5b9zeefeY5K4TlZ2WfwWrY4HGu7WpMr/sz1XmQoB01tId1DMyoGhS39SpB2aUsXx9nT6mJo/uqxa+PVX16dLSODelqtstJ+D315K/VhFF91LI3J1jTsv5xI3vXlTGD9siepfpYekJ16pBjrVfWl/7SC/qYbacufrq27nXtfvOUFbBpv33OCl1pdZvvM54cT5AQNHfQykAl6TaWk27+8hV1y95Zv9GaJ9ddJYgbClqxc/ceVjlZvuPocdfyZAtaMS+3sF738ZH956wQ69NzoDUtrdF27Z5RA/oNq/e69av3WOE7adyMummpACUkneVem7HY2i9vL15XN8/sOj5y4LzVVd2hqNT6+/Z8GTAlYS5Bbc+T99buN89Y/yQ4/05T9Lo/U50HCdrrF7eoAX3LrM9Ywq5XRQe1YeUMq/XqLCfhKNdtD+1aXG++BPVTT/3aGqksreBopL1a/fbUemWmTxmknnjicetv2etyBu3c6cNVSXG21Rq2X3P55DorsJ0hLkH7wvPPWMuc62+qHE+QEPgRtPJ7Vk6O6tKzV90yGT2crv/WvhOn4wZtn5cHWSesXJ+V67Tm8mQMWhl9LAG5c/NRa1q6d53BuPD1Fdb0lvUful4r13illSu/S2v26ad/ow7v+z4oRQnRVe9sqTfK2Axau6tafpp/Y8bU+db727XlI2tagrZ37T8BXvW6P1OdBwla2xMHq61WbTgz3fpsM9JfUHs2za9bXt4pT1V0LnS97quzG9XHB95xBbNTGWAl67S7gs2gbczigiw1YnBF3bQErbNl7FWOJ0gI/AraidNnql8/+aTVKpXAbPfss1aXsCxrLGiXrdtgVeiyjscef1yNnDTZVSYZg1YC7LHHHq/rPu7Vvb968YU0q6tXpqXFKtvVmHZruEdFPxXNynOtvyHNoJ31ak3FuW+H+5qvhLQsk58yLUHrpbvYqdf9meo8TNA6PbBtgSrIC1stSrvrtn36i2rKuEpXWdNLJ9aqSWP6qaL8iAq2/60VzgP7lVvHhNyjK2UaClppBffsVmwFfWEsYo14lrB3Xj+WoJ3taOF6leMJEgK/glbue5Vrg1Pnvq5eW/KWFaDr9+yzljUUtHt1GMttQZmRiPW7lJGgXrNjd71yJZ27qIIOHV1/W9x68Ih1sr/6+huuZQ+q1xP5QYJWlC5bCUy5JivXZoe8PLpumQSwdBFLi1YGJpnaLU0Z2BQJZ7vW3ZBm0M6ducSat2fbx66yK5bVdPu/V73NmiZoWw6vQXvvq126Nfp2gw+ouHJqvXUeLp0/3pqWAUpybdYs51TWI+Eo11Hlde8ue0UteWOcKivJjRu0Mrjpscceta7rymtE+V2ClaCFlMOvoBVLu3azRhF36tJV5Rd3qJvfUNCOrZpqVQJvrVlnTUtL+MXfpln33TrLDRwxUrV75hm1++MTrr9vD6ay19Ecej2RHzRoZUCSbP+rVa9b2yAPq7CXySAlZ9A5dY4IlhHMMpjJfBCFDJaaM2NRvdaqrM++tivKaGOZt/CNla6/Idd8n3jiibr1ErQth9egPbiz9nq8Dj5z2XdXtlvhJyOIZVpamzLK2CwnXc5b186xQvv9VTOt9UlXsrOMtFbjBa2EuDmCWNb3UtrzBC2kHn4G7dylb1vhId3Ar74+v26+GbTrdu+zRhnLrUHO9c1dusw6eZ1PeqreuNlaZ5+Bg6yWrz1/44GD1nVduUfXHO38MHo9kR80aCUEJcxkkFFmMFxv2eF9Z61bdYoLO9WNQhaXL63pap//2tvWtISuBK3ckmN3O4vDh4y3uqa3bThUN+/JXz9pjRh2/h3pdg4FI/VatZvWHlDPP/eC6t6tb908grbl8Bq0EmbZWQFrgJHzVhqZP23SQOt8Orr3LWve+hXTrWnnQCe5LivXbqW7V16zZc0cq4z8tMvIAKmcaM398o0FrbSASzvmWuuwXyctYSlD0ELK4WfQyrXZZ5973hqgs/PYx3XzzaDtUFZuldt66KhrndJVbC6zW7/Pv/iidb1WWs3SzSwtXbnOa67jYfR6Ij9o0IrlpRVWRTRu9FTXspXLNln7Me23L6meFZWqpENn9fjjT1j31TpDVQYuSTezjBSWrmQJT1nneGOdcvuPzA+HotatQjJPbuF5/vkXrRHOFV16W/fHSiBL+O7eerzutQRty+E1aEVpkUrLUUYFy8jfvj1LrHtZ5fOWsHWWldCT+RKucg1VHnYhj2vcu7lm0NTNS9tUJJSunn7qSeshGPK0KbkVx74NqLGglW5mmZYWs9y207k0Zq1HApighZSjOYNWnnEsrVjnvDmLl6oZ8xfUm/dm9Uo1ftqr1u+bPjikho2boBaufNe1PnHD3v3WcrM7WG4XkgdfyPOVpYtaBlpJq9Z8/cPq9UR+mKB9d/lWNXr4ZNfDK2ylxTr05TFWuHYp66FmTn2z3q04ttLF3L/vUNWxuMwaWPXWwvdcZaRlLPfjSjlpGdvzpTUr9892LuuuunbupaZMmFXvPl1RHlThvFXIi173Z6rzIEErSqtz0byx1gMjenQtsq6PSreyWU7ctHqWGj6owgpDGfR06vCKestlFLKMXu5anm+FsTxg4vNP16jZU4eoLz973yojD6eQaedIZWkFy21GvSo6WMvkPcnDMDa/N7uuzOszR1gjmM331FQ5niAhaM6gTUa9nsgPE7SpoNf9meo8aNCmihxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBAQtPH1eiITtPH1uj9THYI2vhxPkBCEI5EbcrBiwwaDwa/MfRaPYDDzK3Md+L3hcOSGuc+gcUKhzK/NfYjfGwmHrpv7DAAAAAAAAAAAAAAAAAAAAAASjHA4/MucnJxvhwwZMtxcBgAA4Dvt27e/Yo5QDAaDJ81yiYiEbDQavVFdXa3KysruduzY8d127dr9yCwHAADgGxKsV69erbOqquq6DqQ5ZrlEww7ZHTt2WNt14cIFNXbs2DtZWVkn9D8SPzHLAwAA+IIZtLFY7Lvs7OyeZrlEIxKJXNShetO5bXq77tS22E+Z5QEAAHzBDNrDhw+rkpKS67pFOC/Ru1nNbZNpswwAAICvSPgUFhbe3b59+3U7kKSbddiwYZd1y++IbhUWhEKhE+brEgGCFtoKFRUV3TMzMy/oY/AX5jIASHJ0y/VMeXn5KF0JXHWGrbhkyZITsVjsZqIGFEELrY30CuXl5S0pLS29vWzZsm/0P68y+JCwBUhF5ORvKGwTOaAIWmhNZNBdKBQ6PmrUqOvSSyTH4LZt274kbAFSmMbCNhEDSldw57TfOLcjGo1+J9uit/EzszxAc6OPv8/keMvNza07BuV3maeXMSAPIFUJh8M98/PzbyV60JZqOnXqdMtuSYhyq09WVtY1WhPQkjh7VhLxXAKAZkYH7edSGTgNBoNfmOUSAd2CfXPEiBFfEbLQmhC0AJC0yECUUCh0bMKECV8QstBaELQAkNTIgJRAIHCakIXWgqAFAADwEYIWAADARwhaAAAAHyFoAaBBdIXw41AoND0zFD4nlQP6aygUPh0IBMampaX9tflZQGIjny9BCwD1iObGCiOR6LUJry68tWrbSbXjo5vosyu3nlBDx756Te/3rzKj0f9mfiaQuBC0AFCPjuVds/Jihd+t3n7aFQbovwtW7FZZ0ZxbsVjxz8zPBhITghYA6sjOzv7T7Jy8W8vWHXYFALacsxetV7H8oquVlZU/ND8jSDwIWgCoo3f/Ea/2GzTWVfFjy9ulez/VpUe/cvMzgsSDoAWAOsq69Pp8/vIdrkpflGuIg0dWqfzCjq6BPNj85uQVqNy8gm/07y/Rsk1s5PMkaAHAIpqde2fDvkuukJ355hqVkxtTE6cvVgyOahnX7DyrZi1cr0rKKq5mhsLH09PT/7P5eUFiQNACQB2BYFBtP3ajXoX/xtvbdCu2g2JwVOs5a8G6G5mZoS8I28SEoAWAOqQScFbwmw9+qXJjhYrBUa3vrAVrvgkGM4/SjZx4ELQAUIcZtFPnVisGR7UdCzuUyReJv2R+btC2IWgBoA4zaLv3GaQaGxy1+dBXVhBLmdy8AtdgHmx+c2MFdwOZmR/z9KjEQj47ghYALKQScIZpdm5MNTQ4Sq7bSpdypW7tShCv2/O5qww2v7VPj7oXjkS/CofD/2J+ftC2CIVC0gOhcnJy7tlBm5uba4WtXnbOLA8AKYAZtA0NjpIRyDI4iuu2rac8PSqSlX2DsG3byHchRyKRT8aMGfPdhQsXrKDdvn37jczMzKvt+X5kgNTEDFpzWlpUcpsPI5BbXwlbadnqltHfmJ8jtB3atWv3o6KiouVlZWV333nnnZuELECKYwarOS0PrJB7ac1KH1vH4eNm3MwMhyeYnyO0Pfr37z8gHA5fJGQBUhwzWM3pmNxPu+OMq8LH1vHdbadUKJJ1wfwcAQCgjWIGqzkdDGaqbUevuSp8bB23H72uP5PgXfNzBABoEfLy8p6MxWL9iouL/0dzmY1e/kspk5ub+3e108UybarX9XxaWtofOF+r571klnOan5//K2d5Qc//sZ4/Qv9cp1+/Wf98W//sUlhY+Bdm2dbADNb7TWPrK5+J+TkCALQIOsSe0yptvrnMpjbsrtghqn8/XPuahvxEB+L/br9WTy9uoIzTId//Jat8V+3tWnfpv71e/zxWW/ZiQUHB/+ss3xqYQXq/aWx9CVoAaDU6duz4P+gA+0K7xlwm5OTk/Du97J62yp4XqwnaDd+Xsub9vrRoa9d1wDFfgvZzZ9nG0OUKJVB1a3aV3Xq20ev+hV52TntFh22rjiA1g/R+09j6ErQA0KroYJupA+x2NBp1PUlHz+8m4aeD77875rmC1kavq7eUt1u1TQ1aCU9d7hvt9srKyt8zlwvSmpV1a3uZy/S8n+rlj+hA/k/msubGDNL7TWPrS9ACQKuiQ+rx2gBzdR/reXu1J/WvP3DMixe07WVddhdvU4NWrsHK63Sg/1dzmRNd5v/R/r5j+me178fZHf2B9sfO1zUnZpDebxpbX4IWAFoVaUFKGMaM7mMJq9rgMq+jNhq0ev4w7d2ioqK/rZ1uUtDqMsubUs6JLv/72s+0J7RP63D/ex30v9W/X9DuM8s3F2aQ3m8aW1+CFgBaHR1ME2NG97GerozVtE7rfb9nrCZot0uw2erp/6BbpZ30z1vaOY6yErR3asPQ9KCj3Ic6JLfZ001Bt37/N3l/0l3tnK/nPa3tE3O0fJsTM0jvN42tL0ELAK2ODqV/ldCKObqP9e9Htfud5Wrnm121tvfkem9ZWdkfOcpK0N6Q+aax+gOsjuh5G+1pGz3vzZg7oK2Wd+1ArsvaU7pcu6ysrD80X+8HZpDebxpbX4K2YdLT0/8hLydnQXZWljzy0NpPKea9SDhyVv+cEQgE/r25fwCamx9IYNkhFqu59inh2dUsGKsJWgnhiFgbhtKyfLaBsk3qOpaQ1eWOm/N1K7mHEc5ntEccy3+hp0/WvtfvtHv1vIHx7gt+WOQENSvxeNPY+spnYn6OqU4oEHohHA7fnD1x6t19721W5/d9pC4e+DilPLXzoDq4fruaNeGVM8FA8LL+x+Nn5n4CaFZ0SA3X3q4dASy/3zVvs6ktV+8arf79z7TntbsqKyt/+H1JT0E7Vpe719Dfc6LLHI85glaQv6nD9b9J17X2rVhNV/Un8r6c5ZoLM0jvN42tL0FbH2nJhkPhm7tWbXCFT6r67vylF4PB4En5ggNzfwE0G7HaVqwOPf0jdlIeFmGWEWINDIbS0wF5rX5NkTG/SUErQVn7+inmMptYzROqpOVaF7S1A7nqXYvV6wjVbkemc35zYQbp/aax9SVo65Ofl79Et2TvOYNGWnbjhoxURfmFZvdqShgIBFRONPuODtvddCODr8RquoTlOqgEWq65XGgoaAUdbGv1/C+cD5RoatAKta3Ru3o9BeYyPe8/1r4vudfWCtracJYnSBUbZf9F3r9enuWc31zISWlW4vGmsfWVz8T8HFOZaCTrq72rN9WF7NqF76jsrKiaM2maSvVu5BkTqu5kBoOXCVvwjVjtSGPtzaysrD83lwuNBa08pCLW8KjjW9I6bsQ8u2xOTs5f6rJ7av/+dm0fHZrl+ud07TXtu9oZsdqgjdXc3rM/VjPYanBezZOpSrSfaq9o/8ped3NiBun9prH1JWjro0Pk3rm9x6yAkXCRkKUb+Xtfm/zqF5FQaK653wCaBR1W/yABqINrhLnMRgfYLLmmas4XaoNxndx6I9P69wENhGuDQSvIiGU9q2/s+wFOooTmMHnWsl7WRTvbLi9hGqsJYmnpStk7evlq85ak5sQM0vtNY+tL0NZH9ocdKtJdPHvi1HpBs+mtVWrEgMGqMJbv6mJNBaUbWf/zcS8zM3M2LVtIaqRFrQPzfzHnN0Z2dvb/rMP4d835zY2ciGYlHm8aW1/5TMzPMZWR/WGHqoSp3Y0s3aeD+/a3rtMunfW62p/i3cizJ71yTgftRcIWoIUJBINq+7Eb9Spxs1I3K3psXQna+jiDNhgIKulGPrfnqOpe3lVNGTnO+t0Mn1R1+viqT/X+mmHuQwDwkWh27p0N+y7Vq8TNSt2s6LF1JWjr4wxa+/e5U6arIf0GuoIm1T28YacKh8LnzX0IAD5S2rnnhfnLd9SrxM1K3azosXUlaOvTUNB2Ku5Y14WM3yut+8xg8I65DwHAR3pVDp/Wb9DYepW4WambFT22rgRtfRoKWh0mKXk9tinK4ChzHwKAj2RnZ/9pdk7ezWXrDtdV4malblb02LoStPVpKGid87C+Xo6f/Pz8/y8Wi72m3RWruU1xVkFBwT+b5WI1tyL2M9WvT5fnuBtl5YFArrK28l3czvJCXl7e/6mXTY7VvIcj2hXa7nIbpVkWoE1SXFIayo0V3Fq9/bS63+AobH29VJSpAEHrzaYeP7Hvn0NwWQfmqtpw+zJW81jYiFFWHhNr38Jo+qncaukoK18japZx2s+5bv3agXreXe1N7SbtUu3B2rKX7O8LB2jzZGfnFUQi0WtZ0RwVb3AUtr5NrShTBYLWm005fnSw/qMOsXvaec5vMKt9EM8H2q+dDwHS059IGNvTgtyeqEPymVhNOO9xlJWgPeUs2xi6XLfaQF3kfEqfkJub+9/1/HPay35+8QpAs6JPwB/n5OZfijc4ClvfplSUqQRB682mHD86IIsk4Bp6WI5e9oRetkkH60/seQ0FrY2e31/W5XjwT5OCtqio6N/qcje06/TkD8zlQl7NN55JEHc2Fv1A/72fSze0dDsbywBal1AoVNJ7wIhrzkrdrOixdW1KRZlKELTebMrxI9dWawOsg7msIe4TtNHaoP25TDc1aGufqifv4afmMie1QVoXxLGa7yOXR9c6u6MPaX/seBlA65GWlvYnoXDkyrJ1h+/ZlbpZ0WPr2pSKMpUgaL3ZlONHh9KPJDxjNddG5+iw/L/MMk6kbGNBq5dN1H5XWFj4F7XTTQra/JovdrlvOSfSza1fc0l7VFq7ukX797Xd159rd5rlAVqNQCDwbCQr5+q7O07fDQYz1faj112VPbaOMlBNfz53zc8slSFovdmUoBXk+7RjNQOP7FahBO8Q7f9qlq1d9r4Em62e/rG2Z6xm8NRkR1kJWvmmshMN6LyWezyvka83bQz9nv8P/Tr5trMuzvl6+kmZ1xKPtQVoMvpkjGZmhr6IRLNvv7fzM1eFj62jDFQLhSNfm59XKkPQerOpQWsj11ZrA1Nu8ZHAvaVbmx2dZWKNjzqWQJ0Qc3zPdqwmaL/V65hpKmUd5aT79z172iav5itI6wW0nldd+xppiV/VntLzng+FQn9svh6gTaFPyB/r1tNHE15deNes8LF1lIFq2Tmx7eZnlcoQtN70GrROdID9TLtVKwOlHnHMl6D9UBsRdcgtlDI6PB9zvNwu26SuY72OHbrcIXO+npcbq3/vrfztffby2gFS9jVaGTl9QDss5tNXjQI8NPqk/Nes7NyrWw5/46r0seXtVTnsC/3PT5MGqKQKBK03mxK08pAJ+U5uc75Qe4vPdzpEJ9nzJOyc12jl1h8974J2e2Vl5Q/t+bVlmxS0sZoHVNwtKir6W3OZgx/oMmecQWsj15X1/GLtglhN9/Un8oAesxxAmyAYDM2vHDzuS7PSx5b1rXWHbmdmhi7JgDXzM0plCFpvNiVo5dqoDqarOjD/0Fz2OzXhJvfGzrJnmEEr6HWEYjWtynzn/KYGbX7NU6nk9RPNZTb6b/ymtkxd0Orff6TD/feMcllSTv98yTkfoM3Qrl27H4VC4f39Bo39gpZt6/jutlM3wpHoJRmoZn4+qQ5B682mBK2EowSTDrux5jI7QJ3XaRsK2tr5G7RXotHoXzvmNSloBb3Od2I1I58LzWV63k9jNQ+s+DpWG7T65y9r31uBs6ye/lXt/HTnfIA2hYSttGyzcvKuTpm97PK720+7wgCb35VbT1wbMvrVvYFg8IquIKPm5wIErVebErTS3auDaaWEk3aLDqj+OmD71g5Ekuue+5wDjWKNBK2e9xO97Ja27jtwYzVBe0NazQ0ZczzeUbqp9Tp2174PGYw1KFZzXXZ+rOaRjItjNc9itoI2LS3tD2I1T66SZcNlXXqdXfTPs7GaUP4ze90AbRZ9kv6rdrau+E/LCYv+mpGRIV/UPVXLzfaNIPvJGSLOn+hW9o25DxtCh9Lva7vG6o8o/kwH3wgzsHSYvS7B5pxnUxt062K1twXpn0PMcG0saAXpvtbzemmPO9+HLttXbteJ1YyInmaX17//lfaVWE33tpSV0F2m/Q/O9QIAQBMJBAL3zu09Vhcizp/otqlB60SueUpr0Zzf0tQG64/M+Y3hfE4zAAA8IFmRyBf2l7wTtPf3QYIWAABSGB20c2dMqLohIRIM1HzhO0HbuAQtALQIwWDwJ5mZmWfD4fAvzWWQWKSnp/9DZjD47a6VG+4UxvLVgTVbCNo4ErQA4DsygjorK+tEVVXVd9Fo9AZhm/jo8HhOwrZ3t+63l856naCNI0ELAL5TXFy8csyYMbevXr2qduzYoQjb5EBatvl5sXVF+QVKh67VhWyGTKorg8Zk8Ji57wAAmo2XX355SFlZ2d0LFy4oCVrCNvkoyi/cnh2NKnuAFH6v7JPsrChfSgEA/hEMBk9pv7BDVoxEIjekO037sVkeEo+0tLQ/ywxmXuhT0eOOGTSp7uyJU1Wn4g6uB0sAADQrEqrOoOWaVfLxzDPP/Gk0K3qxatQ4upBr3bVqg8qKRO5kZmY2+GUBAADNBkGbGkjLtlNxyYGyjp3uLZvzptr/3uaUC13Z3n16u+dMmqaiWVl3u3funGvuJwCAZoegTS2G9x9cWNmjzyflJZ1uBQOBe7WXCVLG/NzYrZ5dK3aVd+z4j+a+AQDwBal8CFoAAAAfyM7OvpiTk3PXGbR62mrlyEApszwAAAB4QAfqL7Kysq7JLT0SsnKbz8iRI78JhULH5GlRZnkAAADwiB221dXVqrS09JZu5S6Up0WZ5QAAAOABkbCNRqNflmvMZQAAAAAAAAAAAAAAAAAAAAAA0MwEg8F/06VLl3LtvqKioku5ubk3zae+ILYV9fF5q0OHDlcrKiqODh48eMSgQYP+J/OYBgBoE+hK6690uK6MRCJ3Kisr1fz589X69evVrl271LFjxxDbpHJ8rlu3zjpeBwwYoLKysu5169btY/37L8xjHACg1SgvL6/Izs6+PX78eLV//35XZYaYKB46dEjNnj1bWrr39HG9Rx7ybx7vyUzv3r1fyMzM/IwHoQC0EXQl9LtlZWWLiouL727ZssVVaSEmqgcPHlTyj2NeXt7XhYWFPzeP/WSkV69eL+p/MO5MmjTpS3nqGA9EAWgDlJaWvtmjR497Bw4ccFVUiMng4sWLVTQavRkIBJI6bO2QtR/zOWLEiK+zs7MXmOUAoAXRLdmuuiV7h5DFZPftt9+WsP0qGAz+nXkeJANmyNrP05ZHffIUMoBWIi0t7a91xfPd1q1bXZUSYjI6c+bMe/qY32ueC8mA/gfijIzAlnEWdtDq3+/IPN2SP2mWB4AWQP+n+9a4ceNclRFisnr06FFVUlLylQ6f9ub5kCxIsPJ9xwBtABmFGQ6Hb+/bt89VGSEms2vXrlWZmZnnKisrf2ieF8kAQQvQRigsLMzt37//PbMSQkwFCwoKzusQSsp7bAlagDZCSUnJFrm536yAEFPBqqqqczqEJpnnRTJA0AK0EfLz88/JE5/MCggxFVyzZs0tHUJbzfMiGSBoAdoI2dnZ1/bs2eOqgBBTQXlkYzAY/Mw8L5IBghagjRAIBO4dOXLEVQEhpoJy7Otz4I55XiQDBC1AG0FOQLPyQUwlkzWECFqANgJBi6lusoYQQQvQRiBoMdVN1hAiaAHaCAQtprrJFkIZGRnHZZuMRzDelnl62admeQDwGYIWU91kC9qXX365fSNfKnC7oqKiu1keAHyGoMVUN9mCVjDDdtSoUdfz8vKWmOUAoAUgaDHVTcagFeywnTx58rVQKHScL34HaCUIWkx1kzVoBQnbzMzMs8Fg8CfmMgBoIQhaTHWTOWgBoA1A0GKqS9ACgK8QtJjqErQA4CsELaa6BC0A+ApBi6kuQQsAvkLQYqpL0AKArxC0mOoStADgKwQtproPG7Q9evT4lwEDBqwvKyv7Ji8v766sDxs3Ozv7bqdOnb7t2bPnDv3zRXN/AiQdcuCbFQ9iKinngHleNIVQKPQ3JSUl2woLC+/OmzdP7dmzR50+fbru+cLYsGfPnlUffPCBeuutt1S3bt3u5ObmntSfwY/N/QuQNBC0mOo+SNBmZGT8W90yuzxr1ix16dIlV5hg012xYoUKh8Pf6H36T+Z+BkgKCFpMdb0GbWVl5Q9zcnKOLly48K4ZGvhgbtiw4Z4O289DodAfm/sbIOEhaDHV9Rq0gUAg1L1792/NsMCHc+jQoV8Fg8Fu5v4GSHgIWkx1vQZtLBbbumbNGldQ4MO5bds2lZube9Dc3wAJD0GLqa7XoI1Go1+dOHHCFRT4cJ45c0au1V439zdAwkPQYqrrNWiDweDdy5cvu4ICH84rV66oQCBwz9zfAAkPQYuprteglfJmSGDz6PWzAEgICFpMdb1W7gStf3r9LAASAoIWU12vlTtB659ePwuAhICgxVTXa+VO0Pqn188CICEgaDHV9Vq5E7T+6fWzAEgICFpMdb1W7gStf3r9LAASAoIWU12vlTtB659ePwuAhICgxVTXa+VO0Pqn188CICEgaDHV9Vq5E7T+6fWzAEgICFpMdb1W7s0dtBs3blTjxo1TvXr1Uv3791dTp05Vhw4dcpWT+eLu3btdy5zK97xKudWrV9fNk+20X9+Q06dPrysr36sr81599VUV7wlY8t279us/+eQT1/IH0etnAZAQELSY6nqt3JsraOWRg1VVVSoWi8kXoKvx48dbgduhQwdVWFiotm7dWq+8zJOyY8eOda3L9ty5c6qoqMgqJwFoz5dwlnmNKX/TLisBbc/fvn2762/Yvv3223Xl5IvczeUPotfPAiAhIGgbdv369er99993zXcqFeHatWvV0aNH1ZEjR6zfxQ8//NBV1ummTZuscrt27aqbt3fv3rrXN6TzvcjrZJ60hMx1Oz148GDd6+X9mcuxRq+Ve3MF7ebNm62QeuONN+q1HE+ePKkqKipUly5d6s2XoJUQlZ/yAH5zfeKqVausdUq5hoJWjiPzNaZ20Mo6pkyZ4lpuW1lZWRfqBC1AHAjahh0xYoRVoR04cMC1TJRwLS8vt7r7ZFqC0v7vXipOs7ythF9xcbFVbubMmXXzpbvPbGU47d69e11ZeZ1dEUoFZ/4N2wULFtS9Xt6fuRxr9Fq5N1fQynEin420Qs1l69atU6NGjVKnTp2qmyfHo7Rm5TXLly93vUYcPHiw1f0sQf2wQSt/S47V8+fPu8pI17aUkVa4/CRoAeJA0DbsO++8Y1Ugixcvdi0TpZUoy+fOnWtNO4O2d+/ervK2S5curSvXUNDOmDFDLVmyxGV1dXVdWTtoxUWLFrn+hq20OOxyBG3jeq3cmyto7a5X6ZkwlzWkBK0cbwMGDLA0lx8/flzl5+dbx678E/iwQbthwwbrp/Nar+1rr71mhfB7771H0ALcD4K2YeU/drluNWTIENcyceLEiValJhWYTNtB26NHD+undCubrxFffvllq0xBQUGDQStd1uZrTOV18rdlPVLhmstFubYmZaTFTdDG12vl3lxBK4OJJBDlWJCBR9LbYZZxKkE7Z84c658u+UzlvTuXSw+G9HJIt3JpaelDB+1HH31k/dM4bNiwesulO7tz585q8uTJdWFM0ALEgaBt3DFjxliVm9k9K9c7S0pK6oWcHbQSgvKaadOmudYnlZ2En7QG5OfDBK2UlUpX1rNz505XGWkZy/uYPXs2QXsfvVbuzRW0ooTZyJEjrc9I7Nmzp5o/f369LmNbO2g/++wzK1Cl69leJgOr5PKCDKaS6caCVoJdupVNna1qZ9DKcSnH2Kefflq3fNu2bdZyOe4IWoAmQNA27sqVK61KxOw+tgecLFy4sG6eHbTz5s2zKk6p0OQ6rvN1UklK60Vam3Yo28seJGh37NhhrW/WrFn1lsvflYE0cp359ddfJ2jvo9fKvTmD1lZCTS4D2N390puyZs2aemXsoJXf5dqojFSWgJVpuSVHXicD7WS6saAdOnSo69YeUY4Pu6wzaCXw5RiTc8BePmnSJNW1a1frbxO0AE2AoG1cu+Vqdh831NK1g1auoa1YscL6XSos5+ukxSGDVaSLsLGglQpUgtPU2Wq1g1bWI+9NKlzn35EKWpbL+5DgJ2jj67Vy9yNone7fv1/169fPCjg5Bu35zqCVSxPyucoIdJmWsJR/7i5dumRNNxa0XruOZVoGZcklCPndvn3Ibk0TtABNgKCNr1yLdYaqfe1WWovOcs6glRZlWVmZFcj2cqngZPmyZcviBm1jyqATu6wzaO0BNc6WsIS1VLRSSRO099dr5d5cQSuhZYeZqcyXz83ZknQGrVwntQc8Xbx4UXXs2LFumdicQWsfu3IO2L05st9kGUEL0AQI2vjarUO7+1huq5BpGdnpLOcMWpmWSk5GZUoYyrQMHJHWsQR1vKD10nUs65H1SSUr3XmyTObJPwLyIASZJmjvr9fKvbmCVq7Hinb3r1MJYfnc5HqtPc8ZtKIca/LZ28Eo92/by5ozaCXIZX3SsyI9MjKgzy5L0AI0AYI2vvb9snb3sbRkpXKTgHOWM4N2y5Yt1rTcznP48GErZKV1LMuaM2hlWkJW1i9/x759SK7VyTKC9v56rdybK2jt+5ydrVZzmTzUwp5nBq183lJGjkfpana+vjmDVpRjTv6Bk4FRMnbBnk/QAjQBgvb+SutQKjm5HibXp6Rr1ixjBq3Yp08f679/uxVsh2hzB61d2Ukre9CgQfXu4yVo76/Xyr25glZainJ8yOcjg5QkXKUFK//UyTwZVOds7ZpBK8rIdykrlxCc8xsLWjkm5W+ZynVYu2xDQStBKvPk+D979mzdfIIWoAkQtPfXrkykQpKfzuultg0FrVSa0gLo27evdQuFPb+5g1aUe2rl78jfcz6ZiqC9v14r9+YKWlHCVgJWBsrJ5yRKd7L0TMgyZ9nhw4e7ngglT5CS41LuyXXOl/EBckzZ03KsmOHaWNDK7Tsy78SJE/XWKT0yMordOU/++ZSyjV1r9qrXzwIgISBom6bcziCVYEO37YgNBa2MHpVWiMyXlog9P17QenkylDNo5e/KPBmpum/fvrr5BO399Vq5N2fQYn29fhYACQFB2zTla8QksKQ7zlwmNhS0olzTlVam8wsE4gVtYzb0rGNn0Mp9lBKy8hQf598naO+v18qdoPVPr58FQEJA0DZNCTUJS2e4OZVbaWS5+c09cu3KfkyjrbSIpazzCwvs9TemBKldVl4n88yWtfwd8ylW8n6kLN/e07heK3eC1j+9fhYACQFBi6mu18qdoPVPr58FQEJA0GKq67VyJ2j90+tnAZAQBAKBe3QrYqoqx74+B+6Y50U8CFr/JGghKYlGo9ed1/8QU0l5hnQwGDxrnhfxIGj9k6CFpKSgoOC83CdqVkCIqeCaNWtu68p9i3lexIOg9U+CFpKS0tLSXXLDvFkBIaaC06dPv6wr96nmeREP3QK+Jw/1N0MCH07Zp7Jvzf0NkPB06tSpszy2z6yAEFPBDh06nA8EAk+Y50U8srOzvzWfmoQPr+zTnJyca+b+Bkh4QqHQ30Sj0TuN3R+KmKxu375dZWZmfvnII4/8nnlexKOkpOSoXG4xgwIfTtmn+h//j8z9DZAUdOzYcdfs2bNdFRFiMtuvX7+v9D+avc3z4X6UlZX1lSd+mUGBD6fs065duw409zdAUhAOh/9LXl7ebfOpRojJqnxDjT7uP8/KyvpD83y4Hzqc/1ifL9flmdJmWOCDKftS79Mbsm/N/Q2QNBQVFa3Q/1HeNSskxGRTbmfLzc29FgwGf2OeB02le/fuMX3O3Dl58qQrNNCbsg+Li4vv9unTp8jczwBJhfwnmZOTc37RokWuigkxWZSxCKWlpdd0S7bSPAe80q1bt3EStrRsH1zZdxKyPXv2nGTuX4CkJD09/T9HIpGvly5des+soBATXWnJ6pD9NhqNvm4e+w9KRUVFnm4d35AvaZfBPJ9++qkrTLC+so9kX8k+k33Xq1evAnO/AiQ17du3/0+6dXtp5syZ181vh0FMVN977z25deRb3ZLtZx7zD0u7du1+1KVLl34lJSUf6eD4Vh66gI0r+0j2VdeuXfvLvjP3J0BKEAgE/l0wGNxcVFR0fu3atbfMSgsxUZRbePr163clHA6ff5hrsgAAvpCRkRHSldNnuiVwcty4cftXrVp1SldcX5uVGWJbcceOHUofp+eqqqo+KS4uPqX/afxSt6J6PcjoYgCAFkNXVL/QVmk3aU+aXUGIbciT+h/Ezfrn9PT09Me9PowCAAAAAAAAAAAAACDJKSkpeSoQCJwOBoM/MZcBAADAQyAhm5OT89348eM/10F7hFtpAAAAmgk7ZGUUtjwkYtiwYZfD4fA8sxwAAAB4xAxZ8cKFC0rPv56fn8/zhAEAAB6GzMzMz+RWp+zs7Dt20MrvMi8YDJ42ywMAJC3hcPiXuuXxTZ8+ffqaywAeFglWO2jld3M5AEBSIyEbjUZvVFdXy4Pu7xQUFCxjsAo0JwQtAKQsdsja19Dk+tno0aNv6vkfcxsGNBcELQCkLDpkr2RnZ992fnVYTk7O3dpraKfM8gAPAkELACmNsxKkIgQ/IGgBIKUhaMFvCFoASGkIWvAbghYAUhqCFvyGoAWAlIagBb8haAEgpSFowW8IWgBIaQha8BuCFgBSGoIW/IagBYCUhqAFvyFoASClIWjBbwhaAEhpCFrwG4IWAFIaghb8hqAFgJSGoAW/IWgBIKUhaMFvCFoASGkIWvAbghYAUhqCFvyGoAWAlIagBb8haAEgpSFowS/C4fBZOZ5ycnLu2cdXbm6udYzpZefN8gAASQlBC34RDAZ/kpWVdWLs2LF3Lly4YB1fO3bs+C4UCn2hj7NfmOUBAJISghb8pF27dj/q2LHju2VlZXeXL19+m5AFgJSDoIWWYMiQIcN1yF4iZAEgpdAV3zntt86gzcrKuiVhGwgETpvlAQAAwANlmtLS0lv29bPaa2gyUOUbWh4AAADNQHZ29oIRI0Z8TcgCAAD4gAxWCYVCxyZNmvQlIQsAAOADchtGIBA4RcgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkJT8IBAI/j0QiZcXFxfOKior25uTkXNZ+kZmZeUee/YqIiBgKhe5INuTl5V3SebGnpKRkXlZWVqdgMPhTM1hSHnkijg7XcEFBweZwOHxT76xrkydPvrt48WK1adMmdfToUXX8+HF18eLFet9ugoiIqevnn39uZYNkxMaNG9WiRYvUhAkT7unQvaGz5LpuqL2vG23BtLS0PzJzJ2WQ/zr0fyJL9H8lNwYOHHh99erV6syZM66diYiI6MWTJ0+qlStXqv79+9+SBpxuyC3TreD/YuZQ0pKRkfFPubm5G3ST/8aCBQvuEa6IiOiXp06dslq7umF3Iz8/f7sO3H81cylpCAQCf5GdnT1Te33ZsmVWs9/cIYiIiH4olx+rq6uVDttruqH3djAY/DszpxKa9PT0x7Oysr6cNGnSzbNnz7p2ACIiYksojbzXXnvtdiQSuabDtqOZVwlHWlra7+oW7KhYLHZ9586drg1GRERsDY8dO6bKy8u/1oG7UmfVX5r5lRDISC8dsmv69u17/fTp066NREREbE0vXbqkpk6dej0UCp1LT0//BzPH2jRZWVl/rkN2/6hRo27Khpgbh4iI2Fasrq6+pcP2aiAQ+Gczz9ok0pLNzc39oKqq6rsrV664NggREbGtuXHjxjs6bL8KBoP/1cy1NoVck83JyVmnW7K3CFlEREwkN2/efDscDl/RYfsTM9/aDLFYbEK/fv3oLkZExIR01apV8mSp87rh+LdmxrU6mZmZv87Pz7/JwCdERExkZ86ceVln2kbppTWzrtWofRjFN9zCg4iIia5c+uzWrdvZjIyMQWbetRrFxcVvVlVV3TPfLCIiYiIqvbO1I5F/bmZei6Ob1z/Ly8v7jic+ISJiMrl8+fKLOmj3tnoXcklJyT55drH5BhERERPd0tLST9q3b59vZl+LkZ2d/Y8FBQW3H/YLAvbu3avGjBmjiouLXV/umwjq/3hUp06d1KxZs1RTW/apuM2IiInm7t27v9b13Wndqv0DMwNbhPLy8vcXLFjgemNN9fLly2ratGmqqLBQLZ89W51ct059u3t3wvnNrl3q6MqVqmrECFVYUKD27dvn2lbXNhcVqvlLX1c7j25Rxy5+mHAe/fwDtXH/WjV64khVUBh/mxERE9mysrIj7VujVavT/U+i0ejth/k+WQmcyh491KUtW1zhlahuW7hQxXJzGw0e2eY+fXurD07tcYVXorp8w1sqNy9X7dm3x7W9iIiJ7rZt2z7XQfuhmYO+U1FRUT548GDXG2qq0nVarFuyyRSythK20rI1u1Rlm4uKi5IqZG0lbPML813bjIiYDIbD4TPp6en/t5mFvtKlS5ejq1evdr2Zpjp61Ci1fPp0V0gli1XDhqlZM2fW3+bRo9UbS+a5QipZHDVxhJo+c7rrs0ZETHQnTZq0W7dqx5tZ6BuVlZU/jEajd06dOuV6M01VWnynEvSabFM8tmqV6tSxY/1t1i34nccS85psU9x0YJ3qWNLB9VkjIia6H3744VUdtB+beegb3bt3f6S8vPyhHlCRGQyqr3ftcgVUsvjVzp3WNtbb5sxMdeTCB66AShaPnD+ggpn1txkRMVnUdfjFjIyMvzcz0RcGDx48dfLkya434UW5RcQMp2RTttHcZjOckk1zmxERk8WuXbvu0nVcxMxEX+jfv/+2xYsXu96EFwna5NTcZkTEZHHKlCkStMPNTPSFioqKc5s2bXK9CS8StMmpuc2IiMniqlWrDus67m0zE32huLj4xtGjR11vwosEbXJqbjMiYrJYOyDqkJmJvhCLxe6cPHnS9Sa8SNAmp+Y2IyImizr37uk67qyZib4QiUTunT9/3vUmvEjQJqfmNiMiJouSe7qO+8bMRF+QB8rLF+Oab8KLBG1yam4zImKyKLmn67i7Zib6QnNUpgRtcmpuMyJiMil1nJmJvtAclSlBm5ya24yImEwStA7Pb9yohnbvrsb162d9jZ1z2fRhw9QQvezM+vWu1zWn5n7yO2j3fLJd9R7QQ02dO7mBZdusZbMXTXcta07NbUZETCYJWsNXhw5Vv/rVr9ScUaPq5q2eOdOaN3HAAFf55tbcT34HrRjNjajftHtaffjZ3nrzp82bYm33ktULXK9pTs1tRkRMJglaQ2nJluXnq18/8YQ6XF2tzm7YoJ5/5hlVnJ1tPYvYLN/cmvupJYL21ddfqfnnYvGMevPzCnPVi2kv+P6sZXObERGTSYK2AaV7+LfPPafyQiHVq6REPdeunTq5dq2rnB+a+6klgvbAqV3qqaefUgUd8+vmbTm4QT366KNq+PghrvLNrbnNiIjJJEHbiFvnz7daeRI2G+bOdS33S3M/tUTQin0H9ba2VQJWpsdWjbKmN3+wzlW2uTW3GRExmSRoG/GNsWOtoBXfHD/etdwvzf3UUkH73vYV1raOnDjMmg6E2qv84jxXOT80txkRMZkkaBtw9+LF6onHH7dGGfcpLbV+l3lmOT8091NLBa0og6LS0n+rVm+rtkJ35oJXXWX80NxmRMRkkqA1lMFPL73wggqmpalLW7aoC5s2qXQ9nfb8877f2iOa+6klg9YeFCWDoOSa7Qend7vK+KG5zYiIySRB6/Dr2hHHjz36aL0WrFyvleuVHXNzfR95bO6nlgxae1CUhG3vgT1dy/3S3GZExGSSoHV4pLpaTRsyRK2cPt21bPnUqdayD99+27WsOTX3U0sGrVjcqdD6p2LNzpWuZX5pbjMiYjJJ0LYxzf3UkkEr12YlZMu6dXIt81NzmxERk0mCto1p7ie/g3bvp9vV5g/Xq9eWzFTPv/i8eva5Z9S2wxtd5fzU3GZExGSSoG1jmvvJ76Cdv3xu3W1MWTkRtWHve64yfmtuMyJiMknQtjHN/eR30MqXCizfsFRt3L/WtaylNLcZETGZTKigzQwGrZHBZjgli7JtmZmZ9bdZT/v9rOHWVLYtMzPo+qwREZPFhArawoICdWrdOldAJYuybbKN9ba5sFDtPLbZFVDJomxbQWG+67NGREwWEypoR48apZY3cOtNsviO3jbZxnrbPHq0emPJXFdAJYtzl8xSI0ePcH3WiIjJYkIF7d69e1WxbuHJE5vMkEp0ZZtk22QbzW0uKi5SB061zFOaWlLZpsLiAtc2IyImkwkVtOK0adNUZffuSRW2si2VPXpY22Zur73Nvfv2SqqwlW3p2beHmjptqmt7ERGTyYQL2suXL1vBU1RQoKpnzFAnE/iarbz36pkzrW2RbZJtM7fXuc2FRYXq9aWvqR1HE/earbz3eUvn6G2RbZ7a6DYjIiaLCRe0ttLdOGbMGFVcVGRtRCIq7122oaldp3XbXFzsWleiKN3gXrYZETHRlbrPzERfkD9k/nFERMRkl6BFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghYREdFHCVpEREQfJWgRERF9lKBFRET0UYIWERHRRwlaREREHyVoERERfZSgRURE9FGCFhER0UcJWkRERB8laBEREX2UoEVERPRRghaxjbp06VI1fPhw13zb7du3q6FDh6qPP/64bt78+fOteU7Hjh2rZs2apfbt2+dax5QpU6wyq1atci1zumTJEqvca6+95lqGiPElaBHbqFOnTlVFRUWu+barV69WsVhMHTp0qG7euHHjrNc4g3bAgAGqU6dOVtlFixbVW0fPnj2t+fLTXL/txYsXVWlpqVUuXvAjYsMStIht1AcN2s6dO7vKSlhOnDhRFRQUqE8//bRuvgRshw4drPXs37/f9Tpx48aN1nIpR9AiepegRWyjNmfQirt377bKb926tW6eBK10LUuIzpgxw/UaUZZXVFSowYMHE7SIDyBBi9hGbe6g3bRpk1X+gw8+qJsnQTthwgRVVVVldQ9Ly9f5mjNnzqjCwkL15ptvWl3QBC2id1ssaAOBgLpy5YrrDSBiwz5o0JaXl6tPPvmkntL9K6FqBqXMk9fs2rXLWpeUcy5fvny5ys/PV8ePH1eVlZWu1yNifCX3dNDeNTPRFyKRyL3z58+73gQiNqwErYTf/TSD1lxuK6H62Wef1fsbdtBKZSDdw/K7c7m0YocMGWL9TtAieldyTzc0vzYz0Rf0iX7n5MmTrjeBiA0rQSuDl+RnQ8o104aCVkYYv/fee/WU23O6dOmi+vfvb534dnk7aOX3BQsWWC1oO4yPHj1qrV9azjJN0CJ698SJE/d0i/YzMxN9obi4+IacuOabQMSGfdCu48au0X700UdWcEug2vOcQSvdw9JNXF1dbU3PmzdP6fO2LpgJWkTvHjx48KoO2kNmJvpCRUXFORmMYb4JRGzY5g5aUYJ15MiR9aad3cXSTTxw4ECrK1lawPJAC3sZQYvo3VWrVh3OyMh4x8xEX+jfv/+2xYsXu94EIjZscwethGdZWZkaP3583TwzaO11yiAo+blz5866ZQQtonf1P6u7AoHACDMTfWHw4MFTJ0+e7HoTiNiwzRm0ly9ftm7RkfJr1qypm28GrXQTyz21cktP165d690pQNAiereiomJn+/bto2Ym+oI+oX9ZXl5+z3wTiNiwDxq0ch1WRhA7tR/BKPfLOsPTDFpRykjZN954o958ghbRu6FQ6Lxu0f5HMxN9QZ+kP4xGo3dOnTrleiOI6FaCdNq0aa75tnv37rXC+MSJE3XzpMvXHJ0szpkzp143sK0MeJLXOOfJAy3kNTI4yjlfBlG99dZbrnUgYsMePnz4im7NnjTz0Fe6dOly1L5VABERMZnV/7BKt/FUMwt9pXv37p3l3j/zzSAiIiab0Wj044yMjEfMLPSVtLS0P9F/+LY8P9V8Q4iIiMni3r17L+jW7Cc6+n5gZqHvlJeXv++8YR4RETHZ7NGjx24dtD3MDGwRsrOz/7GgoOD2559/7npjiIiIie7Ro0e/DAQCl4LB4L8xM7DFKCkp2bds2TLXm0NEREx0e/XqtT8jI6O3mX0tSiQS+XleXt53Z8+edb1BRETERHXbtm1y3+zp7OzsPzWzr8UpLi5+s6qqigdYICJiUiiXRKPR6Bndmn3GzLxWQSf+X+jE/6ahm+gRERETzREjRhxr3779AjPvWpVwOPxkfn7+zdOnT7veMCIiYqK4YsWKc7oB+UlWVtafm1nX6sRisQn9+vW7eenSJdcbR0REbOvu27fvWjAYvKL9qZlxbYK0tLTfzc3NXT9q1KhbzoedIyIitnUPHjz4XTgcvqpD9jdmvrUpdNj+kQ7bD6qqqr4jbBERMRE8dOjQnUgkciUjIyPdzLU2ifRrZ2dn79ctW7qRERGxTbtly5abuiX7RcKErI20bHXYru3bt+91BkghImJbdNGiRd/okJWvwPtXM8cSArlmG41GR8disevc+oOIiG1F+T71Pn36XNEhuzcQCPx7M78SjvT09MezsrK+nDx58i2eIIWIiK3l5cuX1bJly25HIpFvgsHg4EceeeT3zMxKWGofajFTe12ejcwXESAiYkv6/vvvq06dOn2tG37b2uztO81BRkbGP+Xm5m7Iycm5sWDBgnt8ny0iIvrlhQsXVHV1terQocM3uqEnT3t6zsylpEX+m8jLy1sSDodvDhw48Prq1asVoYuIiA+rXKJct26dPEZRRhPf1FmzIRAI/NLMoZShXbt2P9I7IFxQULBZdkhJScm1yZMn3128eLHatGmTfBegOn78uLp48aJrZyIiYmoqmSDZcOzYMSsrlixZol555RVVWlp6PRQK3dKZsjsSiRSmpaX9pZk7qc4PdOj+XAduuW7mv15YWLg3JyfnsvaLzMzMO7rJrxARESUTJBtyc3OvFBcX79eZMT8rK6urzpB/ljtezHABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIav5/PEJoH3//LlQAAAAASUVORK5CYII=" /></p>
+<p>Let’s talk about the components of this diagram in more detail:</p>
+<ul class="simple">
+<li><p><strong>Memory spaces</strong>: A TPU has high-bandwidth memory (HBM) which is what we
+often think of as “device memory”.
+There is also vector memory (VMEM),
+a cache meant for storing vector and array values, and scalar memory (SMEM),
+a cache designed to store scalar values.</p></li>
+<li><p><strong>Registers</strong>: A TensorCore has two main types of registers: vector
+registers (VREGs) store array values, and scalar registers (SREGs) store
+scalar values.
+Values can be loaded into memory from their respective caches (VMEM for
+VREGs and SMEM for SREGs).</p></li>
+<li><p><strong>Compute units</strong>: A TensorCore has a scalar unit, vector unit (VPU) and
+matrix unit (MXU) that can do numerical computation. Each of these compute units can operate asynchronously, but this is managed by the TPU compiler and thus from the programmer’s perspective a TPU program is single-threaded.
+Compute units operate on values that live in SREGs and VREGs and output
+values into those registers as well.</p></li>
+</ul>
+</section>
+<section id="tpu-specific-pipelining-features">
+<h2>TPU-specific Pipelining Features<a class="headerlink" href="#tpu-specific-pipelining-features" title="Link to this heading">#</a></h2>
+<p>Pallas TPU supports the following platform-specific features.</p>
+<section id="tpu-memory-spaces">
+<h3>TPU Memory Spaces<a class="headerlink" href="#tpu-memory-spaces" title="Link to this heading">#</a></h3>
+<p>Pallas exposes all levels of the TPU memory hierarchy to users. The following table maps from Pallas TPU memory spaces to their standard memory types (DRAM/SRAM):</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pallas Enum</p></th>
+<th class="head"><p>TPU Memory Space</p></th>
+<th class="head"><p>Type (DRAM/SRAM)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pltpu.MemorySpace.ANY</span></code></p></td>
+<td><p>HBM (usually) or VMEM</p></td>
+<td><p>DRAM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pltpu.MemorySpace.VMEM</span></code></p></td>
+<td><p>VMEM</p></td>
+<td><p>SRAM</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pltpu.MemorySpace.SMEM</span></code></p></td>
+<td><p>SMEM</p></td>
+<td><p>SRAM</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pltpu.MemorySpace.SEMAPHORE</span></code></p></td>
+<td><p>Semaphore</p></td>
+<td><p>SRAM</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace.VMEM</span></code> denotes vector SRAM. It is the default memory space if nothing is specified.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace.SMEM</span></code> denotes scalar SRAM. Only scalar loads and stores can be performed to/from SMEM.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace.ANY</span></code> is a hint to the compiler that the memory space is unconstrained. In most cases, XLA will place this buffer in HBM. A buffer assigned to the <code class="docutils literal notranslate"><span class="pre">ANY</span></code> memory space cannot be dereferenced normally using array indexing syntax (e.g. <code class="docutils literal notranslate"><span class="pre">x[...]</span></code>). Instead, we must first copy the values into a VMEM or SMEM buffer using <code class="docutils literal notranslate"><span class="pre">pltpu.sync_copy</span></code> or <code class="docutils literal notranslate"><span class="pre">pltpu.async_copy</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MemorySpace.SEMAPHORE</span></code> is used to allocate semaphores for constructing barriers or tracking asynchronous operations. It is also possible to return semaphores from the kernel for building asynchronous kernels - this is an experimental feature; see <a class="reference internal" href="../design/async_note.html#pallas-async"><span class="std std-ref">Pallas Async Operations</span></a> for more details.</p></li>
+</ul>
+<p>Pipelining on TPUs is typically done between HBM (DRAM) to VMEM (Vector SRAM). The default behavior for <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> on TPU is that arguments to <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> are assumed to live in HBM, and inputs to the user kernel body are stored in VMEM.</p>
+<p>While not specific to pipelining, it is possible to gain manual control over the memory space of input and output buffers, you can specify the <code class="docutils literal notranslate"><span class="pre">memory_space</span></code> argument on a <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>. Note that pipelining is not allowed unless the <code class="docutils literal notranslate"><span class="pre">memory_space</span></code> is marked as <code class="docutils literal notranslate"><span class="pre">VMEM</span></code>. Memory spaces can also be used to specify scratch arguments to a kernel via the <code class="docutils literal notranslate"><span class="pre">scratch_shapes</span></code> argument on <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code>. Scratch buffers are persistent across kernel iterations and are useful for storing intermediate results such as partial accumulations and reductions. A scratch buffer must reside in <code class="docutils literal notranslate"><span class="pre">VMEM</span></code>, <code class="docutils literal notranslate"><span class="pre">SMEM</span></code>, or <code class="docutils literal notranslate"><span class="pre">SEMAPHORE</span></code>.</p>
+<p>As an example for using multiple manual memory space assignments in a kernel, the following program copies a slice of an HBM buffer <code class="docutils literal notranslate"><span class="pre">x_hbm_ref</span></code> into a scratch VMEM buffer <code class="docutils literal notranslate"><span class="pre">scratch_vmem_ref</span></code> before using it for arithmetic and storing the result into an output VMEM buffer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hbm_vmem_kernel</span><span class="p">(</span><span class="n">x_hbm_ref</span><span class="p">,</span> <span class="n">out_vmem_ref</span><span class="p">,</span> <span class="n">scratch_vmem_ref</span><span class="p">):</span>
+  <span class="n">pltpu</span><span class="o">.</span><span class="n">sync_copy</span><span class="p">(</span><span class="n">x_hbm_ref</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">scratch_vmem_ref</span><span class="p">)</span>
+  <span class="n">out_vmem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">scratch_vmem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span><span class="n">hbm_vmem_kernel</span><span class="p">,</span>
+  <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">memory_space</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">MemorySpace</span><span class="o">.</span><span class="n">ANY</span><span class="p">)],</span>
+  <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">(</span><span class="n">pltpu</span><span class="o">.</span><span class="n">MemorySpace</span><span class="o">.</span><span class="n">VMEM</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),)</span>
+<span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tpus-in-megacore-configuration">
+<span id="pallas-tpu-megacore"></span><h3>TPUs in Megacore configuration<a class="headerlink" href="#tpus-in-megacore-configuration" title="Link to this heading">#</a></h3>
+<p>Some TPU chips have two TensorCores but appear as one device to JAX users.
+This is called “megacore”.
+The separate TensorCores have their own separate VMEM, VREGs, SMEM, SREGs
+and compute units but <em>share HBM</em>.</p>
+<p><img alt="TPU Memory Space Cartoon (Megacore).png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcYAAAFdCAYAAACZw82pAABFq0lEQVR4Xu2dB3gU17n3TS/CuODYccpNrhPHSZxqO7YTOzfJTRzHyWcn33fja6NqgVClmF6NQfQqUYQoQggQiN6bKKIIAaJjg6gGgenN3dgGc775H3nWo3NWYnbZ1e7O/t/n+T3anZk9e87o/PadM/WOO2o2In7/3y+0eva/n1/xyyd++85/PPTDjx548NvX69dvcNOYJwjxltq1awv0pW9/93sf/+QXvy7/9VPPrP/Vb37byZj30B3OiIg//+OfqX947u+FRruOf++hhz+mO8QX1K5TR7rz3e899NHPfvXE8cd/+/tVjz35TJIx7+47GH6LiMef+n3vHzzyk5ONIyJuPvHb34tWbbuIIeOmioKVm8XyLQdE6bHLYs+pjwi5LdCX5q4pFZm5c0SnNweLv/z9X+K++7954+57m733H9//wRSjLz6mds4gj4in/+u/+z3845+dpjvEX+w++aHsS7NXbREjJs4UaZ17i9/94S8iokmTL7//0MMnHv3l472MvthY7ZwM7+L+n/z8sdlN7mz6xR//+g8xbPx0UXr0kvZPIcTfQPjE17uJbzzw4LV77m1WZvTNfxvUUjtssERERMQDv3z8qYV3Nr3rOt0hgQIbXUiUf37hJWH0xc9/+vNf5Rrds6naXxn2ov5DP3gk00iI11+NTxYrt5ZpK5yQQLCr/AMxclKBePjHj37YsHHEfqOv/l7tvAGO+o/87Bfj6A4JNhZv3Cv++b/R4q57m10zBjzt1Y7LqCbqNW78xD3NvnH5D8/9/UsMzdWVS0iwMGhM7o2md939fu3atccZXbeR2pdrOh544NtPN7vvgauGOzfpDglWpi1eLx559Bc3f/jjR9+62wi1HzOUePDb3+1h/NB8gd0+6sokJBjZXHZW/Ndzf79Qt169w0YXfljt0zUV3//hj9686+57rtMdEgrsOH5VNI9PwfH7T55++tmn1P7MqIha93/zwakPPfzjz5eV7NdWIiHBTrf+wy/XqVv3otGXn1Q7t5+j1ne++/2ZP3zkp9fpDgk1Bo6eLO6+t9n1Z/703Etqxw73qNXsvvsX//o3v/2i+MAZbcUREipkTp71gZEcrxh9+jdqJ/dT1Prmg99Z8fhTz9ygOyRUyZq+UNx1z703/vjXF/6ldvCwjbubfWPyL594+jOeMUecwMhJBVdq16lzwejaP1T7uq/jgW9/Zzo2KOkOCXWQHDFy/P2fnntG7edhF40aRbT/zx/+6Bq3domT6PzmkDO1a9c+iC6u9nlfxT3NmnXBoQe6Q5wCdqve/81vXfvhr3/9DbW/h1M8HtHkzk95XIQ4kd8888djRh8fq3Z6X0S9evWeuLPpXZ/RHeI0YhLbih/99OdwJ2ivEfZn1I9o0uRdnkFHnArOVm3UOAIn4zyrdv7bjPpN77rnHN0hTmTn8ffEr554Wjzx9DMj1Y7v+GjYuHHvZ/703CfqSiHESaSPnHCpTp06O+/w4dbvPc2a9f/9X174XP0uQpzCwvW7RdO77r5+94MPfk/t/06O+xs2avzJiq28AJk4G9w/8lvf+Y93jT7/P6oEXsb9jSMirtEd4nRSO/YSP3jkJztUARwbjSIiRrwc0/KauiIIcSLDsqd9VLdu3S2qB97E3fc0G/2/sYnX1e8gxGlsO3JRNPvGAzca33VXqN2036to0qBho495/0YSLuw68b5ocmfTy0bf/7Uqg4fRBHta6A4JF7r1GyG++72HwmLUGPv07//7fXUFEOJkolqmnTf6/mBVBk+iTp06cc/+6a+fqmUT4lQwajQ2Kj83uv9/qD44Ku5s2nTL8PH52gogxMngkVX16zc4qfrgSTS77xs76Q4JN5rHp9y89777R6g+OCki6tWr/xm2AtTGk8CA/8Wmt0+JnSfe0+YR39KkyZ3vGw78pyqFzYgwEuvndCc42H7ssvRmxztXtHm+ouTgWbH5wGlteriBh2nf2fSuc6oQTornf/KzX15RGx5u9Bs8QnTs3FW0btNWtGvfQb4eM6lmr0nbVf6+GDUhT3Tt8YboO3CY6NSlm5i+YJW23O2yducR0a1nb7G8eK82L9x48tk/Qu5IVQqb8fyjv3ziQ7XMcGJIRpZ0pU3bdqJtu9fl6xFjJ2nL+ROcZTxuykzRpXsvlze5sxZry90uYyZNEz3e6Ct6vtlPDByWKb9XXSZcQNvvuvueTwwHfqBK4ZTo27J1J56N+hXZeQVi9vINlaZtO3xBFO9/V1sWIzpsoVoF2V3+gdvR3vZjV+R0JD+1nE1vn5RlTJg+V8r39WcuS9mRyKzLbjXqo5aBaVger8167Tx+VVtu7Y7D4o30AaJ3+kAmRoO23dOvGQ5kqFLYifoNGw5o1a7rTbXMcASJaPr8lZWmYSRdbPRDdVk4IL0xXDGnof+767MY/bnzCcBJlJE3d5kYPmaiy0N8Bslr+eZ9lZbdeui8VgbqaI74TXfhqrrcxn3lskzz/Rt9+4vCbeF9wtXfXnr5A0ODJNULR0Tjxk0WD87K0xodrqiJcWL+PClE/yEjZTLBjaHX7zkuur/RR7zZf7BIHzRc9OjdVwoNeTASG5o5TnTu1kMs27RHljF35SYjwfUU/YwyMB/JCdMxMhw4fJSUDJ/v2LmbUX5FcjNZXVomNr51Uu7CwXL4PpSBemE+RpR9Bw6VdZy5ZJ1Ys+OQrBvKxXcuXFdaqbwtB8/JH5mho7KZGA0yc+eIho0jVqte2Il7m32jkO5UoCbGvDlLZT8cMDRD9s0th85JsKHXZ8AQuYcGr7Exh12TWBbeyD67dpssA33X9AaurNpScas9eIgRG3zYYngBH/DXWh84Bk+R9PB9GEniO7Imz5Dz4ST87dk7XUydt1wuC49NbzBfbaN1A7i/0S6zPuFKt34jvqxTp84E1QtHRESTJkewv1htdLhiTYxIMpDHnDdh2hz5AwCJXm/f0bV1iySzuGi7/GHAMpiGZLZ04y4pJnbtmFulq7YekCM2vIbsZuLCViqSqVofk8zxuWLm4rXyNbZsUQaSJhIjfjhMaTF93a6j8jW2kvHdalmAibGCuWtKReOIiBOqF3birrvvOUF3KrAmRvR9JBxzRIgRHbxCYkxr3drlAg4bzFmx0fBtvRg9caqchiQJJ7Dxhr5bUlZxM/ai3cdkAsRrJEZ8xvzu9h07a/UxwfdOmb1UvoYjcAVeIvHBFbOOmL6i5C35GiNLlGkd0VpBO+Cqu1FsODF57ircXnGX6oUjon7DRlfW7Kz4ISWVEyOSDkZx2OIEEHPkuByZGNONLVDrZyAapIZsWBYJEoIh+SAJWb+jQ6cuUjokRnOEiN1LmK7WxwTfbd2Fav4QoY6TCxbJaSgzJSXVVV+QnJzidvctE2MFRXtO4MxUnIDjcRgJ9X26U4E1McIFJBazD2KkNnjkGJlQcIzO+pn8hYWyX2M5JLzsvFnSI4z4kKys3wEHcFgDy1l30b7eoVOVx/ve7DdIJmrzff6i1WJS/nxZR3hrTscxUqs3qWmtZX3V8uAYRqtI6Oq8cAPX7jZo0NCZJ+DUrVvvWslBfd97uGJNjNgqzZ7ytTwmMjEOGl7pM9ZdL0iI2JWE3S0Y1eGvOQ9imVu4SIzW4xnY5WTuZjXBcUfsskHCtQqO7yxYWiQTY+7sJa7pMulW8SNhhYmxAvwoGw58pnphJ3A2N92pwJoYMeLLzM7VlkGisR6nMxOj+R4jyRmL1rj6urlnBaBP48QeHD+UidFyzB8uqn0Z/i1Zv8PloPU7MYKVidHiNkan6vFNFbiKXa0oW50XjuDRaoY7H6teOCJq1ap1084PabhgTYxIcDjesHLL21JEbCmu2LyvysSIYxUZxogSAmHXKrY8sW6xxTx3VbHcEsay5o+GmhghMqZBcpwEgF2neA9hpxk/OoNGjJZbyqhDp67d5fFCNTFilyuOP2IXFNqhjlZNmBgrwP8HDqhe2Am68zXWxIg+DW9wjB19ftjo8fK4YVWJcdayImNEOVYeb4Rr8AXzkQDhAMrAXhGcAWtOtyZGfAa7Npds2Cm9wWgO73E+ABzA8UVMx2EMTMcJbGpihJdjc/KlN6grjo1a24ffAoxYscsX3gB3I8pw4nbcCYXQGhzOIIFBNPP96u0H5W4gJEKc3IJpONBvHrcwPwPpsMsSSQkJEYkHJ+NgPsQemTVJTh8/dbbr2IT1tYnc9Zo5Ti47etI01zEWgOSIXbiDM8bK45+YtnTTbpmEzWWQRCE5Po9jOEie1vJNZixabST4d7Tp4QgcUKWwGVpZ4coiow/i2J35HscEkciQlMyEicMG2I1Z6TNG/8VeFGzc4SQyJEjzGDn6LjYi0Zdx0oy5EZkzc6F2ZjbOEB0+ZoJcFp9BIjTnwVv4i9Ge6Tb2wswr/Pr4MOpguovDJeq1itgghcNWwv3kGwAHVCmcElpjCQkn4IAqhc3QyiIknIADqhROCa2xhIQTcECVwmZoZRESTsABVQqnhNZYQsIJOKBKYTO0sggJJ+CAKoVTQmssIeEEHFClsBlaWYSEE3BAlcIpoTWWkHACDqhS2AytLELCCTigSuGU0BpLSDgBB1QpbIZWFiHhBBxQpXBKaI0lJJyAA6oUNkMri5BwAg6oUjgltMYSEk7AAVUKm6GVRUg4AQdUKZwSWmMJCSfggCqFzdDKIiScgAOqFE4JrbHeEt8yQTRv3jxg4PuDrU52cFdvX9IiSNdBi5YttboGAjigSmEztLK8Jd5YF+r6qUnc9cFg7TcmLVrodfY16KPq9wYD+N+odQ0EcECVwimhNdZb8A/bW/5uwMD3u6vT4bcuBDXu6u1LUL74cGfQ4e922wUOqFLYDK0sb6E7nuOuzr6G7lQPHFClcEpojfUWyu0d7urtSyh39cABVQqboZXlLXTHc9zV2dfQneqBA6oUTgmtsd5Cub3DXb19CeWuHjigSmEztLK8he54jrs6+xq6Uz1wQJXCKaE11lsot3e4q7cvodzVAwdUKWyGVpa30B3PcVdnX0N3qgcOqFI4JbTGegvl9g539fYllLt64IAqhc3QyvIWuuM57ursa+hO9cABVQqnhNZYb6Hc3uGu3r6EclcPHFClsBlaWd5CdzzHXZ19Dd2pHjigSuGU0BrrLZ7I/ebAQfJvydtlYsioMWLa/IViy4FDYsrsuWL5ps1iVck2OR/T1c9WhbvO4o3c03Lnyb+L560TO0qOaPPBysXF2jRvcVdvX+Kp3Ls3zxJL5owVmwrztHkmc/MztGme4u922wUOqFLYDK0sb/HGnbWlO8WYnFwxuWC22HH0uMiZWSAWrF4nNu55S84PpDuz85eJt3e9q80HvnLHXZ19jafubFk3TSyePUZs3zhDm2dCd0IjtMZ6iydyt+3YSazYvEVMmD5DDBuTJXYceUf0HTxUyr24aINYtLZILgfx1c9WhbvO4o3ck7LzxZ7S42L0yIli6fz18v3cgpVi2YIN8vWs/KWiV/d0sXLJZuP9DDFu9BRRtGqHGDlsnFxGLe9WuKu3L/FU7tnTRogT+5eLC8fXivIDy8WiWaPF6iUTxa7iWWKh8RqJE3If3rNILCgYJTaumiI2rMyVr9WyqsPf7bYLHFClsBlaWd7iiTstk5LFpr1vi7GTp4jMCZPkxuUb/fqL/IVLJEiYWC4Q7owdNVmU7Tkj3YEz8AUOzZ+1SkwcN10smrtGdO3US6xdWSqyx+SJMRmTxJYN+8Wg/iPF6mVbtfKqw12dfY2n7kybNFicPbpaulO2c4HcwCxenSdK1k6TfmAa3Nm3da50CQm0cPEEsXz+OK2s6qiJttsBDqhSOCW0xnqLJ3KPnpQjxR09abJkz4lTovubfUTB0uViyfqNYuGawCXG7ZsPyYQHkQekDxdTJ8+VwgPM37v9hMgalSv27zotJmRNk9PGZuZIydWy7OCu3r7EU7mvXy2VMudPHiqTJKa9f3qjlBoS544fIOU+dXClWLEgW2RlvCkK8oaLmx/s0MqqDn+32y5wQJXCZmhleYsn7ozMHi/G5U11+bPz2AnRvktXsXT9JjFjUWAT47qV28WUibNF/pQFom/vQdIdOKK6s23TQTFz6mJxaN95+d4bd9zV2dd46s7nl7eJdctzxLwZGZXcQSJctWi8mJE7VLpzZO9i+X5SVj/pjlrOraiJttsBDqhSOCW0xnqLJ3JD2szxE8Xs5Sul3BPzZ4q123eJ4WPHya3hASNGGqPHWcYW8GLts1XhrrN4Izfo2L6bIW+ZyBk/Q8yduULMmbFcCl4wbbGUfvKEArF80UYxeECmyM9bKKdDcLUcO7irty/xVG6IumPTTJkAMVJEklw6N0tKjekTx6ZLubHFi/eZw3qKOdNHauXcCn+32y5wQJXCZmhleYun7vQfNlysKC75asMyR5TsLxODM0eJop17xNDRY0T21Gli3qrV2merwt3/wlt3UpPbin3by6UPcAejRCS+WdOXyF2s2MNSuGyL4U6GTKKL5q71yh13dfY1nrozdeIg6QQ2KrGnBbtWsTE51RhJblufL+fDnVlTR8jlskf18WrXak203Q5wQJXCKaE11ls8kbv00FG5+xQjRbzG8UVMx7ESiTFv89sHtM9Vh7vO4q3cENt8ja3br1+Xya1cvN6z7R1Rtues6zik9TOe4K7evsRTucG5Y6vlyBGvL51YJ764sk2+v3JyvfjkQokEI8SLx9e53qtl3Ap/t9sucECVwmZoZXmLp+4A87XpzvbDx8Sud8rFtkNHxJb9B7XPVYe7/4Xv3al4fXDfObkM9rjs2npM+4xd3NXZ13jqDpyAOzfe2y7fY5cqXn92aat4790NLlfg0uXyonB2J+hDa6y3eCK3P3DXWbyVuyZxV29f4qncNYW/220XOKBKYTO0sryF7niOuzr7GrpTPXBAlcIpoTXWWyi3d7irty+h3NUDB1QpbIZWlrfQHc9xV2dfQ3eqBw6oUjgltMZ6C+X2Dnf19iWUu3rggCqFzdDK8ha64znu6uxr6E71wAFVCqeE1lhvodze4a7evoRyVw8cUKWwGVpZ3kJ3PMddnX0N3akeOKBK4ZTQGustlNs73NXbl1Du6oEDqhQ2QyvLW+iO57irs6+hO9UDB1QpnBJaY70l0A8Fdvew1UDXyQ7u6u1LgvWBs3xQ8dfwQcWewwcV6/WtaeCAKoVTQmssIeEEHFClsBlaWYSEE3BAlcIpoTU2XNl84LRISWsjlm3cpc0jzgUOqFLYDK2scMV0Z+kGuhNOwAFVCqeE1thgxdy1Ex/fQoqozr9dMrMni/R+/USrVolMjmEEHFClsBlaWcFKTbrD5Bg+wAFVCqeE1thgBWJfvXpVjJ+YI3r2GSBS27TTlrkdsMXbMiFBktq6rTY/3DFHBUsc9sMHB1QpbIZWVrBiupPtR3cS4I6RgFPojgbdCb3QGhusYKs3vkULsWbNGtG6dRspu7rM7WIe3Fank4/EyHG5om96P5FgjAqcJDgcUKWwGVpZwQrdCSwZ2XQn1EJrbDCDTgXBsfXrawkxSoyOjhaRkZFy606dH+7ExsWJ8vJyOaJ20qgADqhS2AytrGCG7gSOONMdh42o4YAqhVNCa2ywYx4v8fUpy/jhwBbd2AmTxeayM9r8cMfcHefrH9VAAwdUKWyGVlaw4093cHxxzHi64w66E3qhNZYQd1BuLbSyCHEH3Qm90Bob7Cxav0N06NpDxMTEuo5rBBvYpdSl55ti7c4jWv1DFbSLclcKraxgh+4EBrSL7oRWaI0NZiB2YnKqmLO8VGw5+LEoPfJZULKl7CMxZfZqkdAqyTGCU24ttLKCGdOd2SHgTq7hTku6E/TAAVUKp4TW2GCmY9eeUmxVpmAld/Ya0aVHb60doQjl1kIrK5jp2LWX4c52rY8GK0iOdCe4gQOqFE4JrbHBDHYBmVu78wr3iPadewb9bqGU1q+LtTtCf8sX7aHclUIrK5gJRXeS09oZo8ajWltCDbSH7oRWaI0NZtCxTLFbJaWKWcYWcNDvFpq1xhG7hSi3FlpZwQzdCRx0J/RCa2wwY8rdocvXu4VCYeu3ObZ+U9uEtOBxr73muo4xObW1Nj9UgQOqFDZDKyuYQT8MVXeSUlo7w52WCSIpNU2bH6rAAVUKp4TW2GAGokBoc7cQt35rDvN+mLx7hyu0soIZuhM46E7ohdbYYMaU2/xr3foNBSB45xA9oYD3e9RCKyuYcYI7oXoyDt0JvdAaG8yocltPKAgFsPUbFRWttYsEDjigSmEztLKCGbpDfA0cUKVwSmiNDWZUuc2/oQTqrLaLBA44oEphM7SyghnVGbpDbhc4oErhlNAaG8yoUlNucrvAAVUKm6GVFcyoztAdcrvAAVUKp4TW2GBGlZpy22f19kOiY9cecncU6lAT4KkCffoNlt+t1idYgAOqFDZDKyuYwf/D7H/Wv6EE6qy2qyagO+6BA6oUTgmtscEMOowpiPVvKIE6q+2qCSD2gmlzxMGNO0T/Xn1EbA2doh8TEyPiYuNEVm6BVqdgAA6oUtgMraxgBv8Ls/9Z/4YSqLParpqgY5ceYuG02QFxB9+1ZGNwnrQDB1QpnBJaY+0yuWCR2LivXL7OmblQrN1xWHR/o4/IHD9FjM3JF1sOnhU9e6eLkVmTxPips8XO41fFqAl5YoLx44xpm94+qZV5K9BZTEGsf0MJ1FltV00QHR0jDmzYLpJaJYr5uTPEmV0HxcV9x/zO2d2HxcK8mUZyjBUrSt7W6hVo4IAqhc3QyrLLuCkFYuvhC/J1Vu5MUbjtgHgjfYAYPXGqyM4rEOt2HRW90wdKT3JnLxHbjlwUGdmTxcT8eXLatq8+6wmqM3THPnjWZKDcmT9lhkhIaOU0d4I+tMbaZeNbJ6W0eA1pS49eluLi/dR5yw3Zy2TCNJefPn+lTJ54jWWLdh8Ti4q2y0Q5Y/EarXx3qFJTbvvge7G1u2DKTLFvbYno1rGziI6KqrSF6k+iIiPl7qGi3e9odQskcECVwmZoZdll1Zb9omBpkdhd/oHckNyw94SYvmCVnIeNyFVbD4iZi9e6lodXOOUfr7ccOmdsVJ4Sc1duksvir1q+O/A/MPuf9W8ogTqr7aoJ8L1wZ15uvpgxPle0b91W3rJO7eP+QroT6yh3gj60xnoCRoC46BZSI9n1GTBEjJ40TYq85eA5kT5wmJiUP18sWLNVjiJ3n/xQLNu0R271zl6+Xm45z1+9RW4hq2W7wzzFHJ3FFEWVJ9hBndV21QT4XuyWwdYukuKiqbPEhb1Hta1Uf4KRI/YiqHULJHBAlcJmaGV5AkaHSzfuMvp/iUyM/YdmyCSZN3eZ9GHgsEzpDpaBU/jMwrXbpDv4C/cWGxuW6/fY+7GkO95jupMxcKgY0Luv2L26uMbdwcixZ+9+Wt0CCRxQpXBKaI31BIwMh4+ZILYeOu8aMa4uLZPTMc06YixYsk6sKHlLvl6/57j8YcCoc+WWt8XQzHFa2e7o2A1P19hOub3A3PqEZDHR0eLcniOafP7m7K5DcreUWrdAAgdUKWyGVpYnmLtFcYjBHDEuXr/D6N8bZGK0jhhx2ALO4PXyzftEzowF8jPYyBwxdpJWtjvMp2vQHc8x3cHhgHd3lGn9uiaocCdGq1sggQOqFE4JrbGeUFJ2Ro4E8RqCY/cQXmOrF8cYIT62eiE9dhuNmzJT7jrFNCRKLI/3QC3bHeYz5dBBrFu/oUSg5YZk5t9AEKj2VwUcUKWwGVpZnoBDCfAAr7GbFHtV8BqHJ3DsfpQxesT8WcuKxI53rshRIzyZMnup3Nsybf5KMWH6XJE7a7FWtjvojveY7gTSGxCo9lcFHFClcEpojQ12IDjum2jd+g0lAtW5mRjdAwdUKWyGVlawA3daJaXQHQ9hYnQPHFClcEpojQ0FpOCWrV9VoGAFdcWxHrU9NQETo3vggCqFzdDKCgUqkqPhTgzdsQsTo3vggCqFU0JrbKhgCh5KN0JGXXGsR21LTcDE6B44oEphM7SyQgW4k5TSJvTc6RZYdwLpDXCQO0EfWmNDCTM5Bv2jc4y6oY6JRl1RZ7UdNUGoJEZc0pM1eYaYs2KjfI/j0DjWhpNScJwax6bxHuD6PlwPax57Kz16SSvvVsABVQqboZUVSiwq2hlS7mAPUaDdCaQ34Fbu4DIguIOzlvEe53bAk/mFJfI9Too03dlV/r48oQvXzU6bv0KeI6KWdyvggCqFU0JrbKgBWTp0Ce6HraJuqGOgxAZmXUzBVOlqCny3Wjcr8kzNE+/Jk05wZjNEx/SF60plkjRP9gKQGcvjjOji/e/KszcxHWc6272MAQ6oUtgMraxQA8mR7twaa33U/lyT4PvVulkZPmai3HjENeNwyHQHZzjj0h6rO7hJRGZ2rnQIriA54nK65cV75dUCatnugAOqFE4JrbHEmeB4rCl2IAW/ldzYqsUZmGt2VNwjEpf14IJ2nIUJuQePHCu3eHNnLZES4zpA/BhgGSRHvMeWct6cpWL7sSta+SpwQJXCZmhlEWeCS4xCITHCC1wbbm4U4rpYJDlcNocbrvQbMtJ1lcDcVcXy0h8kULiDKwwwHXtq4BacUstXgQOqFE4JrbGkAvPhorjAWp0XisibIEdGyuuwAin4reTG7lEkNHkHmC375VYwtoDHTJou5+PCdjMJ4g4x2MWK5THC7G+IX3LwrNw9hEuD7OxahQOqFDZDK4tU4HJnw05tXiiCe6VGRVbcJUrtzzVJde5gtIf+Dn+wYYndpLg+HJfz4LpXLIMRItzB/we7W/HbhpEj3Bk0YrRMonBH3sLTSJjqd6jAAVUKp4TWWFIBbnOX3q+faNUq0RHJEXfpb5HQSvTq0k1uAQfiAn98560u8McNI3CTCBw3xC5Rc3cQZEUyzBiXI0eKAAkRiRPLzSvcLO+8hP8VbjWIrV4kVrV8FTigSmEztLJIBZmGO/1MdxyQHOFOS6MtkUZiCtQF/hXuVH2BP0Z4SITY04KNSCRG0x0kSiRMuGW6g8MPpms4RDFw+CjpEEaRSI7mfbCrAw6oUjgltMaSCrDF2zIhQZLSuq02PxTZdeJ9MT5vtmjfpl2N3xIO34Xv7NSlu1YvK9jqxf0/ISzem4IiCSIxrt5+0CU3jo9gOpaH0NgaxrLY5Yr5atnugAOqFDZDK4tUAHcS4E5LZ7nTrkNn0btbzxq/JZx0Zxrc6aHVywpuw4k9KLh5BN6b7iApYk8K9rCY7mCEielYHjexhztIrhhJYjm1bHfAAVUKp4TWWPI15nEFdXqos25bmejaqWuN3kQ8OipadO7cLeieLwcHVClshlYW+Rrz/65OD2WQHCdMmSXaGRuWNXkT8Qp3ujvJnaAPrbGkAtdWr0Fyapo2nzgDOKBKYTO0skgFqZXcaa3NJ84ADqhSOCW0xpIKRo7LFX3S+4uEVoliyYbQP8ZI3AMHVClshlYWqYDuhAdwQJXCKaE1llRgnllHsZ0NHFClsBlaWaQCuhMewAFVCqeE1lhCwgk4oEphM7SyCAkn4IAqhVNCaywh4QQcUKWwGVpZhIQTcECVwimhNZYQdyzdsEseMxqVPVlsLjujzQ9V4IAqhc3QyiLEHbiWE9d04vpOuhMaoTWWEHfEt2ghioqK5GnqOH6kzg9V4IAqhc3QyiLEHXQn9EJrLCHuwPVUV69elX/VeaEMHFClsBlaWYS4g+6EXmiNJcQdlFsLrSxC3EF3Qi+0xhLiDsqthVYWIe6gO6EXWmMJcQfl1kIrixB30J3QC62xhLgj7rXXRHl5ubwxdJKDbvMFB1QpbIZWFiHuMN1pQXdCJrTGEuKO0eOd9SghEzigSmEztLIIcceYSu44525AcECVwimhNbamWLl1v+g/bJRo276jiIr6+gnZxD64uXn64JFi7c4j2vr1NbjNV2pr5zx81gQOqFLYDK2smgLuDIA7r9Mdb8HNzWvcHQc819UKHFClcEpoja0JsnILRMuEViI3d4ooLi4WBw8eFIcPHyYesn37djE9f4a88L4mBHcicECVwmZoZdUEdMc30J3bBw6oUjgltMb6m/xFq+VFrrt27dI6K/GO6dPzRd+BQ7V1TW4NHFClsBlaWf6mwp3WdMeHTM/PF30GDtPWNbk1cECVwimhNdbftG3fSRSu3aB1UOI9paWlIiU1VVvXJnjKQYcuPWr04ap2eb1TN1G4rUyrc00BB1QpbIZWlr+pcGe99v8n3lPhTtXPW6U7VQMHVCmcElpj/Q2OiRw8pHdQ4j3YnRYVFaWta1C0+x15NtyKwjXi4sWL8rTxYGLN2nWiVWKSrKda95oADqhS2AytLH9T4c4h7f9PvKfCnWhtXQPTnZVB6k7hmnUiITTdCfrQGutvsKWjdk5y+2C9qusaDB2VLWYWFGhSBROzZ88WQzPGanWvCeCAKoXN0MryN3THP1TlzjDDnYKCWVp/DSZmGe4MCT13gj60xvobyu0fqpI7rU1bceTIEU2oYOKQMQqqblewP4EDqhQ2QyvL39Ad/1CVO63pTrXAAVUKp4TWWH9Duf1DVXJHRUeLS5cuaUIFE6hfVbuC/Q0cUKWwGVpZ/obu+Ieq3ImmO9UCB1QpnBJaY/0N5fYPVcmN6apMwUhV9fc3cECVwmZoZfkbuuMfqup7dKd64IAqhVNCa6y/CRa5S0pKxNtvvy1f79ixQ+zcuVMsXbrUNX/btm3yOjGctbZgwQLJpk2bXNPM5ayfCSRVyUG5qwcOqFLYDK0sfxMs7mzcuNF1/eTWrVvF7t27xfLly13z4Ramb9myxeUOpq1fv156hmWwC3DZsmVa2YGgqr5Hd6oHDqhSOCW0xvqbYJEbks6fP1++njRpkti3b5/o0KGDlBnTJkyYIHJzc8XChQvFqlWrZPJ86623xJQpU8T48ePlMlj29ddf18oOBFXJQbmrBw6oUtgMrSx/EyzuIKHBCbzOysoSe/bsEe3bt5cJEtMyMjLErFmzRH5+vkyicAcboaZTWGbdunWiZ8+eWtmBoKq+R3eqBw6oUjgltMb6m2CRG1uskBpbvviLaWPHjpWJb//+/ZUSY15entzqheCYj3lYZurUqWL06NFa2YGgKjkod/XAAVUKm6GV5W+CxZ0DBw7IjUPTE2wwwp2ZM2fK5AifzMRYUFAg3UHyxAboxIkTpXN4PW7cOK3sQFBV36M71QMHVCmcElpj/U2wyA2Q+LAr1NylA1kBkiFGlOqIET8ESIzmaBPL4odBLTcQVCWHp3Jjg2Hy5MkS7PbavHmz/HEz5w8fPlycOHFC/sCZnDx5UgwcOFCcPn1aLoPdzdbP2KGq+vsbOKBKYTO0svxNMLmDxAg3MPJDYsRGIlzA/x3T1BEjkil8Wb16tfQNbpl7XgJNVX3PU3f27t3rcgftRVuXLFki5125ckWkp6fL6yHHjBnjcufChQuiT58+ruskCwsLXZ+xS1X19zdwQJXCKaE11t8Ek9z4Ae/WrZvsxHgPcdEx8SOPJGgmxnnz5knZcX9Fc0Q5aNAguazTEiM2FHDLMbzG7q+ioiKZDHH2G7b0IfexY8fEtGnTKn1u1KhRYuXKlfI15k2fPl0ruzqqqr+/gQOqFDZDK8vfBJM76Pv4QceGlJkYFy1aJDIzM+UxeDMxoj/BHWxkwS8s37t3b+me0xIj2ozLO+BKWVmZTHAYPWMefjvgDhKh6k7//v3l+Qt4jaQ6Z84crezqqKr+/gYOqFI4JbTG+ptgkhusXbvW9RqdE+JiKxd/qzr5BvPwGokCy6plBoKq5PBUbmy5YkMAgqJ9SIwQHCNHCIt5SIzYdYb3GDnjc/gRhPCnTp2SGxOq/Leiqvr7GzigSmEztLL8TTC5AweQ8PAa/QT9AxuM5klt7k6+gTNYfsOGiltCOs2dc+fOyeSIDep33nlHegNw/sKMGTMkSIw4Bgt3sNGAz5nuoC5Ynokx8KE11t8Ek9xOoio5PJUbW7bY4r18+bLIycmRiRE/dBAXYmM3mLsRI+TGiBHTjx8/rs2/FVXV39/AAVUKm6GV5W/ojn+oqu956g42BrDLFBuX2LOEJGe6gmSHpOluxAh3sIGJ6ThMwcQY+NAa628ot3+oSg5P5cZuMezigqw4RoKRAEYH2E2GpIlpkBdbxRAYvPvuu1LsM2fOuHYdzZ07Vyu7Oqqqv7+BA6oUNkMry9/QHf9QVd/z1B34geOGSHAYHcMV7EHBBiUO18AhJE34ZbqD93AHCRR7ac6fP89jjEEQWmP9DeX2D1XJ4ancgaKq+vsbOKBKYTO0svwN3fEPVfU9ulM9cECVwimhNdbfUG7/UJUclLt64IAqhc3QyvI3dMc/VNX36E71wAFVCqeE1lh/Q7n9Q1VyUO7qgQOqFDZDK8vf0B3/UFXfozvVAwdUKZwSWmP9DeX2D1XJQbmrBw6oUtgMrSx/Q3f8Q1V9j+5UDxxQpXBKaI31N3goqHndIPENOF0eTwJQ17Vc3yHyhICq6u9v4IAqhc3QyvI3dMf3VOdOqDxdo6r6+xs4oErhlNAa629at+sgn4itdlDiPThztG2717V1Ldd3CDxTDvVrY9RTrXtNAAdUKWyGVpa/gTurCgu1/z/xHie4g3qqda8J4IAqhSOiVq1aN3ef/FBrsD+ZOGOBeOPNvvISALWTEu/ApRNDRmRq6xoMlU8h9+z2bDUN6jdidLZWd3+Dvg8HVC/sRODcqbjbjNoHiHdUuDNKW9dgWIi4g3qqdfc3t+NO0EedunU/LTl4Xmu0P8EK7dLjDZEdJLeDCnVw+7ZWiYmiaNcxbV2Dot3viBYtE+Qo3bwfY7CA+qwqXC3rh3qqdfc36Pt169a7pnphJ+rVq/9ZwNzJpju+wOXO7lu5szpI3VkTUHdq16nzieqFI6J+w0ZX1uw8qjXa32w+cFoKjq3fovXruQXsBbj91rJly0VKaprIyp2prWMrSzbsEh269BCRkZHyQH2wgPqgXqifWueaAH0fDqhe2IlGjRu/FzB3un/lTlER3fECuLOU7twW6Pv16jW4pHrhiGjYKOJQwcrNWqNrgt3lH4icgkWia68+IiYmVvvHk+qBGO06dhH5i1Zr65bYA32/UUSTw6oXduLOpk2PBdydnnTHG+jO7YO+X69e/f2qF46IOnXrzhuSlXdTbTQh4QD6ft369eerXtiJiDubLh2claeVSUg4MHDMZByCmK164ZToG5vc7qraaELCgddSXn8fDqhS2InatWunt2zT+XO1TELCgeYtUk/f4aU7oRDP/+CRn55TG00qjuWkpLUJ2D78YMRp6wR9Hw6oUtiM53/86C8uq2US5/UTX+C0dfL9Hzx8Cg6oUjglInBW3rYjF7WGhzsjx00WfdP7i4RWiY7pzLdLRnauSO/XzxHrBH3+qzNSI1QpbEYEzkylOzpO6ie+ItNB6wR9Hlc0wAFVCseE8eNQNCx72hdq48MdbN0lJCSIlgaprQNzAW2wERsXJ8rLy+U6SQnxdYI+X69eg/WqD55Eo8aNi4dPyOcxeoXU1nRHJc50p2XouzM4K++jOnXqrFV9cFrE/vo3vz2jNp5U3CsRqNPDFawLXEPlhHXy2JO/O4u+r8rgYcT+5nd/4O5UN9CdyjjJnZ/96onj6PuqDE6LJsao8f2VW8u0FRDuUO7KOEVu9PV69ep/gL6vyuBhNKlfv8GHdEeH7lTGMe5sK7tZp27d99D3VRmcGINe/HfkeXUlhDuUuzJOkfulf0ddQJ9XJfAmateuPfj/vvra++p3hDt0pzJOcedvL/3PiTt85E4oxP3Ygl6x9YC2IsIZyl0ZJ8iNPv7VaPF+VQIv436MGulOZehOZZzgzvKtZV9+NVr0lTshEd1x3EVdGeEM5a6ME+R+7KlncYlGd7Xz304Yo8YeT/JYYyXoTmWc4M4vfv1k+R0+dicUon69+vWPDc6a8om6QsIVyl2ZUJd7SFbep8Zo8Rj6utr5bzPqN2jQ8PjQcVN5dvdX0J3KhLo7A0fnvle7bt0j6Otq5w+HeLx+g0bvLyvZr62YcIRyVyaU5UafbmD0bfRxtdP7KB5v2CjiQ7pTAd2pTEi7s/ntG8YG5VX0cbXTh1O0fuDBb18sPnBGW0HhBuWuTKjKjb78zW99B08CaK12dh9H629953tX6Q7dUQlld+77xgO4tMnf7gR/1K5de9TDP/7ZhdKjl7QVFU5Q7sqEotzow+jL6NNqP/dH1KtXb8xPfv6rq3SH7lgJVXceevgR3BM1U+3n4Rq16tSpM/1HP/l52I4ccceO6Oho+Yga3AVHnR+OyIeiFhWFzDpB333kp7+4ZCSrfPRptZP7KWrVq19/BpIj3QmNflIThKI7P/jRT84aG5TT0KfVTh7OUQtb2Q9++7uXw/G4Ce5niPsajsqeLDaXhecPnIq5TjJDYJ2gz6LvfjVSrGmxa2Hk+O3vfv89uhPc/aSmMNdJRgisE/TZ+7/5LVzri5FiTbsTMpHWoEHDD4Zk5X2mrkBCgpEh46Z+3qBhow/Rd9XOXMOR1rBR44+GZk+7odaRkGAEVyXUr98AJ6kF2p2QiMeM5Hjiyd/915XlW3ghMwlO0DfRR9FX0WfVThygeKxhw0blT/3+T+/THRKsoG8+/vSzF+vVq/8O+qzaiRlVR31cyGxsTXz0/yJf4/0hSdCAvvj/IuM/Qt9EH0VfVTtvgKN+7bp1e9Zv0PDj/4lu8QndIcEC+uK/Xol7z0iI2MOCi/eDzZ2Qifvr1q07xNgq/+ipZ//0/rDx0+XZS+oKJ8SfoM+h72EkZiQcIynWH4q+qXbWIAvcPm5Yg4aNPv7dH/78Ed0hgcDlzjN/uIrbGeJ+v+ibamdleBd4SGXcnU2bbjVW7ueP/vLxDxLadL45ZNxUUbBysxyalx67rP1TCPEE9CH0JfQp9C30MfQ19Dn0PfTBr/piKIV0p+ldd5dWuPPEh63adpHtozvEV6jutGzd6cajv3jsfTxgu3GTJiXog1/1RYafAiv3+UYREYPuu/+Btffc2+ykIf17derWvW5MF4R4C/oQ+hL6FPoW+pgx/fk7nCO0dCfizjuH3PfAN9fd0+y+U3SH+ALTnbvvube82X33r2nYuPHAO5zlDoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwXBC1IqMjHy8efPmbRITE/NSU1N3xMfHX2jZsuV7UVFR18276hNCCAlfoqOjv0BeSEhIuGjkiZ1paWnTYmNjWxt54udqUgnJePHFFxsbDY1u1arVBqNh19q0afNRVlbW9fnz54vi4mJx6NAhcfToUXHx4kX5aBVCCCHhzYULF2ReOHjwoNi4caOYN2+eGD169E0jQV4z8sinRrLcGBcXF/Xyyy83UnNOUMcrr7zysxYtWsyJiYm51rdv348LCwvFqVOntBVACCGE2KW8vFysXLlSpKenf24kyc9SUlKWGvnml2oOCqqIjIz8lZEQ1xl8Onv27BtMhoQQQvzByZMn5WgyMTHxs+Tk5O3Nmzd/Vs1JAY3XXnvtbiMZ5hh8smjRoi8xFFYbQQghhPiaS5cuiRUrVoikpKRrCQkJy6Oior6j5qgaD2OU+Je4uLirY8eOvXb69Gmt0oQQQoi/wbkq06dPv2Hko09jYmLaqrmqRuLll1+uY4wUh7Zq1eqT0tJSrZKEEEJITXP48GHRqVOnT+Lj49cYeepeNXf5LYyE2ND40tU9e/b8GPt51YoRQgghgQK7V3Nycj43Ro/nX3nllR+pOcznYWTgu4ykuGvYsGGf4svVChFCCCHBwIoVK27Exsa+FxkZ+aSay3wWGCm2aNFid3Z29udXrlzRKkEIIYQEE8XFxTeN5Pjhq6+++pSa0247cEyxZcuWa4cPH/4ZkyIhhJBQoaSkBMkRd1n7qZrbbisSEhIy3njjjWvcfUoIISTUKCwsvI5jjs2bN39AzW9ehZFl/5qYmHiNJ9oQQggJVaZOnfqRMXLcjD2gap7zKHDxfnx8/Ie8JIMQQkgog8OAPXr0uGIM9vqruc6jSElJmZGdnf2l+gWEEEJIqIE9n3FxcR+88sorj6n5zlbg3qcJCQmf8442hBBCnMLy5cs/jo6O3tOnT5/aat67ZbRp02bn4sWLtUIJIYSQUKZjx45njMFfopr3qg08FDIpKen67T4rcffu3SIjI0OkpaVpD6QMBYwVJ9q1ayfy8vLEmTNntPa5IxzbTAghoYTxO33dGDWeTkxMrKfmvyqjffv2RXPmzNEKs8vly5dxSx6RmpIilk2bJk6sWyc+3rkz5Phoxw5xcNUqMX7ECJGSnCz27NmjtVVrc2qKmLVwpth2sFgcvvh2yHHowluieG+RyMwaKVJSqm8zIYSEKp07dy5/9dVXW6n5z23ExMRExMfHX7+d5ylOmjRJ9OnRQ1wqKdGSTaiyFc/+SkioMlGgzb169xL7Tu7Skk2osmzDItGqVdVtJoSQUKW0tPRaZGTkfjUHug0ji7YbOHDgTbUQu2BXYpoxUnRSUjRBcsTIUd3FiDanpqUaSXGnllxCHSTH5BS9zYQQEsrg8g1jEHjeSI6Pq3lQi44dOx5cvXq1VohdMkaOFMsmT9aSilMYP2yYPP5Wqc0ZGWLmgulaUnEKI7OGa20mhJBQZ9KkSceaN28+Ws2DlQKnr2I36u3c5QYjqpNFRVpCcQpHCgvF6+3aVW6zMUIuPbRZSyhOofitItGuXVvtf00IIaHMgQMHvjRGjO+oubBSGKPF/+rQoYPXu1FBdFSU+HDHDi2hOIUPtm+XbazU5uhocfD8W1pCcQoHz+0TUdGV20wIIU4gNjb2ipEcv6fmQ1f0798/e9y4cdoHPQGn/KvJxGmgjWqb1WTiNNQ2E0KIE+jVq1eZ8fsWp+ZDV/Tp02fr/PnztQ96AhOjM1HbTAghTiA3N/cd4/dtqJoPXdGlS5czxcXF2gc9gYnRmahtJoQQJ7B27dorxu/bEjUfuiItLe3aoUOHtA96AhOjM1HbTAghTqCsrOxmZGTkQTUfuiIxMfFGeXm59kFPYGJ0JmqbCSHECSDnRUdHn1fzoSvi4uJunjt3TvugJzAxOhO1zYQQ4gSQ86Kioj5W86ErcANp3A1A/aAnMDE6E7XNhBDiBJDzjN+3L9V86Apf/PgxMToTtc2EEOIU8Pum5kNX+OLHj4nRmahtJoQQpxDyifHIqlViYNeuYsrQodq8CQMGiEHGvLMbN2rzfIm6nvydGFeWLBW90ruLhWvnavPWlK6U85auX6DN8yVqmwkhxCmEfGIE/Tt3Fn/+85/Fmrw817QlEybIaTmDB2vL+xp1Pfk7Me45XipeeOFvIrl1ojbvzYG9xHPP/cXvz39U20wIIU7BEYnx8pYtIvbVV8X/feklcXrDBnFy3Trx0v/5P6J9UpJ8uLC6vK9R15O/EyPo0aeb+Mtf/iI2v73eNa3s7F7x4j9fFK3bp2nL+xq1zYQQ4hQckRjBgWXLxN//9jfRo00b0TUtTfz7X/8S765fry3nD9T1VBOJcUXxYjkiHj52iGvanBUz5bSZi6dpy/satc2EEOIUHJMYwfysLJkYnjNGUltmzdLm+wt1PdVEYgTRcVHi3//7P+LQhYoneXTq0VGOGA+c3aMt62vUNhNCiFNwVGKcPmKETIzYxVg8c6Y231+o66mmEuP4qWNlexetnSv2lu8QfzNGzOlD+mjL+QO1zYQQ4hQckxhL584Vf33uOTGke3eRFBcn/vXii+Kd1au15fyBup5qKjHiJBwkw65vdBZ5c3IqTkDatkJbzh+obSaEEKfgiMSIY4k4pogTcK5s3Sov4fjHCy+IxNhYcXXbNm15X6Oup5pKjKD7m13F3//xd9EquaWIjY/R5vsLtc2EEOIUQj4xfrB9u2jbqpV4/q9/FXsWLXJNN483DurWTfuMr1HXU00mxuWbKk7CAdl5Y7T5/kJtMyGEOIWQT4w4G3XSoEGiMDdXm1eQmSnnnSoq0ub5EnU91WRixIk3L/3zJfHC318Qe05s1+b7C7XNhBDiFEI+MQYD6nqqycSYvzBPjhaHjBqozfMnapsJIcQpMDH6AHU9+TsxYmSIO9tMm58rR4qRMc3F2+/u0pbzJ2qbCSHEKTAx+gB1Pfk7MQ4bM9h1XBEn3Wwt26Qt42/UNhNCiFNgYvQB6nryd2LcsHuNvLtN0c5CbV5NobaZEEKcgt8TY3RUlPiwBu5XGijQtujo6MptNt4fPF9xNxongrapbSaEEKfg98SYkpwsTvr5rNBAgrahjZXanJIsSg9t1hKKU0DbklMqt5kQQpyC3xNjxogRYllOjpZQnMLS3FyRkZFRuc3G+xkLpmoJxSnkG20bmTFS+18TQogT8Hti3L17t0gzRlSXSkq0pBLqoE1pKSmyjWqbU9NSxL6TO7WkEuqgTSlpepsJIcQp+D0xgkmTJok+3bo5KjmiLX26d5dtU9trtrln7x6OSo5oS4/eVbeZEEKcQI0kxsuXL4sc48c01Rg5Ls/NFSfWrdMSTaiAuqMNaEtOTo5sm9peV5uN+SmpKWLGwmnyukM10YQKqDvakJJafZsJIcQJ1EhiNMHut4yRI0Vaaqr84lAEdccxRLu7EmWbjeVT00K3zai7J20mhJBQBr97aj50BWaqHyCEEEKcDBMjIYQQYoGJkRBCCLHAxEgIIYRYYGIkhBBCLDAxEkIIIRaYGAkhhBALTIyEEEKIBSZGQgghxAITIyGEEGKBiZEQQgixwMRICCGEWGBiJIQQQiwwMRJCCCEWmBgJIYQQC0yMhBBCiAUmRkIIIcQCEyMhhBBigYmREEIIscDESAghhFhgYiSEEEIsMDESQgghFpgYCSGEEAtMjIQQQogFJkZCCCHEAhMjIYQQYoGJkRBCCLHAxEgIIYRYYGIkhBBCLDAxEkIIIRaYGAkhhBALTIyEEEKIBSZGQgghxAITIyGEEGKBiZEQQgixwMRICCGEWGBiJIQQQiwwMRJCCCEWmBgJIYQQC0yMhBBCiAUmRkIIIcQCEyMhhBBigYmREEIIscDESAghhFhgYiSEEEIsMDESQgghFpgYCSGEEAtMjIQQQogFJkZCCCHEAhMjIYQQYoGJkRBCCLHAxEgIIYRYYGIkhBBCLDAxEkIIIRaYGAkhhBALTIyEEEKIBSZGQgghxAITIyGEEGKBiZEQQgixwMRICCGEWGBiJIQQQiwwMRJCCCEWmBgJIYQQC0yMhBBCiAUmRkIIIcQCEyMhhBBigYmREEIIscDESAghhFhgYiSEEEIsMDESQgghFpgYCSGEEAtMjIQQQogFJkZCCCHEAhMjIYQQYoGJkRBCCLHAxEgIIYRYYGIkhBBCLDAxEkIIIRaYGAkhhBALTIyEEEKIBSZGQgghxAITIyGEEGKBiZEQQgixwMRICCGEWGBiJIQQQiwwMRJCCCEWmBgJIYQQC0yMhBBCiAUmRkIIIcQCEyMhhBBigYmREEIIscDESAghhFhgYiSEEEIsMDESQgghFpgYCfERV65cEXPmzBFbt27V5pkUFhaK1atXu96fO3dOfsYdxcXF4tKlS5U+f+TIEdf8CxcuaOWbYJ653LFjx7T5hJCqYWIkxEdcvnxZJCYmiry8PG2eSXp6uhg4cKDr/YkTJ+RnquLNN98Up06dci1fUlLimrdu3TqtfBPMM5fbvn27Np8QUjVMjIT4iNtJjPPnz9eW3bRpk0hNTRUTJ050TTMTY3Jyshg+fLj2GZOhQ4fKZZgYCfEcJkZCfISvEyMYOXKk6NGjh+u9mRgzMjJk4jt58qT2mfLycjkvMzOTiZEQL2BiJMRH+CMxjhgxQn7GfG8mRuwqTUpKEosXL9Y+s3DhQjnP3J3KxEiIZ1SbGCMjI+UJBeqHCCE6vkyMFy9elIkNu1JXrlzpmm4mxl27dolBgwbJY5Dqd7zxxhtyVyoSIhMjIZ6BnGckxptqPnRFXFzcTZw1p36QEKJjJsZOnTqJwYMHu6VNmzZuE2NVFBQUVPoOa2LE2a14feDAAdf8t956yzWiZGIkxHOQ86Kioj5W86ErDKlu4HiF+kFCiM7tJEaM8KyXasyaNUv0799fpKWlic2bN7uWtyZGCNy6dWuRn5/vmj916lT5Hbhcg4mREM+Bk9HR0efVfOgKQ7rPDh06pH2QEKLjy12pJmPHjhXt2rUTZ8+ele+tiRHvx48fLxMxvhvXPHbo0MF1FisTIyGeU1ZWhhHjITUfuqJr167ncJGx+kFCiI4/EqOZCM3kpiZGM/lt27ZNjizdzWNiJMQ+RUVFH7366qtL1XzoCkPi7VUJSwipjD8S48aNG6tNjDhRoEuXLiI7O1uMHj1adOvWzXXCHBMjIZ5j+HuyefPmQ9V86IohQ4bkjhs3TvsgIUTH14kRxwlx5imOGZ4/f15OUxMjwPFIHIvEGaw4PmlOZ2IkxHP69Olz1EiM8Wo+dEXfvn2f79ixo/ZBQojO7SRGjPTUE3VwvBAX6q9du9a1vLvEiPun4rpFYL0vKhMjIZ4TFxd3OTo6+odqPnSFkTlrx8fH33B3dw1CSGWQGJHQli5dqs0zmTx5cqXEifugqgnRBCfR7Nu3r9Ln9+7dK+dZL9EAWDYnJ6fSNFy6gWXxV60HIUQHJ5tGRUWdUnOhFl26dDlmfRoAIYQQ4kTy8/PPNm/efKKaB7Xo27dvT+uuH0IIIcSJJCcnIzH+Qc2DWsTExERgd6r10TeEEEKIk9i7d++X0dHR5Ubaq6XmQbfRtWvXbdaz3QghhBAnMWDAgFPGaLGbmv+qjJSUlMeTkpK+xI2N1cIIIYSQUAYn3RijxatRUVFN1fxXbXTs2PGAu0fcEEIIIaGMMVrEscWeat67ZSQnJz+ZmJh44/Tp01qhhBBCSCiybdu2GzExMWdffvnlJmresxXGqHEJblqsFkwIIYSEGri7VFJS0lVjtPiimu9sx2uvvXZ3QkLCp6WlpdoXEEIIIaFEVlbW+8Zocb6a6zyOtLS0fyYnJ1/n3XAIIYSEKoWFhV/ExsaefPnll+9S85xX0a5du5w+ffrcwPPf1C8jhBBCgpk9e/YIIyl+GBUV9XM1v3kdRoatk5qaujUjI+Om+YgbQgghJNjZv3+/iI+P//jVV1/9h5rbbjtee+21hikpKYcmTJjgev4bIYQQEqwgKSYkJHwSHR39v2pO81lg32xycvLBESNGfMndqoQQQoKVrVu3CmNA92lsbOwrai7zeWDkmJqaugXHHHlCDiGEkGADDwKPj4//KCoq6hk1h/ktcMyxTZs245OSkr7gpRyEEEKCAQzW0tPTv2jVqtXhmJiY/1RzV41EYmLiP1q2bPlxdnb2Td4hhxBCSCDAQ8NxC9OEhIQvUlJSRv/xj3+sq+arGg3cBMAYPc41MvQXqBjuLKBWmhBCCPEHGzZsEB06dLiemppa1rx580fVHBXQiI+Pf8xIkLuMUeR1PLKKz3MkhBDiD86fPy+WL18u2rVrd8NIiGcMmqs5KagCF1C2b9++KC4u7ouBAwfeLCwsZJIkhBByW5w5c0YUFRWJ4cOH42zTG0aeeSslJeUFNQcFdbz44ouN27Ztm/b666/vQ5I0hrpfZmdny7OFiouL5fOwjh49KvjMR0IIIQD5AHnh8OHDMk8gX+Da+U6dOt2MjY1FMjzarVu3NyMjI+9Rc04oRi0jw//GaNDQrl27rjKS5NHExMQPkpKSPo2JifmyefPmghBCSHiDfGDkhWtGfviwY8eOx3v06FHUq1evzDZt2vwBV0OoiYXBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAaDwWAwGAwGg8FgMBgMBoPBYDAYDAYjlOP/Aw1x9j2Es5w/AAAAAElFTkSuQmCC" /></p>
+<p>Conceptually, TPUs in Megacore behave like very simple GPUs, i.e. they have
+only two threads.
+How do we modify our kernels to utilize both TensorCores simultaneously?</p>
+<p>The basic idea is that if we have embarrassingly parallel dimensions in our
+computation, we can split up those dimensions across the TensorCores.
+We can indicate which dimensions are parallelizable by providing an
+annotation to <code class="docutils literal notranslate"><span class="pre">pallas_call</span></code> called <code class="docutils literal notranslate"><span class="pre">dimension_semantics</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_matrices_kernel</span><span class="p">(</span><span class="n">x_vmem_ref</span><span class="p">,</span> <span class="n">y_vmem_ref</span><span class="p">,</span> <span class="n">z_vmem_ref</span><span class="p">):</span>
+  <span class="c1"># Load x and y from VMEM into VREGs</span>
+  <span class="n">x_vregs</span> <span class="o">=</span> <span class="n">x_vmem_ref</span><span class="p">[:,</span> <span class="p">:]</span>
+  <span class="n">y_vregs</span> <span class="o">=</span> <span class="n">y_vmem_ref</span><span class="p">[:,</span> <span class="p">:]</span>
+  <span class="c1"># Execute a vectorized add</span>
+  <span class="n">z_vregs</span> <span class="o">=</span> <span class="n">x_vregs</span> <span class="o">+</span> <span class="n">y_vregs</span>
+  <span class="c1"># Store the output values in VREGs back into VMEM</span>
+  <span class="n">z_vmem_ref</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">z_vregs</span>
+
+<span class="k">def</span> <span class="nf">add_matrices_pipelined_megacore</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span><span class="p">:</span>
+  <span class="n">block_spec</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+      <span class="n">add_matrices_kernel</span><span class="p">,</span>
+      <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+      <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span><span class="n">block_spec</span><span class="p">,</span> <span class="n">block_spec</span><span class="p">],</span>
+      <span class="n">out_specs</span><span class="o">=</span><span class="n">block_spec</span><span class="p">,</span>
+      <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span>
+      <span class="n">compiler_params</span><span class="o">=</span><span class="n">pltpu</span><span class="o">.</span><span class="n">CompilerParams</span><span class="p">(</span>
+          <span class="n">dimension_semantics</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;parallel&quot;</span><span class="p">,))</span>
+  <span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">))</span>
+<span class="n">add_matrices_pipelined_megacore</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([[2., 2., 2., ..., 2., 2., 2.],
+       [2., 2., 2., ..., 2., 2., 2.],
+       [2., 2., 2., ..., 2., 2., 2.],
+       ...,
+       [2., 2., 2., ..., 2., 2., 2.],
+       [2., 2., 2., ..., 2., 2., 2.],
+       [2., 2., 2., ..., 2., 2., 2.]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dimension_semantics</span></code> should be a tuple of same length as <code class="docutils literal notranslate"><span class="pre">grid</span></code> where each
+entry is either <code class="docutils literal notranslate"><span class="pre">&quot;parallel&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;arbitrary&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">&quot;parallel&quot;</span></code> indicates to Pallas that the iterations of the for loop corresponding to that dimension can be executed independently without affecting the correctness of the program. <code class="docutils literal notranslate"><span class="pre">&quot;arbitrary&quot;</span></code> indicates to Pallas that there can be no assumptions made about this grid dimension and it therefore cannot be parallelized.</p>
+<p>By specifying <code class="docutils literal notranslate"><span class="pre">dimension_semantics</span></code>, we now execute the kernel
+simultaneously on each TensorCore. Pallas will handle splitting up the grid
+automatically.</p>
+<blockquote>
+<div><p>Note that Megacore is only currently available on TPU <code class="docutils literal notranslate"><span class="pre">v4</span></code> and TPU <code class="docutils literal notranslate"><span class="pre">v5p</span></code>. Supplying <code class="docutils literal notranslate"><span class="pre">dimension_semantics</span></code> annotations is a no-op on other platforms, but <em>not</em> specifying it will result in only one TensorCore being used (even if there are more than one available).</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="details.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Writing TPU kernels with Pallas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="matmul.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Matrix Multiplication</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-and-its-memory-spaces">TPU and its memory spaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-specific-pipelining-features">TPU-specific Pipelining Features</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-memory-spaces">TPU Memory Spaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tpus-in-megacore-configuration">TPUs in Megacore configuration</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

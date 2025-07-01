@@ -1,0 +1,1448 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Writing Mosaic GPU kernels with Pallas &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=30646c52"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pallas/gpu/reference';</script>
+    <link rel="icon" href="../../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Pallas Design Notes" href="../design/index.html" />
+    <link rel="prev" title="Pallas:Mosaic GPU" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">Pallas: a JAX kernel language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">Pallas:Mosaic GPU</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/14273-shard-map.html">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pallas:Mosaic GPU</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Writing...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/pallas/gpu/reference.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Writing Mosaic GPU kernels with Pallas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-gpu">What is a GPU?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-order-execution-using-multiple-hardware-units">In-order execution &amp; using multiple hardware units</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-spaces">Memory spaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-allocating-memory-in-specific-memory-spaces">Requesting/allocating memory in specific memory spaces</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-advantage-of-the-l2-cache">Taking advantage of the L2 cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-layouts-and-memory-reference-transforms">Array layouts and memory reference transforms</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-reference-transforms">Memory reference transforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-layouts">Array layouts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mma-tensorcore">MMA (TensorCore)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-space-of-a-and-b-operands">Memory space of <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transposed-operands">Transposed operands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hopper-wgmma">Hopper (<code class="docutils literal notranslate"><span class="pre">wgmma</span></code>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allocating-the-accumulator">Allocating the accumulator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-a-and-b-operands">Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#issuing-the-operation">Issuing the operation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-for-the-operation-to-complete">Waiting for the operation to complete</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackwell-tcgen05">Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-core-map">Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization-structures-and-primitives">Synchronization structures and primitives</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-smem"><code class="docutils literal notranslate"><span class="pre">commit_smem</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-gmem-to-smem-copies">Asynchronous GMEM-to-SMEM copies</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-arrival-cross-thread-synchronization">Explicit arrival (cross-thread synchronization)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#awaiting-tcgen05-tensorcore-instructions">Awaiting <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> TensorCore instructions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clusterbarrier"><code class="docutils literal notranslate"><span class="pre">ClusterBarrier</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semaphore"><code class="docutils literal notranslate"><span class="pre">Semaphore</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-copies">Asynchronous copies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-mosaic-gpu">Inline Mosaic GPU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-parameters">Compiler parameters</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="writing-mosaic-gpu-kernels-with-pallas">
+<h1>Writing Mosaic GPU kernels with Pallas<a class="headerlink" href="#writing-mosaic-gpu-kernels-with-pallas" title="Link to this heading">#</a></h1>
+<p>This page is a reference for the most important features of the Pallas:MGPU backend.
+It’s not a tutorial and as such we do not expect everyone to read it top to bottom.
+Still, it is worth going over
+just to familiarise yourself with some patterns you can find in other tutorials.</p>
+<p>In the following examples, we’re going to assume the following imports are in scope:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.experimental.pallas</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="kn">import</span> <span class="nn">jax.experimental.pallas.mosaic_gpu</span> <span class="k">as</span> <span class="nn">plgpu</span>
+</pre></div>
+</div>
+<section id="what-is-a-gpu">
+<h2>What is a GPU?<a class="headerlink" href="#what-is-a-gpu" title="Link to this heading">#</a></h2>
+<p>Technically, the NVIDIA GPU architecture looks as follows: the GPU is partitioned into
+<em>streaming multiprocessors</em> (SMs). The way this manifests in the CUDA programming model
+is that each <em>CUDA thread block</em> (or CTA) is scheduled on exactly one SM, but multiple
+blocks can be scheduled onto a single SM at a time.</p>
+<p>Each SM contains a chunk of fast memory called <em>shared memory</em> (SMEM) and 4 subdivisions,
+each containing a <em>warp scheduler</em> and compute units (ALU, TensorCore, …).
+This is also reflected in the CUDA programs: each <em>warp</em> (a group of consecutive 32 CUDA
+threads in a block) is assigned to one of those subdivisions in a round-robin fashion.
+Similarly to blocks, each warp is assigned to exactly one subdivision (it never migrates),
+but multiple warps can be assigned to the same SM subdivision. At each clock cycle, the
+warp scheduler from each subdivision tries to select one of its resident warps to execute
+the next instruction.</p>
+<center><img alt="A diagram of one NVIDIA SM" src="../../_static/pallas/gpu/nvidia_sm.svg" style="width:60%; min-width: 400px;"></center>
+<p>Going further, recent CUDA versions also outline the concept of a <em>warpgroup</em>, which are
+4 consecutive warps. Knowing how the hardware looks like, we can see where this is coming
+from: 4 consecutive warps occupy the 4 quarters of an SM and let us issue instructions
+that utilize the whole SM.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A GPU can be viewed in many different ways and in here we want to focus on a slightly
+simplified model that is very TensorCore-centric. This should help you navigate the
+complexities of writing kernels involving the TensorCore, but keep in mind that the
+real picture is more complicated.</p>
+</div>
+<p>For our purposes, TensorCore operations have grown so big that it no longer makes much
+sense to follow the CUDA model. As such, to us, a GPU is a collection of single-threaded cores
+(SMs) with one thread of Pallas:MGPU corresponding to a CUDA warpgroup. In this model, each
+operation you perform in the kernel occupies the whole CUDA warpgroup, and its constituent
+warps always run in lockstep (modulo the jitter from hardware scheduling) and never take
+different paths through control flow (with the small exception of <code class="docutils literal notranslate"><span class="pre">core_map</span></code> that we will
+discuss later). One notable addition here is that we still allow you to co-schedule multiple
+of those Pallas-level threads on the same SM so that they can cooperate and communicate
+through shared memory (we realize that by putting them in the same CUDA block).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From now on, whenever we say “thread”, we refer to the Pallas thread, not a CUDA thread/lane.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is very similar to a programming model popularized by <a class="reference external" href="https://triton-lang.org/">Triton</a>,
+but as you will see there are a few differences. Mosaic GPU tends to be more low level,
+which usually means you will have to put in more work, but it also puts you more in control.
+In our view both approaches have their merits and we encourage you to pick the backend that
+suits your needs the best! Pallas supports and will continue to support Triton as an alternative
+GPU backend.</p>
+</div>
+<section id="in-order-execution-using-multiple-hardware-units">
+<h3>In-order execution &amp; using multiple hardware units<a class="headerlink" href="#in-order-execution-using-multiple-hardware-units" title="Link to this heading">#</a></h3>
+<p>Unlike more complicated CPU architectures GPU only support in-order execution. That, however,
+does not mean that at any given time only a single instruction is running! Each SM quarter
+has multiple independent functional units: TensorCore, Arithmetic logic unit (ALU),
+Load/Store (LSU), Special function unit (SFU).  If the first instruction targets one of the
+units and is followed by another one (that does not use the result of the first one), then the
+warp scheduler can issue the second one before the first one completes. This is often referred
+to as instruction-level parallelism (ILP) and is a common theme in modern TensorCore kernels:
+TensorCore operations are so big and take so many cycles to complete, that it is a waste to not
+try to use other units in the meantime.</p>
+<p>To extend this even further, we can take advantage of this hardware-unit-level parallelism by
+allowing multiple Pallas threads to run concurrently. If one of the threads primarily
+occupies the ALU, while another one primarily issues TensorCore related instructions, we can
+take advantage of the efficient context switching built into the warp schedulers to keep both
+units busy. This is one of the core idea behind algorithms such as <a class="reference external" href="https://arxiv.org/abs/2407.08608">FlashAttention 3</a>
+or <a class="reference external" href="https://pytorch.org/blog/cutlass-ping-pong-gemm-kernel/">CUTLASS ping-pong matmul kernels</a>.</p>
+<p>For more information on how warp scheduling and instruction issue works, we recommend reading
+<a class="reference external" href="https://arxiv.org/abs/2503.20481">Analyzing Modern NVIDIA GPU cores</a>.</p>
+</section>
+<section id="memory-spaces">
+<h3>Memory spaces<a class="headerlink" href="#memory-spaces" title="Link to this heading">#</a></h3>
+<p>The GPU features a few different memory spaces that can be totally ordered from largest (in
+terms of capacity) and slowest (in both total bandwidth and latency of a single access).</p>
+<center><img alt="A diagram of memory spaces of an NVIDIA GPU" src="../../_static/pallas/gpu/memory_spaces.svg" style="width: 90%; min-width: 450px;"></center>
+<p>The biggest memory space is <code class="docutils literal notranslate"><span class="pre">plgpu.GMEM</span></code>, for <em>global memory</em>. In recent data-center grade GPUs
+this memory space is often measured in tens or even hudreds of gigabytes, but it is also the
+slowest one.</p>
+<p>The next memory space, used for the L2 cache, is also more or less global in the
+sense that it is shared by the whole GPU, but its use can only be influenced indirectly through
+cache hints. As such, there’s no way to manually place values in there and so this memory space
+is not exposed in Pallas:MGPU. While only about a 100MB in size, this memory has considerably
+higher bandwidth than GMEM, and so it is still often recommended to take advantage of it while
+writing high-performance kernels.</p>
+<p>Next in line is <em>shared memory</em>, or <code class="docutils literal notranslate"><span class="pre">plgpu.SMEM</span></code>. This memory is located directly inside each SM
+and so it is partitioned. Unless block clusters are used (see the section of clusters below),
+each block is only allowed to access its own SMEM allocations.</p>
+<p>Finally, the lowest level memory space is the <em>register memory</em>. This is where every single value
+(i.e. JAX array) in a Pallas kernel will be located. If the compiler runs out of registers to
+store those arrays, it will insert <em>spills</em>, meaning that it will periodically store and reload
+values to memory. Those spills often introduce other significant performance degradations and so
+we recommend avoiding them. The warning messages about spills can be clearly seen in the <code class="docutils literal notranslate"><span class="pre">ptxas</span></code>
+messages during kernel compilation. To make them visible, run with <code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_PTXAS=1</span></code>
+in your environment.</p>
+<p>The Blackwell GPU generation, has one additional memory space called <em>tensor memory</em> or <code class="docutils literal notranslate"><span class="pre">plgpu.TMEM</span></code>.
+TMEM is very similar to register memory, only it is explicitly allocated and managed by you.
+It is used to store the MMA accumulator, operand metadata (for sparsity or scaling),
+and optionally the left MMA operand. See the Blackwell MMA section for more information about TMEM.</p>
+<section id="requesting-allocating-memory-in-specific-memory-spaces">
+<h4>Requesting/allocating memory in specific memory spaces<a class="headerlink" href="#requesting-allocating-memory-in-specific-memory-spaces" title="Link to this heading">#</a></h4>
+<p>Kernel inputs or outputs are placed in SMEM by default. If you want to access them as GMEM references
+add <code class="docutils literal notranslate"><span class="pre">memory_space=plgpu.GMEM</span></code> to their <code class="docutils literal notranslate"><span class="pre">BlockSpec</span></code>. If you want the kernel to be called with the whole
+input or output array in GMEM, it is sufficient to specify <code class="docutils literal notranslate"><span class="pre">BlockSpec(memory_space=plgpu.GMEM)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SMEM</span></code> and <code class="docutils literal notranslate"><span class="pre">TMEM</span></code> can be allocated explicitly in the <code class="docutils literal notranslate"><span class="pre">scratch_shapes</span></code> argument of <code class="docutils literal notranslate"><span class="pre">pl.pallas_call</span></code>,
+or using <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code>. To allocate a reference, simply call the memory space object with the
+requested shape and dtype.  For example: <code class="docutils literal notranslate"><span class="pre">plgpu.SMEM((128,</span> <span class="pre">128),</span> <span class="pre">jnp.float16)</span></code> will allocate a 128x128
+array of float16 elements in shared memory.</p>
+</section>
+<section id="taking-advantage-of-the-l2-cache">
+<h4>Taking advantage of the L2 cache<a class="headerlink" href="#taking-advantage-of-the-l2-cache" title="Link to this heading">#</a></h4>
+<p>While the L2 cache cannot be managed manually, its noticeably higher bandwidth compared to global
+memory makes it worth thinking about. The simplest way to take advantage of it, is to reorder
+the parallel grid dimensions so that invocations that are scheduled in similar time periods also
+access the same input data.</p>
+<p>While the CUDA programming model does not guarantee anything about the order in which the blocks
+are assigned to SMs, in recent generations the heuristic seems to simply iterate over the
+<code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> CUDA grids in column-major order (i.e. <code class="docutils literal notranslate"><span class="pre">x</span></code> is the fastest-changing dimension and
+<code class="docutils literal notranslate"><span class="pre">z</span></code> is the slowest). Similarly, Pallas:MGPU does not guarantee how a user-specified grid is mapped to
+the CUDA grid (Pallas supports grids of arbitrary rank, not just up to 3D). However, you can assume that
+the iteration will happen in <em>row-major</em> order. That is, if a grid has dimensions <code class="docutils literal notranslate"><span class="pre">(a,</span> <span class="pre">b)</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">b</span></code> will be the fastest-changing dimension and <code class="docutils literal notranslate"><span class="pre">a</span></code> will be the slower one.</p>
+<p>To give a practical example of this, consider a plain matrix multiplication kernel. There, one
+usually uses two parallel grid dimensions <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n)</span></code>, corresponding to tiling the two non-contracting
+dimensions.  If we use this simple scheme, in Pallas:MGPU all programs with id <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">...)</span></code> will be
+scheduled before any block with id <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">...)</span></code>. And, collectively, the programs with <code class="docutils literal notranslate"><span class="pre">m=0</span></code> have to
+read all of the <code class="docutils literal notranslate"><span class="pre">B</span></code> operand! If the <code class="docutils literal notranslate"><span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">k</span></code> dimensions are very large, there is no chance that
+we’ll be able to get cache hits from the <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">...)</span></code> programs from accesses made by the <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">...)</span></code>
+programs. For simplicity, assuming we can only run 16 blocks at a time, we see this access pattern
+from the first scheduled wave:</p>
+<center>
+<object type="image/svg+xml" data="../../_static/pallas/gpu/grid_tiling_off.svg" style="padding-bottom: 10px;">
+    Your browser does not support SVGs or scripting is disabled.
+    This would be an image showing the access pattern of first 16 blocks without grid tiling.
+</object>
+</center>
+<p>However, if we simply rearrange the grid to be <code class="docutils literal notranslate"><span class="pre">(m</span> <span class="pre">//</span> <span class="pre">mt,</span> <span class="pre">n,</span> <span class="pre">mt)</span></code> (and then replace <code class="docutils literal notranslate"><span class="pre">pl.program_id(0)</span></code>
+with <code class="docutils literal notranslate"><span class="pre">pl.program_id(0)</span> <span class="pre">*</span> <span class="pre">mt</span> <span class="pre">+</span> <span class="pre">pl.program_id(2)</span></code> in the kernel), it is straightforward to see that a
+band of programs along both dimensions will be scheduled concurrently (instead of scheduling a single
+row). This greatly increases the number of concurrent programs that load similar slices of data,
+usually significantly improves the L2 utilization and hence the overall performance of the kernel
+(if it was memory bound). Continuing our example with 16 blocks and using <code class="docutils literal notranslate"><span class="pre">mt=4</span></code>, we get the following
+access pattern:</p>
+<center>
+<object type="image/svg+xml" data="../../_static/pallas/gpu/grid_tiling_on.svg" style="padding-bottom: 10px;">
+    Your browser does not support SVGs or scripting is disabled.
+    This would be an image showing the access pattern of first 16 blocks with grid tiling.
+</object>
+</center>
+<p>Note that even though the number of active blocks hasn’t changed, the total footprint of the data they
+access has halved! We get a much higher chance of getting L2 hits now.</p>
+</section>
+</section>
+</section>
+<section id="array-layouts-and-memory-reference-transforms">
+<h2>Array layouts and memory reference transforms<a class="headerlink" href="#array-layouts-and-memory-reference-transforms" title="Link to this heading">#</a></h2>
+<p>In Pallas, the data structures you work with (arrays and references) have a
+<strong>logical shape</strong> (e.g., a 128x128 matrix). This
+logical shape must be mapped to a <strong>physical representation</strong> (how the data is
+actually represented in the GPU’s memory). The specific mapping depends on where the
+data resides:</p>
+<ol class="arabic simple">
+<li><p><strong>Array Layouts:</strong> Arrays are stored in register memory and we call this mapping
+a <em>layout</em>. Layouts define how the elements of an array are
+distributed across the registers available to the CUDA lanes that form a Pallas thread.</p></li>
+<li><p><strong>Memory Reference Transforms:</strong> For mutable references pointing
+to <code class="docutils literal notranslate"><span class="pre">SMEM</span></code>, this mapping is called a <em>transform</em>.
+Transforms describe how the logical data structure is arranged within that
+block of memory.</p></li>
+</ol>
+<p>These concepts are crucial for performance, especially when interacting with
+specialized hardware units like TensorCores or optimizing memory access
+patterns.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are working on a mode that will deal with assigning layouts and transforms fully
+automatically (although with way to provide hints and more control). The APIs listed
+below will likely continue to function, but will become optional.</p>
+</div>
+<section id="memory-reference-transforms">
+<h3>Memory reference transforms<a class="headerlink" href="#memory-reference-transforms" title="Link to this heading">#</a></h3>
+<p>Transforms are applied when a memory reference is first allocated. Pallas
+primitives that operate on these references will automatically account for their
+associated transforms.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">scratch_ref</span><span class="p">):</span>
+  <span class="c1"># Asynchronous copy will reformat the GMEM data to match the SMEM transforms</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">scratch_ref</span><span class="p">,</span> <span class="n">barrier</span><span class="p">)</span>
+  <span class="n">barrier</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">wgmma</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">scratch_ref</span><span class="p">)</span>  <span class="c1"># wgmma only accepts properly transformed refs</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>There are two ways in which references are allocated and each has a way to select
+the desired transforms:</p>
+<p><strong>1. Using <code class="docutils literal notranslate"><span class="pre">plgpu.BlockSpec</span></code></strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transforms</span> <span class="o">=</span> <span class="p">(</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TileTransform</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">SwizzleTransform</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+  <span class="n">in_specs</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">in_block_shape</span><span class="p">,</span> <span class="n">in_index_map</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">),</span>
+  <span class="n">out_specs</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">out_block_shape</span><span class="p">,</span> <span class="n">out_index_map</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">),</span>
+  <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that unlike <code class="docutils literal notranslate"><span class="pre">plgpu.BlockSpec</span></code>, <code class="docutils literal notranslate"><span class="pre">pl.BlockSpec</span></code> does <em>not</em> allow specifying
+transforms.</p>
+<p><strong>2. Specifying the <code class="docutils literal notranslate"><span class="pre">transforms</span></code> argument on the allocated <code class="docutils literal notranslate"><span class="pre">SMEM</span></code></strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transforms</span> <span class="o">=</span> <span class="p">(</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TileTransform</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">SwizzleTransform</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">(</span>
+  <span class="n">scratch_shapes</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="n">transforms</span><span class="p">),</span>
+  <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The available transforms are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.TileTransform(tile_shape)</span></code>, which organizes the data into contiguous,
+non-overlapping tiles of shape <code class="docutils literal notranslate"><span class="pre">tile_shape</span></code>.  The data of one tile is always
+fully linearized (row-major), before another tile begins (tiles are also
+traversed in row-major order). As an example, applying <code class="docutils literal notranslate"><span class="pre">TileTransform((8,</span> <span class="pre">64))</span></code> to a <code class="docutils literal notranslate"><span class="pre">(128,</span> <span class="pre">128)</span></code> reference means the data corresponding to the logical
+slice <code class="docutils literal notranslate"><span class="pre">[0:8,</span> <span class="pre">0:64]</span></code> will be stored first (row-major), followed by
+<code class="docutils literal notranslate"><span class="pre">[0:8,</span> <span class="pre">64:128],</span> <span class="pre">[8:16,</span> <span class="pre">0:64],</span> <span class="pre">[8:16,</span> <span class="pre">64:128]</span></code>, and so on. A different way to achieve
+this would be to take the input array <code class="docutils literal notranslate"><span class="pre">x</span></code> and traverse
+<code class="docutils literal notranslate"><span class="pre">x.reshape(128</span> <span class="pre">//</span> <span class="pre">8,</span> <span class="pre">128</span> <span class="pre">//</span> <span class="pre">64,</span> <span class="pre">8,</span> <span class="pre">64).transpose(0,</span> <span class="pre">2,</span> <span class="pre">1,</span> <span class="pre">3)</span></code> in row-major order.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.SwizzleTransform(swizzle_in_bytes)</span></code>, which transforms the data as described in the
+<a class="reference external" href="https://docs.nvidia.com/cuda/parallel-thread-execution/#tensor-swizzling-modes">PTX docs</a> and
+<a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/#the-swizzle-modes">CUDA docs</a>.
+Swizzling is useful, because it allows transferring data in MMA-related layouts
+between register and shared memory without bank conflicts. The exact details
+of how the memory looks like after swizzling <em>are not that important</em>, since
+all primitives will account for it automatically. Note that the swizzle amount
+is specified in bytes (only 128, 64, 32 and 16 are supported), and is usually
+accompanied by a <code class="docutils literal notranslate"><span class="pre">TileTransform</span></code> (which uses elements in its shape!).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.TransposeTransform(permutation)</span></code>, which permutes the dimensions of the array before it is linearized.
+This is primarily useful in that it lets you change the layout during the GMEM-SMEM copies (only
+do keep in mind that changing the minormost/last dimension is not supported by the hardware).</p></li>
+</ul>
+</section>
+<section id="array-layouts">
+<h3>Array layouts<a class="headerlink" href="#array-layouts" title="Link to this heading">#</a></h3>
+<p>There are a few useful layouts we have defined for you so far:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.Layout.WGMMA</span></code>, which is the layout in which the Hopper-generation TensorCore
+expects the MMA accumulator or 16-bit input operands to have in registers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.Layout.WGMMA_ROW</span></code>, which is the layout obtained after the above after reducing
+it along the rows. Re-broadcasting the rows is free and will produce a value with <code class="docutils literal notranslate"><span class="pre">WGMMA</span></code>
+layout.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.Layout.WGMMA_COL</span></code>, which is an analogue of the one above, only reduced along
+columns instead of rows.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.Layout.WG_STRIDED</span></code>, where the value is partitioned equally among the 128
+CUDA lanes making up a Pallas thread. The consecutive elements (after vectorization)
+are assigned to the lanes in a round-robin fashion. Very simple and effective when
+no interaction with TensorCores is needed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plgpu.Layout.WG_SPLAT</span></code>, indicating that the value is constant. Each CUDA lane will
+hold a single register that contains the value. You normally never have to interact
+with this layout, as it is implicitly used when constant values are created and
+is always implicitly convertible to other layouts.</p></li>
+</ul>
+<p>At the moment, in the default mode of operation, array layout propagation happens
+only in a forward direction and there is little implicit support for reconciling
+layout conflicts: only splat layouts can be implicitly converted into any other
+layout. If you e.g. try to add two arrays that have a different layout, the lowering
+will complain and fail. There are very limited facilities that let you convert between
+layouts, and we usually recommend storing the value to SMEM and reading it back in
+the target layout.</p>
+</section>
+</section>
+<section id="mma-tensorcore">
+<h2>MMA (TensorCore)<a class="headerlink" href="#mma-tensorcore" title="Link to this heading">#</a></h2>
+<p>In this section, we focus on how Pallas:MGPU kernels can utilize the TensorCore unit.
+The programming interface of the TensorCore changes significantly between different
+NVIDIA GPU generations, which is why the lowest-level interfaces differ in Pallas:MGPU as well.</p>
+<p>Each MMA operation is associated with three operands:</p>
+<ul class="simple">
+<li><p>the accumulator <code class="docutils literal notranslate"><span class="pre">D</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(M,</span> <span class="pre">N)</span></code>,</p></li>
+<li><p>the left input <code class="docutils literal notranslate"><span class="pre">A</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(M,</span> <span class="pre">K)</span></code>,</p></li>
+<li><p>the right input <code class="docutils literal notranslate"><span class="pre">B</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(K,</span> <span class="pre">N)</span></code>.
+All operands must have the same element type.</p></li>
+</ul>
+<p>Each use of MMA involves a few steps:</p>
+<ol class="arabic simple">
+<li><p>Allocating the space for the accumulator (MMA implicitly performs <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">+=</span> <span class="pre">A</span> <span class="pre">&#64;</span> <span class="pre">B</span></code>)</p></li>
+<li><p>Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</p></li>
+<li><p>Issuing the operation</p></li>
+<li><p>Waiting for the operation to complete</p></li>
+<li><p>Reading out the result</p></li>
+</ol>
+<p>Steps 2.-4. are usually performed in a loop over the contraction dimension (<code class="docutils literal notranslate"><span class="pre">K</span></code>).</p>
+<section id="memory-space-of-a-and-b-operands">
+<h3>Memory space of <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands<a class="headerlink" href="#memory-space-of-a-and-b-operands" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands are generally best passed in through SMEM, where they can
+be conveniently loaded using <code class="docutils literal notranslate"><span class="pre">plgpu.copy_gmem_to_smem</span></code>. For those operands to be
+compatible with MMA operations, they need to have the appropriate tiling and swizzling
+transforms specified upon their allocation. For all currently supported generations,
+the TensorCore requires the data to be laid out into row-major 2D tiles of shape
+<code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">swizzle_elems)</span></code>, where <code class="docutils literal notranslate"><span class="pre">swizzle_elems</span></code> is derived by dividing the swizzle by the
+element type bytewidth.  The currently supported swizzles are: 128, 64, and 32. Larger
+swizzles are preferable as they improve the performance of GMEM-to-SMEM copies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mma_transforms</span><span class="p">(</span><span class="n">shape_dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">):</span>
+  <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape_dtype</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+  <span class="k">if</span> <span class="n">shape_dtype</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">8</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of rows must be divisible by 8&quot;</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">swizzle_bytes</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">):</span>
+    <span class="n">swizzle_elems</span> <span class="o">=</span> <span class="n">swizzle_bytes</span> <span class="o">//</span> <span class="n">shape_dtype</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">itemsize</span>
+    <span class="k">if</span> <span class="n">shape_dtype</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="n">swizzle_elems</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">(</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TilingTransform</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="n">swizzle_elems</span><span class="p">)),</span>
+              <span class="n">plgpu</span><span class="o">.</span><span class="n">SwizzleTransform</span><span class="p">(</span><span class="n">swizzle_bytes</span><span class="p">))</span>
+  <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Failed to find transforms for the specified window type&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the operands need to be transformed, the <code class="docutils literal notranslate"><span class="pre">A</span></code> operand can be passed in through a different
+memory space (architecture dependent, see below). The <code class="docutils literal notranslate"><span class="pre">B</span></code> operand <em>must</em> be located in SMEM.</p>
+</section>
+<section id="transposed-operands">
+<h3>Transposed operands<a class="headerlink" href="#transposed-operands" title="Link to this heading">#</a></h3>
+<p>When performing MMA on 16-bit operands, the TensorCore can automatically transpose the
+input data. For example, the <code class="docutils literal notranslate"><span class="pre">A</span></code> reference is allowed to be of shape <code class="docutils literal notranslate"><span class="pre">(K,</span> <span class="pre">M)</span></code>, but it
+has to be transposed before passing it into the mma function. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">acc_ref</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a_ref</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span> <span class="ow">and</span> <span class="n">b_ref</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">a_ref_t</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">transpose_ref</span><span class="p">(</span><span class="n">a_ref</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">a_ref_t</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>  <span class="c1"># The shape expected by plgpu.wgmma</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">wgmma</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">a_ref_t</span><span class="p">,</span> <span class="n">b_ref</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An analogous operation is allowed on the <code class="docutils literal notranslate"><span class="pre">B</span></code> reference in this case too.</p>
+</section>
+<section id="hopper-wgmma">
+<h3>Hopper (<code class="docutils literal notranslate"><span class="pre">wgmma</span></code>)<a class="headerlink" href="#hopper-wgmma" title="Link to this heading">#</a></h3>
+<p>In this section, we cover the basics of using the Hopper-generation TensorCores, exposed in
+PTX as the <a class="reference external" href="https://docs.nvidia.com/cuda/parallel-thread-execution/#asynchronous-warpgroup-level-matrix-instructions-wgmma-mma"><code class="docutils literal notranslate"><span class="pre">wgmma.mma_async</span></code> instruction</a>.</p>
+<section id="allocating-the-accumulator">
+<h4>Allocating the accumulator<a class="headerlink" href="#allocating-the-accumulator" title="Link to this heading">#</a></h4>
+<p>In the Hopper hardware architecture the accumulator is allocated in registers, but in Pallas
+it is modeled as a mutable reference, as each MMA operation accumulates in-place.
+There are two ways to allocate the accumulator.</p>
+<p>To create a zero-initialized accumulator you can use <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code> with a
+<code class="docutils literal notranslate"><span class="pre">plgpu.ACC((m,</span> <span class="pre">n),</span> <span class="pre">dtype)</span></code> type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">):</span>
+  <span class="o">...</span>
+  <span class="k">return</span> <span class="n">acc_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">(</span><span class="n">compute</span><span class="p">,</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">ACC</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Dereferencing the accumulator reference, as seen in the end of the <code class="docutils literal notranslate"><span class="pre">compute</span></code> function will
+implicitly await all outstanding WGMMA operations.</p>
+<p>If you’d like to initialize it with an existing array, you can use <code class="docutils literal notranslate"><span class="pre">pl.run_state</span></code> with
+<code class="docutils literal notranslate"><span class="pre">plgpu.ACC.init(init_array)</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">):</span>
+  <span class="o">...</span>
+  <span class="k">return</span> <span class="c1"># pl.run_state only returns the final value of the accumulator</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">run_state</span><span class="p">(</span><span class="n">compute</span><span class="p">)(</span><span class="n">plgpu</span><span class="o">.</span><span class="n">ACC</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">init_array</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">pl.run_state</span></code> has accumulator operands, it implicitly awaits all outstanding WGMMA
+operations before returning the final values.</p>
+</section>
+<section id="preparing-the-a-and-b-operands">
+<h4>Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands<a class="headerlink" href="#preparing-the-a-and-b-operands" title="Link to this heading">#</a></h4>
+<p>As discussed above, we recommend passing in <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> through shared memory. In this
+case the correct tiling and swizzling transforms must be specified.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plgpu.wgmma</span></code> additionally allows passing in <code class="docutils literal notranslate"><span class="pre">A</span></code> through registers (i.e. not an SMEM
+reference but as a regular JAX array). This mode, however, comes with a number of
+significant drawbacks and it is very difficult to ensure sufficient synchronization to
+make this safe.</p>
+<p>TODO: Explain the conditions under which it is acceptable to do this.</p>
+</section>
+<section id="issuing-the-operation">
+<h4>Issuing the operation<a class="headerlink" href="#issuing-the-operation" title="Link to this heading">#</a></h4>
+<p>The supported MMA shapes are such that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> is divisible by 64</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and smaller than 256</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">swizzle</span></code> divided by the bytewidth of element type</p></li>
+</ul>
+<p>The currently supported data types are: <code class="docutils literal notranslate"><span class="pre">jnp.float32</span></code>, <code class="docutils literal notranslate"><span class="pre">jnp.bfloat16</span></code> and <code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code>.
+The accumulator <code class="docutils literal notranslate"><span class="pre">D</span></code> must be a <code class="docutils literal notranslate"><span class="pre">jnp.float32</span></code>, with the exception of <code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code> inputs,
+in which case it is allowed to be <code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code> as well.</p>
+</section>
+<section id="waiting-for-the-operation-to-complete">
+<h4>Waiting for the operation to complete<a class="headerlink" href="#waiting-for-the-operation-to-complete" title="Link to this heading">#</a></h4>
+<p>Each <code class="docutils literal notranslate"><span class="pre">plgpu.wgmma</span></code> call implicitly synchronizes with all previous <code class="docutils literal notranslate"><span class="pre">plgpu.wgmma</span></code> calls, such
+that once control returns from it, we guarantee that no WGMMA other than the last issued
+one is still running. As such, any SMEM regions that were read by previously issued WGMMA
+instructions can be reused. This is especially relevant for pipelining WGMMA with async memory copies:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">buffers</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># In reality you might want even more</span>
+<span class="k">assert</span> <span class="n">a_smem</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffers</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">b_smem</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffers</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">acc_ref</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fetch_a_b</span><span class="p">(</span><span class="n">ki</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+  <span class="n">a_slice</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Replace with the right M/K slice</span>
+  <span class="n">b_slice</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Replace with the right K/N slice</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="n">a_gmem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">a_slice</span><span class="p">],</span> <span class="n">a_smem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">],</span> <span class="n">a_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="n">b_gmem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">b_slice</span><span class="p">],</span> <span class="n">b_smem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">],</span> <span class="n">b_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+  <span class="n">slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">buffers</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">a_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">b_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">wgmma</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">,</span> <span class="n">a_smem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">],</span> <span class="n">b_smem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
+  <span class="c1"># We know that only the last issued WGMMA is running, so we can issue a async load in</span>
+  <span class="c1"># into the other buffer</span>
+  <span class="n">load_i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">buffers</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="n">load_slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">load_i</span><span class="p">,</span> <span class="n">buffers</span><span class="p">)</span>
+  <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">load_i</span> <span class="o">&gt;=</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">load_i</span> <span class="o">&lt;</span> <span class="n">num_steps</span><span class="p">))</span>
+  <span class="k">def</span> <span class="nf">_do_fetch</span><span class="p">():</span>
+    <span class="n">fetch_a_b</span><span class="p">(</span><span class="n">load_i</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">buffers</span><span class="p">):</span>
+  <span class="n">fetch_a_b</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">,</span> <span class="n">loop_body</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="blackwell-tcgen05">
+<h3>Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)<a class="headerlink" href="#blackwell-tcgen05" title="Link to this heading">#</a></h3>
+<p>While Mosaic GPU supports <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> MMA instructions, exposing this capability to Pallas
+is still work in progress. Stay tuned!</p>
+</section>
+</section>
+<section id="using-core-map">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code><a class="headerlink" href="#using-core-map" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+</section>
+<section id="synchronization-structures-and-primitives">
+<h2>Synchronization structures and primitives<a class="headerlink" href="#synchronization-structures-and-primitives" title="Link to this heading">#</a></h2>
+<p>In this section, we go over the most important functions and data structures
+used for synchronization between threads and also some asynchronous operations.</p>
+<section id="commit-smem">
+<h3><code class="docutils literal notranslate"><span class="pre">commit_smem</span></code><a class="headerlink" href="#commit-smem" title="Link to this heading">#</a></h3>
+<p>Regular reads/writes to references are guaranteed to produce values consistent
+with the sequential program order. For example, in the following program, it is
+guaranteed that <code class="docutils literal notranslate"><span class="pre">value</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">value2</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">value2</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This guarantee, however, does not extend to asynchronous primitives such as async
+copies or MMA operations. To make the SMEM writes visible to those primitives, you
+are required to explicitly synchronize with them using the <code class="docutils literal notranslate"><span class="pre">plgpu.commit_smem()</span></code> function.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">commit_smem</span><span class="p">()</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">copy_smem_to_gmem</span><span class="p">(</span><span class="n">smem_ref</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">commit_smem</span><span class="p">()</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">wgmma</span><span class="p">(</span><span class="n">smem_ref</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Failing to call this function is likely to cause subtle data races, due to those asynchronous
+hardware units reading stale data from SMEM. Unfortunately, this function is relatively expensive,
+which is why we rely on you, the user, to insert it in the minimal number of places where it’s necessary.</p>
+</section>
+<section id="barrier">
+<h3><code class="docutils literal notranslate"><span class="pre">Barrier</span></code><a class="headerlink" href="#barrier" title="Link to this heading">#</a></h3>
+<p>This is essentially a thin wrapper around an array of PTX <code class="docutils literal notranslate"><span class="pre">mbarrier</span></code> types and is
+passed in as a reference. All functions involving barriers expect to only get a single
+barrier argument, and so if the reference contains multiple, you have to extract one
+of them explicitly using <code class="docutils literal notranslate"><span class="pre">barriers.at[index]</span></code>. <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>s are always allocated in SMEM
+and as such have relatively low overheads. Each barrier can be configured to complete
+after a fixed number of “arrivals” (by default 1).</p>
+<p>To block a thread until a barrier completes, use the following function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are three operations that can complete a barrier:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>It is critical to ensure that the synchronization scheme makes it impossible for two
+barrier completions to happen without a call to <code class="docutils literal notranslate"><span class="pre">plgpu.barrier_wait</span></code> in between them.
+For example, if you use <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>s to synchronize two producer/consumer threads, you
+need to perform barrier synchronization going both ways to introduce “backpressure”
+that will stop one thread from arriving twice before the other one had a chance to await.
+Failing to satisfy this will corrupt the data structure and can cause surprising failures
+(including CUDA runtime errors). See below for an example of a valid program with two threads.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Another critical restriction is that the number of barrier completions must equal the
+number of barrier waits throughout the barrier’s lifetime. It is not allowed to end a scoped
+allocation of a barrier when it has an unawaited completion. Otherwise, when it is
+reused by the compiler, leaving it in this state can cause problems downstream.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Finally, it is crucial to ensure that each thread that ever waits on a <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>
+takes part in all <code class="docutils literal notranslate"><span class="pre">wait</span></code> operations on it. It is not allowed to e.g. await every
+other completion of a barrier from one thread, and all other completions from another
+one. Doing so will lead to deadlocks. To recap: when a <code class="docutils literal notranslate"><span class="pre">Barrier</span></code> is used to wait in
+some thread, it must observe every single completion of that barrier (by waiting on it).</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">Barrier</span></code> can receive arrivals from any source, without restrictions.</p>
+</div>
+<section id="asynchronous-gmem-to-smem-copies">
+<h4>Asynchronous GMEM-to-SMEM copies<a class="headerlink" href="#asynchronous-gmem-to-smem-copies" title="Link to this heading">#</a></h4>
+<p>When an asynchronous GMEM-to-SMEM copy is being executed by the TMA engine, it will
+post progress updates to the barrier given to <code class="docutils literal notranslate"><span class="pre">plgpu.copy_gmem_to_smem</span></code>. Once the copy
+is complete, the barrier will complete one arrival as well.</p>
+</section>
+<section id="explicit-arrival-cross-thread-synchronization">
+<h4>Explicit arrival (cross-thread synchronization)<a class="headerlink" href="#explicit-arrival-cross-thread-synchronization" title="Link to this heading">#</a></h4>
+<p>Any thread can explicitly arrival on a barrier using the following function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_arrive</span><span class="p">(</span><span class="n">barrier</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is especially useful when synchronizing two threads that are in producer/consumer
+roles. In this case, we recommend allocating two arrays of <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>s, with size equal
+to the size of the “queue” used to pass data between the two threads. For example,
+assume one thread continues writing tiles of an array to SMEM while another thread
+reads them. We triple-buffer the SMEM region to allow more asynchrony between the two
+threads:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tid</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;thread&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffering</span><span class="p">,</span> <span class="o">*</span><span class="n">item_shape</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">produced</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">consumed</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffering</span><span class="p">,)</span>
+
+<span class="k">def</span> <span class="nf">thread0_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+  <span class="n">slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">buffering</span><span class="p">)</span>
+  <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">buffering</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">_await_consumed</span><span class="p">():</span>
+    <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">consumed</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Wait for consumption of the value before overwriting it</span>
+  <span class="c1"># Option 1: Compute the next value</span>
+  <span class="n">queue</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">produce</span><span class="p">()</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_arrive</span><span class="p">(</span><span class="n">produced</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Signal the value is ready</span>
+  <span class="c1"># Option 2: Produce the value through async_copy</span>
+  <span class="c1"># plgpu.copy_gmem_to_smem(..., queue.at[slot], barrier=produced.at[slot])</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">tid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">thread0_body</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">thread1_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+  <span class="n">slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">buffering</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">produced</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Wait for the value to be ready</span>
+  <span class="n">consume</span><span class="p">(</span><span class="n">queue</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Load and compute</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_arrive</span><span class="p">(</span><span class="n">consumed</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Signal that the value is consumed</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">tid</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">thread1_body</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="awaiting-tcgen05-tensorcore-instructions">
+<h4>Awaiting <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> TensorCore instructions<a class="headerlink" href="#awaiting-tcgen05-tensorcore-instructions" title="Link to this heading">#</a></h4>
+<p>While Mosaic GPU supports <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> MMA instructions, exposing this capability to Pallas
+is still work in progress. Stay tuned!</p>
+</section>
+</section>
+<section id="clusterbarrier">
+<h3><code class="docutils literal notranslate"><span class="pre">ClusterBarrier</span></code><a class="headerlink" href="#clusterbarrier" title="Link to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+<section id="semaphore">
+<h3><code class="docutils literal notranslate"><span class="pre">Semaphore</span></code><a class="headerlink" href="#semaphore" title="Link to this heading">#</a></h3>
+<p>TODO</p>
+</section>
+</section>
+<section id="asynchronous-copies">
+<h2>Asynchronous copies<a class="headerlink" href="#asynchronous-copies" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+</section>
+<section id="inline-mosaic-gpu">
+<h2>Inline Mosaic GPU<a class="headerlink" href="#inline-mosaic-gpu" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+</section>
+<section id="compiler-parameters">
+<h2>Compiler parameters<a class="headerlink" href="#compiler-parameters" title="Link to this heading">#</a></h2>
+<p>TODO</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pallas:Mosaic GPU</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../design/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pallas Design Notes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-gpu">What is a GPU?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-order-execution-using-multiple-hardware-units">In-order execution &amp; using multiple hardware units</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-spaces">Memory spaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#requesting-allocating-memory-in-specific-memory-spaces">Requesting/allocating memory in specific memory spaces</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-advantage-of-the-l2-cache">Taking advantage of the L2 cache</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-layouts-and-memory-reference-transforms">Array layouts and memory reference transforms</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-reference-transforms">Memory reference transforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-layouts">Array layouts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mma-tensorcore">MMA (TensorCore)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-space-of-a-and-b-operands">Memory space of <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transposed-operands">Transposed operands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hopper-wgmma">Hopper (<code class="docutils literal notranslate"><span class="pre">wgmma</span></code>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allocating-the-accumulator">Allocating the accumulator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-a-and-b-operands">Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#issuing-the-operation">Issuing the operation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-for-the-operation-to-complete">Waiting for the operation to complete</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackwell-tcgen05">Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-core-map">Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization-structures-and-primitives">Synchronization structures and primitives</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-smem"><code class="docutils literal notranslate"><span class="pre">commit_smem</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-gmem-to-smem-copies">Asynchronous GMEM-to-SMEM copies</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-arrival-cross-thread-synchronization">Explicit arrival (cross-thread synchronization)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#awaiting-tcgen05-tensorcore-instructions">Awaiting <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> TensorCore instructions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clusterbarrier"><code class="docutils literal notranslate"><span class="pre">ClusterBarrier</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semaphore"><code class="docutils literal notranslate"><span class="pre">Semaphore</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-copies">Asynchronous copies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-mosaic-gpu">Inline Mosaic GPU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-parameters">Compiler parameters</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

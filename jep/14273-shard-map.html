@@ -1,0 +1,1323 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>shmap (shard_map) for simple per-device code &#8212; JAX  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=30646c52"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'jep/14273-shard-map';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="jax.extend: a module for extensions" href="15856-jex.html" />
+    <link rel="prev" title="Type Annotation Roadmap for JAX" href="12049-type-annotations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/jax_logo_250px.png" class="logo__image only-light" alt="JAX  documentation - Home"/>
+    <script>document.write(`<img src="../_static/jax_logo_250px.png" class="logo__image only-dark" alt="JAX  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffi.html">Foreign function interface (FFI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aot.html">Ahead-of-time lowering and compilation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../export/export.html">Exporting and serializing staged-out computations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../export/shape_poly.html">Shape polymorphism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../export/jax2tf.html">Interoperation with TensorFlow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/quickstart.html">Pallas Quickstart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/pipelining.html">Software Pipelining</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/pipelining.html">TPU Pipelining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/matmul.html">Matrix Multiplication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/sparse.html">Scalar Prefetch and Block-Sparse Computation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/design/design.html">Pallas Design</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/design/async_note.html">Pallas Async Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../pallas/CHANGELOG.html">Pallas Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/neural_network_with_tfds_data.html">Training a simple neural network, with tensorflow/datasets data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../contributor_guide.html">Developer notes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html">Contributing to JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer.html">Building from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../investigating_a_regression.html">Investigating a regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autodidax.html">Autodidax: JAX core from scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
+
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">JAX Enhancement Proposals (JEPs)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="263-prng.html">263: JAX PRNG Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="4410-omnistaging.html">4410: Omnistaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="9263-typed-keys.html">9263: Typed keys &amp; pluggable RNGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="9407-type-promotion.html">9407: Design of Type Promotion Semantics for JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="9419-jax-versioning.html">9419: Jax and Jaxlib versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="10657-sequencing-effects.html">10657: Sequencing side-effects in JAX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="11830-new-remat-checkpoint.html">11830: `jax.remat` / `jax.checkpoint` new implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="12049-type-annotations.html">12049: Type Annotation Roadmap for JAX</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">14273: `shard_map` (`shmap`) for simple per-device code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="15856-jex.html">15856: `jax.extend`, an extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="17111-shmap-transpose.html">17111: Efficient transposition of `shard_map` (and other maps)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="18137-numpy-scipy-scope.html">18137: Scope of JAX NumPy &amp; SciPy Wrappers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="25516-effver.html">25516: Effort-based versioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../building_on_jax.html">Building on JAX</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_compatibility.html">API compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deprecation.html">Python and NumPy version support policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../async_dispatch.html">Asynchronous dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.debug.html"><code class="docutils literal notranslate"><span class="pre">jax.debug</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.dlpack.html"><code class="docutils literal notranslate"><span class="pre">jax.dlpack</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_partitioning.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_partitioning</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.jet.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.jet</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.all.html">jax.Array.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.any.html">jax.Array.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.at.html">jax.Array.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.device.html">jax.Array.device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.item.html">jax.Array.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.max.html">jax.Array.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.min.html">jax.Array.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.real.html">jax.Array.real</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.round.html">jax.Array.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.size.html">jax.Array.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.std.html">jax.Array.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.take.html">jax.Array.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.var.html">jax.Array.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.view.html">jax.Array.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.T.html">jax.Array.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About the project</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently asked questions (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary of terms</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../config_options.html">Configuration Options</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../contributor_guide.html" class="nav-link">Developer notes</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">JAX Enhancement Proposals (JEPs)</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><code...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/jax-ml/jax" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/jep/14273-shard-map.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>shmap (shard_map) for simple per-device code</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#so-let-s-see-shmap">So, let’s see <code class="docutils literal notranslate"><span class="pre">shmap</span></code>!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tl-dr-example-with-a-more-detailed-explanation-to-follow">TL;DR example (with a more detailed explanation to follow)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slow-down-start-with-the-basics">Slow down, start with the basics!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-reducing-vs-rank-preserving-maps-over-array-axes">Rank-reducing vs rank-preserving maps over array axes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-how-each-input-is-split-unconcatenated-and-tiled-with-in-specs">Controlling how each input is split (unconcatenated) and tiled with <code class="docutils literal notranslate"><span class="pre">in_specs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-how-each-output-assembled-by-concatenation-block-transposition-and-untiling-using-out-specs">Controlling how each output assembled by concatenation, block transposition, and untiling using <code class="docutils literal notranslate"><span class="pre">out_specs</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-specification">API Specification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-should-you-use-shmap-and-when-should-you-use-pjit">When should you use <code class="docutils literal notranslate"><span class="pre">shmap</span></code> and when should you use <code class="docutils literal notranslate"><span class="pre">pjit</span></code>?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-realistic-example">A realistic example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-don-t-pmap-or-xmap-already-solve-this">Why don’t <code class="docutils literal notranslate"><span class="pre">pmap</span></code> or <code class="docutils literal notranslate"><span class="pre">xmap</span></code> already solve this?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="shmap-shard-map-for-simple-per-device-code">
+<h1><code class="docutils literal notranslate"><span class="pre">shmap</span></code> (<code class="docutils literal notranslate"><span class="pre">shard_map</span></code>) for simple per-device code<a class="headerlink" href="#shmap-shard-map-for-simple-per-device-code" title="Link to this heading">#</a></h1>
+<p><em>sholto&#64;, sharadmv&#64;, jekbradbury&#64;, zhangqiaorjc&#64;, mattjj&#64;</em></p>
+<p><em>January 2023</em></p>
+<p><strong>This was the design doc proposing <code class="docutils literal notranslate"><span class="pre">shard_map</span></code>. You may instead want
+<a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/shard_map.html">the up-to-date user docs</a>.</strong></p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<p>JAX supports two schools of thought for multi-device programming:</p>
+<ol class="arabic simple">
+<li><p><strong>Compiler, take the wheel!</strong> Let the compiler automatically partition bulk
+array functions over devices.</p></li>
+<li><p><strong>Just let me write what I mean, damnit!</strong> Give me per-device code and
+explicit communication collectives.</p></li>
+</ol>
+<p>We need great APIs for both, and rather than being mutually exclusive
+alternatives, they need to compose with each other.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">pjit</span></code> (now just <code class="docutils literal notranslate"><span class="pre">jit</span></code>) we have <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html">a next-gen
+API</a>
+for the first school. But we haven’t quite leveled-up the second school. <code class="docutils literal notranslate"><span class="pre">pmap</span></code>
+follows the second school, but over time we found it has <a class="reference internal" href="#why-don-t-pmap-or-xmap-already-solve-this">fatal
+flaws</a>. <code class="docutils literal notranslate"><span class="pre">xmap</span></code> solved those flaws,
+but it doesn’t quite give us per-device shapes, and it includes several other
+big ideas too. Meanwhile, new demands for per-device explicit-collectives
+programming have emerged, like in <a class="reference external" href="https://arxiv.org/abs/2211.05102">Efficiently Scaling Transformer
+Inference</a>.</p>
+<p>We can level-up the second school with <code class="docutils literal notranslate"><span class="pre">shmap</span></code>. <code class="docutils literal notranslate"><span class="pre">shmap</span></code> is:</p>
+<ul class="simple">
+<li><p>a simple multi-device parallelism API which lets us write per-device code with
+explicit collectives, where logical shapes match per-device physical buffer
+shapes and collectives correspond exactly to cross-device communication;</p></li>
+<li><p>a specialization of <code class="docutils literal notranslate"><span class="pre">xmap</span></code> with scaled-back features and a few tweaks;</p></li>
+<li><p>a fairly direct surfacing of the XLA SPMD Partitioner’s ‘manual’ mode;</p></li>
+<li><p>a fun-to-say Seussian name which could stand for <code class="docutils literal notranslate"><span class="pre">shard_map</span></code>,
+<code class="docutils literal notranslate"><span class="pre">shpecialized_xmap</span></code>, <code class="docutils literal notranslate"><span class="pre">sholto_map</span></code>, or <code class="docutils literal notranslate"><span class="pre">sharad_map</span></code>.</p></li>
+</ul>
+<p><strong>For <code class="docutils literal notranslate"><span class="pre">pjit</span></code> users</strong>, <code class="docutils literal notranslate"><span class="pre">shmap</span></code> is a complementary tool. It can be used inside a
+<code class="docutils literal notranslate"><span class="pre">pjit</span></code> computation to drop temporarily into a “manual collectives” mode, like an
+escape hatch from the compiler’s automatic partitioning. That way, users get the
+convenience and familiar just-NumPy programming model of <code class="docutils literal notranslate"><span class="pre">pjit</span></code> for most of their
+code, along with the ability to hand-optimize collective communication with
+<code class="docutils literal notranslate"><span class="pre">shmap</span></code> wherever it’s needed. It’s the best of both worlds!</p>
+<p><strong>For <code class="docutils literal notranslate"><span class="pre">pmap</span></code> users</strong>, <code class="docutils literal notranslate"><span class="pre">shmap</span></code> is a strict upgrade. It’s more expressive,
+performant, and composable with other JAX APIs, without making basic batch data
+parallelism any harder.</p>
+<p>For more on practical use, you can jump to <a class="reference internal" href="#when-should-you-use-shmap-and-when-should-you-use-pjit">When should you use <code class="docutils literal notranslate"><span class="pre">shmap</span></code> and when
+should you use <code class="docutils literal notranslate"><span class="pre">pjit</span></code>?</a>.
+If you’re wondering why we need a new thing at all, or what
+the problems with <code class="docutils literal notranslate"><span class="pre">pmap</span></code> are, jump to <a class="reference internal" href="#why-don-t-pmap-or-xmap-already-solve-this">Why don’t <code class="docutils literal notranslate"><span class="pre">pmap</span></code> or <code class="docutils literal notranslate"><span class="pre">xmap</span></code> already solve
+this?</a>.
+Or keep reading the next section to see some <code class="docutils literal notranslate"><span class="pre">shmap</span></code> examples and the API spec.</p>
+</section>
+<section id="so-let-s-see-shmap">
+<h2>So, let’s see <code class="docutils literal notranslate"><span class="pre">shmap</span></code>!<a class="headerlink" href="#so-let-s-see-shmap" title="Link to this heading">#</a></h2>
+<section id="tl-dr-example-with-a-more-detailed-explanation-to-follow">
+<h3>TL;DR example (with a more detailed explanation to follow)<a class="headerlink" href="#tl-dr-example-with-a-more-detailed-explanation-to-follow" title="Link to this heading">#</a></h3>
+<p>Sho shick:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">PartitionSpec</span> <span class="k">as</span> <span class="n">P</span>
+<span class="kn">from</span> <span class="nn">jax.experimental.shard_map</span> <span class="kn">import</span> <span class="n">shard_map</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_mesh</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span> <span class="mi">8</span> <span class="o">*</span> <span class="mf">16.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span> <span class="o">*</span> <span class="mf">32.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">),</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+         <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">matmul_basic</span><span class="p">(</span><span class="n">a_block</span><span class="p">,</span> <span class="n">b_block</span><span class="p">):</span>
+  <span class="c1"># a_block: f32[2, 8]</span>
+  <span class="c1"># b_block: f32[8, 32]</span>
+  <span class="n">z_partialsum</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a_block</span><span class="p">,</span> <span class="n">b_block</span><span class="p">)</span>
+  <span class="n">z_block</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="n">z_partialsum</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">z_block</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">matmul_basic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># c: f32[8, 32]</span>
+</pre></div>
+</div>
+<p>Notice:</p>
+<ul class="simple">
+<li><p>no nesting needed (or <code class="docutils literal notranslate"><span class="pre">axis_index_groups</span></code>) for multiple axes of parallelism,
+unlike <code class="docutils literal notranslate"><span class="pre">pmap</span></code>;</p></li>
+<li><p>no reshapes in the caller, unlike <code class="docutils literal notranslate"><span class="pre">pmap</span></code> and hard-<code class="docutils literal notranslate"><span class="pre">xmap</span></code>, and logical shapes
+correspond to per-device physical shapes, unlike (non-hard) <code class="docutils literal notranslate"><span class="pre">xmap</span></code>;</p></li>
+<li><p>precise device placement control by using <code class="docutils literal notranslate"><span class="pre">mesh</span></code>, unlike <code class="docutils literal notranslate"><span class="pre">pmap</span></code>;</p></li>
+<li><p>there’s only one set of axis names for logical and physical, unlike <code class="docutils literal notranslate"><span class="pre">xmap</span></code>;</p></li>
+<li><p>the result is a <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code> which could be efficiently passed to a <code class="docutils literal notranslate"><span class="pre">pjit</span></code>,
+unlike <code class="docutils literal notranslate"><span class="pre">pmap</span></code>;</p></li>
+<li><p>this same code works efficiently inside a <code class="docutils literal notranslate"><span class="pre">pjit</span></code>/<code class="docutils literal notranslate"><span class="pre">jit</span></code>, unlike <code class="docutils literal notranslate"><span class="pre">pmap</span></code>;</p></li>
+<li><p>this code works eagerly, so we can <code class="docutils literal notranslate"><span class="pre">pdb</span></code> in the middle and print values,
+unlike <code class="docutils literal notranslate"><span class="pre">xmap</span></code>’s current implementation (though by design <code class="docutils literal notranslate"><span class="pre">xmap</span></code> without the
+sequential schedule can in principle work eagerly too).</p></li>
+</ul>
+<p>Here’s another matmul variant with a fully sharded result:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="p">(</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">),</span> <span class="n">P</span><span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+         <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">matmul_reduce_scatter</span><span class="p">(</span><span class="n">a_block</span><span class="p">,</span> <span class="n">b_block</span><span class="p">):</span>
+  <span class="c1"># c_partialsum: f32[8/X, 32]</span>
+  <span class="n">c_partialsum</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a_block</span><span class="p">,</span> <span class="n">b_block</span><span class="p">)</span>
+  <span class="c1"># c_block: f32[8/X, 32/Y]</span>
+  <span class="n">c_block</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum_scatter</span><span class="p">(</span><span class="n">c_partialsum</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">scatter_dimension</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tiled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">c_block</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">matmul_reduce_scatter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="slow-down-start-with-the-basics">
+<h3>Slow down, start with the basics!<a class="headerlink" href="#slow-down-start-with-the-basics" title="Link to this heading">#</a></h3>
+<section id="rank-reducing-vs-rank-preserving-maps-over-array-axes">
+<h4>Rank-reducing vs rank-preserving maps over array axes<a class="headerlink" href="#rank-reducing-vs-rank-preserving-maps-over-array-axes" title="Link to this heading">#</a></h4>
+<p>We can think of <code class="docutils literal notranslate"><span class="pre">pmap</span></code> (and <code class="docutils literal notranslate"><span class="pre">vmap</span></code> and <code class="docutils literal notranslate"><span class="pre">xmap</span></code>) as unstacking each array input
+along an axis (e.g. unpacking a 2D matrix into its 1D rows), applying its body
+function to each piece, and stacking the results back together, at least when
+collectives aren’t involved:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pmap</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">out_axes</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span><span class="n">xs</span><span class="p">)</span> <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>For example, if <code class="docutils literal notranslate"><span class="pre">xs</span></code> had shape <code class="docutils literal notranslate"><span class="pre">f32[8,5]</span></code> then each <code class="docutils literal notranslate"><span class="pre">x</span></code> has shape <code class="docutils literal notranslate"><span class="pre">f32[5]</span></code>, and
+if each <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> has shape <code class="docutils literal notranslate"><span class="pre">f32[3,7]</span></code> then the final stacked result <code class="docutils literal notranslate"><span class="pre">pmap(f)(xs)</span></code>
+has shape <code class="docutils literal notranslate"><span class="pre">f32[8,3,7]</span></code>. That is, each application of the body function <code class="docutils literal notranslate"><span class="pre">f</span></code> takes
+as argument inputs with one fewer axis than the corresponding argument to
+<code class="docutils literal notranslate"><span class="pre">pmap(f)</span></code>. We can say these are <em>rank-reducing maps</em> with unstacking/stacking of
+inputs/outputs.</p>
+<p>The number of logical applications of <code class="docutils literal notranslate"><span class="pre">f</span></code> is determined by the size of the input
+axis being mapped over: for example, if we map over an input axis of size 8,
+semantically we get 8 logical applications of the function, which for pmap
+always correspond to 8 devices physically computing them.</p>
+<p>In contrast, <code class="docutils literal notranslate"><span class="pre">shmap</span></code> does not have this rank-reducing behavior. Instead, we can
+think of it as slicing (or “unconcatenating”) along input axes into blocks,
+applying the body function, and concatenating the results back together (again
+when collectives aren’t involved):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">devices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[:</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">devices</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,))</span>  <span class="c1"># mesh.shape[&#39;i&#39;] = 4</span>
+
+<span class="n">shard_map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">))(</span><span class="n">y</span><span class="p">)</span>
+<span class="o">==</span>
+<span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">y_blk</span><span class="p">)</span> <span class="k">for</span> <span class="n">y_blk</span> <span class="ow">in</span> <span class="n">jnp</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>Recall that <code class="docutils literal notranslate"><span class="pre">jnp.split</span></code> slices its input into equally-sized blocks with the same
+rank, so that if in the above example <code class="docutils literal notranslate"><span class="pre">y</span></code> has shape <code class="docutils literal notranslate"><span class="pre">f32[8,5]</span></code> then each <code class="docutils literal notranslate"><span class="pre">y_blk</span></code>
+has shape <code class="docutils literal notranslate"><span class="pre">f32[2,5]</span></code>, and if each <code class="docutils literal notranslate"><span class="pre">f(y_blk)</span></code> has shape <code class="docutils literal notranslate"><span class="pre">f32[3,7]</span></code> then the final
+concatenated result <code class="docutils literal notranslate"><span class="pre">shard_map(f,</span> <span class="pre">...)(y)</span></code> has shape <code class="docutils literal notranslate"><span class="pre">f32[12,7]</span></code>. So <code class="docutils literal notranslate"><span class="pre">shmap</span></code>
+(<code class="docutils literal notranslate"><span class="pre">shard_map</span></code>) maps over shards, or blocks, of its inputs. We can say it’s a
+<em>rank-preserving ma</em>p with unconcatenating/concatenating of its inputs/outputs.</p>
+<p>The number of logical applications of <code class="docutils literal notranslate"><span class="pre">f</span></code> is determined by the mesh size, not by
+any input axis size: for example, if we have a mesh of total size 4 (i.e. over 4
+devices) then semantically we get 4 logical applications of the function,
+corresponding to the 4 devices physically computing them.</p>
+</section>
+<section id="controlling-how-each-input-is-split-unconcatenated-and-tiled-with-in-specs">
+<h4>Controlling how each input is split (unconcatenated) and tiled with <code class="docutils literal notranslate"><span class="pre">in_specs</span></code><a class="headerlink" href="#controlling-how-each-input-is-split-unconcatenated-and-tiled-with-in-specs" title="Link to this heading">#</a></h4>
+<p>Each of the <code class="docutils literal notranslate"><span class="pre">in_specs</span></code> identifies some of the corresponding input array’s axes
+with mesh axes by name using <code class="docutils literal notranslate"><span class="pre">PartitionSpec</span></code>s, representing how to split (or
+unconcatenate) that input into the blocks to which the body function is applied.
+That identification determines the shard sizes; when an input axis is identified
+with a mesh axis, the input is split (unconcatenated) along that logical axis
+into a number of pieces equal to the corresponding mesh axis size. (It’s an
+error if the corresponding mesh axis size does not evenly divide the input array
+axis size.) If an input’s pspec does not mention a mesh axis name, then there’s
+no splitting over that mesh axis. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">devices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">())</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">devices</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x_block</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">x_block</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x_block</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>  <span class="c1"># prints (3,12)</span>
+</pre></div>
+</div>
+<p>Here, because the input pspec did not mention the mesh axis name <code class="docutils literal notranslate"><span class="pre">'j'</span></code>, no input
+array axis is split over that mesh axis; similarly, because the second axis of
+the input array is not identified with (and hence split over) any mesh axis,
+application of <code class="docutils literal notranslate"><span class="pre">f1</span></code> gets a full view of the input along that axis.</p>
+<p>When a mesh axis is not mentioned in an input pspec, we can always rewrite to a
+less efficient program where all mesh axes are mentioned but the caller performs
+a <code class="docutils literal notranslate"><span class="pre">jnp.tile</span></code>, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x_block</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">x_block</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x_block</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">x_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">mesh</span><span class="o">.</span><span class="n">axis_size</span><span class="p">[</span><span class="s1">&#39;j&#39;</span><span class="p">]))</span>  <span class="c1"># x_ has shape (12, 24)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f2</span><span class="p">(</span><span class="n">x_</span><span class="p">)</span>  <span class="c1"># prints (3,12), and f1(x) == f2(x_)</span>
+</pre></div>
+</div>
+<p>In other words, because each input pspec can mention each mesh axis name zero or
+one times, rather than having to mention each name exactly once, we can say that
+in addition to the <code class="docutils literal notranslate"><span class="pre">jnp.split</span></code> built into its input, <code class="docutils literal notranslate"><span class="pre">shard_map</span></code> also has a
+<code class="docutils literal notranslate"><span class="pre">jnp.tile</span></code> built into its input, at least logically (though the tiling may not
+need to be carried out physically, depending on the arguments’ physical sharding
+layout). The tiling to use is not unique; we could also have tiled along the
+first axis, and used the pspec <code class="docutils literal notranslate"><span class="pre">P(('j',</span> <span class="pre">'i'),</span> <span class="pre">None)</span></code>.</p>
+<p>Physical data movement is possible on inputs, as each device needs to have a
+copy of the appropriate data.</p>
+</section>
+<section id="controlling-how-each-output-assembled-by-concatenation-block-transposition-and-untiling-using-out-specs">
+<h4>Controlling how each output assembled by concatenation, block transposition, and untiling using <code class="docutils literal notranslate"><span class="pre">out_specs</span></code><a class="headerlink" href="#controlling-how-each-output-assembled-by-concatenation-block-transposition-and-untiling-using-out-specs" title="Link to this heading">#</a></h4>
+<p>Analogously to the input side, each of the <code class="docutils literal notranslate"><span class="pre">out_specs</span></code> identifies some of the
+corresponding output array’s axes with mesh axes by name, representing how the
+output blocks (one for each application of the body function, or equivalently
+one for each physical device) should be assembled back together to form the
+final output value. For example, in both the <code class="docutils literal notranslate"><span class="pre">f1</span></code> and <code class="docutils literal notranslate"><span class="pre">f2</span></code> examples above the
+<code class="docutils literal notranslate"><span class="pre">out_specs</span></code> indicate we should form the final output by concatenating together
+the block results along both axes, resulting in both cases an array <code class="docutils literal notranslate"><span class="pre">y</span></code> of shape
+<code class="docutils literal notranslate"><span class="pre">(12,24)</span></code>. (It’s an error if an output shape of the body function, i.e. an
+output block shape, has a rank too small for the concatenation described by the
+corresponding output pspec.)</p>
+<p>When a mesh axis name is not mentioned in an output pspec, it represents an
+<em>un-tiling</em>: when the user writes an output pspec which does not mention one of
+the mesh axis names, they promise that the output blocks are equal along that
+mesh axis, and so only one block along that axis is used in the output (rather
+than concatenating all the blocks together along that mesh axis). For example,
+using the same mesh as above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">]])</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">shard_map</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="p">(),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>  <span class="c1"># prints the same as jnp.tile(x, (4, 2))</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">shard_map</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="p">(),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>  <span class="c1"># prints the same as jnp.tile(x, (4, 1)), or just jnp.tile(x, (4,))</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">shard_map</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="p">(),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>  <span class="c1"># prints the same as jnp.tile(x, (1, 1)), or just x</span>
+</pre></div>
+</div>
+<p>Notice that the body function closing over an array value is equivalent to
+passing it as an augment with a corresponding input pspec of <code class="docutils literal notranslate"><span class="pre">P(None,</span> <span class="pre">None)</span></code>. As
+another example, following more closely to the other examples above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x_block</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="n">x_block</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">f3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y3</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (12,6)</span>
+</pre></div>
+</div>
+<p>Notice that the result has a second axis size of 6, half the size of the input’s
+second axis. In this case, the un-tile expressed by not mentioning the mesh axis
+name <code class="docutils literal notranslate"><span class="pre">'j'</span></code> in the output pspec was safe because of the collective <code class="docutils literal notranslate"><span class="pre">psum</span></code>, which
+ensures each output block is equal along the corresponding mesh axis. Here are
+two more examples where we vary which mesh axes are mentioned in the output
+pspec:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">f4</span><span class="p">(</span><span class="n">x_block</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="n">x_block</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="n">f4</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y4</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3,12)</span>
+
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">shard_map</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">in_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">),</span> <span class="n">out_specs</span><span class="o">=</span><span class="n">P</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">f5</span><span class="p">(</span><span class="n">x_block</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="n">x_block</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span><span class="p">))</span>
+
+<span class="n">y5</span> <span class="o">=</span> <span class="n">f5</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y5</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (3,6)</span>
+</pre></div>
+</div>
+<p>On the physical side, not mentioning a mesh axis name in an output pspec
+assembles an <code class="docutils literal notranslate"><span class="pre">Array</span></code> from the output device buffers with replicated layout along
+that mesh axis.</p>
+<p>There is no runtime check that the output blocks are actually equal along a mesh
+axis to be un-tiled along, or equivalently that the corresponding physical
+buffers have equal values and thus can be interpreted as a replicated layout for
+a single logical array. But we can provide a static check mechanism which raises
+an error on all potentially-incorrect programs.</p>
+<p>Because the <code class="docutils literal notranslate"><span class="pre">out_specs</span></code> can mention mesh axis names zero or one times, and
+because they can be mentioned in any order, we can say that in addition to the
+<code class="docutils literal notranslate"><span class="pre">jnp.concatenate</span></code> built into its output, <code class="docutils literal notranslate"><span class="pre">shard_map</span></code> also has both an untile and
+a block transpose built into its output.</p>
+<p>Physical data movement is not possible on outputs, no matter the output pspec.
+Instead, <code class="docutils literal notranslate"><span class="pre">out_specs</span></code> just encodes how to assemble the block outputs into
+<code class="docutils literal notranslate"><span class="pre">Array</span></code>s, or physically how to interpret the buffers across devices as the
+physical layout of a single logical <code class="docutils literal notranslate"><span class="pre">Array</span></code>.</p>
+</section>
+</section>
+<section id="api-specification">
+<h3>API Specification<a class="headerlink" href="#api-specification" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.sharding</span> <span class="kn">import</span> <span class="n">Mesh</span>
+<span class="n">Specs</span> <span class="o">=</span> <span class="n">PyTree</span><span class="p">[</span><span class="n">PartitionSpec</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">shard_map</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">mesh</span><span class="p">:</span> <span class="n">Mesh</span><span class="p">,</span> <span class="n">in_specs</span><span class="p">:</span> <span class="n">Specs</span><span class="p">,</span> <span class="n">out_specs</span><span class="p">:</span> <span class="n">Specs</span>
+          <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mesh</span></code> encodes devices arranged in an array and with associated axis names,
+just like it does for <code class="docutils literal notranslate"><span class="pre">xmap</span></code> and for <code class="docutils literal notranslate"><span class="pre">sharding.NamedSharding</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in_specs</span></code> and <code class="docutils literal notranslate"><span class="pre">out_specs</span></code> are <code class="docutils literal notranslate"><span class="pre">PartitionSpec</span></code>s which can
+<a class="reference external" href="https://en.wikipedia.org/wiki/Substructural_type_system">affinely</a> mention
+axis names from <code class="docutils literal notranslate"><span class="pre">mesh</span></code> (not separate logical names as in <code class="docutils literal notranslate"><span class="pre">xmap</span></code>) to express
+slicing/unconcatenation and concatenation of inputs and outputs, respectively
+(not unstacking and stacking like <code class="docutils literal notranslate"><span class="pre">pmap</span></code> and <code class="docutils literal notranslate"><span class="pre">xmap</span></code> do), with unmentioned
+names corresponding to replication and untiling
+(assert-replicated-so-give-me-one-copy), respectively;</p></li>
+<li><p>the shapes of the arguments passed to <code class="docutils literal notranslate"><span class="pre">f</span></code> have the same ranks as the arguments
+passed to <code class="docutils literal notranslate"><span class="pre">shard_map</span></code>-of-<code class="docutils literal notranslate"><span class="pre">f</span></code> (unlike <code class="docutils literal notranslate"><span class="pre">pmap</span></code> and <code class="docutils literal notranslate"><span class="pre">xmap</span></code> where the ranks are
+reduced), and the shape of an argument to <code class="docutils literal notranslate"><span class="pre">f</span></code> is computed from the shape
+<code class="docutils literal notranslate"><span class="pre">shape</span></code> of the corresponding argument to <code class="docutils literal notranslate"><span class="pre">shard_map</span></code>-of-<code class="docutils literal notranslate"><span class="pre">f</span></code> and the
+corresponding <code class="docutils literal notranslate"><span class="pre">PartitionSpec</span></code> spec as roughly
+<code class="docutils literal notranslate"><span class="pre">tuple(sz</span> <span class="pre">//</span> <span class="pre">(1</span> <span class="pre">if</span> <span class="pre">n</span> <span class="pre">is</span> <span class="pre">None</span> <span class="pre">else</span> <span class="pre">mesh.shape[n])</span> <span class="pre">for</span> <span class="pre">sz,</span> <span class="pre">n</span> <span class="pre">in</span> <span class="pre">zip(shape,</span> <span class="pre">spec))</span></code>;</p></li>
+<li><p>the body of <code class="docutils literal notranslate"><span class="pre">f</span></code> can apply collectives using names from <code class="docutils literal notranslate"><span class="pre">mesh</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">shmap</span></code> is eager by default, meaning that we dispatch computations
+primitive-by-primitive, so that the user can employ Python control flow on fully
+replicated values and interactive <code class="docutils literal notranslate"><span class="pre">pdb</span></code> debugging to print any values. To stage
+out and end-to-end compile a <code class="docutils literal notranslate"><span class="pre">shmap</span></code>ped function, just put a <code class="docutils literal notranslate"><span class="pre">jit</span></code> around it. A
+consequence is that <code class="docutils literal notranslate"><span class="pre">shmap</span></code> doesn’t have its own dispatch and compilation paths
+like <code class="docutils literal notranslate"><span class="pre">xmap</span></code> and <code class="docutils literal notranslate"><span class="pre">pmap</span></code> currently do; it’s just the <code class="docutils literal notranslate"><span class="pre">jit</span></code> path.</p>
+<p>When it’s staged out by e.g. an enclosing <code class="docutils literal notranslate"><span class="pre">jit</span></code>, the lowering of <code class="docutils literal notranslate"><span class="pre">shmap</span></code> to
+StableHLO is trivial: it just involves switching into ‘manual SPMD mode’ on the
+inputs, and switching back on the outputs. (We don’t currently plan to support
+partially-manual-partially-automatic modes.)</p>
+<p>The interaction with effects is the same as with <code class="docutils literal notranslate"><span class="pre">pmap</span></code>.</p>
+<p>The interaction with autodiff is also just like <code class="docutils literal notranslate"><span class="pre">pmap</span></code> (rather than attempting
+the new semantics that <code class="docutils literal notranslate"><span class="pre">xmap</span></code> did, corresponding to having unmapped
+intermediates and hence <code class="docutils literal notranslate"><span class="pre">grad</span></code>’s <code class="docutils literal notranslate"><span class="pre">reduce_axes</span></code> as well as making <code class="docutils literal notranslate"><span class="pre">psum</span></code>
+transpose to <code class="docutils literal notranslate"><span class="pre">pbroadcast</span></code> rather than <code class="docutils literal notranslate"><span class="pre">psum</span></code>). But it thus inherits an unsolved
+problem from <code class="docutils literal notranslate"><span class="pre">pmap</span></code>: in some cases, instead of transposing <code class="docutils literal notranslate"><span class="pre">psum</span></code> to <code class="docutils literal notranslate"><span class="pre">psum</span></code>, and
+thus performing a backward pass <code class="docutils literal notranslate"><span class="pre">psum</span></code> corresponding to the forward pass <code class="docutils literal notranslate"><span class="pre">psum</span></code>,
+it can be beneficial to move the backward pass <code class="docutils literal notranslate"><span class="pre">psum</span></code> to elsewhere in the
+backward pass, exploiting linearity. Many advanced <code class="docutils literal notranslate"><span class="pre">pmap</span></code> users addressed this
+challenge by using <code class="docutils literal notranslate"><span class="pre">custom_vjp</span></code> to implement <code class="docutils literal notranslate"><span class="pre">psum_idrev</span></code> and <code class="docutils literal notranslate"><span class="pre">id_psumrev</span></code>
+functions, but since it’s easy to accidentally leave those imbalanced, that
+technique is a foot-cannon. We have some ideas on how to provide this
+functionality in a safer way.</p>
+</section>
+</section>
+<section id="when-should-you-use-shmap-and-when-should-you-use-pjit">
+<h2>When should you use <code class="docutils literal notranslate"><span class="pre">shmap</span></code> and when should you use <code class="docutils literal notranslate"><span class="pre">pjit</span></code>?<a class="headerlink" href="#when-should-you-use-shmap-and-when-should-you-use-pjit" title="Link to this heading">#</a></h2>
+<p>One philosophy is: it is almost always simpler to write a program in <code class="docutils literal notranslate"><span class="pre">jit==pjit</span></code>
+— but if a given part of the program is less optimized by the compiler than it
+could be, drop into <code class="docutils literal notranslate"><span class="pre">shmap</span></code>!</p>
+<section id="a-realistic-example">
+<h3>A realistic example<a class="headerlink" href="#a-realistic-example" title="Link to this heading">#</a></h3>
+<p>Here’s how <code class="docutils literal notranslate"><span class="pre">shmap</span></code> might look in a transformer layer pass with a 2D weight
+gathered pattern (<a class="reference external" href="https://arxiv.org/abs/2211.05102">paper</a>, Sec 3.2.3 on p. 5):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">matmul_2D_wg_manual</span><span class="p">(</span><span class="n">xnorm</span><span class="p">,</span> <span class="n">q_wi</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39;Calls a custom manual implementation of matmul_reducescatter&#39;&#39;&#39;</span>
+  <span class="c1"># [batch, maxlen, embed.X] @ [heads.YZ, embed.X, q_wi_per_head]</span>
+  <span class="c1"># -&gt; (matmul)</span>
+  <span class="c1"># -&gt; [batch, maxlen, heads.YZ, q_wi_per_head]{x unreduced}</span>
+  <span class="c1"># -&gt; (reducescatter over x into X heads, B batches)</span>
+  <span class="c1"># -&gt; [batch, maxlen, heads.YZX, q_wi_per_head]</span>
+  <span class="k">with</span> <span class="n">jax</span><span class="o">.</span><span class="n">named_scope</span><span class="p">(</span><span class="s1">&#39;q_wi&#39;</span><span class="p">):</span>
+    <span class="n">xnorm</span> <span class="o">=</span> <span class="n">intermediate_dtype</span><span class="p">(</span><span class="n">xnorm</span><span class="p">)</span>
+    <span class="n">q_wi</span> <span class="o">=</span> <span class="n">matmul_reducescatter</span><span class="p">(</span>
+        <span class="s1">&#39;bte,hed-&gt;bthd&#39;</span><span class="p">,</span>
+        <span class="n">xnorm</span><span class="p">,</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">q_wi</span><span class="p">,</span>
+        <span class="n">scatter_dimension</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">axis_name</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">,</span>
+        <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">q_wi</span>
+
+
+<span class="kn">import</span> <span class="nn">partitioning.logical_to_physical</span> <span class="k">as</span> <span class="nn">l2phys</span>
+
+<span class="k">def</span> <span class="nf">pjit_transformer_layer</span><span class="p">(</span>
+    <span class="n">hparams</span><span class="p">:</span> <span class="n">HParams</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">weights</span><span class="o">.</span><span class="n">Layer</span><span class="p">,</span> <span class="n">sin</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">cos</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">kv_caches</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">attention</span><span class="o">.</span><span class="n">KVCache</span><span class="p">],</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Forward pass through a single layer, returning output, K, V.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="nf">my_layer</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the parameters corresponding to a given layer.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">lax</span><span class="o">.</span><span class="n">dynamic_index_in_dim</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+  <span class="c1"># 2D: [batch.Z, time, embed.XY]</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">_with_sharding_constraint</span><span class="p">(</span>
+      <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;residual_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;residual_time&#39;</span><span class="p">,</span> <span class="s1">&#39;residual_embed&#39;</span><span class="p">))</span>
+  <span class="n">xnorm</span> <span class="o">=</span> <span class="n">_layernorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="c1"># 2D: [batch, time, embed.X]</span>
+  <span class="n">xnorm</span> <span class="o">=</span> <span class="n">_with_sharding_constraint</span><span class="p">(</span>
+      <span class="n">xnorm</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;post_norm_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;post_norm_embed&#39;</span><span class="p">))</span>
+  <span class="c1"># jump into manual mode where you want to optimise</span>
+  <span class="k">if</span> <span class="n">manual</span><span class="p">:</span>
+    <span class="n">q_wi</span> <span class="o">=</span> <span class="n">shard_map</span><span class="p">(</span><span class="n">matmul_2D_wg_manual</span><span class="p">,</span> <span class="n">mesh</span>
+                <span class="n">in_specs</span><span class="o">=</span><span class="p">(</span><span class="n">l2phys</span><span class="p">(</span><span class="s1">&#39;post_norm_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;post_norm_embed&#39;</span><span class="p">),</span>
+                          <span class="n">l2phys</span><span class="p">(</span><span class="s1">&#39;layers&#39;</span><span class="p">,</span> <span class="s1">&#39;heads&#39;</span><span class="p">,</span> <span class="s1">&#39;embed&#39;</span><span class="p">,</span> <span class="s1">&#39;q_wi_per_head&#39;</span><span class="p">)),</span>
+                <span class="n">out_specs</span><span class="o">=</span><span class="n">l2phys</span><span class="p">(</span><span class="s1">&#39;post_norm_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;heads&#39;</span><span class="p">,</span> <span class="s1">&#39;q_wi_per_head&#39;</span><span class="p">))(</span><span class="n">xnorm</span><span class="p">,</span> <span class="n">q_wi</span><span class="p">,</span> <span class="n">layer</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">q_wi</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bte,hed-&gt;bthd&#39;</span><span class="p">,</span> <span class="n">xnorm</span><span class="p">,</span> <span class="n">my_layer</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">q_wi</span><span class="p">))</span>
+    <span class="c1"># 2D: [batch, time, heads.YZX, None]</span>
+    <span class="n">q_wi</span> <span class="o">=</span> <span class="n">_with_sharding_constraint</span><span class="p">(</span><span class="n">q_wi</span><span class="p">,</span>
+                                   <span class="p">(</span><span class="s1">&#39;post_norm_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;heads&#39;</span><span class="p">,</span> <span class="s1">&#39;qkv&#39;</span><span class="p">))</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="n">q_wi</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:</span><span class="n">hparams</span><span class="o">.</span><span class="n">qkv</span><span class="p">]</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="n">_rope</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+  <span class="c1"># unlike in https://arxiv.org/pdf/2002.05202.pdf, PaLM implements</span>
+  <span class="c1"># swiGLU with full d_ff dimension, rather than 2/3 scaled</span>
+  <span class="n">wi0</span> <span class="o">=</span> <span class="n">q_wi</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">hparams</span><span class="o">.</span><span class="n">qkv</span><span class="p">:</span><span class="n">hparams</span><span class="o">.</span><span class="n">qkv</span> <span class="o">+</span> <span class="p">(</span><span class="n">hparams</span><span class="o">.</span><span class="n">ff</span> <span class="o">//</span> <span class="n">hparams</span><span class="o">.</span><span class="n">heads</span><span class="p">)]</span>
+  <span class="n">wi1</span> <span class="o">=</span> <span class="n">q_wi</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">hparams</span><span class="o">.</span><span class="n">qkv</span> <span class="o">+</span> <span class="p">(</span><span class="n">hparams</span><span class="o">.</span><span class="n">ff</span> <span class="o">//</span> <span class="n">hparams</span><span class="o">.</span><span class="n">heads</span><span class="p">):]</span>
+  <span class="n">kv</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bte,ezd-&gt;btzd&#39;</span><span class="p">,</span> <span class="n">xnorm</span><span class="p">,</span> <span class="n">my_layer</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">kv</span><span class="p">))</span>
+  <span class="n">k</span> <span class="o">=</span> <span class="n">kv</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="n">hparams</span><span class="o">.</span><span class="n">qkv</span><span class="p">]</span>
+  <span class="n">v</span> <span class="o">=</span> <span class="n">kv</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hparams</span><span class="o">.</span><span class="n">qkv</span><span class="p">:]</span>
+  <span class="n">k</span> <span class="o">=</span> <span class="n">_rope</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+  <span class="n">y_att</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">(</span><span class="n">attention</span><span class="o">.</span><span class="n">attend</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">kv_caches</span><span class="p">,</span> <span class="n">layer</span><span class="p">))</span>
+
+  <span class="n">y_mlp</span> <span class="o">=</span> <span class="n">special2</span><span class="o">.</span><span class="n">swish2</span><span class="p">(</span><span class="n">wi0</span><span class="p">)</span> <span class="o">*</span> <span class="n">wi1</span>
+  <span class="c1"># 2D: [batch, time, heads.YZX, None]</span>
+  <span class="n">y_mlp</span> <span class="o">=</span> <span class="n">_with_sharding_constraint</span><span class="p">(</span><span class="n">y_mlp</span><span class="p">,</span>
+                                    <span class="p">(</span><span class="s1">&#39;post_norm_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;heads&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+  <span class="n">y_fused</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">y_att</span><span class="p">,</span> <span class="n">y_mlp</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="c1"># do the second half of the mlp and the self-attn projection in parallel</span>
+  <span class="n">y_out</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bthd,hde-&gt;bte&#39;</span><span class="p">,</span> <span class="n">y_fused</span><span class="p">,</span> <span class="n">my_layer</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">o_wo</span><span class="p">))</span>
+  <span class="c1"># 2D: [batch.Z, time, embed.XY]</span>
+  <span class="n">y_out</span> <span class="o">=</span> <span class="n">_with_sharding_constraint</span><span class="p">(</span>
+      <span class="n">y_out</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;residual_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;residual_time&#39;</span><span class="p">,</span> <span class="s1">&#39;residual_embed&#39;</span><span class="p">))</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">y_out</span> <span class="o">+</span> <span class="n">x</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">_with_sharding_constraint</span><span class="p">(</span>
+      <span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;residual_batch&#39;</span><span class="p">,</span> <span class="s1">&#39;residual_time&#39;</span><span class="p">,</span> <span class="s1">&#39;residual_embed&#39;</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">z</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>In the profile below, both the first and second matmul were replaced by manually
+lowered versions, where the compute (fusions) are fully overlapped with the
+communication (ppermute)! One fun hint that we are using a latency optimised
+variant is that the ppmerute pixels are jittered — because there are two
+overlapping ppermutes using opposite ICI axes at the same time!</p>
+<p>All-to-all is much harder to overlap, so was left on the table.</p>
+<img width="1085" alt="image" src="https://user-images.githubusercontent.com/1458824/216507137-adc35a1f-a76c-4704-a62d-389b42771090.png">
+</section>
+</section>
+<section id="why-don-t-pmap-or-xmap-already-solve-this">
+<h2>Why don’t <code class="docutils literal notranslate"><span class="pre">pmap</span></code> or <code class="docutils literal notranslate"><span class="pre">xmap</span></code> already solve this?<a class="headerlink" href="#why-don-t-pmap-or-xmap-already-solve-this" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pmap</span></code> was our first multi-device parallelism API. It follows the
+per-device-code-and-explicit-collectives school. But it had major shortcomings
+which make it unsuitable for today’s programs:</p>
+<ul class="simple">
+<li><p><strong>Mapping multiple axes required nested <code class="docutils literal notranslate"><span class="pre">pmap</span></code>s.</strong> Not only are nested <code class="docutils literal notranslate"><span class="pre">pmap</span></code>s
+cumbersome to write, but also they make it difficult to control (or even
+predict) the device placement of data and computation, and difficult to
+preserve data sharding (see the next two bullets). Today’s programs require
+multiple axes of parallelism.</p></li>
+<li><p><strong>Controlling device placement was impossible.</strong> Especially with multiple axes
+of parallelism, programmers need to control how those axes are aligned with
+hardware resources and their communication topologies. But (nested) <code class="docutils literal notranslate"><span class="pre">pmap</span></code>
+doesn’t offer control over how mapped program instances are placed on
+hardware; there’s just an automatic device order which the user can’t control.
+(<a class="reference external" href="https://arxiv.org/abs/2112.11446">Gopher</a>’s use of <code class="docutils literal notranslate"><span class="pre">axis_index_groups</span></code> and a
+single un-nested <code class="docutils literal notranslate"><span class="pre">pmap</span></code> was essentially a hack to get around this by
+flattening multiple axes of parallelism down to one.)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">jit</span></code>/<code class="docutils literal notranslate"><span class="pre">pjit</span></code> composability.</strong> <code class="docutils literal notranslate"><span class="pre">jit</span></code>-of-<code class="docutils literal notranslate"><span class="pre">pmap</span></code> is a performance footgun, as
+is nesting <code class="docutils literal notranslate"><span class="pre">pmap</span></code>s, as is e.g. <code class="docutils literal notranslate"><span class="pre">scan</span></code>-of-<code class="docutils literal notranslate"><span class="pre">pmap</span></code>, because sharding is not
+preserved when returning from an inner <code class="docutils literal notranslate"><span class="pre">pmap</span></code>. To preserve sharding we would
+need pattern matching on jaxprs to ensure we’re working with perfectly nested
+pmaps, or a pmap just inside a <code class="docutils literal notranslate"><span class="pre">jit</span></code>. Moreover, <code class="docutils literal notranslate"><span class="pre">pjit</span></code> was no help here
+because <code class="docutils literal notranslate"><span class="pre">pmap</span></code> targets XLA replicas while <code class="docutils literal notranslate"><span class="pre">pjit</span></code> targets the XLA SPMD
+Partitioner, and composing those two is hard.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">jax.Array</span></code> compatibility (and hence <code class="docutils literal notranslate"><span class="pre">pjit</span></code> compatibility).</strong> Because the
+sharding of <code class="docutils literal notranslate"><span class="pre">pmap</span></code> outputs can’t be expressed as <code class="docutils literal notranslate"><span class="pre">Shardings</span></code> / <code class="docutils literal notranslate"><span class="pre">OpShardings</span></code>,
+due to <code class="docutils literal notranslate"><span class="pre">pmap</span></code>’s stacking rather than concatenative semantics, the output of a
+<code class="docutils literal notranslate"><span class="pre">pmap</span></code> computation can’t currently be passed to a <code class="docutils literal notranslate"><span class="pre">pjit</span></code> computation without
+bouncing to host (or dispatching a reshaping computation).</p></li>
+<li><p><strong>Multi-controller semantics (and hence <code class="docutils literal notranslate"><span class="pre">pjit</span></code> compatibility).</strong>
+Multi-controller <code class="docutils literal notranslate"><span class="pre">pmap</span></code> concatenates values across controllers, which works well
+but differs from single-controller <code class="docutils literal notranslate"><span class="pre">pmap</span></code>’s stacking semantics. More
+practically, it precludes the use of non-fully-addressable <code class="docutils literal notranslate"><span class="pre">jax.Array</span></code> inputs
+and outputs as we use with multi-controller <code class="docutils literal notranslate"><span class="pre">pjit</span></code>.</p></li>
+<li><p><strong>Eager mode.</strong> We didn’t make <code class="docutils literal notranslate"><span class="pre">pmap</span></code> eager-first, and though we eventually
+(after 4+ years!) added eager operation with <code class="docutils literal notranslate"><span class="pre">disable_jit()</span></code>, the fact that
+<code class="docutils literal notranslate"><span class="pre">pmap</span></code> has <code class="docutils literal notranslate"><span class="pre">jit</span></code> fused into it means it has its own compilation and dispatch
+path (actually two dispatch paths: in Python for handling <code class="docutils literal notranslate"><span class="pre">Tracer</span></code>s, and in
+C++ for performance on raw <code class="docutils literal notranslate"><span class="pre">Array</span></code> inputs!), a heavy implementation burden.</p></li>
+<li><p><strong>Reshapes needed in the caller.</strong> A typical use case with <code class="docutils literal notranslate"><span class="pre">pmap</span></code> on 8 devices
+might look like starting with a batch axis of size 128, reshaping it to split
+into two axes with sizes (8, 16), and then <code class="docutils literal notranslate"><span class="pre">pmap</span></code>ping over the first. These
+reshapes are awkward and the compiler often interprets them as copies instead
+of view — increasing memory and time usage.</p></li>
+</ul>
+<p>These shortcomings aren’t so bad when only doing batch data parallelism. But
+when more parallelism is involved, <code class="docutils literal notranslate"><span class="pre">pmap</span></code> just can’t cut it!</p>
+<p><code class="docutils literal notranslate"><span class="pre">xmap</span></code> paved the way as a next-gen evolution of <code class="docutils literal notranslate"><span class="pre">pmap</span></code> and solved (almost) all these
+issues. <code class="docutils literal notranslate"><span class="pre">shmap</span></code> follows in <code class="docutils literal notranslate"><span class="pre">xmap</span></code>’s footsteps and solves these problems in
+essentially the same ways; indeed, <code class="docutils literal notranslate"><span class="pre">shmap</span></code> is like a specialized subset of <code class="docutils literal notranslate"><span class="pre">xmap</span></code>
+(what some call the “hard <code class="docutils literal notranslate"><span class="pre">xmap</span></code>” subset), with a few tweaks.</p>
+<p>For the initial prototype, we chose to implement <code class="docutils literal notranslate"><span class="pre">shmap</span></code> as a separate primitive
+from <code class="docutils literal notranslate"><span class="pre">xmap</span></code>, because limiting the set of features it supports makes it easier to
+focus on the core functionality. For example, <code class="docutils literal notranslate"><span class="pre">shmap</span></code> doesn’t allow unmapped
+intermediates, making it easier not to worry about the interactions between
+named axes and autodiff. Furthermore, not having to reason about interactions of
+all pairs of features makes it easier to add capabilities beyond what’s
+implemented in <code class="docutils literal notranslate"><span class="pre">xmap</span></code> today, such as support for eager mode.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">shmap</span></code> and <code class="docutils literal notranslate"><span class="pre">xmap</span></code> share significant portions of the lowering code. We
+could consider merging both in the future, or even focusing solely on <code class="docutils literal notranslate"><span class="pre">shmap</span></code>,
+depending on how the usage will evolve.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="12049-type-annotations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Type Annotation Roadmap for JAX</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="15856-jex.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code>: a module for extensions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#so-let-s-see-shmap">So, let’s see <code class="docutils literal notranslate"><span class="pre">shmap</span></code>!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tl-dr-example-with-a-more-detailed-explanation-to-follow">TL;DR example (with a more detailed explanation to follow)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slow-down-start-with-the-basics">Slow down, start with the basics!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-reducing-vs-rank-preserving-maps-over-array-axes">Rank-reducing vs rank-preserving maps over array axes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-how-each-input-is-split-unconcatenated-and-tiled-with-in-specs">Controlling how each input is split (unconcatenated) and tiled with <code class="docutils literal notranslate"><span class="pre">in_specs</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#controlling-how-each-output-assembled-by-concatenation-block-transposition-and-untiling-using-out-specs">Controlling how each output assembled by concatenation, block transposition, and untiling using <code class="docutils literal notranslate"><span class="pre">out_specs</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-specification">API Specification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-should-you-use-shmap-and-when-should-you-use-pjit">When should you use <code class="docutils literal notranslate"><span class="pre">shmap</span></code> and when should you use <code class="docutils literal notranslate"><span class="pre">pjit</span></code>?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-realistic-example">A realistic example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-don-t-pmap-or-xmap-already-solve-this">Why don’t <code class="docutils literal notranslate"><span class="pre">pmap</span></code> or <code class="docutils literal notranslate"><span class="pre">xmap</span></code> already solve this?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The JAX authors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, The JAX Authors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

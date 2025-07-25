@@ -36,6 +36,7 @@ operations.
    :caption: Performance optimizations
 
    persistent_compilation_cache
+   buffer_donation
    gpu_performance_tips
 
 .. toctree::

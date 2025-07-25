@@ -18,3 +18,4 @@ design and implementation, see the :doc:`advanced guides <advanced_guides>`.
    control-flow
    pytrees
    working-with-pytrees
+   intro_parallel

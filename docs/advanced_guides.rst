@@ -17,6 +17,12 @@ operations.
    advanced-autodiff
 
 .. toctree::
+   :caption: Custom Pytrees
+   :maxdepth: 1
+
+   custom_pytrees
+
+.. toctree::
    :maxdepth: 1
    :caption: Errors and debugging
 

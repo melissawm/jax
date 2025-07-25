@@ -43,6 +43,7 @@ operations.
    :maxdepth: 1
    :caption: Performance benchmarking and profiling
 
+   benchmarking
    profiling
    device_memory_profiling
 

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -756,7 +755,7 @@ current process.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.Sharding.addressable_devices_indices_map">
-<span class="sig-name descname"><span class="pre">addressable_devices_indices_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L153-L161"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.addressable_devices_indices_map" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">addressable_devices_indices_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L157-L165"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.addressable_devices_indices_map" title="Link to this definition">#</a></dt>
 <dd><p>A mapping from addressable devices to the slice of array data each contains.</p>
 <p><code class="docutils literal notranslate"><span class="pre">addressable_devices_indices_map</span></code> contains that part of
 <code class="docutils literal notranslate"><span class="pre">device_indices_map</span></code> that applies to the addressable devices.</p>
@@ -780,7 +779,7 @@ non-addressable devices from other processes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.Sharding.devices_indices_map">
-<span class="sig-name descname"><span class="pre">devices_indices_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L162-L169"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.devices_indices_map" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">devices_indices_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L166-L173"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.devices_indices_map" title="Link to this definition">#</a></dt>
 <dd><p>Returns a mapping from devices to the array slices each contains.</p>
 <p>The mapping includes all global devices, i.e., including
 non-addressable devices from other processes.</p>
@@ -796,7 +795,7 @@ non-addressable devices from other processes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.Sharding.is_equivalent_to">
-<span class="sig-name descname"><span class="pre">is_equivalent_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L184-L200"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.is_equivalent_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">is_equivalent_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L188-L204"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.is_equivalent_to" title="Link to this definition">#</a></dt>
 <dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if two shardings are equivalent.</p>
 <p>Two shardings are equivalent if they place the same logical array shards on
 the same devices.</p>
@@ -845,7 +844,7 @@ entire data.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.Sharding.shard_shape">
-<span class="sig-name descname"><span class="pre">shard_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L176-L183"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.shard_shape" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">shard_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding.py#L180-L187"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Sharding.shard_shape" title="Link to this definition">#</a></dt>
 <dd><p>Returns the shape of the data on each device.</p>
 <p>The shard shape returned by this function is calculated from
 <code class="docutils literal notranslate"><span class="pre">global_shape</span></code> and the properties of the sharding.</p>
@@ -916,7 +915,7 @@ non-addressable devices from other processes.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.sharding.SingleDeviceSharding.is_fully_addressable">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_fully_addressable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L181-L186"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.SingleDeviceSharding.is_fully_addressable" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_fully_addressable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L181-L184"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.SingleDeviceSharding.is_fully_addressable" title="Link to this definition">#</a></dt>
 <dd><p>Is this sharding fully addressable?</p>
 <p>A sharding is fully addressable if the current process can address all of
 the devices named in the <a class="reference internal" href="#jax.sharding.Sharding" title="jax.sharding.Sharding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sharding</span></code></a>. <code class="docutils literal notranslate"><span class="pre">is_fully_addressable</span></code> is
@@ -975,10 +974,9 @@ dimension is partitioned across zero or more mesh dimensions. For example,
 <code class="docutils literal notranslate"><span class="pre">PartitionSpec('x',</span> <span class="pre">'y')</span></code> says that the first dimension of data
 is sharded across <code class="docutils literal notranslate"><span class="pre">x</span></code> axis of the mesh, and the second dimension is sharded
 across <code class="docutils literal notranslate"><span class="pre">y</span></code> axis of the mesh.</p>
-<p>The Distributed arrays and automatic parallelization
-(<a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html#namedsharding-gives-a-way-to-express-shardings-with-names">https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html#namedsharding-gives-a-way-to-express-shardings-with-names</a>)
-tutorial has more details and diagrams that explain how
-<a class="reference internal" href="#jax.sharding.Mesh" title="jax.sharding.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> and <a class="reference internal" href="#jax.sharding.PartitionSpec" title="jax.sharding.PartitionSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartitionSpec</span></code></a> are used.</p>
+<p>The <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a>
+and <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/explicit-sharding.html">Explicit Sharding</a> tutorials have more details and diagrams that
+explain how <a class="reference internal" href="#jax.sharding.Mesh" title="jax.sharding.Mesh"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mesh</span></code></a> and <a class="reference internal" href="#jax.sharding.PartitionSpec" title="jax.sharding.PartitionSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartitionSpec</span></code></a> are used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -997,7 +995,7 @@ tutorial has more details and diagrams that explain how
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.sharding.NamedSharding.addressable_devices">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">addressable_devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="_autosummary/jax.Device.html#jax.Device" title="jax.Device"><span class="pre">Device</span></a><span class="p"><span class="pre">]</span></span></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/named_sharding.py#L212-L220"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.NamedSharding.addressable_devices" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">addressable_devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.13)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="_autosummary/jax.Device.html#jax.Device" title="jax.Device"><span class="pre">Device</span></a><span class="p"><span class="pre">]</span></span></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/named_sharding.py#L209-L217"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.NamedSharding.addressable_devices" title="Link to this definition">#</a></dt>
 <dd><p>The set of devices in the <a class="reference internal" href="#jax.sharding.Sharding" title="jax.sharding.Sharding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sharding</span></code></a> that are addressable by the
 current process.</p>
 </dd></dl>
@@ -1012,7 +1010,7 @@ non-addressable devices from other processes.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.sharding.NamedSharding.is_fully_addressable">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_fully_addressable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/named_sharding.py#L195-L205"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.NamedSharding.is_fully_addressable" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_fully_addressable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/named_sharding.py#L195-L202"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.NamedSharding.is_fully_addressable" title="Link to this definition">#</a></dt>
 <dd><p>Is this sharding fully addressable?</p>
 <p>A sharding is fully addressable if the current process can address all of
 the devices named in the <a class="reference internal" href="#jax.sharding.Sharding" title="jax.sharding.Sharding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sharding</span></code></a>. <code class="docutils literal notranslate"><span class="pre">is_fully_addressable</span></code> is
@@ -1053,7 +1051,7 @@ entire data.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.NamedSharding.with_memory_kind">
-<span class="sig-name descname"><span class="pre">with_memory_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/named_sharding.py#L232-L234"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.NamedSharding.with_memory_kind" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">with_memory_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/named_sharding.py#L229-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.NamedSharding.with_memory_kind" title="Link to this definition">#</a></dt>
 <dd><p>Returns a new Sharding instance with the specified memory kind.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1074,7 +1072,7 @@ entire data.</p>
 <p>Describes a sharding used by <a class="reference internal" href="_autosummary/jax.pmap.html#jax.pmap" title="jax.pmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.pmap()</span></code></a>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.default">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharded_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L244-L287"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.default" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharded_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L242-L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.default" title="Link to this definition">#</a></dt>
 <dd><p>Creates a <a class="reference internal" href="#jax.sharding.PmapSharding" title="jax.sharding.PmapSharding"><code class="xref py py-class docutils literal notranslate"><span class="pre">PmapSharding</span></code></a> which matches the default placement
 used by <a class="reference internal" href="_autosummary/jax.pmap.html#jax.pmap" title="jax.pmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.pmap()</span></code></a>.</p>
 <dl class="field-list simple">
@@ -1109,7 +1107,7 @@ non-addressable devices from other processes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.devices_indices_map">
-<span class="sig-name descname"><span class="pre">devices_indices_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L296-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.devices_indices_map" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">devices_indices_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L294-L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.devices_indices_map" title="Link to this definition">#</a></dt>
 <dd><p>Returns a mapping from devices to the array slices each contains.</p>
 <p>The mapping includes all global devices, i.e., including
 non-addressable devices from other processes.</p>
@@ -1125,7 +1123,7 @@ non-addressable devices from other processes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.is_equivalent_to">
-<span class="sig-name descname"><span class="pre">is_equivalent_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L239-L242"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.is_equivalent_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">is_equivalent_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L237-L240"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.is_equivalent_to" title="Link to this definition">#</a></dt>
 <dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if two shardings are equivalent.</p>
 <p>Two shardings are equivalent if they place the same logical array shards on
 the same devices.</p>
@@ -1162,19 +1160,19 @@ entire data.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.memory_kind">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_kind</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L303-L309"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.memory_kind" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_kind</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L301-L307"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.memory_kind" title="Link to this definition">#</a></dt>
 <dd><p>Returns the memory kind of the sharding.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.num_devices">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L288-L291"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.num_devices" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L286-L289"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.num_devices" title="Link to this definition">#</a></dt>
 <dd><p>Number of devices that the sharding contains.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.shard_shape">
-<span class="sig-name descname"><span class="pre">shard_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L330-L354"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.shard_shape" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">shard_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">global_shape</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L328-L352"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.shard_shape" title="Link to this definition">#</a></dt>
 <dd><p>Returns the shape of the data on each device.</p>
 <p>The shard shape returned by this function is calculated from
 <code class="docutils literal notranslate"><span class="pre">global_shape</span></code> and the properties of the sharding.</p>
@@ -1196,7 +1194,7 @@ entire data.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.sharding.PmapSharding.with_memory_kind">
-<span class="sig-name descname"><span class="pre">with_memory_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L310-L312"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.with_memory_kind" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">with_memory_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/sharding_impls.py#L308-L310"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.PmapSharding.with_memory_kind" title="Link to this definition">#</a></dt>
 <dd><p>Returns a new Sharding instance with the specified memory kind.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1231,11 +1229,10 @@ specifications from tuples that should be treated as pytrees.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.sharding.Mesh">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.sharding.</span></span><span class="sig-name descname"><span class="pre">Mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_names</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/mesh.py#L220-L421"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Mesh" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.sharding.</span></span><span class="sig-name descname"><span class="pre">Mesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/mesh.py#L223-L426"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.sharding.Mesh" title="Link to this definition">#</a></dt>
 <dd><p>Declare the hardware resources available in the scope of this manager.</p>
-<p>See the Distributed arrays and automatic parallelization tutorial
-(<a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html">https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html</a>)
-and Explicit sharding tutorial (<a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/explicit-sharding.html">https://docs.jax.dev/en/latest/notebooks/explicit-sharding.html</a>)</p>
+<p>See <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a> and
+<a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/explicit-sharding.html">Explicit Sharding</a> tutorials.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1244,7 +1241,8 @@ obtained e.g. from <a class="reference internal" href="_autosummary/jax.devices.
 <li><p><strong>axis_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><em>MeshAxisName</em><em>, </em><em>...</em><em>]</em>) – A sequence of resource axis names to be assigned to the
 dimensions of the <code class="docutils literal notranslate"><span class="pre">devices</span></code> argument. Its length should match the
 rank of <code class="docutils literal notranslate"><span class="pre">devices</span></code>.</p></li>
-<li><p><strong>axis_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><em>AxisType</em><em>, </em><em>...</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>axis_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><em>AxisType</em><em>, </em><em>...</em><em>] </em><em>| </em><em>None</em>) – and optional tuple of <code class="xref py py-class docutils literal notranslate"><span class="pre">jax.sharding.AxisType</span></code> entries corresponding to
+the <code class="docutils literal notranslate"><span class="pre">axis_names</span></code>. See <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/explicit-sharding.html">Explicit Sharding</a> for more information.</p></li>
 </ul>
 </dd>
 </dl>

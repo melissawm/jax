@@ -13,6 +13,7 @@
 
    .. autosummary::
    
+      ~Layout.reduce
       ~Layout.to_mgpu
    
    
@@ -24,13 +25,17 @@
    .. autosummary::
    
       ~Layout.WGMMA
-      ~Layout.WGMMA_ROW
-      ~Layout.WGMMA_COL
       ~Layout.WGMMA_TRANSPOSED
       ~Layout.WG_SPLAT
       ~Layout.WG_STRIDED
       ~Layout.TCGEN05
+      ~Layout.TCGEN05_TRANSPOSED
+      ~Layout.TCGEN05_M64_COLLECTIVE
+      ~Layout.TCGEN05_TMEM_NATIVE
+      ~Layout.WGMMA_ROW
+      ~Layout.WGMMA_COL
       ~Layout.TCGEN05_ROW
       ~Layout.TCGEN05_COL
+      ~Layout.TCGEN05_TMEM_NATIVE_ROW
    
    

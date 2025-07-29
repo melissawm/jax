@@ -30,11 +30,11 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -54,7 +54,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Compiled prints and breakpoints" href="debugging/print_breakpoint.html" />
+    <link rel="next" title="JAX debugging flags" href="debugging/flags.html" />
     <link rel="prev" title="Errors" href="errors.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,61 +171,54 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
-<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">Introduction to debugging</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction to debugging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ffi.html">Foreign function interface (FFI)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aot.html">Ahead-of-time lowering and compilation</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="export/index.html">Exporting and serialization</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="export/export.html">Exporting and serializing staged-out computations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="export/shape_poly.html">Shape polymorphism</a></li>
 <li class="toctree-l3"><a class="reference internal" href="export/jax2tf.html">Interoperation with TensorFlow</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="pallas/quickstart.html">Pallas Quickstart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pallas/pipelining.html">Software Pipelining</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pallas/grid_blockspec.html">Grids and BlockSpecs</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/tpu/index.html">Pallas TPU</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/tpu/details.html">Writing TPU kernels with Pallas</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pallas/tpu/pipelining.html">TPU Pipelining</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pallas/tpu/matmul.html">Matrix Multiplication</a></li>
@@ -233,11 +226,12 @@
 <li class="toctree-l4"><a class="reference internal" href="pallas/tpu/distributed.html">Distributed Computing in Pallas for TPUs</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/design/design.html">Pallas Design</a></li>
 <li class="toctree-l4"><a class="reference internal" href="pallas/design/async_note.html">Pallas Async Operations</a></li>
 </ul>
@@ -249,20 +243,20 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributor_guide.html">Developer notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing to JAX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer.html">Building from source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="investigating_a_regression.html">Investigating a regression</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodidax.html">Autodidax: JAX core from scratch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodidax2_part1.html">Autodidax2, part 1: JAX from scratch, again</a></li>
 
-<li class="toctree-l2 has-children"><a class="reference internal" href="jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jep/index.html">JAX Enhancement Proposals (JEPs)</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="jep/263-prng.html">263: JAX PRNG Design</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jep/2026-custom-derivatives.html">2026: Custom JVP/VJP rules for JAX-transformable functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jep/4008-custom-vjp-update.html">4008: Custom VJP and `nondiff_argnums` update</a></li>
@@ -283,9 +277,9 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
@@ -295,45 +289,20 @@
 <li class="toctree-l2"><a class="reference internal" href="building_on_jax.html">Building on JAX</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="api_compatibility.html">API compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deprecation.html">Python and NumPy version support policy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="async_dispatch.html">Asynchronous dispatch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftn.html">jax.numpy.fft.fftn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.fftshift.html">jax.numpy.fft.fftshift</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.hfft.html">jax.numpy.fft.hfft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft.html">jax.numpy.fft.ifft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifft2.html">jax.numpy.fft.ifft2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftn.html">jax.numpy.fft.ifftn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ifftshift.html">jax.numpy.fft.ifftshift</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.ihfft.html">jax.numpy.fft.ihfft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft.html">jax.numpy.fft.irfft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfft2.html">jax.numpy.fft.irfft2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.irfftn.html">jax.numpy.fft.irfftn</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft.html">jax.numpy.fft.rfft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfft2.html">jax.numpy.fft.rfft2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftfreq.html">jax.numpy.fft.rfftfreq</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/jax.scipy.stats.bernoulli.ppf.html">jax.scipy.stats.bernoulli.ppf</a></li>
-</ul>
-</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.lax.html"><code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.random.html"><code class="docutils literal notranslate"><span class="pre">jax.random</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.sharding.html"><code class="docutils literal notranslate"><span class="pre">jax.sharding</span></code> module</a></li>
@@ -342,10 +311,9 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
 </ul>
 </li>
@@ -357,19 +325,19 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
@@ -378,7 +346,7 @@
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
@@ -387,93 +355,10 @@
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general.html">jax.experimental.sparse.bcoo_dot_general</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dot_general_sampled.html">jax.experimental.sparse.bcoo_dot_general_sampled</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_dynamic_slice.html">jax.experimental.sparse.bcoo_dynamic_slice</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_extract.html">jax.experimental.sparse.bcoo_extract</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_fromdense.html">jax.experimental.sparse.bcoo_fromdense</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_gather.html">jax.experimental.sparse.bcoo_gather</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_dense.html">jax.experimental.sparse.bcoo_multiply_dense</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_multiply_sparse.html">jax.experimental.sparse.bcoo_multiply_sparse</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_update_layout.html">jax.experimental.sparse.bcoo_update_layout</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reduce_sum.html">jax.experimental.sparse.bcoo_reduce_sum</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_reshape.html">jax.experimental.sparse.bcoo_reshape</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_slice.html">jax.experimental.sparse.bcoo_slice</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sort_indices.html">jax.experimental.sparse.bcoo_sort_indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_squeeze.html">jax.experimental.sparse.bcoo_squeeze</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_sum_duplicates.html">jax.experimental.sparse.bcoo_sum_duplicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_todense.html">jax.experimental.sparse.bcoo_todense</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/jax.experimental.sparse.bcoo_transpose.html">jax.experimental.sparse.bcoo_transpose</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="jax.lib.html"><code class="docutils literal notranslate"><span class="pre">jax.lib</span></code> module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.addressable_shards.html">jax.Array.addressable_shards</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.all.html">jax.Array.all</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.any.html">jax.Array.any</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmax.html">jax.Array.argmax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argmin.html">jax.Array.argmin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argpartition.html">jax.Array.argpartition</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.argsort.html">jax.Array.argsort</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.astype.html">jax.Array.astype</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.at.html">jax.Array.at</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.choose.html">jax.Array.choose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.clip.html">jax.Array.clip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.compress.html">jax.Array.compress</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.committed.html">jax.Array.committed</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conj.html">jax.Array.conj</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.conjugate.html">jax.Array.conjugate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy.html">jax.Array.copy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.copy_to_host_async.html">jax.Array.copy_to_host_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumprod.html">jax.Array.cumprod</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.cumsum.html">jax.Array.cumsum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.device.html">jax.Array.device</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.diagonal.html">jax.Array.diagonal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dot.html">jax.Array.dot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.dtype.html">jax.Array.dtype</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flat.html">jax.Array.flat</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.flatten.html">jax.Array.flatten</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.global_shards.html">jax.Array.global_shards</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.imag.html">jax.Array.imag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_addressable.html">jax.Array.is_fully_addressable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.is_fully_replicated.html">jax.Array.is_fully_replicated</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.item.html">jax.Array.item</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.itemsize.html">jax.Array.itemsize</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.max.html">jax.Array.max</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mean.html">jax.Array.mean</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.min.html">jax.Array.min</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nbytes.html">jax.Array.nbytes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ndim.html">jax.Array.ndim</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.nonzero.html">jax.Array.nonzero</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.prod.html">jax.Array.prod</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ptp.html">jax.Array.ptp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.ravel.html">jax.Array.ravel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.real.html">jax.Array.real</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.repeat.html">jax.Array.repeat</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.reshape.html">jax.Array.reshape</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.round.html">jax.Array.round</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.searchsorted.html">jax.Array.searchsorted</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.shape.html">jax.Array.shape</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sharding.html">jax.Array.sharding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.size.html">jax.Array.size</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sort.html">jax.Array.sort</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.squeeze.html">jax.Array.squeeze</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.std.html">jax.Array.std</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.sum.html">jax.Array.sum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.swapaxes.html">jax.Array.swapaxes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.take.html">jax.Array.take</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.to_device.html">jax.Array.to_device</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.trace.html">jax.Array.trace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.transpose.html">jax.Array.transpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.var.html">jax.Array.var</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.view.html">jax.Array.view</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.T.html">jax.Array.T</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/jax.Array.mT.html">jax.Array.mT</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About the project</a></li>
@@ -531,7 +416,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     <li class="breadcrumb-item active" aria-current="page">Introduction...</li>
   </ul>
@@ -671,9 +556,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-debug-print-for-simple-inspection"><code class="docutils literal notranslate"><span class="pre">jax.debug.print</span></code> for simple inspection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-debug-breakpoint-for-pdb-like-debugging"><code class="docutils literal notranslate"><span class="pre">jax.debug.breakpoint</span></code> for <code class="docutils literal notranslate"><span class="pre">pdb</span></code>-like debugging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-debug-callback-for-more-control-during-debugging"><code class="docutils literal notranslate"><span class="pre">jax.debug.callback</span></code> for more control during debugging</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-runtime-values">Debugging runtime values</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-inspection-with-jax-debug">Interactive inspection with <code class="docutils literal notranslate"><span class="pre">jax.debug</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-error-checks-with-jax-experimental-checkify">Functional error checks with <code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-error-checks-with-jax-experimental-checkify">Functional error checks with <code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#throwing-python-errors-with-jax-s-debug-flags">Throwing Python errors with JAX’s debug flags</a></li>
 </ul>
 </li>
@@ -692,7 +575,13 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-debugging">
 <span id="debugging"></span><h1>Introduction to debugging<a class="headerlink" href="#introduction-to-debugging" title="Link to this heading">#</a></h1>
 <!--* freshness: { reviewed: '2024-05-10' } *-->
-<p>This section introduces you to a set of built-in JAX debugging methods — <a class="reference internal" href="_autosummary/jax.debug.print.html#jax.debug.print" title="jax.debug.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.print()</span></code></a>, <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#jax.debug.breakpoint" title="jax.debug.breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.breakpoint()</span></code></a>, and <a class="reference internal" href="_autosummary/jax.debug.callback.html#jax.debug.callback" title="jax.debug.callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.callback()</span></code></a> — that you can use with various JAX transformations.</p>
+<p>Do you have exploding gradients? Are NaNs making you gnash your teeth? Just want
+to poke around the intermediate values in your computation? This section
+introduces you to a set of built-in JAX debugging methods —
+<a class="reference internal" href="_autosummary/jax.debug.print.html#jax.debug.print" title="jax.debug.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.print()</span></code></a>, <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#jax.debug.breakpoint" title="jax.debug.breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.breakpoint()</span></code></a>, and
+<a class="reference internal" href="_autosummary/jax.debug.callback.html#jax.debug.callback" title="jax.debug.callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.callback()</span></code></a> — that you can use with various JAX transformations.</p>
+<p><strong>Summary:</strong> Use <a class="reference internal" href="_autosummary/jax.debug.print.html#jax.debug.print" title="jax.debug.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.print()</span></code></a> to print values to stdout in <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>-,<code class="docutils literal notranslate"><span class="pre">jax.pmap</span></code>-, and <code class="docutils literal notranslate"><span class="pre">pjit</span></code>-decorated functions,
+and <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#jax.debug.breakpoint" title="jax.debug.breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.breakpoint()</span></code></a> to pause execution of your compiled function to inspect values in the call stack.</p>
 <p>Let’s begin with <a class="reference internal" href="_autosummary/jax.debug.print.html#jax.debug.print" title="jax.debug.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.print()</span></code></a>.</p>
 <section id="jax-debug-print-for-simple-inspection">
 <h2><code class="docutils literal notranslate"><span class="pre">jax.debug.print</span></code> for simple inspection<a class="headerlink" href="#jax-debug-print-for-simple-inspection" title="Link to this heading">#</a></h2>
@@ -721,8 +610,8 @@ the Python <a class="reference external" href="https://docs.python.org/3/library
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>print(x) -&gt; Traced&lt;~float32[]&gt;with&lt;DynamicJaxprTrace&gt;
-print(y) -&gt; Traced&lt;~float32[]&gt;with&lt;DynamicJaxprTrace&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>print(x) -&gt; JitTracer&lt;~float32[]&gt;
+print(y) -&gt; JitTracer&lt;~float32[]&gt;
 </pre></div>
 </div>
 </div>
@@ -956,45 +845,10 @@ WARNING:root:Logged value: 4.0
 </div>
 <p>This can make <a class="reference internal" href="_autosummary/jax.debug.callback.html#jax.debug.callback" title="jax.debug.callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.callback()</span></code></a> useful for general-purpose debugging.</p>
 <p>You can learn more about <a class="reference internal" href="_autosummary/jax.debug.callback.html#jax.debug.callback" title="jax.debug.callback"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.callback()</span></code></a> and other kinds of JAX callbacks in <a class="reference internal" href="external-callbacks.html#external-callbacks"><span class="std std-ref">External callbacks</span></a>.</p>
-</section>
-<section id="debugging-runtime-values">
-<h2>Debugging runtime values<a class="headerlink" href="#debugging-runtime-values" title="Link to this heading">#</a></h2>
-<!--* freshness: { reviewed: '2024-04-11' } *-->
-<p>Do you have exploding gradients? Are NaNs making you gnash your teeth? Just want to poke around the intermediate values in your computation? Check out the following JAX debugging tools! This page has summaries and you can click the “Read more” links at the bottom to learn more.</p>
-<p>Table of contents:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="debugging/print_breakpoint.html"><span class="doc std std-doc">Interactive inspection with <code class="docutils literal notranslate"><span class="pre">jax.debug</span></code></span></a></p></li>
-<li><p><a class="reference internal" href="debugging/checkify_guide.html"><span class="doc std std-doc">Functional error checks with jax.experimental.checkify</span></a></p></li>
-<li><p><a class="reference internal" href="debugging/flags.html"><span class="doc std std-doc">Throwing Python errors with JAX’s debug flags</span></a></p></li>
-</ul>
-<section id="interactive-inspection-with-jax-debug">
-<h3>Interactive inspection with <code class="docutils literal notranslate"><span class="pre">jax.debug</span></code><a class="headerlink" href="#interactive-inspection-with-jax-debug" title="Link to this heading">#</a></h3>
-<p>Complete guide <a class="reference internal" href="debugging/print_breakpoint.html"><span class="doc std std-doc">here</span></a></p>
-<p><strong>Summary:</strong> Use <a class="reference internal" href="_autosummary/jax.debug.print.html#jax.debug.print" title="jax.debug.print"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.print()</span></code></a> to print values to stdout in <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>-,<code class="docutils literal notranslate"><span class="pre">jax.pmap</span></code>-, and <code class="docutils literal notranslate"><span class="pre">pjit</span></code>-decorated functions,
-and <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#jax.debug.breakpoint" title="jax.debug.breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.debug.breakpoint()</span></code></a> to pause execution of your compiled function to inspect values in the call stack:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-
-<span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-  <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;🤯 </span><span class="si">{x}</span><span class="s2"> 🤯&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
-  <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-  <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">breakpoint</span><span class="p">()</span>
-  <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;🤯 </span><span class="si">{y}</span><span class="s2"> 🤯&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
-  <span class="k">return</span> <span class="n">y</span>
-
-<span class="n">f</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
-<span class="c1"># Prints:</span>
-<span class="c1"># 🤯 2.0 🤯</span>
-<span class="c1"># Enters breakpoint to inspect values!</span>
-<span class="c1"># 🤯 0.9092974662780762 🤯</span>
-</pre></div>
-</div>
-<p><a class="reference internal" href="debugging/print_breakpoint.html"><span class="doc std std-doc">Read more</span></a>.</p>
+<p>Read more in <a class="reference internal" href="debugging/print_breakpoint.html"><span class="doc std std-doc">Compiled prints and breakpoints</span></a>.</p>
 </section>
 <section id="functional-error-checks-with-jax-experimental-checkify">
-<h3>Functional error checks with <code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code><a class="headerlink" href="#functional-error-checks-with-jax-experimental-checkify" title="Link to this heading">#</a></h3>
-<p>Complete guide <a class="reference internal" href="debugging/checkify_guide.html"><span class="doc std std-doc">here</span></a></p>
+<h2>Functional error checks with <code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code><a class="headerlink" href="#functional-error-checks-with-jax-experimental-checkify" title="Link to this heading">#</a></h2>
 <p><strong>Summary:</strong> Checkify lets you add <code class="docutils literal notranslate"><span class="pre">jit</span></code>-able runtime error checking (e.g. out of bounds indexing) to your JAX code. Use the <code class="docutils literal notranslate"><span class="pre">checkify.checkify</span></code> transformation together with the assert-like <code class="docutils literal notranslate"><span class="pre">checkify.check</span></code> function to add runtime checks to JAX code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">checkify</span>
 <span class="kn">import</span> <span class="nn">jax</span>
@@ -1030,11 +884,9 @@ and <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#j
 <span class="c1"># ValueError: nan generated by primitive sin at &lt;...&gt;:8 (f)</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="debugging/checkify_guide.html"><span class="doc std std-doc">Read more</span></a>.</p>
-</section>
+<p>Read more in <a class="reference internal" href="debugging/checkify_guide.html"><span class="doc std std-doc">The checkify transformation</span></a>.</p>
 <section id="throwing-python-errors-with-jax-s-debug-flags">
 <h3>Throwing Python errors with JAX’s debug flags<a class="headerlink" href="#throwing-python-errors-with-jax-s-debug-flags" title="Link to this heading">#</a></h3>
-<p>Complete guide <a class="reference internal" href="debugging/flags.html"><span class="doc std std-doc">here</span></a></p>
 <p><strong>Summary:</strong> Enable the <code class="docutils literal notranslate"><span class="pre">jax_debug_nans</span></code> flag to automatically detect when NaNs are produced in <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>-compiled code (but not in <code class="docutils literal notranslate"><span class="pre">jax.pmap</span></code> or <code class="docutils literal notranslate"><span class="pre">jax.pjit</span></code>-compiled code) and enable the <code class="docutils literal notranslate"><span class="pre">jax_disable_jit</span></code> flag to disable JIT-compilation, enabling use of traditional Python debugging tools like <code class="docutils literal notranslate"><span class="pre">print</span></code> and <code class="docutils literal notranslate"><span class="pre">pdb</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
 <span class="n">jax</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_debug_nans&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -1044,15 +896,7 @@ and <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#j
 <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>  <span class="c1"># ==&gt; raises FloatingPointError exception!</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="debugging/flags.html"><span class="doc std std-doc">Read more</span></a>.</p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Read more</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
-</ul>
-</div>
+<p>Read more in <a class="reference internal" href="debugging/flags.html"><span class="doc std std-doc">JAX debugging flags</span></a>.</p>
 </section>
 </section>
 <section id="next-steps">
@@ -1082,11 +926,11 @@ and <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#j
       </div>
     </a>
     <a class="right-next"
-       href="debugging/print_breakpoint.html"
+       href="debugging/flags.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Compiled prints and breakpoints</p>
+        <p class="prev-next-title">JAX debugging flags</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1108,9 +952,7 @@ and <a class="reference internal" href="_autosummary/jax.debug.breakpoint.html#j
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-debug-print-for-simple-inspection"><code class="docutils literal notranslate"><span class="pre">jax.debug.print</span></code> for simple inspection</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-debug-breakpoint-for-pdb-like-debugging"><code class="docutils literal notranslate"><span class="pre">jax.debug.breakpoint</span></code> for <code class="docutils literal notranslate"><span class="pre">pdb</span></code>-like debugging</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-debug-callback-for-more-control-during-debugging"><code class="docutils literal notranslate"><span class="pre">jax.debug.callback</span></code> for more control during debugging</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-runtime-values">Debugging runtime values</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-inspection-with-jax-debug">Interactive inspection with <code class="docutils literal notranslate"><span class="pre">jax.debug</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-error-checks-with-jax-experimental-checkify">Functional error checks with <code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functional-error-checks-with-jax-experimental-checkify">Functional error checks with <code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#throwing-python-errors-with-jax-s-debug-flags">Throwing Python errors with JAX’s debug flags</a></li>
 </ul>
 </li>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -54,7 +54,7 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Pallas Design Notes" href="../design/index.html" />
+    <link rel="next" title="Mosaic GPU Pipelining" href="pipelining.html" />
     <link rel="prev" title="Pallas:Mosaic GPU" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">Pallas:Mosaic GPU</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l4 current active"><a class="current reference internal" href="#">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -533,7 +532,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="../../advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     
     <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
@@ -700,10 +699,27 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-for-the-operation-to-complete">Waiting for the operation to complete</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackwell-tcgen05">Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackwell-tcgen05">Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allocating-the-accumulator-using-tmem">Allocating the accumulator / Using TMEM</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#loads">Loads</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#stores">Stores</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-core-map">Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Issuing the operation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Waiting for the operation to complete</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-mma">Collective MMA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-core-map">Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replacing-pl-pallas-call-with-pl-core-map-or-plgpu-kernel">Replacing <code class="docutils literal notranslate"><span class="pre">pl.pallas_call</span></code> with <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code> or <code class="docutils literal notranslate"><span class="pre">plgpu.kernel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-multiple-pallas-threads-per-cuda-block">Using multiple Pallas threads per CUDA block</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cuda-block-clusters">Using CUDA block clusters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-allocations-in-pl-run-scoped">Collective allocations in <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization-structures-and-primitives">Synchronization structures and primitives</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-smem"><code class="docutils literal notranslate"><span class="pre">commit_smem</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></a><ul class="nav section-nav flex-column">
@@ -1026,7 +1042,7 @@ All operands must have the same element type.</p></li>
 </ol>
 <p>Steps 2.-4. are usually performed in a loop over the contraction dimension (<code class="docutils literal notranslate"><span class="pre">K</span></code>).</p>
 <section id="memory-space-of-a-and-b-operands">
-<h3>Memory space of <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands<a class="headerlink" href="#memory-space-of-a-and-b-operands" title="Link to this heading">#</a></h3>
+<span id="memory-space-a-b-mma"></span><h3>Memory space of <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands<a class="headerlink" href="#memory-space-of-a-and-b-operands" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands are generally best passed in through SMEM, where they can
 be conveniently loaded using <code class="docutils literal notranslate"><span class="pre">plgpu.copy_gmem_to_smem</span></code>. For those operands to be
 compatible with MMA operations, they need to have the appropriate tiling and swizzling
@@ -1153,13 +1169,363 @@ instructions can be reused. This is especially relevant for pipelining WGMMA wit
 </section>
 <section id="blackwell-tcgen05">
 <h3>Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)<a class="headerlink" href="#blackwell-tcgen05" title="Link to this heading">#</a></h3>
-<p>While Mosaic GPU supports <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> MMA instructions, exposing this capability to Pallas
-is still work in progress. Stay tuned!</p>
+<p>The Blackwell generation has significantly redesigned the TensorCore subunit.
+It is now significantly more independent from the regular warp schedulers and
+no longer uses or even supports using registers as its operands. In their place,
+a new memory space called <em>tensor memory</em> (TMEM) has been introduced. What’s
+more TensorCores from pairs of SMs can now pool their resources and compute
+larger MMA operations that span both SMs. We call this a <a class="reference internal" href="#collective-mma">“collective MMA operation”</a>.</p>
+<section id="allocating-the-accumulator-using-tmem">
+<h4>Allocating the accumulator / Using TMEM<a class="headerlink" href="#allocating-the-accumulator-using-tmem" title="Link to this heading">#</a></h4>
+<p>TMEM references can be allocated in the same way in which all other references
+are allocated—using <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.run_scoped.html#jax.experimental.pallas.run_scoped" title="jax.experimental.pallas.run_scoped"><code class="xref py py-func docutils literal notranslate"><span class="pre">pl.run_scoped</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">tmem_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">tmem_ref</span><span class="p">):</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>Not all shapes can be allocated in TMEM. Only 2D references are supported, and
+the number of rows (the size of the first dimension) must be 128 or 64 at the
+moment.</p>
+<p>What’s more, if the data type has a bitwidth smaller than 32-bits, it is necessary
+to declare if the allocation is supposed to be packed (e.g. putting two 16-bit
+elements into a single 32-bit cell in TMEM) or not (with each element padded up
+to 32-bits). MMA accumulators (fp32 or fp16) are never packed, but if the left
+operand it passed in TMEM, it must always be packed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span>
+                   <span class="n">acc_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">packed</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                   <span class="n">lhs_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">packed</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">):</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_smem_ref</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>Another interesting complication with TMEM is that all operations on it are asynchronous.
+For that reason, reads and writes using the Python subscript syntax that are normally
+used e.g. for SMEM are not allowed for TMEM.</p>
+<section id="loads">
+<h5>Loads<a class="headerlink" href="#loads" title="Link to this heading">#</a></h5>
+<p>Loads can be performed using <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.async_load_tmem.html#jax.experimental.pallas.mosaic_gpu.async_load_tmem" title="jax.experimental.pallas.mosaic_gpu.async_load_tmem"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.async_load_tmem</span></code></a> and awaited using <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.wait_load_tmem.html#jax.experimental.pallas.mosaic_gpu.wait_load_tmem" title="jax.experimental.pallas.mosaic_gpu.wait_load_tmem"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.wait_load_tmem</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">async_load_tmem</span><span class="p">(</span><span class="n">tmem_ref</span><span class="p">)</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">commit_smem</span><span class="p">()</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">copy_smem_to_gmem</span><span class="p">(</span><span class="n">smem_ref</span><span class="p">,</span> <span class="n">gmem_ref</span><span class="p">)</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">wait_smem_to_gmem</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">wait_load_tmem</span><span class="p">()</span>  <span class="c1"># Wait for the read to fully complete before we overwrite tmem_ref again.</span>
+</pre></div>
+</div>
+<p>The load semantics are quite confusing, in that the array returned from the load
+can be safely used without any additional synchronization. However, if the read
+TMEM region is ever overwritten again (e.g. by a store or an MMA operation), the
+thread that issued the load must first call <code class="docutils literal notranslate"><span class="pre">plgpu.wait_load_tmem()</span></code> to ensure
+the program remains race-free.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One way to make peace with this seemingly causality-breaking behavior (data
+arrives in registers before it is fully read from TMEM) is to consider that it
+might be an effect of an interaction of a limitation and a convenience feature
+in the PTX compiler. We don’t know if this is true, but at least it makes sense.</p>
+<p>The convenience feature is that the compiler can reliably track the usage of
+registers produced by TMEM loads and will insert the minimum number of delays
+necessary to ensure the data arrives from TMEM before it’s used. The read
+operation is unrolled into many instructions, meaning that they don’t have to
+all be awaited before we start consuming the registers filled in by the first load.
+This is why we don’t need to guard the use of the result.</p>
+<p>The limitation is that the compiler cannot reliably perform alias analysis on
+TMEM loads and stores, which is why any load and store that is not separated
+by an explicit wait is considered safe to execute concurrently. The alternative
+would unnecessarily pessimize the performance of loads and stores that are truly
+unrelated. This is why we need to explicitly wait before we reuse TMEM again.</p>
+</div>
+</section>
+<section id="stores">
+<h5>Stores<a class="headerlink" href="#stores" title="Link to this heading">#</a></h5>
+<p>Conversely, stores are performed using <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.async_store_tmem.html#jax.experimental.pallas.mosaic_gpu.async_store_tmem" title="jax.experimental.pallas.mosaic_gpu.async_store_tmem"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.async_store_tmem</span></code></a> and awaited using <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.commit_tmem.html#jax.experimental.pallas.mosaic_gpu.commit_tmem" title="jax.experimental.pallas.mosaic_gpu.commit_tmem"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.commit_tmem</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plgpu</span><span class="o">.</span><span class="n">async_store_tmem</span><span class="p">(</span><span class="n">tmem_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">])</span>
+<span class="n">plgpu</span><span class="o">.</span><span class="n">commit_tmem</span><span class="p">()</span>
+<span class="n">smem_ref2</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">async_load_tmem</span><span class="p">(</span><span class="n">tmem_ref</span><span class="p">)</span>  <span class="c1"># Safe to read from tmem_ref now</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id1">
+<h4>Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>We recommend passing in <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> through shared memory. In this case the
+<a class="reference internal" href="#memory-space-a-b-mma">correct tiling and swizzling transforms must be specified</a>.
+The <code class="docutils literal notranslate"><span class="pre">A</span></code> operand can be passed in as a TMEM reference as well, but it must be packed.</p>
+</section>
+<section id="id2">
+<h4>Issuing the operation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>The supported <strong>non-collective</strong> MMA shapes are such that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> is 64 or 128</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and smaller than 512</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">*</span> <span class="pre">swizzle</span></code> divided by the bitwidth of element type</p></li>
+</ul>
+<p>The supported <a class="reference internal" href="#collective-mma"><strong>collective</strong> MMA</a> shapes are such that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> is 128 or 256 (half of that per block)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and smaller than 256 (smaller than 128 in each block)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">*</span> <span class="pre">swizzle</span></code> divided by the bitwidth of element type</p></li>
+</ul>
+<p>The currently supported floating-point data types are: <code class="docutils literal notranslate"><span class="pre">jnp.bfloat16</span></code>,
+<code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code>, <code class="docutils literal notranslate"><span class="pre">jnp.float8_e5m2</span></code>, <code class="docutils literal notranslate"><span class="pre">jnp.float8_e4m3fn</span></code>. The accumulator can be
+a <code class="docutils literal notranslate"><span class="pre">jnp.float32</span></code> or <code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code>, with the exception of <code class="docutils literal notranslate"><span class="pre">jnp.bfloat16</span></code> when it
+must be a <code class="docutils literal notranslate"><span class="pre">jnp.float32</span></code>.</p>
+<p>The only currently supported integer data type is <code class="docutils literal notranslate"><span class="pre">jnp.int8</span></code> with a <code class="docutils literal notranslate"><span class="pre">jnp.int32</span></code>
+accumulator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>According to our benchmarks, here are some performance rules-of-thumb:</p>
+<ul class="simple">
+<li><p>Non-collective MMA should always use M=128 and N &gt;= 128.</p>
+<ul>
+<li><p>M=64 causes a significant performance drop.</p></li>
+<li><p>N=64 causes a noticeable performance drop, but not as significant as M=64.</p></li>
+</ul>
+</li>
+<li><p>Collective MMA is always reasonably fast, but not faster than non-collective MMA.</p>
+<ul>
+<li><p>The biggest benefit from collective MMA is not higher TensorCore throughput
+but the ability to share data between SMs, allowing to increase the arithmetic
+intensity of the kernel.</p></li>
+</ul>
+</li>
+<li><p>Swizzle and transposes do not seem to affect performance in a significant way.</p></li>
+</ul>
+</div>
+</section>
+<section id="id3">
+<h4>Waiting for the operation to complete<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<p>Awaiting the result of a <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_mma</span></code>
+call requires the use of a <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>. We recommend reading through the reference
+documentation for <a class="reference internal" href="#barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code>s</a>, and especially its
+<a class="reference internal" href="#awaiting-tcgen05-instructions">Blackwell-related subsection</a> for more information.</p>
+<p>If the barrier is passed in directly to
+the <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_mma</span></code>,
+completing a wait on that barrier will indicate that the final accumulator has
+been written to TMEM. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">orders_tensor_core</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">,</span> <span class="n">accumulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
+  <span class="c1"># We can read the result now.</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">async_load_tmem</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">)</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>If no barrier is given to <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_mma</span></code>,
+its completion will be tracked only once <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_commit</span></code> is called:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">orders_tensor_core</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_ref</span><span class="p">,</span> <span class="n">accumulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref2</span><span class="p">,</span> <span class="n">rhs_ref2</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_commit</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
+  <span class="c1"># We can read the result now. Both MMAs have completed.</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">async_load_tmem</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">)</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="collective-mma">
+<span id="id4"></span><h4>Collective MMA<a class="headerlink" href="#collective-mma" title="Link to this heading">#</a></h4>
+<p>The Blackwell generation gains a new way to perform MMA operations, where the
+TensorCores of 2 SMs in a cluster collaborate on a single MMA operation. The
+<code class="docutils literal notranslate"><span class="pre">B</span></code> operand from each SM is shared with the other. The <code class="docutils literal notranslate"><span class="pre">D</span></code> and <code class="docutils literal notranslate"><span class="pre">A</span></code> operands are
+local to each SM and not shared.</p>
+<center><img alt="A diagram showing the partitioning of operands in a collective MMA" src="../../_static/pallas/gpu/collective_mma.svg" style="width:60%; min-width: 600px;"></center>
+<p>This means that to perform a collective MMA with shape M, N, and K, the operands
+in each of the two Pallas threads should be of sizes: <code class="docutils literal notranslate"><span class="pre">(M</span> <span class="pre">//</span> <span class="pre">2,</span> <span class="pre">K)</span></code> for <code class="docutils literal notranslate"><span class="pre">A</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(K,</span> <span class="pre">N</span> <span class="pre">//</span> <span class="pre">2)</span></code> for <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">(M</span> <span class="pre">//</span> <span class="pre">2,</span> <span class="pre">N)</span></code> for <code class="docutils literal notranslate"><span class="pre">D</span></code> (the accumulator). Stacking the
+two accumulators on top would recover the result of performing a MxNxK matrix
+multiplication.</p>
+<p>To make loading of the <code class="docutils literal notranslate"><span class="pre">B</span></code> operand easier, <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.copy_gmem_to_smem.html#jax.experimental.pallas.mosaic_gpu.copy_gmem_to_smem" title="jax.experimental.pallas.mosaic_gpu.copy_gmem_to_smem"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.copy_gmem_to_smem</span></code></a>
+can be used together with <code class="docutils literal notranslate"><span class="pre">collective_axes</span></code> and <code class="docutils literal notranslate"><span class="pre">partitioned_axis</span></code> to indicate
+that the two Pallas threads along the collective axis should load the same slice,
+but each will only obtain half of it. Unlike a copy with <code class="docutils literal notranslate"><span class="pre">collective_axes</span></code> alone
+it does not utilize TMA multicast (since each thread loads a distinct slice of
+data), but it can simplify the indexing logic a bit.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span>
+    <span class="n">b_gmem</span><span class="p">,</span>  <span class="c1"># [K, N]</span>
+    <span class="n">b_smem</span><span class="p">,</span>  <span class="c1"># [K, N // 2]</span>
+    <span class="n">b_tma_barrier</span><span class="p">,</span>
+    <span class="n">collective_axes</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">partitioned_axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 <section id="using-core-map">
 <h2>Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code><a class="headerlink" href="#using-core-map" title="Link to this heading">#</a></h2>
-<p>TODO</p>
+<p><code class="docutils literal notranslate"><span class="pre">pl.pallas_call</span></code> is suitable for kernels where a single Pallas thread can
+perform the whole computation for an entire CUDA block. The <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code>
+function relaxes this restriction, allowing for using multiple threads within a
+single block (e.g. for warp specialization) or across multiple blocks in a block
+cluster (e.g. to utilize multicast TMA).</p>
+<section id="replacing-pl-pallas-call-with-pl-core-map-or-plgpu-kernel">
+<h3>Replacing <code class="docutils literal notranslate"><span class="pre">pl.pallas_call</span></code> with <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code> or <code class="docutils literal notranslate"><span class="pre">plgpu.kernel</span></code><a class="headerlink" href="#replacing-pl-pallas-call-with-pl-core-map-or-plgpu-kernel" title="Link to this heading">#</a></h3>
+<p>Let us begin with a simple Pallas kernel that increments an array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+  <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">,</span>
+  <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span>
+  <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">block_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,),</span> <span class="n">index_map</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,))],</span>
+  <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">block_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,),</span> <span class="n">index_map</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,))</span>
+  <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">256</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="c1"># Total output shape</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">):</span>
+  <span class="c1"># x_ref and y_ref are in SMEM!</span>
+  <span class="n">y_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can write a similar kernel using <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code>. One big difference is that
+unlike <code class="docutils literal notranslate"><span class="pre">pl.pallas_call</span></code>, no GMEM&lt;-&gt;SMEM copies will be inserted automatically.
+If you want them, you can either insert them yourself or use the
+<a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.emit_pipeline.html#jax.experimental.pallas.mosaic_gpu.emit_pipeline" title="jax.experimental.pallas.mosaic_gpu.emit_pipeline"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.emit_pipeline</span></code></a>
+helper. We recommend reviewing the <a class="reference internal" href="pipelining.html"><span class="std std-doc">software pipelining guide</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pl</span><span class="o">.</span><span class="n">run_state</span>
+<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">refs</span><span class="p">):</span>
+  <span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span> <span class="o">=</span> <span class="n">refs</span>
+  <span class="c1"># Here, we&#39;re not in the kernel yet! pl.run_state simply changes the JAX</span>
+  <span class="c1"># immutable arrays into mutable GMEM (not SMEM!) references.</span>
+
+  <span class="c1"># Define the mesh: 2 CUDA blocks over 1 axis called &quot;x&quot;</span>
+  <span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">grid_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
+
+  <span class="nd">@pl</span><span class="o">.</span><span class="n">core_map</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>  <span class="c1"># core_map executes the body</span>
+  <span class="k">def</span> <span class="nf">kernel_body</span><span class="p">():</span>
+    <span class="c1"># Once we enter the pl.core_map scope, we are in the body of the kernel.</span>
+    <span class="n">block_slice</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">y_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y_init</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_init</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code> is a powerful API, it is also quite low-level and is pretty
+much always used in under <code class="docutils literal notranslate"><span class="pre">pl.run_state</span></code> (to make JAX arrays into refs) or
+<code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code> (to allocate for scratch refs). For that reason, we also
+provide a convenience API <code class="docutils literal notranslate"><span class="pre">plgpu.kernel</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">grid_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+    <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span>
+    <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">256</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+    <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">):</span>
+  <span class="c1"># x_ref and y_ref are in GMEM!</span>
+  <span class="n">block_slice</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+  <span class="n">y_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># No need to preallocate outputs as in pl.core_map.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">plgpu.Mesh</span></code> used with <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code> defines a topology for computation
+<em>within a single GPU</em>, specifying how work is distributed across CUDA blocks
+(the <code class="docutils literal notranslate"><span class="pre">grid</span></code>), Pallas threads within a block (<code class="docutils literal notranslate"><span class="pre">num_threads</span></code>), and potentially
+CUDA block clusters (<code class="docutils literal notranslate"><span class="pre">cluster</span></code>). This is analogous to how <code class="docutils literal notranslate"><span class="pre">jax.sharding.Mesh</span></code>
+defines a topology for distributed computation <em>across multiple devices</em> in JAX.
+Both involve SPMD programs executing across the defined topology. Furthermore,
+you can run “collectives” over the Pallas threads and cluster (e.g., using
+<code class="docutils literal notranslate"><span class="pre">plgpu.ClusterBarrier</span></code> or collective async copies), similar to how JAX
+collectives (<code class="docutils literal notranslate"><span class="pre">psum</span></code>, <code class="docutils literal notranslate"><span class="pre">all_gather</span></code>, etc.) operate across devices in a JAX <code class="docutils literal notranslate"><span class="pre">Mesh</span></code>.
+Both also use named axes, and <code class="docutils literal notranslate"><span class="pre">lax.axis_index(axis_name)</span></code> can be used to get a
+thread’s or block’s coordinate.</p>
+</div>
+</section>
+<section id="using-multiple-pallas-threads-per-cuda-block">
+<h3>Using multiple Pallas threads per CUDA block<a class="headerlink" href="#using-multiple-pallas-threads-per-cuda-block" title="Link to this heading">#</a></h3>
+<p>Below, you can find an example of two Pallas threads within a single block
+synchronizing through a barrier and even exchanging data through SMEM.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">num_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thread_name</span><span class="o">=</span><span class="s2">&quot;pallas_thread&quot;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">[</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()]</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">):</span>
+  <span class="n">thread_id</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;pallas_thread&quot;</span><span class="p">)</span>
+
+  <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">thread_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">producer_thread</span><span class="p">():</span>
+    <span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_arrive</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>  <span class="c1"># Signal the consumer thread</span>
+
+  <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">thread_id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">consumer_thread</span><span class="p">():</span>
+    <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>  <span class="c1"># Wait for the producer thread</span>
+    <span class="n">out_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># There&#39;s no need to preallocate the input anymore.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While this example is simple, you can find a more complicated example in the
+<a class="reference internal" href="#cross-thread-synchronization">synchronization section</a>.</p>
+<p>Multiple threads are frequently used in high-performance kernels such as the
+latest flash attention variants or ping-pong matrix multiplication. In both of
+those, there are 2 compute threads in the program that use the SM’s ALU
+and TensorCore in an alternating fashion to ensure no execution conflicts.</p>
+<p>Another common technique is to allocate one Pallas thread and devote it entirely
+to scheduling asynchronous copies for data consumed by other threads. While
+implementing this scheme from scratch can be complicated, we provide a
+convenient helper API: <code class="docutils literal notranslate"><span class="pre">plgpu.emit_pipeline_warp_specialized</span></code>.</p>
+</section>
+<section id="using-cuda-block-clusters">
+<h3>Using CUDA block clusters<a class="headerlink" href="#using-cuda-block-clusters" title="Link to this heading">#</a></h3>
+<p>The kernel below launches a single cluster of 2 CUDA blocks and uses the TMA
+multicast feature to collectively perform a copy of GMEM into SMEM of both
+blocks. All blocks participating in the collective copy must schedule the exact
+same copy for the program to be valid.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">cluster</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">cluster_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;cluster&quot;</span><span class="p">,))</span>
+
+<span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span>
+  <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+  <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
+  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">[</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()]</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">):</span>
+  <span class="c1"># Specifying collective_axes will enable TMA multicast automatically.</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">,</span> <span class="n">collective_axes</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_smem_to_gmem</span><span class="p">(</span><span class="n">smem_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;cluster&quot;</span><span class="p">)])</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">wait_smem_to_gmem</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># Each block gets the same data and writes it out.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="collective-allocations-in-pl-run-scoped">
+<h3>Collective allocations in <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code><a class="headerlink" href="#collective-allocations-in-pl-run-scoped" title="Link to this heading">#</a></h3>
+<p>When using <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code> with multiple Pallas threads (i.e., <code class="docutils literal notranslate"><span class="pre">num_threads</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>
+in <code class="docutils literal notranslate"><span class="pre">plgpu.Mesh</span></code>), allocations made via <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code> (for SMEM or Barriers)
+must be performed <em>collectively by all threads</em>. This is indicated by specifying
+a <code class="docutils literal notranslate"><span class="pre">collective_axis</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">run_scoped</span></code>, which has two effects:</p>
+<ol class="arabic simple">
+<li><p>it promises that all threads will call the same allocation, and</p></li>
+<li><p>all threads will receive the exact same allocation.</p></li>
+</ol>
+<p>If collective_axes is not specified or does not include the Pallas thread axis,
+each thread would get its own private copy of the scratch variable. This is
+usually undesired and not supported at the moment.</p>
+</section>
 </section>
 <section id="synchronization-structures-and-primitives">
 <h2>Synchronization structures and primitives<a class="headerlink" href="#synchronization-structures-and-primitives" title="Link to this heading">#</a></h2>
@@ -1194,7 +1560,7 @@ hardware units reading stale data from SMEM. Unfortunately, this function is rel
 which is why we rely on you, the user, to insert it in the minimal number of places where it’s necessary.</p>
 </section>
 <section id="barrier">
-<h3><code class="docutils literal notranslate"><span class="pre">Barrier</span></code><a class="headerlink" href="#barrier" title="Link to this heading">#</a></h3>
+<span id="id5"></span><h3><code class="docutils literal notranslate"><span class="pre">Barrier</span></code><a class="headerlink" href="#barrier" title="Link to this heading">#</a></h3>
 <p>This is essentially a thin wrapper around an array of PTX <code class="docutils literal notranslate"><span class="pre">mbarrier</span></code> types and is
 passed in as a reference. All functions involving barriers expect to only get a single
 barrier argument, and so if the reference contains multiple, you have to extract one
@@ -1205,7 +1571,6 @@ after a fixed number of “arrivals” (by default 1).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>There are three operations that can complete a barrier:</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It is critical to ensure that the synchronization scheme makes it impossible for two
@@ -1232,6 +1597,7 @@ one. Doing so will lead to deadlocks. To recap: when a <code class="docutils lit
 some thread, it must observe every single completion of that barrier (by waiting on it).</p>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">Barrier</span></code> can receive arrivals from any source, without restrictions.</p>
 </div>
+<p>There are three operations that can complete a barrier:</p>
 <section id="asynchronous-gmem-to-smem-copies">
 <h4>Asynchronous GMEM-to-SMEM copies<a class="headerlink" href="#asynchronous-gmem-to-smem-copies" title="Link to this heading">#</a></h4>
 <p>When an asynchronous GMEM-to-SMEM copy is being executed by the TMA engine, it will
@@ -1239,7 +1605,7 @@ post progress updates to the barrier given to <code class="docutils literal notr
 is complete, the barrier will complete one arrival as well.</p>
 </section>
 <section id="explicit-arrival-cross-thread-synchronization">
-<h4>Explicit arrival (cross-thread synchronization)<a class="headerlink" href="#explicit-arrival-cross-thread-synchronization" title="Link to this heading">#</a></h4>
+<span id="cross-thread-synchronization"></span><h4>Explicit arrival (cross-thread synchronization)<a class="headerlink" href="#explicit-arrival-cross-thread-synchronization" title="Link to this heading">#</a></h4>
 <p>Any thread can explicitly arrival on a barrier using the following function:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_arrive</span><span class="p">(</span><span class="n">barrier</span><span class="p">)</span>
 </pre></div>
@@ -1276,9 +1642,36 @@ threads:</p>
 </div>
 </section>
 <section id="awaiting-tcgen05-tensorcore-instructions">
-<h4>Awaiting <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> TensorCore instructions<a class="headerlink" href="#awaiting-tcgen05-tensorcore-instructions" title="Link to this heading">#</a></h4>
-<p>While Mosaic GPU supports <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> MMA instructions, exposing this capability to Pallas
-is still work in progress. Stay tuned!</p>
+<span id="awaiting-tcgen05-instructions"></span><h4>Awaiting <code class="docutils literal notranslate"><span class="pre">tcgen05</span></code> TensorCore instructions<a class="headerlink" href="#awaiting-tcgen05-tensorcore-instructions" title="Link to this heading">#</a></h4>
+<p>Before we begin, an important warning:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On Blackwell generation of GPUs, <code class="docutils literal notranslate"><span class="pre">Barrier</span></code> operations by default have relaxed
+semantics with respect to the TensorCore operations. This means that by default
+any TensorCore-related operation (including TMEM operation) can be moved by the
+compiler <em>after a barrier signal</em>. Similarly, any TensorCore-related operation
+can be moved <em>before a barrier wait</em>.</p>
+<p>If you mean to use <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>s to indicate to other threads that a TensorCore
+operation is complete, allocate the barrier with <code class="docutils literal notranslate"><span class="pre">orders_tensor_core=True</span></code>. This
+argument will insert the necessary instructions to prevent the problematic
+reordering mentioned above.</p>
+</div>
+<p>Unlike in older GPUs, the only way to observe the completion of
+Blackwell-generation TensorCore instructions is to pass in a <code class="docutils literal notranslate"><span class="pre">Barrier</span></code> reference
+to the <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_mma</span></code>
+function. Once the MMA is complete, the TensorCore will arrive on the barrier.</p>
+<p>Note that this use of <code class="docutils literal notranslate"><span class="pre">Barrier</span></code>s requires that they are created with
+<code class="docutils literal notranslate"><span class="pre">orders_tensor_core=True</span></code>, since they are used to synchronize with TensorCore
+operations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">orders_tensor_core</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">,</span> <span class="n">accumulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
+  <span class="c1"># We can read the result now</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">async_load_tmem</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">)</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="clusterbarrier">
@@ -1325,11 +1718,11 @@ is still work in progress. Stay tuned!</p>
       </div>
     </a>
     <a class="right-next"
-       href="../design/index.html"
+       href="pipelining.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Pallas Design Notes</p>
+        <p class="prev-next-title">Mosaic GPU Pipelining</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1372,10 +1765,27 @@ is still work in progress. Stay tuned!</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-for-the-operation-to-complete">Waiting for the operation to complete</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackwell-tcgen05">Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blackwell-tcgen05">Blackwell (<code class="docutils literal notranslate"><span class="pre">tcgen05</span></code>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#allocating-the-accumulator-using-tmem">Allocating the accumulator / Using TMEM</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#loads">Loads</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#stores">Stores</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-core-map">Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preparing the <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code> operands</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Issuing the operation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Waiting for the operation to complete</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-mma">Collective MMA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-core-map">Using <code class="docutils literal notranslate"><span class="pre">core_map</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replacing-pl-pallas-call-with-pl-core-map-or-plgpu-kernel">Replacing <code class="docutils literal notranslate"><span class="pre">pl.pallas_call</span></code> with <code class="docutils literal notranslate"><span class="pre">pl.core_map</span></code> or <code class="docutils literal notranslate"><span class="pre">plgpu.kernel</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-multiple-pallas-threads-per-cuda-block">Using multiple Pallas threads per CUDA block</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-cuda-block-clusters">Using CUDA block clusters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-allocations-in-pl-run-scoped">Collective allocations in <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization-structures-and-primitives">Synchronization structures and primitives</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-smem"><code class="docutils literal notranslate"><span class="pre">commit_smem</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barrier"><code class="docutils literal notranslate"><span class="pre">Barrier</span></code></a><ul class="nav section-nav flex-column">

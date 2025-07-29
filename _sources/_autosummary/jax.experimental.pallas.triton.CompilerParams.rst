@@ -26,6 +26,5 @@
       ~CompilerParams.BACKEND
       ~CompilerParams.num_stages
       ~CompilerParams.num_warps
-      ~CompilerParams.serialized_metadata
    
    

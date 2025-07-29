@@ -29,8 +29,8 @@
       ~ShapeDtypeStruct.sharding
       ~ShapeDtypeStruct.weak_type
       ~ShapeDtypeStruct.vma
+      ~ShapeDtypeStruct.is_ref
       ~ShapeDtypeStruct.format
-      ~ShapeDtypeStruct.layout
       ~ShapeDtypeStruct.ndim
       ~ShapeDtypeStruct.size
    

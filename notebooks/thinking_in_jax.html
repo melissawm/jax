@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -672,9 +671,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-devices-and-sharding">Array devices and sharding</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-in-time-compilation-with-jax-jit">Just-in-time compilation with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-in-time-compilation-with-jax-jit">Just-in-time compilation with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jit-mechanics-tracing-and-static-variables">JIT mechanics: tracing and static variables</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-derivatives-with-jax-grad">Taking derivatives with <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-vectorization-with-jax-vmap">Auto-vectorization with <code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vmap()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-vectorization-with-jax-vmap">Auto-vectorization with <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudorandom-numbers">Pseudorandom numbers</a></li>
 </ul>
             </nav>
@@ -716,7 +718,7 @@ document.write(`
 <p><strong>Key concepts:</strong></p>
 <ul class="simple">
 <li><p>JAX provides a NumPy-inspired interface for convenience.</p></li>
-<li><p>Through duck-typing, JAX arrays can often be used as drop-in replacements of NumPy arrays.</p></li>
+<li><p>Through <a class="reference external" href="https://en.wikipedia.org/wiki/Duck_typing">duck-typing</a>, JAX arrays can often be used as drop-in replacements of NumPy arrays.</p></li>
 <li><p>Unlike NumPy arrays, JAX arrays are always immutable.</p></li>
 </ul>
 <p>NumPy provides a well-known, powerful API for working with numerical data. For convenience, JAX provides <a class="reference external" href="https://docs.jax.dev/en/latest/jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code></a> which closely mirrors the NumPy API and provides easy entry into JAX. Almost anything that can be done with <code class="docutils literal notranslate"><span class="pre">numpy</span></code> can be done with <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code>, which is typically imported under the <code class="docutils literal notranslate"><span class="pre">jnp</span></code> alias:</p>
@@ -731,21 +733,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="n">x_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">y_np</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_np</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_np</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/ed74117ce798d02f04559155709be03bef63cfa850e6af47b918884ed471961f.png" src="../_images/ed74117ce798d02f04559155709be03bef63cfa850e6af47b918884ed471961f.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
 <span class="n">x_jnp</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">y_jnp</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_jnp</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_jnp</span><span class="p">)</span>
@@ -757,7 +744,7 @@ document.write(`
 <img alt="../_images/7566bdaf92d2f9beda43e4d3ddee916a69d996ec12b671de077d49428fd54fd2.png" src="../_images/7566bdaf92d2f9beda43e4d3ddee916a69d996ec12b671de077d49428fd54fd2.png" />
 </div>
 </div>
-<p>The code blocks are identical aside from replacing <code class="docutils literal notranslate"><span class="pre">np</span></code> with <code class="docutils literal notranslate"><span class="pre">jnp</span></code>, and the results are the same. As we can see, JAX arrays can often be used directly in place of NumPy arrays for things like plotting.</p>
+<p>The code blocks are identical to what you would expect with NumPy, aside from replacing <code class="docutils literal notranslate"><span class="pre">np</span></code> with <code class="docutils literal notranslate"><span class="pre">jnp</span></code>, and the results are the same. As we can see, JAX arrays can often be used directly in place of NumPy arrays for things like plotting.</p>
 <p>The arrays themselves are implemented as different Python types:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -794,7 +781,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Python’s <a class="reference external" href="https://en.wikipedia.org/wiki/Duck_typing">duck-typing</a> allows JAX arrays and NumPy arrays to be used interchangeably in many places. However, there is one important difference between JAX and NumPy arrays: JAX arrays are immutable, meaning that once created their contents cannot be changed.</p>
+<p>Python’s duck-typing allows JAX arrays and NumPy arrays to be used interchangeably in many places. However, there is one important difference between JAX and NumPy arrays: JAX arrays are immutable, meaning that once created their contents cannot be changed.</p>
 <p>Here is an example of mutating an array in NumPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -854,7 +841,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>You’ll find a few differences between JAX arrays and NumPy arrays once you begin digging-in. See also:</p>
+<p>You’ll find a few differences between JAX arrays and NumPy arrays once you begin digging in. See also:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.jax.dev/en/latest/key-concepts.html#jax-arrays-jax-array">Key concepts</a> for an introduction to the key concepts of JAX, such as transformations, tracing, jaxprs and pytrees.</p></li>
 <li><p><a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a> for common gotchas when using JAX.</p></li>
@@ -982,8 +969,8 @@ To read more about sharded arrays and parallel computation, refer to <a class="r
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>507 μs ± 20.4 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
-540 μs ± 69.7 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>365 μs ± 77.6 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+355 μs ± 70.5 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1022,7 +1009,139 @@ To read more about sharded arrays and parallel computation, refer to <a class="r
 </div>
 </div>
 <p>This is because the function generates an array whose shape is not known at compile time: the size of the output depends on the values of the input array, and so it is not compatible with JIT.</p>
-<p>For more on JIT compilation in JAX, check out <a class="reference internal" href="../jit-compilation.html#jit-compilation"><span class="std std-ref">Just-in-time compilation</span></a>.</p>
+<p>For more on JIT compilation in JAX, check out <a class="reference external" href="https://docs.jax.dev/en/latest/jit-compilation.html">Just-in-time compilation</a>.</p>
+<section id="jit-mechanics-tracing-and-static-variables">
+<h3>JIT mechanics: tracing and static variables<a class="headerlink" href="#jit-mechanics-tracing-and-static-variables" title="Link to this heading">#</a></h3>
+<p><strong>Key concepts:</strong></p>
+<ul class="simple">
+<li><p>JIT and other JAX transforms work by <em>tracing</em> a function to determine its effect on inputs of a specific shape and type.</p></li>
+<li><p>Variables that you don’t want to be traced can be marked as <em>static</em></p></li>
+</ul>
+<p>To use <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> effectively, it is useful to understand how it works. Let’s put a few <code class="docutils literal notranslate"><span class="pre">print()</span></code> statements within a JIT-compiled function and then call the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running f():&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  x = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  y = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running f():
+  x = JitTracer&lt;float32[3,4]&gt;
+  y = JitTracer&lt;float32[4]&gt;
+  result = JitTracer&lt;float32[3]&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([0.25773212, 5.3623195 , 5.403243  ], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the print statements execute, but rather than printing the data we passed to the function, though, it prints <em>tracer</em> objects that stand-in for them.</p>
+<p>These tracer objects are what <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> uses to extract the sequence of operations specified by the function. Basic tracers are stand-ins that encode the <strong>shape</strong> and <strong>dtype</strong> of the arrays, but are agnostic to the values. This recorded sequence of computations can then be efficiently applied within XLA to new inputs with the same shape and dtype, without having to re-execute the Python code.</p>
+<p>When we call the compiled function again on matching inputs, no re-compilation is required and nothing is printed because the result is computed in compiled XLA rather than in Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([1.4344584, 4.3004413, 7.9897013], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The extracted sequence of operations is encoded in a JAX expression, or <a class="reference external" href="https://docs.jax.dev/en/latest/key-concepts.html#jaxprs"><em>jaxpr</em></a> for short. You can view the jaxpr using the <code class="docutils literal notranslate"><span class="pre">jax.make_jaxpr</span></code> transformation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">make_jaxpr</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">make_jaxpr</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:f32[3,4]</span> b<span class=" -Color -Color-Magenta">:f32[4]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
+<span class=" -Color -Color-Bold -Color-Bold-Blue">    </span>c<span class=" -Color -Color-Magenta">:f32[3,4]</span> = add a 1.0:f32[]
+    d<span class=" -Color -Color-Magenta">:f32[4]</span> = add b 1.0:f32[]
+    e<span class=" -Color -Color-Magenta">:f32[3]</span> = dot_general[
+      dimension_numbers=(([1], [0]), ([], []))
+      preferred_element_type=float32
+    ] c d
+  <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(e,) }
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note one consequence of this: because JIT compilation is done <em>without</em> information on the content of the array, control flow statements in the function cannot depend on traced values. For example, this fails:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">neg</span><span class="p">):</span>
+  <span class="k">return</span> <span class="o">-</span><span class="n">x</span> <span class="k">if</span> <span class="n">neg</span> <span class="k">else</span> <span class="n">x</span>
+
+<span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TracerBoolConversionError</span>: Attempted boolean conversion of traced array with shape bool[].
+<span class="n">The</span> <span class="n">error</span> <span class="n">occurred</span> <span class="k">while</span> <span class="n">tracing</span> <span class="n">the</span> <span class="n">function</span> <span class="n">f</span> <span class="n">at</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_149423</span><span class="o">/</span><span class="mf">2422663986.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span> <span class="k">for</span> <span class="n">jit</span><span class="o">.</span> <span class="n">This</span> <span class="n">concrete</span> <span class="n">value</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">available</span> <span class="ow">in</span> <span class="n">Python</span> <span class="n">because</span> <span class="n">it</span> <span class="n">depends</span> <span class="n">on</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">argument</span> <span class="n">neg</span><span class="o">.</span>
+<span class="n">See</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">jax</span><span class="o">.</span><span class="n">dev</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">errors</span><span class="o">.</span><span class="n">html</span><span class="c1">#jax.errors.TracerBoolConversionError</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If there are variables that you would not like to be traced, they can be marked as static for the purposes of JIT compilation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">neg</span><span class="p">):</span>
+  <span class="k">return</span> <span class="o">-</span><span class="n">x</span> <span class="k">if</span> <span class="n">neg</span> <span class="k">else</span> <span class="n">x</span>
+
+<span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(-1, dtype=int32, weak_type=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that calling a JIT-compiled function with a different static argument results in re-compilation, so the function still works as expected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(1, dtype=int32, weak_type=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Understanding which values and operations will be static and which will be traced is a key part of using <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> effectively.</p>
+</section>
 </section>
 <section id="taking-derivatives-with-jax-grad">
 <h2>Taking derivatives with <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code><a class="headerlink" href="#taking-derivatives-with-jax-grad" title="Link to this heading">#</a></h2>
@@ -1031,7 +1150,7 @@ To read more about sharded arrays and parallel computation, refer to <a class="r
 <li><p>JAX provides automatic differentiation via the <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code> transformation.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code> and <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> transformations compose and can be mixed arbitrarily.</p></li>
 </ul>
-<p>In addition to transforming functions via JIT compilation, JAX also provides other transformations. One such transformation is <a class="reference internal" href="../_autosummary/jax.grad.html#jax.grad" title="jax.grad"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.grad()</span></code></a>, which performs <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation (autodiff)</a>:</p>
+<p>In addition to transforming functions via JIT compilation, JAX also provides other transformations. One such transformation is <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.grad.html"><code class="docutils literal notranslate"><span class="pre">jax.grad</span></code></a>, which performs <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation (autodiff)</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">grad</span>
@@ -1063,12 +1182,12 @@ To read more about sharded arrays and parallel computation, refer to <a class="r
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.24998187 0.1964569  0.10502338]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.24998187 0.1965761  0.10502338]
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <a class="reference internal" href="../_autosummary/jax.grad.html#jax.grad" title="jax.grad"><code class="xref py py-func docutils literal notranslate"><span class="pre">grad()</span></code></a> and <a class="reference internal" href="../_autosummary/jax.jit.html#jax.jit" title="jax.jit"><code class="xref py py-func docutils literal notranslate"><span class="pre">jit()</span></code></a> transformations compose and can be mixed arbitrarily.
+<p>The <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.grad.html"><code class="docutils literal notranslate"><span class="pre">jax.grad</span></code></a> and <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.jit.html"><code class="docutils literal notranslate"><span class="pre">jax.jit</span></code></a> transformations compose and can be mixed arbitrarily.
 For instance, while the <code class="docutils literal notranslate"><span class="pre">sum_logistic</span></code> function was differentiated directly in the previous example, it could also be JIT-compiled, and these operations can be combined. We can go further:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1082,7 +1201,7 @@ For instance, while the <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 </div>
-<p>Beyond scalar-valued functions, the <a class="reference internal" href="../_autosummary/jax.jacobian.html#jax.jacobian" title="jax.jacobian"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jacobian()</span></code></a> transformation can be
+<p>Beyond scalar-valued functions, the <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.jacobian.html"><code class="docutils literal notranslate"><span class="pre">jax.jacobian</span></code></a> transformation can be
 used to compute the full Jacobian matrix for vector-valued functions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1099,10 +1218,10 @@ used to compute the full Jacobian matrix for vector-valued functions:</p>
 </div>
 </div>
 </div>
-<p>For more advanced autodiff operations, you can use <a class="reference internal" href="../_autosummary/jax.vjp.html#jax.vjp" title="jax.vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vjp()</span></code></a> for reverse-mode vector-Jacobian products,
-and <a class="reference internal" href="../_autosummary/jax.jvp.html#jax.jvp" title="jax.jvp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jvp()</span></code></a> and <a class="reference internal" href="../_autosummary/jax.linearize.html#jax.linearize" title="jax.linearize"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.linearize()</span></code></a> for forward-mode Jacobian-vector products.
+<p>For more advanced autodiff operations, you can use <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.vjp.html"><code class="docutils literal notranslate"><span class="pre">jax.vjp</span></code></a> for reverse-mode vector-Jacobian products,
+and <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.jvp.html"><code class="docutils literal notranslate"><span class="pre">jax.jvp</span></code></a> and <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.linearize.html"><code class="docutils literal notranslate"><span class="pre">jax.linearize</span></code></a> for forward-mode Jacobian-vector products.
 The two can be composed arbitrarily with one another, and with other JAX transformations.
-For example, <a class="reference internal" href="../_autosummary/jax.jvp.html#jax.jvp" title="jax.jvp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jvp()</span></code></a> and <a class="reference internal" href="../_autosummary/jax.vjp.html#jax.vjp" title="jax.vjp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vjp()</span></code></a> are used to define the forward-mode <a class="reference internal" href="../_autosummary/jax.jacfwd.html#jax.jacfwd" title="jax.jacfwd"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jacfwd()</span></code></a> and reverse-mode <a class="reference internal" href="../_autosummary/jax.jacrev.html#jax.jacrev" title="jax.jacrev"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jacrev()</span></code></a> for computing Jacobians in forward- and reverse-mode, respectively.
+For example, <code class="docutils literal notranslate"><span class="pre">jax.jvp</span></code> and <code class="docutils literal notranslate"><span class="pre">jax.vjp</span></code> are used to define the forward-mode <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.jacfwd.html"><code class="docutils literal notranslate"><span class="pre">jax.jacfwd</span></code></a> and reverse-mode <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.jacrev.html"><code class="docutils literal notranslate"><span class="pre">jax.jacrev</span></code></a> for computing Jacobians in forward- and reverse-mode, respectively.
 Here’s one way to compose them to make a function that efficiently computes full Hessian matrices:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1121,22 +1240,22 @@ Here’s one way to compose them to make a function that efficiently computes fu
 </div>
 </div>
 </div>
-<p>This kind of composition produces efficient code in practice; this is more-or-less how JAX’s built-in <a class="reference internal" href="../_autosummary/jax.hessian.html#jax.hessian" title="jax.hessian"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.hessian()</span></code></a> function is implemented.</p>
-<p>For more on automatic differentiation in JAX, check out <a class="reference internal" href="../automatic-differentiation.html#automatic-differentiation"><span class="std std-ref">Automatic differentiation</span></a>.</p>
+<p>This kind of composition produces efficient code in practice; this is more-or-less how JAX’s built-in <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.hessian.html"><code class="docutils literal notranslate"><span class="pre">jax.hessian</span></code></a> function is implemented.</p>
+<p>For more on automatic differentiation in JAX, check out <a class="reference external" href="https://docs.jax.dev/en/latest/automatic-differentiation.html">Automatic differentiation</a>.</p>
 </section>
 <section id="auto-vectorization-with-jax-vmap">
-<h2>Auto-vectorization with <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vmap()</span></code></a><a class="headerlink" href="#auto-vectorization-with-jax-vmap" title="Link to this heading">#</a></h2>
+<h2>Auto-vectorization with <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code><a class="headerlink" href="#auto-vectorization-with-jax-vmap" title="Link to this heading">#</a></h2>
 <p><strong>Key concepts:</strong></p>
 <ul class="simple">
-<li><p>JAX provides automatic vectorization via the <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code> transformation.</p></li>
+<li><p>JAX provides automatic vectorization via the <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.vmap.html"><code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code></a> transformation.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code> can be composed with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code> to produce efficient vectorized code.</p></li>
 </ul>
-<p>Another useful transformation is <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a>, the vectorizing map.
+<p>Another useful transformation is <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.vmap.html"><code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code></a>, the vectorizing map.
 It has the familiar semantics of mapping a function along array axes, but instead of explicitly looping
 over function calls, it transforms the function into a natively vectorized version for better performance.
-When composed with <a class="reference internal" href="../_autosummary/jax.jit.html#jax.jit" title="jax.jit"><code class="xref py py-func docutils literal notranslate"><span class="pre">jit()</span></code></a>, it can be just as performant as manually rewriting your function
+When composed with <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.jit.html"><code class="docutils literal notranslate"><span class="pre">jax.jit</span></code></a>, it can be just as performant as manually rewriting your function
 to operate over an extra batch dimension.</p>
-<p>We’re going to work with a simple example, and promote matrix-vector products into matrix-matrix products using <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a>.
+<p>We’re going to work with a simple example, and promote matrix-vector products into matrix-matrix products using <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.vmap.html"><code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code></a>.
 Although this is easy to do by hand in this specific case, the same technique can apply to more complicated functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1167,7 +1286,7 @@ We could do this by looping over the batch dimension in Python, but this usually
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naively batched
-645 μs ± 43.3 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+540 μs ± 63.4 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -1191,13 +1310,13 @@ be rewritten to avoid explicit looping, using the built-in batching semantics of
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Manually batched
-18.6 μs ± 1 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+18.8 μs ± 3.54 μs per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
 <p>However, as functions become more complicated, this kind of manual batching becomes more difficult and error-prone.
-The <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> transformation is designed to automatically transform a function into a batch-aware version:</p>
+The <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code> transformation is designed to automatically transform a function into a batch-aware version:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span>
@@ -1215,14 +1334,14 @@ The <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-vectorized with vmap
-22.8 μs ± 1.24 μs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+22.1 μs ± 753 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
 </pre></div>
 </div>
 </div>
 </div>
-<p>As you would expect, <a class="reference internal" href="../_autosummary/jax.vmap.html#jax.vmap" title="jax.vmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">vmap()</span></code></a> can be arbitrarily composed with <a class="reference internal" href="../_autosummary/jax.jit.html#jax.jit" title="jax.jit"><code class="xref py py-func docutils literal notranslate"><span class="pre">jit()</span></code></a>,
-<a class="reference internal" href="../_autosummary/jax.grad.html#jax.grad" title="jax.grad"><code class="xref py py-func docutils literal notranslate"><span class="pre">grad()</span></code></a>, and any other JAX transformation.</p>
-<p>For more on automatic vectorization in JAX, check out <a class="reference internal" href="../automatic-vectorization.html#automatic-vectorization"><span class="std std-ref">Automatic vectorization</span></a>.</p>
+<p>As you would expect, <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code> can be arbitrarily composed with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>,
+<code class="docutils literal notranslate"><span class="pre">jax.grad</span></code>, and any other JAX transformation.</p>
+<p>For more on automatic vectorization in JAX, check out <a class="reference external" href="https://docs.jax.dev/en/latest/automatic-vectorization.html">Automatic vectorization</a>.</p>
 </section>
 <section id="pseudorandom-numbers">
 <span id="key-concepts-prngs"></span><h2>Pseudorandom numbers<a class="headerlink" href="#pseudorandom-numbers" title="Link to this heading">#</a></h2>
@@ -1290,6 +1409,7 @@ draw 2: -0.36703771352767944
 </div>
 <p>Note that this code is thread safe, since the local random state eliminates possible race conditions involving global state. <code class="docutils literal notranslate"><span class="pre">jax.random.split</span></code> is a deterministic function that converts one <code class="docutils literal notranslate"><span class="pre">key</span></code> into several independent (in the pseudorandomness sense) keys.</p>
 <p>For more on pseudo random numbers in JAX, see the <a class="reference external" href="https://docs.jax.dev/en/latest/random-numbers.html">Pseudorandom numbers tutorial</a>.</p>
+<hr class="docutils" />
 <p>This is just a taste of what JAX can do. We’re really excited to see what you do with it!</p>
 </section>
 </section>
@@ -1345,9 +1465,12 @@ draw 2: -0.36703771352767944
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-devices-and-sharding">Array devices and sharding</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-in-time-compilation-with-jax-jit">Just-in-time compilation with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-in-time-compilation-with-jax-jit">Just-in-time compilation with <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jit-mechanics-tracing-and-static-variables">JIT mechanics: tracing and static variables</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taking-derivatives-with-jax-grad">Taking derivatives with <code class="docutils literal notranslate"><span class="pre">jax.grad</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-vectorization-with-jax-vmap">Auto-vectorization with <code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vmap()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-vectorization-with-jax-vmap">Auto-vectorization with <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudorandom-numbers">Pseudorandom numbers</a></li>
 </ul>
   </nav></div>

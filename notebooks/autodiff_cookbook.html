@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -57,7 +57,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Custom derivative rules" href="Custom_derivative_rules_for_Python_code.html" />
-    <link rel="prev" title="Resources and Advanced Guides" href="../advanced_guide.html" />
+    <link rel="prev" title="Resources and Advanced Guides" href="../advanced_guides.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,24 +173,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -201,15 +199,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
@@ -237,6 +235,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -251,7 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -304,6 +303,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -344,7 +344,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -533,7 +532,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="../advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     <li class="breadcrumb-item active" aria-current="page">The...</li>
   </ul>
@@ -816,11 +815,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W_grad [-0.43314594 -0.7354604  -1.2598921 ]
-W_grad [-0.43314594 -0.7354604  -1.2598921 ]
-b_grad -0.69001764
-W_grad [-0.43314594 -0.7354604  -1.2598921 ]
-b_grad -0.69001764
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W_grad [-0.433146  -0.7354605 -1.2598922]
+W_grad [-0.433146  -0.7354605 -1.2598922]
+b_grad -0.6900178
+W_grad [-0.433146  -0.7354605 -1.2598922]
+b_grad -0.6900178
 </pre></div>
 </div>
 </div>
@@ -843,7 +842,7 @@ b_grad -0.69001764
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;W&#39;: Array([-0.43314594, -0.7354604 , -1.2598921 ], dtype=float32), &#39;b&#39;: Array(-0.69001764, dtype=float32)}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;W&#39;: Array([-0.433146 , -0.7354605, -1.2598922], dtype=float32), &#39;b&#39;: Array(-0.6900178, dtype=float32)}
 </pre></div>
 </div>
 </div>
@@ -895,9 +894,9 @@ loss value 2.9729187
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b_grad_numerical -0.6890297
-b_grad_autodiff -0.69001764
-W_dirderiv_numerical 1.3041496
-W_dirderiv_autodiff 1.3006743
+b_grad_autodiff -0.6900178
+W_dirderiv_numerical 1.3017654
+W_dirderiv_autodiff 1.3006744
 </pre></div>
 </div>
 </div>
@@ -962,7 +961,7 @@ W_dirderiv_autodiff 1.3006743
  [ 0.12579198  0.01451446 -0.31447992]
  [ 0.00574409 -0.0193281   0.01078958]]
 jacrev result, with shape (4, 3)
-[[ 0.05069415  0.10918739  0.07506634]
+[[ 0.05069415  0.10918741  0.07506634]
  [ 0.14170025 -0.17390487  0.02415345]
  [ 0.12579198  0.01451446 -0.31447995]
  [ 0.00574409 -0.0193281   0.01078958]]
@@ -986,12 +985,12 @@ jacrev result, with shape (4, 3)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jacobian from W to logits is
-[[ 0.05069415  0.10918739  0.07506634]
+[[ 0.05069415  0.10918741  0.07506634]
  [ 0.14170025 -0.17390487  0.02415345]
  [ 0.12579198  0.01451446 -0.31447995]
  [ 0.00574409 -0.0193281   0.01078958]]
 Jacobian from b to logits is
-[0.09748875 0.16102302 0.24190766 0.00776229]
+[0.09748876 0.16102302 0.24190766 0.00776229]
 </pre></div>
 </div>
 </div>
@@ -1248,15 +1247,14 @@ we could write</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forward over reverse
-2.53 ms ± 80 μs per loop (mean ± std. dev. of 3 runs, 10 loops each)
+3.07 ms ± 99.9 μs per loop (mean ± std. dev. of 3 runs, 10 loops each)
 Reverse over forward
-The slowest run took 7.59 times longer than the fastest. This could mean that an intermediate result is being cached.
-9.61 ms ± 9.32 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+The slowest run took 4.09 times longer than the fastest. This could mean that an intermediate result is being cached.
+9.89 ms ± 7.08 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
 Reverse over reverse
-The slowest run took 6.09 times longer than the fastest. This could mean that an intermediate result is being cached.
-14.3 ms ± 12.7 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+13 ms ± 5.44 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
 Naive full Hessian materialization
-24.3 ms ± 1.13 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+31 ms ± 2.01 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -1304,13 +1302,13 @@ Naive full Hessian materialization
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-vmapped Matrix-Jacobian product
-63.1 ms ± 3.07 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+43.6 ms ± 1.99 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
 
 Vmapped Matrix-Jacobian product
-3.1 ms ± 79.4 μs per loop (mean ± std. dev. of 3 runs, 10 loops each)
+3.34 ms ± 61.5 μs per loop (mean ± std. dev. of 3 runs, 10 loops each)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_231925/3769736790.py:8: DeprecationWarning: vstack requires ndarray or scalar arguments, got &lt;class &#39;tuple&#39;&gt; at position 0. In a future JAX release this will be an error.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_145138/3769736790.py:8: DeprecationWarning: vstack requires ndarray or scalar arguments, got &lt;class &#39;tuple&#39;&gt; at position 0. In a future JAX release this will be an error.
   return jnp.vstack([vjp_fun(mi) for mi in M])
 </pre></div>
 </div>
@@ -1343,10 +1341,10 @@ Vmapped Matrix-Jacobian product
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-vmapped Jacobian-Matrix product
-115 ms ± 3.72 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
+118 ms ± 1.7 ms per loop (mean ± std. dev. of 3 runs, 10 loops each)
 
 Vmapped Jacobian-Matrix product
-1.43 ms ± 48.4 μs per loop (mean ± std. dev. of 3 runs, 10 loops each)
+1.56 ms ± 46.4 μs per loop (mean ± std. dev. of 3 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -1673,7 +1671,7 @@ True
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../advanced_guide.html"
+       href="../advanced_guides.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">

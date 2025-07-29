@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>List of XLA compiler flags &#8212; JAX  documentation</title>
+    <title>XLA compiler flags &#8212; JAX  documentation</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">List of XLA compiler flags</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -531,9 +530,9 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">List of XLA...</li>
+    <li class="breadcrumb-item active" aria-current="page">XLA compiler flags</li>
   </ul>
 </nav>
 </div>
@@ -658,7 +657,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>List of XLA compiler flags</h1>
+    <h1>XLA compiler flags</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -670,12 +669,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xla-the-powerhouse-behind-jax">XLA: The Powerhouse Behind Jax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-xla-in-jax">Configuring XLA in Jax:</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-xla-flags">Common XLA flags</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-xla-flags">TPU XLA flags</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-xla-flags">GPU XLA flags</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-xla-in-jax">Configuring XLA in Jax:</a></li>
 </ul>
             </nav>
         </div>
@@ -687,13 +681,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="list-of-xla-compiler-flags">
-<h1>List of XLA compiler flags<a class="headerlink" href="#list-of-xla-compiler-flags" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="xla-compiler-flags">
+<h1>XLA compiler flags<a class="headerlink" href="#xla-compiler-flags" title="Link to this heading">#</a></h1>
 <!--* freshness: { reviewed: '2024-08-18' } *-->
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>This guide gives a brief overview of XLA and how XLA relates to Jax.
-For in-depth details please refer to <a class="reference external" href="https://openxla.org/xla">XLA documentation</a>. Then it lists commonly-used XLA compiler flags designed to optimize performance of Jax programs.</p>
+For in-depth details please refer to <a class="reference external" href="https://openxla.org/xla">XLA documentation</a>.</p>
 </section>
 <section id="xla-the-powerhouse-behind-jax">
 <h2>XLA: The Powerhouse Behind Jax<a class="headerlink" href="#xla-the-powerhouse-behind-jax" title="Link to this heading">#</a></h2>
@@ -725,152 +719,12 @@ For in-depth details please refer to <a class="reference external" href="https:/
 <ul class="simple">
 <li><p>Complete and up to date documentation about XLA can be found in the official <a class="reference external" href="https://openxla.org/xla">XLA documentation</a>.</p></li>
 <li><p>For backends supported by open-source version of XLA (CPU, GPU), XLA flags are defined with their default values in <a class="reference external" href="https://github.com/openxla/xla/blob/main/xla/debug_options_flags.cc">xla/debug_options_flags.cc</a>, and a complete list of flags could be found <a class="reference external" href="https://github.com/openxla/xla/blob/main/xla/xla.proto">here</a>.</p></li>
-<li><p>TPU compiler flags are not part of <a class="reference external" href="https://github.com/openxla/xla">OpenXLA</a>, but commonly-used options are listed below.</p></li>
-<li><p>Please note that this list of flags is not exhaustive and is subject to change. These flags are implementation details, and there is no guarantee that they will remain available or maintain their current behavior.</p></li>
+<li><p>A guide on how to use key XLA flags can be found <a class="reference external" href="https://openxla.org/xla/flags_guidance">here</a>.</p></li>
 </ul>
-<section id="common-xla-flags">
-<h3>Common XLA flags<a class="headerlink" href="#common-xla-flags" title="Link to this heading">#</a></h3>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_dump_to</span></code></p></td>
-<td><p>String (filepath)</p></td>
-<td><p>The folder where pre-optimization HLO files and other artifacts will be placed (see <a class="reference external" href="https://openxla.org/xla/tools">XLA Tools</a>).</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_enable_async_collective_permute</span></code></p></td>
-<td><p>TristateFlag (true/false/auto)</p></td>
-<td><p>Rewrites all collective-permute operations to their asynchronous variants.  When set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>, XLA can turn on async collective based on other configurations or conditions automatically.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_enable_async_all_gather</span></code></p></td>
-<td><p>TristateFlag (true/false/auto)</p></td>
-<td><p>If set to true, enables async all gather. If <code class="docutils literal notranslate"><span class="pre">auto</span></code>, enables only for platforms that implement async all-gather. The implementation (such as BC-offload or continuation fusion) is chosen based on other flag values.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_disable_hlo_passes</span></code></p></td>
-<td><p>String (comma-separated list of pass names)</p></td>
-<td><p>Comma-separated list of HLO passes to be disabled. These names must exactly match the pass name (no whitespace around commas).</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tpu-xla-flags">
-<h3>TPU XLA flags<a class="headerlink" href="#tpu-xla-flags" title="Link to this heading">#</a></h3>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_enable_data_parallel_all_reduce_opt</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Optimization to increase overlap opportunities for DCN (data center networking) all-reduces used for data parallel sharding.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_data_parallel_opt_different_sized_ops</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enables pipelining of data parallel ops across multiple iterations even if their output sizes don’t match what can be saved in place in the stacked variables. Can increase memory pressure.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_enable_async_collective_fusion</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enables the pass which fuses async collective communications with compute ops (output/loop-fusion or convolution) that are scheduled between their -start and -done instructions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_enable_async_collective_fusion_fuse_all_gather</span></code></p></td>
-<td><p>TristateFlag (true/false/auto)</p></td>
-<td><p>Enables fusing all-gathers within the AsyncCollectiveFusion pass. <br>If set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>, it will be enabled based on the target.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_enable_async_collective_fusion_multiple_steps</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enables continuing the same async collective in multiple steps (fusions) in the AsyncCollectiveFusion pass.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_overlap_compute_collective_tc</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enables the overlap of compute and communication on a single TensorCore, i.e., one core equivalent of MegaCore fusion.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_spmd_rng_bit_generator_unsafe</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Whether to run RngBitGenerator HLO in a partitioned way, which is unsafe if deterministic results are expected with different shardings on different parts of the computation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_megacore_fusion_allow_ags</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Allows fusing all-gathers with convolutions/all-reduces.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_tpu_enable_ag_backward_pipelining</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Pipelines all-gathers (currently megascale all-gathers) backwards through scan loops.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="gpu-xla-flags">
-<h3>GPU XLA flags<a class="headerlink" href="#gpu-xla-flags" title="Link to this heading">#</a></h3>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Flag</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_latency_hiding_scheduler</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>This flag enables latency hiding schedulers to overlap asynchronous communication with computation efficiently. The default value is False.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_triton_gemm</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Use Triton-based matrix multiplication.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_graph_level</span></code></p></td>
-<td><p>Flag (0-3)</p></td>
-<td><p>The legacy flag for setting GPU graph level. Use xla_gpu_enable_command_buffer in new use cases. 0 = off; 1 = capture fusions and memcpys; 2 = capture gemms; 3 = capture convolutions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_all_reduce_combine_threshold_bytes</span></code></p></td>
-<td><p>Integer (bytes)</p></td>
-<td><p>These flags tune when to combine multiple small AllGather / ReduceScatter / AllReduce into one big AllGather / ReduceScatter / AllReduce to reduce time spent on cross-device communication. For example, for the AllGather / ReduceScatter thresholds on a Transformer-based workload, consider tuning them high enough so as to combine at least a Transformer Layer’s weight AllGather / ReduceScatter. By default, the combine_threshold_bytes is set to 256.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_all_gather_combine_threshold_bytes</span></code></p></td>
-<td><p>Integer (bytes)</p></td>
-<td><p>See xla_gpu_all_reduce_combine_threshold_bytes above.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_reduce_scatter_combine_threshold_bytes</span></code></p></td>
-<td><p>Integer (bytes)</p></td>
-<td><p>See xla_gpu_all_reduce_combine_threshold_bytes above.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_pipelined_all_gather</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enable pipelinling of all-gather instructions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_pipelined_reduce_scatter</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enable pipelinling of reduce-scatter instructions.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_pipelined_all_reduce</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enable pipelinling of all-reduce instructions.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_while_loop_double_buffering</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Enable double-buffering for while loop.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_all_gather_combine_by_dim</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Combine all-gather ops with the same gather dimension or irrespective of their dimension.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xla_gpu_enable_reduce_scatter_combine_by_dim</span></code></p></td>
-<td><p>Boolean (true/false)</p></td>
-<td><p>Combine reduce-scatter ops with the same dimension or irrespective of their dimension.</p></td>
-</tr>
-</tbody>
-</table>
 <p><strong>Additional reading:</strong></p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.jax.dev/en/latest/gpu_performance_tips.html#xla-performance-flags">GPU performance tips</a></p></li>
 </ul>
-</section>
 </section>
 </section>
 
@@ -920,12 +774,7 @@ For in-depth details please refer to <a class="reference external" href="https:/
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xla-the-powerhouse-behind-jax">XLA: The Powerhouse Behind Jax</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-xla-in-jax">Configuring XLA in Jax:</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-xla-flags">Common XLA flags</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tpu-xla-flags">TPU XLA flags</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-xla-flags">GPU XLA flags</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-xla-in-jax">Configuring XLA in Jax:</a></li>
 </ul>
   </nav></div>
 

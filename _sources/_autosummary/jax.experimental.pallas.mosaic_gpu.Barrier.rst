@@ -24,8 +24,8 @@
 
    .. autosummary::
    
-      ~Barrier.for_tensor_core
       ~Barrier.num_arrivals
       ~Barrier.num_barriers
+      ~Barrier.orders_tensor_core
    
    

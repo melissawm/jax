@@ -16,6 +16,7 @@
       ~SwizzleTransform.__init__
       ~SwizzleTransform.batch
       ~SwizzleTransform.to_gpu_transform
+      ~SwizzleTransform.to_gpu_transform_attr
       ~SwizzleTransform.undo
       ~SwizzleTransform.undo_to_gpu_transform
    

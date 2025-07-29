@@ -16,6 +16,7 @@
       ~TilingTransform.__init__
       ~TilingTransform.batch
       ~TilingTransform.to_gpu_transform
+      ~TilingTransform.to_gpu_transform_attr
       ~TilingTransform.undo
    
    

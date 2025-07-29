@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -170,24 +170,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -198,15 +196,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -234,6 +232,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -248,7 +247,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -301,6 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -341,7 +341,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -687,6 +686,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_collectives_implementation">Cpu Collectives Implementation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_enable_async_dispatch">Cpu Enable Async Dispatch</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_enable_gloo_collectives">Cpu Enable Gloo Collectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_get_global_topology_timeout_minutes">Cpu Get Global Topology Timeout Minutes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_get_local_topology_timeout_minutes">Cpu Get Local Topology Timeout Minutes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transfer_socket_address">Cross Host Transfer Socket Address</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transfer_timeout_seconds">Cross Host Transfer Timeout Seconds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transfer_transfer_size">Cross Host Transfer Transfer Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transport_addresses">Cross Host Transport Addresses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cuda_visible_devices">Cuda Visible Devices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_custom_vjp_disable_shape_check">Custom Vjp Disable Shape Check</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_debug_infs">Debug Infs</a></li>
@@ -701,13 +706,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_disable_vmap_shmap_error">Disable Vmap Shmap Error</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_disallow_mesh_context_manager">Disallow Mesh Context Manager</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_distributed_debug">Distributed Debug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_dump_ir_modes">Dump Ir Modes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_dump_ir_to">Dump Ir To</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_dynamic_shapes">Dynamic Shapes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_checks">Enable Checks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_compilation_cache">Enable Compilation Cache</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_custom_prng">Enable Custom Prng</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_custom_vjp_by_custom_transpose">Enable Custom Vjp By Custom Transpose</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_empty_arrays">Enable Empty Arrays</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_pgle">Enable Pgle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_x64">Enable X64</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_error_checking_behavior_divide">Error Checking Behavior Divide</a></li>
@@ -751,6 +756,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_pmap_no_rank_reduction">Pmap No Rank Reduction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_pmap_shmap_merge">Pmap Shmap Merge</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_pprint_use_color">Pprint Use Color</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_ragged_dot_use_ragged_dot_instruction">Ragged Dot Use Ragged Dot Instruction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_raise_persistent_cache_errors">Raise Persistent Cache Errors</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_random_seed_offset">Random Seed Offset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_remove_custom_partitioning_ptr_from_cache_key">Remove Custom Partitioning Ptr From Cache Key</a></li>
@@ -770,6 +776,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_direct_linearize">Use Direct Linearize</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_magma">Use Magma</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_shardy_partitioner">Use Shardy Partitioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_simplified_jaxpr_constants">Use Simplified Jaxpr Constants</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_xla_backend">Xla Backend</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_xla_profile_version">Xla Profile Version</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mock_num_gpu_processes">Mock Num Gpu Processes</a></li>
@@ -1259,6 +1266,128 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 </section>
 <p></p>
 <p></p>
+<section class="config-option-section" id="jax_cpu_get_global_topology_timeout_minutes">
+<span id="jax_cpu_get_global_topology_timeout_minutes"></span><h3 class="h4">Cpu Get Global Topology Timeout Minutes<a class="headerlink" href="#jax_cpu_get_global_topology_timeout_minutes" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">5</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_cpu_get_global_topology_timeout_minutes'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_CPU_GET_GLOBAL_TOPOLOGY_TIMEOUT_MINUTES</span></code></p>
+</dd>
+</dl>
+<p><p>Timeout in minutes for getting the global topology of CPU devices; should be strictly greater than <cite>–jax_cpu_get_local_topology_timeout_minutes</cite>.</p>
+</p>
+</section>
+<p></p>
+<p></p>
+<section class="config-option-section" id="jax_cpu_get_local_topology_timeout_minutes">
+<span id="jax_cpu_get_local_topology_timeout_minutes"></span><h3 class="h4">Cpu Get Local Topology Timeout Minutes<a class="headerlink" href="#jax_cpu_get_local_topology_timeout_minutes" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_cpu_get_local_topology_timeout_minutes'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_CPU_GET_LOCAL_TOPOLOGY_TIMEOUT_MINUTES</span></code></p>
+</dd>
+</dl>
+<p><p>Timeout in minutes for getting the local topology of each CPU device when building the global topology.</p>
+</p>
+</section>
+<p></p>
+<p></p>
+<section class="config-option-section" id="jax_cross_host_transfer_socket_address">
+<span id="jax_cross_host_transfer_socket_address"></span><h3 class="h4">Cross Host Transfer Socket Address<a class="headerlink" href="#jax_cross_host_transfer_socket_address" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_cross_host_transfer_socket_address'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_CROSS_HOST_TRANSFER_SOCKET_ADDRESS</span></code></p>
+</dd>
+</dl>
+<p><p>Socket address to use for cross host device transfers via DCN. Necessary only if the PjRt plugin does not support cross host transfers.</p>
+</p>
+</section>
+<p></p>
+<p></p>
+<section class="config-option-section" id="jax_cross_host_transfer_timeout_seconds">
+<span id="jax_cross_host_transfer_timeout_seconds"></span><h3 class="h4">Cross Host Transfer Timeout Seconds<a class="headerlink" href="#jax_cross_host_transfer_timeout_seconds" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_cross_host_transfer_timeout_seconds'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_CROSS_HOST_TRANSFER_TIMEOUT_SECONDS</span></code></p>
+</dd>
+</dl>
+</section>
+<p></p>
+<p></p>
+<section class="config-option-section" id="jax_cross_host_transfer_transfer_size">
+<span id="jax_cross_host_transfer_transfer_size"></span><h3 class="h4">Cross Host Transfer Transfer Size<a class="headerlink" href="#jax_cross_host_transfer_transfer_size" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_cross_host_transfer_transfer_size'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_CROSS_HOST_TRANSFER_TRANSFER_SIZE</span></code></p>
+</dd>
+</dl>
+</section>
+<p></p>
+<p></p>
+<section class="config-option-section" id="jax_cross_host_transport_addresses">
+<span id="jax_cross_host_transport_addresses"></span><h3 class="h4">Cross Host Transport Addresses<a class="headerlink" href="#jax_cross_host_transport_addresses" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_cross_host_transport_addresses'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_CROSS_HOST_TRANSPORT_ADDRESSES</span></code></p>
+</dd>
+</dl>
+<p><p>Comma-separated list of transport addresses to use for cross host device transfers via DCN. If not set, defaults to [0.0.0.0:0] * 4.</p>
+</p>
+</section>
+<p></p>
+<p></p>
 <section class="config-option-section" id="jax_cuda_visible_devices">
 <span id="jax_cuda_visible_devices"></span><h3 class="h4">Cuda Visible Devices<a class="headerlink" href="#jax_cuda_visible_devices" title="Link to this heading">#</a></h3>
 <dl class="config-field-list field-list simple">
@@ -1399,7 +1528,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_DEFAULT_DEVICE</span></code></p>
 </dd>
 </dl>
-<p><p>Configure the default device for JAX operations. Set to a Device object (e.g. <code class="docutils literal notranslate"><span class="pre">jax.devices(&quot;cpu&quot;)[0]</span></code>) to use that Device as the default device for JAX operations and jit’d function calls (there is no effect on multi-device computations, e.g. pmapped function calls). Set to None to use the system default device. See <a class="reference internal" href="intro_parallel.html#faq-data-placement"><span class="std std-ref">Introduction to Parallel Programming with JAX</span></a> for more information on device placement.</p>
+<p><p>Configure the default device for JAX operations. Set to a Device object (e.g. <code class="docutils literal notranslate"><span class="pre">jax.devices(&quot;cpu&quot;)[0]</span></code>) to use that Device as the default device for JAX operations and jit’d function calls (there is no effect on multi-device computations, e.g. pmapped function calls). Set to None to use the system default device. See <a class="reference internal" href="faq.html#faq-data-placement"><span class="std std-ref">Controlling data and computation placement on devices</span></a> for more information on device placement.</p>
 </p>
 </section>
 <p></p>
@@ -1552,6 +1681,27 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 </section>
 <p></p>
 <p></p>
+<section class="config-option-section" id="jax_dump_ir_modes">
+<span id="jax_dump_ir_modes"></span><h3 class="h4">Dump Ir Modes<a class="headerlink" href="#jax_dump_ir_modes" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">'stablehlo'</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_dump_ir_modes'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_DUMP_IR_MODES</span></code></p>
+</dd>
+</dl>
+<p><p>Comma-delimited modes in which to dump IR. Can be ‘stablehlo’ (the default), ‘jaxpr’, or ‘eqn_count_pprof’ for jaxpr equation count pprof profile.</p>
+</p>
+</section>
+<p></p>
+<p></p>
 <section class="config-option-section" id="jax_dump_ir_to">
 <span id="jax_dump_ir_to"></span><h3 class="h4">Dump Ir To<a class="headerlink" href="#jax_dump_ir_to" title="Link to this heading">#</a></h3>
 <dl class="config-field-list field-list simple">
@@ -1568,7 +1718,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_DUMP_IR_TO</span></code></p>
 </dd>
 </dl>
-<p><p>Path to which the IR that is emitted by JAX should be dumped as text files. If omitted, JAX will not dump IR. Supports the special value ‘sponge’ to pick the path from the environment variable TEST_UNDECLARED_OUTPUTS_DIR.</p>
+<p><p>Path to which IR(s) emitted by JAX should be dumped as text files.If omitted, JAX will not dump any IR. Supports the special value ‘sponge’ to pick the path from the environment variable TEST_UNDECLARED_OUTPUTS_DIR. See jax_dump_ir_modes for options governing what is dumped.</p>
 </p>
 </section>
 <p></p>
@@ -1674,27 +1824,6 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 </dd>
 </dl>
 <p><p>Enables an internal upgrade that implements <cite>jax.custom_vjp</cite> by reduction to <cite>jax.custom_jvp</cite> and <cite>jax.custom_transpose</cite>.  This will be enabled by default in future versions of JAX, at which point all uses of the flag will be considered deprecated (following the <a class="reference external" href="https://docs.jax.dev/en/latest/api_compatibility.html">API compatibility policy</a>).</p>
-</p>
-</section>
-<p></p>
-<p></p>
-<section class="config-option-section" id="jax_enable_empty_arrays">
-<span id="jax_enable_empty_arrays"></span><h3 class="h4">Enable Empty Arrays<a class="headerlink" href="#jax_enable_empty_arrays" title="Link to this heading">#</a></h3>
-<dl class="config-field-list field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-<dt class="field-even">Default Value<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
-</dd>
-<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_enable_empty_arrays'</span></code></p>
-</dd>
-<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_ENABLE_EMPTY_ARRAYS</span></code></p>
-</dd>
-</dl>
-<p><p>Enable the creation of an Array from an empty list of single-device arrays. This is to support MPMD/pipeline parallelism in McJAX (WIP).</p>
 </p>
 </section>
 <p></p>
@@ -1874,7 +2003,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
 <dt class="field-even">Default Value<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">9</span></code></p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">10</span></code></p>
 </dd>
 <dt class="field-odd">Configuration String<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_export_calling_convention_version'</span></code></p>
@@ -1955,10 +2084,10 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <span id="jax_include_debug_info_in_dumps"></span><h3 class="h4">Include Debug Info In Dumps<a class="headerlink" href="#jax_include_debug_info_in_dumps" title="Link to this heading">#</a></h3>
 <dl class="config-field-list field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 <dt class="field-even">Default Value<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">'True'</span></code></p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 </dd>
 <dt class="field-odd">Configuration String<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_include_debug_info_in_dumps'</span></code></p>
@@ -2600,6 +2729,27 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 </section>
 <p></p>
 <p></p>
+<section class="config-option-section" id="jax_ragged_dot_use_ragged_dot_instruction">
+<span id="jax_ragged_dot_use_ragged_dot_instruction"></span><h3 class="h4">Ragged Dot Use Ragged Dot Instruction<a class="headerlink" href="#jax_ragged_dot_use_ragged_dot_instruction" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_ragged_dot_use_ragged_dot_instruction'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_RAGGED_DOT_USE_RAGGED_DOT_INSTRUCTION</span></code></p>
+</dd>
+</dl>
+<p><p>(TPU only) If True, use chlo.ragged_dot instruction for ragged_dot() lowering. Otherwise, rely on the rollout logic in lowering rule for ragged_dot_general_p.  This will be enabled by default in future versions of JAX, at which point all uses of the flag will be considered deprecated (following the <a class="reference external" href="https://docs.jax.dev/en/latest/api_compatibility.html">API compatibility policy</a>).</p>
+</p>
+</section>
+<p></p>
+<p></p>
 <section class="config-option-section" id="jax_raise_persistent_cache_errors">
 <span id="jax_raise_persistent_cache_errors"></span><h3 class="h4">Raise Persistent Cache Errors<a class="headerlink" href="#jax_raise_persistent_cache_errors" title="Link to this heading">#</a></h3>
 <dl class="config-field-list field-list simple">
@@ -2946,7 +3096,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 <dt class="field-even">Default Value<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 </dd>
 <dt class="field-odd">Configuration String<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_use_direct_linearize'</span></code></p>
@@ -2988,7 +3138,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 <dt class="field-even">Default Value<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 </dd>
 <dt class="field-odd">Configuration String<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_use_shardy_partitioner'</span></code></p>
@@ -2997,7 +3147,28 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_USE_SHARDY_PARTITIONER</span></code></p>
 </dd>
 </dl>
-<p><p>Whether to lower to Shardy. Shardy is a new open sourced propagation framework for MLIR. Currently Shardy is experimental in JAX. See www.github.com/openxla/shardy  This will be enabled by default in future versions of JAX, at which point all uses of the flag will be considered deprecated (following the <a class="reference external" href="https://docs.jax.dev/en/latest/api_compatibility.html">API compatibility policy</a>).</p>
+<p><p>Whether to lower to Shardy. See the migration guide for more information: <a class="reference external" href="https://docs.jax.dev/en/latest/shardy_jax_migration.html">https://docs.jax.dev/en/latest/shardy_jax_migration.html</a>.  This will be enabled by default in future versions of JAX, at which point all uses of the flag will be considered deprecated (following the <a class="reference external" href="https://docs.jax.dev/en/latest/api_compatibility.html">API compatibility policy</a>).</p>
+</p>
+</section>
+<p></p>
+<p></p>
+<section class="config-option-section" id="jax_use_simplified_jaxpr_constants">
+<span id="jax_use_simplified_jaxpr_constants"></span><h3 class="h4">Use Simplified Jaxpr Constants<a class="headerlink" href="#jax_use_simplified_jaxpr_constants" title="Link to this heading">#</a></h3>
+<dl class="config-field-list field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Default Value<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+<dt class="field-odd">Configuration String<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'jax_use_simplified_jaxpr_constants'</span></code></p>
+</dd>
+<dt class="field-even">Environment Variable<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">JAX_USE_SIMPLIFIED_JAXPR_CONSTANTS</span></code></p>
+</dd>
+</dl>
+<p><p>Enable a simplification of the handling of closed-over constants in Jaxpr. The value <cite>True</cite> enables the new behavior. This flag will exist only briefly, while we transition users. See <a class="github reference external" href="https://github.com/jax-ml/jax/pull/29679.DO">jax-ml/jax#29679.DO</a> NOT RELY ON THIS FLAG.</p>
 </p>
 </section>
 <p></p>
@@ -3124,6 +3295,12 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_collectives_implementation">Cpu Collectives Implementation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_enable_async_dispatch">Cpu Enable Async Dispatch</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_enable_gloo_collectives">Cpu Enable Gloo Collectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_get_global_topology_timeout_minutes">Cpu Get Global Topology Timeout Minutes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cpu_get_local_topology_timeout_minutes">Cpu Get Local Topology Timeout Minutes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transfer_socket_address">Cross Host Transfer Socket Address</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transfer_timeout_seconds">Cross Host Transfer Timeout Seconds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transfer_transfer_size">Cross Host Transfer Transfer Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cross_host_transport_addresses">Cross Host Transport Addresses</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_cuda_visible_devices">Cuda Visible Devices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_custom_vjp_disable_shape_check">Custom Vjp Disable Shape Check</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_debug_infs">Debug Infs</a></li>
@@ -3138,13 +3315,13 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_disable_vmap_shmap_error">Disable Vmap Shmap Error</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_disallow_mesh_context_manager">Disallow Mesh Context Manager</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_distributed_debug">Distributed Debug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_dump_ir_modes">Dump Ir Modes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_dump_ir_to">Dump Ir To</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_dynamic_shapes">Dynamic Shapes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_checks">Enable Checks</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_compilation_cache">Enable Compilation Cache</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_custom_prng">Enable Custom Prng</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_custom_vjp_by_custom_transpose">Enable Custom Vjp By Custom Transpose</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_empty_arrays">Enable Empty Arrays</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_pgle">Enable Pgle</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_enable_x64">Enable X64</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_error_checking_behavior_divide">Error Checking Behavior Divide</a></li>
@@ -3188,6 +3365,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_pmap_no_rank_reduction">Pmap No Rank Reduction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_pmap_shmap_merge">Pmap Shmap Merge</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_pprint_use_color">Pprint Use Color</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_ragged_dot_use_ragged_dot_instruction">Ragged Dot Use Ragged Dot Instruction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_raise_persistent_cache_errors">Raise Persistent Cache Errors</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_random_seed_offset">Random Seed Offset</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_remove_custom_partitioning_ptr_from_cache_key">Remove Custom Partitioning Ptr From Cache Key</a></li>
@@ -3207,6 +3385,7 @@ python<span class="w"> </span>my_program.py<span class="w"> </span>--jax_enable_
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_direct_linearize">Use Direct Linearize</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_magma">Use Magma</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_shardy_partitioner">Use Shardy Partitioner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_use_simplified_jaxpr_constants">Use Simplified Jaxpr Constants</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_xla_backend">Xla Backend</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax_xla_profile_version">Xla Profile Version</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mock_num_gpu_processes">Mock Num Gpu Processes</a></li>

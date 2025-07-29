@@ -299,7 +299,7 @@ and re-run the requirements updater command for a selected version of Python.
 For example:
 
 ```
-echo -e "\n$(realpath jaxlib-0.4.27.dev20240416-cp312-cp312-manylinux2014_x86_64.whl)" >> build/requirements.in
+echo -e "\n$(realpath jaxlib-0.4.27.dev20240416-cp312-cp312-manylinux_2_27_x86_64.whl)" >> build/requirements.in
 python build/build.py requirements_update --python_version=3.12
 ```
 
@@ -455,7 +455,6 @@ which one is selected by specifying `HERMETIC_PYTHON_VERSION`. For example in
 `WORKSPACE` file:
 ```
 requirements = {
-  "3.10": "//build:requirements_lock_3_10.txt",
   "3.11": "//build:requirements_lock_3_11.txt",
   "3.12": "//build:requirements_lock_3_12.txt",
   "3.13": "//build:requirements_lock_3_13.txt",
@@ -543,7 +542,7 @@ python build/build.py requirements_update
 Alternatively, to install `jaxlib` from a local wheel (assuming Python 3.12):
 
 ```
-echo -e "\n$(realpath jaxlib-0.4.26-cp312-cp312-manylinux2014_x86_64.whl)" >> build/requirements.in
+echo -e "\n$(realpath jaxlib-0.4.26-cp312-cp312-manylinux_2_27_x86_64.whl)" >> build/requirements.in
 python build/build.py requirements_update --python_version=3.12
 ```
 

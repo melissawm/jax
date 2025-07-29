@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction to multi-controller JAX (aka multi-process/multi-host JAX)" href="../multi_process.html" />
-    <link rel="prev" title="Manual parallelism with shard_map" href="shard_map.html" />
+    <link rel="prev" title="Device-local array layout control" href="layout.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -531,7 +530,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="../advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     <li class="breadcrumb-item active" aria-current="page">JAX...</li>
   </ul>
@@ -668,6 +667,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">JAX Memories and Host Offloading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-blocks-for-offloading">Building Blocks for Offloading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namedsharding-and-memory-kinds">NamedSharding and Memory Kinds</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-placement-with-device-put">Data Placement with device_put</a></li>
@@ -687,11 +687,26 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-offloading">Parameter Offloading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-placement-for-computation">Parameter Placement for Computation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-initialization-with-host-offloading">Parameter Initialization with Host Offloading</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation-of-parameter-offloading">Limitation of Parameter Offloading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-analysis">Memory Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-optimizations">Key Optimizations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-parameter-offloading">Limitations of Parameter Offloading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer-state-offloading">Optimizer State Offloading</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-implementation">Basic Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-sharding-and-memory-kinds">Setting Up Sharding and Memory Kinds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-training-step-implementation">Model and Training Step Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-and-comparing-results">Running and Comparing Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools-for-host-offloading">Tools for Host Offloading</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -709,11 +724,12 @@ document.write(`
 <ul class="simple">
 <li><p>Activation offloading</p></li>
 <li><p>Parameter offloading</p></li>
+<li><p>Optimizer state offloading</p></li>
 </ul>
-<p>By applying offloading strategies, you can better manage memory resources and reduce memory pressure on your devices. To implement these strategies effectively, you’ll need to understand JAX’s core mechanisms for data placement and movement.</p>
+<p>By applying offloading strategies, developers can better manage memory resources and reduce memory pressure on devices. To implement these strategies effectively, understanding JAX’s core mechanisms for data placement and movement is essential.</p>
 <section id="building-blocks-for-offloading">
 <h2>Building Blocks for Offloading<a class="headerlink" href="#building-blocks-for-offloading" title="Link to this heading">#</a></h2>
-<p>JAX provides several key components for controlling where and how data are stored and moved between the host and the device memory. In the following sections, you’ll explore:</p>
+<p>JAX provides several key components for controlling where and how data are stored and moved between the host and the device memory. The following sections explore:</p>
 <ul class="simple">
 <li><p>How to specify data distribution with sharding</p></li>
 <li><p>How to control memory placement between host and device</p></li>
@@ -814,11 +830,11 @@ device
 <p>Moving data from host to device memory when needed for computation is the essence of host offloading. Use <a class="reference internal" href="../_autosummary/jax.device_put.html#jax.device_put" title="jax.device_put"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.device_put()</span></code></a> to perform this transfer in this example to optimize performance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of the lambda function, you can define add_func to explicitly</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instead of the lambda function, add_func can be defined explicitly</span>
 <span class="c1"># move data to device before computation</span>
 <span class="k">def</span> <span class="nf">add_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>  <span class="c1"># Move data to device and add one</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s_dev</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s_dev</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">add_func</span><span class="p">,</span> <span class="n">out_shardings</span><span class="o">=</span><span class="n">s_dev</span><span class="p">)</span>
 <span class="n">out_dev</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">arr_host</span><span class="p">)</span>
@@ -858,16 +874,82 @@ device
 </section>
 <section id="activation-offloading">
 <h2>Activation Offloading<a class="headerlink" href="#activation-offloading" title="Link to this heading">#</a></h2>
+<p>Before diving into activation offloading, let’s first take a look at the baseline code.</p>
+<p>This code implements a simple neural network with 10 layers, each consisting of two linear transformations. The code demonstrates basic memory usage patterns and provides a foundation for comparing offloading optimization techniques.</p>
+<p>Key components:</p>
+<ul class="simple">
+<li><p>Each layer consists of two sequential linear operations:</p>
+<ol class="arabic simple">
+<li><p>First multiplication: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#64;</span> <span class="pre">w1</span></code></p></li>
+<li><p>Second multiplication: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&#64;</span> <span class="pre">w2</span></code></p></li>
+</ol>
+</li>
+<li><p>10-layer network using JAX’s scan operation</p></li>
+<li><p>Memory usage analysis</p></li>
+<li><p>Gradient computation with JIT compilation</p></li>
+</ul>
+<p>To analyze memory usage in JAX, the :func:<code class="docutils literal notranslate"><span class="pre">jax.stages.Compiled.memory_analysis</span></code> method can be used on a compiled function. This provides detailed statistics about memory consumption during computation. The key metrics include temporary memory size, argument size, output size, and alias size. To calculate the total memory usage, sum the temporary, argument, and output sizes, then subtract the alias size to avoid double-counting the same memory multiple times. This provides a summarized view of how the device memory is utilized across different aspects of the computation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize input and weights with small values (0.0001)</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.001</span>  <span class="c1"># Input matrix: 256 x 256</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">1024</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.001</span> <span class="c1"># 10 layers of 256 x 1024 matrices</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.001</span> <span class="c1"># 10 layers of 1024 x 256 matrices</span>
+
+<span class="k">def</span> <span class="nf">two_layers</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+  <span class="c1"># Simple two-layer linear transformation</span>
+  <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">w</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w1</span>
+  <span class="k">return</span> <span class="n">y</span> <span class="o">@</span> <span class="n">w2</span><span class="p">,</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">scanned</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  <span class="c1"># Applies the layer function 10 times using JAX&#39;s scan operation</span>
+  <span class="c1"># Input: w (tuple of weight matrices), x (input matrix)</span>
+  <span class="c1"># Output: sum of the final layer&#39;s output</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">two_layers</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># Compile and compute gradients of the scanned function</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">scanned</span><span class="p">))</span>  <span class="c1"># Apply JIT compilation to gradient computation</span>
+
+<span class="c1"># Analyze memory usage</span>
+<span class="n">compiled_step</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">((</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span> <span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">compiled_stats</span> <span class="o">=</span> <span class="n">compiled_step</span><span class="o">.</span><span class="n">memory_analysis</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">compiled_stats</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="c1"># Calculate total memory usage including temporary storage, arguments, and outputs</span>
+  <span class="c1"># Subtract alias size to avoid double-counting memory shared between different components</span>
+  <span class="n">total</span> <span class="o">=</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span> <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span> \
+      <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">output_size_in_bytes</span> <span class="o">-</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">alias_size_in_bytes</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total size: </span><span class="si">{</span><span class="n">total</span><span class="o">/</span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+
+<span class="c1"># Execute the function and print sample results</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">((</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span> <span class="nb">input</span><span class="p">)</span>     <span class="c1"># Execute the function with weights and input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample of results: &quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp size: 17.25 MB
+Argument size: 20.25 MB
+Total size: 57.50 MB
+Sample of results:  [3.8312336e-07 3.8312336e-07 3.8312336e-07 3.8312336e-07 3.8312336e-07]
+</pre></div>
+</div>
+</div>
+</div>
 <p>The detailed coverage of activation offloading can be found in the <a class="reference internal" href="../gradient-checkpointing.html#gradient-checkpointing"><span class="std std-ref">Gradient checkpointing with jax.checkpoint (jax.remat)</span></a> tutorial. Activation offloading helps manage memory by moving intermediate activations to host memory after the forward pass, and bringing them back to device memory during the backward pass when needed for gradient computation.</p>
-<p>To implement activation offloading effectively, you need to understand checkpoint names and policies. Here’s how they work in a simple example:</p>
+<p>To implement activation offloading effectively, it is important to understand checkpoint names and policies. Here’s how they work in a simple example:</p>
 <section id="checkpoint-names">
 <h3>Checkpoint Names<a class="headerlink" href="#checkpoint-names" title="Link to this heading">#</a></h3>
-<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">checkpoint_name()</span></code> function allows you to label activations for memory management during computation. Here’s a simple example:</p>
+<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">checkpoint_name()</span></code> function allows labeling activations for memory management during computation. Here’s a simple example that a checkpoint name <code class="docutils literal notranslate"><span class="pre">x</span></code> is specified.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.ad_checkpoint</span> <span class="kn">import</span> <span class="n">checkpoint_name</span>
 
-<span class="k">def</span> <span class="nf">layer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">layer_name</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
   <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span> <span class="o">=</span> <span class="n">w</span>
   <span class="n">x</span> <span class="o">=</span> <span class="n">checkpoint_name</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">)</span>
   <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w1</span>
@@ -876,17 +958,6 @@ device
 </div>
 </div>
 </div>
-<p>This example shows:</p>
-<ul class="simple">
-<li><p>A simple neural network layer with two matrix multiplications</p></li>
-<li><p>Labeling of input activation x with identifier <code class="docutils literal notranslate"><span class="pre">&quot;x&quot;</span></code></p></li>
-<li><p>Sequential operations:</p>
-<ol class="arabic simple">
-<li><p>First multiplication: <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#64;</span> <span class="pre">w1</span></code></p></li>
-<li><p>Second multiplication: <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&#64;</span> <span class="pre">w2</span></code></p></li>
-</ol>
-</li>
-</ul>
 <p>The checkpoint name helps the system decide whether to:</p>
 <ul class="simple">
 <li><p>Keep the activation in device memory or</p></li>
@@ -896,13 +967,12 @@ device
 </section>
 <section id="checkpoint-policies">
 <h3>Checkpoint Policies<a class="headerlink" href="#checkpoint-policies" title="Link to this heading">#</a></h3>
-<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">jax.remat()</span></code> transformation manages memory by handling intermediate values through three strategies:</p>
+<p>This checkpoint policy implements a memory management strategy that optimizes memory usage during computation. It manages memory by handling intermediate values through three strategies:</p>
 <ol class="arabic simple">
 <li><p>Recomputing during backward pass (default behavior)</p></li>
 <li><p>Storing on device</p></li>
 <li><p>Offloading to host memory after forward pass and loading back during backward pass</p></li>
 </ol>
-<p>Example of setting an offloading checkpoint policy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">checkpoint_policies</span> <span class="k">as</span> <span class="n">cp</span>
@@ -917,17 +987,17 @@ device
 </div>
 </div>
 </div>
-<p>Since <a class="reference internal" href="../_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.scan()</span></code></a> is commonly used in JAX for handling sequential operations (like RNNs or transformers), you need to know how to apply your offloading strategy in this context.</p>
+<p><a class="reference internal" href="../_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.scan()</span></code></a> is commonly used in JAX for handling sequential operations (like RNNs or transformers). It can be integrated with JAX’s rematerialization to process sequential data.</p>
 <p>Key components:</p>
 <ul class="simple">
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.remat()</span></code> applies our checkpoint policy to the layer function</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.remat()</span></code> creates a rematerialized version of the layer function using <code class="xref py py-func docutils literal notranslate"><span class="pre">jax.remat()</span></code> and applies the checkpoint policy to the layer function</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">prevent_cse=False</span></code> enables XLA’s common subexpression elimination for better performance</p></li>
 <li><p><a class="reference internal" href="../_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.scan()</span></code></a> iterates the rematerialized layer along an axis</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scanned</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-  <span class="n">remat_layer</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">remat</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span>
+  <span class="n">remat_layer</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">remat</span><span class="p">(</span><span class="n">layer_name</span><span class="p">,</span>
                           <span class="n">policy</span><span class="o">=</span><span class="n">policy</span><span class="p">,</span>     <span class="c1"># Use our offloading policy</span>
                           <span class="n">prevent_cse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Allow CSE optimizations</span>
   <span class="n">result</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">remat_layer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -940,17 +1010,42 @@ device
 
 <span class="c1"># Compile and compute gradients of the scanned function</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">scanned</span><span class="p">))</span>  <span class="c1"># Apply JIT compilation to gradient computation</span>
+
+<span class="c1"># Analyze memory usage</span>
+<span class="n">compiled_step</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">((</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span> <span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">compiled_stats</span> <span class="o">=</span> <span class="n">compiled_step</span><span class="o">.</span><span class="n">memory_analysis</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">compiled_stats</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">total</span> <span class="o">=</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span> <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span> \
+      <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">output_size_in_bytes</span> <span class="o">-</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">alias_size_in_bytes</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total size: </span><span class="si">{</span><span class="n">total</span><span class="o">/</span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+
 <span class="n">result_activation</span> <span class="o">=</span> <span class="n">f</span><span class="p">((</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span> <span class="nb">input</span><span class="p">)</span>     <span class="c1"># Execute the function with weights and input</span>
+<span class="c1"># Verify numerical correctness</span>
+<span class="n">are_close</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+    <span class="n">result_activation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>    <span class="c1"># Result from activation offloading only</span>
+    <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>         <span class="c1"># Result from both activation and parameter offloading</span>
+    <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+    <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results match within tolerance: </span><span class="si">{</span><span class="n">are_close</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample of results: &quot;</span><span class="p">,</span> <span class="n">result_activation</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample of results:  [3.7363498e-07 3.7363498e-07 3.7363498e-07 3.7363498e-07 3.7363498e-07]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp size: 6.50 MB
+Argument size: 20.25 MB
+Total size: 46.75 MB
+Results match within tolerance: True
+Sample of results:  [3.8312336e-07 3.8312336e-07 3.8312336e-07 3.8312336e-07 3.8312336e-07]
 </pre></div>
 </div>
 </div>
 </div>
+<p>Activation offloading reduces temporary memory usage from 17.25 MB to 6.5 MB while input and output argument sizes remain the same. Totally 10.75 MB is saved. It is achieved by offloading activation <code class="docutils literal notranslate"><span class="pre">x</span></code> to host memory after the forward pass and loading it back to device memory before the backward pass.</p>
 </section>
 <section id="summary-of-activation-offloading">
 <h3>Summary of Activation Offloading<a class="headerlink" href="#summary-of-activation-offloading" title="Link to this heading">#</a></h3>
@@ -1005,6 +1100,18 @@ device
 
 <span class="c1"># Compile and compute gradients of the scanned function</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">hybrid_scanned</span><span class="p">))</span>  <span class="c1"># Apply JIT compilation to gradient computation</span>
+
+<span class="c1"># Analyze memory usage</span>
+<span class="n">compiled_step</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">lower</span><span class="p">((</span><span class="n">wh1</span><span class="p">,</span> <span class="n">wh2</span><span class="p">),</span> <span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">compiled_stats</span> <span class="o">=</span> <span class="n">compiled_step</span><span class="o">.</span><span class="n">memory_analysis</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">compiled_stats</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">total</span> <span class="o">=</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span> <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span> \
+      <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">output_size_in_bytes</span> <span class="o">-</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">alias_size_in_bytes</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total size: </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+
 <span class="n">result_both</span> <span class="o">=</span> <span class="n">f</span><span class="p">((</span><span class="n">wh1</span><span class="p">,</span> <span class="n">wh2</span><span class="p">),</span> <span class="nb">input</span><span class="p">)</span> <span class="c1"># Execute with both activation and parameter offloading</span>
 
 <span class="c1"># Verify numerical correctness</span>
@@ -1019,21 +1126,250 @@ device
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Results match within tolerance: True
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp size: 4.75 MB
+Argument size: 0.25 MB
+Total size: 25.00 MB
+Results match within tolerance: True
 </pre></div>
 </div>
 </div>
 </div>
-<p>The matching results verify that initializing parameters on host memory maintains computational correctness.</p>
+<p>This implementation demonstrates how offloading model parameters together with activation offloading to host memory can significantly reduce device memory usage.</p>
 </section>
-<section id="limitation-of-parameter-offloading">
-<h3>Limitation of Parameter Offloading<a class="headerlink" href="#limitation-of-parameter-offloading" title="Link to this heading">#</a></h3>
+<section id="memory-analysis">
+<h3>Memory Analysis<a class="headerlink" href="#memory-analysis" title="Link to this heading">#</a></h3>
+<p><strong>Baseline Memory Usage:</strong></p>
+<ul class="simple">
+<li><p>Input tensor: 0.25 MB (256 × 256 × 4 bytes)</p></li>
+<li><p>Model parameters (w1, w2): 10 MB each (256 × 1024 × 4 bytes ≈ 1 MB per layer × 10 layers)</p></li>
+</ul>
+<p><strong>Memory Usage Comparison:</strong></p>
+<ul class="simple">
+<li><p>Argument size without parameter offloading: 20.25 MB (0.25 + 10 + 10)</p></li>
+<li><p>Argument size with parameter offloading: 0.25 MB (only input remains)</p></li>
+<li><p>Temporary memory without activation offloading: 17.25 MB</p></li>
+<li><p>Temporary memory with activation offloading: 6.50 MB</p></li>
+<li><p>Temporary memory with activation and parameter offloading: 4.75 MB</p></li>
+</ul>
+<section id="key-optimizations">
+<h4>Key Optimizations<a class="headerlink" href="#key-optimizations" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Parameter Offloading</strong>: Moving parameters (w1, w2) to host memory reduces argument size by 20 MB (from 20.25 MB to 0.25 MB).</p></li>
+<li><p><strong>Activation Offloading</strong>: Moving activations to host memory reduces temporary memory usage by 10.75 MB (from 17.25 to 6.50 MB).</p></li>
+<li><p><strong>Hybrid Strategy</strong>: The rematerialization of activation offloading helps avoid keeping weights on the device and reduce temporary memory usage by 1.75 MB (from 6.50 MB to 4.75 MB). Without it, JAX would be eager to keep the on-device copies of the weights alive for the backward pass.</p></li>
+</ol>
+</section>
+<section id="results">
+<h4>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h4>
+<p><strong>Total Memory Savings</strong>: 33.5 MB (20 MB + 10.75 MB + 1.75 MB)</p>
+<p>This hybrid approach demonstrates that parameter and activation offloading work synergistically to achieve significant memory reductions while maintaining computational correctness.</p>
+</section>
+</section>
+<section id="limitations-of-parameter-offloading">
+<h3>Limitations of Parameter Offloading<a class="headerlink" href="#limitations-of-parameter-offloading" title="Link to this heading">#</a></h3>
 <p><a class="reference internal" href="../_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.scan()</span></code></a> is crucial for effective parameter management. Using an explicit for loop would cause parameters to continuously occupy device memory, resulting in the same memory usage as without parameter offloading. While <a class="reference internal" href="../_autosummary/jax.lax.scan.html#jax.lax.scan" title="jax.lax.scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.lax.scan()</span></code></a> allows specifying the scan axis, parameter offloading currently works only when scanning over axis 0. Scanning over other axes generates a <code class="docutils literal notranslate"><span class="pre">transpose</span></code> operation during compilation before returning parameters to the device, which is expensive and not supported on all platforms.</p>
+<p>The offloading performance can vary for different device types. It may degrade performance due to memory transfers between host and device, so it’s important to consider this trade-off when designing your optimization strategy.</p>
 </section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="optimizer-state-offloading">
+<h1>Optimizer State Offloading<a class="headerlink" href="#optimizer-state-offloading" title="Link to this heading">#</a></h1>
+<p>Optimizer state offloading is a memory management technique that stores optimizer states in host memory instead of device memory. This approach is particularly useful when optimizer states are large, as it reduces device memory usage.</p>
+<p>A basic JAX implementation using the Adam optimizer can serve as a starting point, where all tensors are stored on the device. This will serve as a reference implementation before introducing optimizer state offloading.</p>
+<section id="basic-implementation">
+<h2>Basic Implementation<a class="headerlink" href="#basic-implementation" title="Link to this heading">#</a></h2>
+<p>This section, let’s implement a simple model with the Adam optimizer. This implementation helps establish the baseline behavior before exploring optimizer state offloading. It is particularly useful for understanding memory patterns in large-scale neural network training.</p>
+<p>In the code example below, a neural network training loop is included to use JAX and Optax’s Adam optimizer. The network consists of four linear layers with GELU activation functions, processing large matrices of size 7168x7168. The training process involves:</p>
+<ul class="simple">
+<li><p>Forward pass: The input flows through four layers, each applying a linear transformation followed by GELU activation</p></li>
+<li><p>Loss computation: Calculates mean squared error between output and input, plus L2 regularization</p></li>
+<li><p>Backward pass: Computes gradients using automatic differentiation</p></li>
+<li><p>Optimization step: Updates parameters using Adam optimizer with gradient clipping</p></li>
+</ul>
+<p>The code uses JIT compilation to optimize performance and includes memory usage analysis to monitor the computational resources required during training. The memory analysis provides insights into temporary memory usage, argument sizes, and total memory consumption during the optimization step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">optax</span>
+
+<span class="n">DIM</span> <span class="o">=</span> <span class="mi">7168</span>
+
+<span class="c1"># Initialize data and parameter w1, w2, w3 and w4</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">DIM</span><span class="p">,</span> <span class="n">DIM</span><span class="p">))</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s1">&#39;w</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">DIM</span><span class="p">,</span> <span class="n">DIM</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)}</span>
+
+<span class="c1"># Initialize optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optax</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+    <span class="n">optax</span><span class="o">.</span><span class="n">clip_by_global_norm</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+    <span class="n">optax</span><span class="o">.</span><span class="n">adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">opt_state</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gelu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.044715</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">single_layer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w</span>
+
+<span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">gelu</span><span class="p">(</span><span class="n">single_layer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;w</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]))</span>
+  <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">compute_loss</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+  <span class="n">outputs</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">inputs</span><span class="p">)</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">outputs</span> <span class="o">-</span> <span class="n">inputs</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="n">l2_reg</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_util</span><span class="o">.</span><span class="n">tree_leaves</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">l2_reg</span>
+
+<span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+  <span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">compute_loss</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">inputs</span><span class="p">))(</span><span class="n">params</span><span class="p">)</span>
+  <span class="n">updates</span><span class="p">,</span> <span class="n">new_opt_state</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">optax</span><span class="o">.</span><span class="n">apply_updates</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">updates</span><span class="p">),</span> <span class="n">new_opt_state</span>
+
+<span class="c1"># JIT compile the step function with proper sharding</span>
+<span class="n">step</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">donate_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Run a optimization step</span>
+<span class="n">new_params</span><span class="p">,</span> <span class="n">new_opt_state</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+
+<span class="c1"># Analyze memory usage</span>
+<span class="n">compiled_step</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">compiled_stats</span> <span class="o">=</span> <span class="n">compiled_step</span><span class="o">.</span><span class="n">memory_analysis</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">compiled_stats</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">total</span> <span class="o">=</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span> <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span> \
+      <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">output_size_in_bytes</span> <span class="o">-</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">alias_size_in_bytes</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total size: </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GB&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp size: 2.11 GB
+Argument size: 2.49 GB
+Total size: 4.59 GB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Optimizer state offloading can be implemented as follows.</p>
+</section>
+<section id="setting-up-sharding-and-memory-kinds">
+<h2>Setting Up Sharding and Memory Kinds<a class="headerlink" href="#setting-up-sharding-and-memory-kinds" title="Link to this heading">#</a></h2>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.sharding.SingleDeivceSharding()</span></code> is adopted to simplify the shardings for both device and host memory kinds. During the model state initialization, move the optimizer state to the host using <code class="xref py py-func docutils literal notranslate"><span class="pre">device_put()</span></code>.</p>
+</section>
+<section id="model-and-training-step-implementation">
+<h2>Model and Training Step Implementation<a class="headerlink" href="#model-and-training-step-implementation" title="Link to this heading">#</a></h2>
+<p>Next, define the model architecture, loss function, and training step. The key addition here is moving the optimizer state to device memory via <code class="xref py py-func docutils literal notranslate"><span class="pre">device_put()</span></code> at the beginning of each training step, as it’s needed for the parameter update on the device.</p>
+</section>
+<section id="running-and-comparing-results">
+<h2>Running and Comparing Results<a class="headerlink" href="#running-and-comparing-results" title="Link to this heading">#</a></h2>
+<p>After setting up the sharding, the optimizer state is moved to host memory and the step function is run with <a class="reference internal" href="../_autosummary/jax.jit.html#jax.jit" title="jax.jit"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jit()</span></code></a>.</p>
+<p>The JIT compilation of the step function uses several important parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">donate_argnums=(0,)</span></code>: Indicates that the first argument (parameters) can be modified in-place, allowing JAX to reuse its memory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">out_shardings</span></code>: Specifies how output tensors should be sharded across the mesh (devices and hosts)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create sharding specifications for device and host memory</span>
+<span class="n">s_dev</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">SingleDeviceSharding</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">memory_kind</span><span class="o">=</span><span class="s2">&quot;device&quot;</span><span class="p">)</span>
+<span class="n">s_host</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">SingleDeviceSharding</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">memory_kind</span><span class="o">=</span><span class="s2">&quot;pinned_host&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+  <span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">compute_loss</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">inputs</span><span class="p">))(</span><span class="n">params</span><span class="p">)</span>
+  <span class="n">opt_state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">opt_state</span><span class="p">,</span> <span class="n">s_dev</span><span class="p">)</span>
+  <span class="n">updates</span><span class="p">,</span> <span class="n">new_opt_state</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+  <span class="n">new_params</span> <span class="o">=</span> <span class="n">optax</span><span class="o">.</span><span class="n">apply_updates</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">updates</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">new_params</span><span class="p">,</span> <span class="n">new_opt_state</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s1">&#39;w</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">DIM</span><span class="p">,</span> <span class="n">DIM</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)}</span>
+<span class="n">opt_state</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="c1"># Initialize optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optax</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span>
+  <span class="n">optax</span><span class="o">.</span><span class="n">clip_by_global_norm</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+  <span class="n">optax</span><span class="o">.</span><span class="n">adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Optimizer state is placed on the host during initialization</span>
+<span class="n">opt_state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">device_put</span><span class="p">(</span><span class="n">opt_state</span><span class="p">,</span> <span class="n">s_host</span><span class="p">)</span>
+
+<span class="c1"># JIT compile the step function with proper sharding and memory optimization</span>
+<span class="n">step</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span>
+  <span class="n">step</span><span class="p">,</span>
+  <span class="n">donate_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,),</span>
+  <span class="n">out_shardings</span><span class="o">=</span><span class="p">(</span><span class="n">s_dev</span><span class="p">,</span> <span class="n">s_host</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Run an optimization step</span>
+<span class="n">new_params</span><span class="p">,</span> <span class="n">offload_opt_state</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+
+<span class="c1"># Analyze memory usage</span>
+<span class="n">compiled_step</span> <span class="o">=</span> <span class="n">step</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">compiled_stats</span> <span class="o">=</span> <span class="n">compiled_step</span><span class="o">.</span><span class="n">memory_analysis</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">compiled_stats</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">total</span> <span class="o">=</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span> <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span> \
+      <span class="o">+</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">output_size_in_bytes</span> <span class="o">-</span> <span class="n">compiled_stats</span><span class="o">.</span><span class="n">alias_size_in_bytes</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temp size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">temp_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Argument size: </span><span class="si">{</span><span class="n">compiled_stats</span><span class="o">.</span><span class="n">argument_size_in_bytes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total size: </span><span class="si">{</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GB&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temp size: 1.91 GB
+Argument size: 0.96 MB
+Total size: 2.87 GB
+</pre></div>
+</div>
+</div>
+</div>
+<p>This implementation demonstrates how to:</p>
+<ol class="arabic simple">
+<li><p>Set up sharding specifications for <code class="docutils literal notranslate"><span class="pre">device</span></code> and <code class="docutils literal notranslate"><span class="pre">pinned_host</span></code></p></li>
+<li><p>Move optimizer states between host and device memory via <a class="reference internal" href="../_autosummary/jax.device_put.html#jax.device_put" title="jax.device_put"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.device_put()</span></code></a></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">out_shardings</span></code> to ensure proper memory placement</p></li>
+<li><p>Show the memory usage</p></li>
+</ol>
+<p>This implementation demonstrates how offloading optimizer state to host memory can reduce device memory usage through a trade-off between argument size and temporary memory.</p>
+<p>Memory Analysis:</p>
+<ol class="arabic simple">
+<li><p>Argument Size Reduction:</p>
+<ul class="simple">
+<li><p>The optimizer states are arguments of the <a class="reference internal" href="../_autosummary/jax.jit.html#jax.jit" title="jax.jit"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.jit()</span></code></a> function</p></li>
+<li><p>By offloading these states to host memory, the argument size on device is reduced</p></li>
+</ul>
+</li>
+<li><p>Temporary Memory Impact:</p>
+<ul class="simple">
+<li><p>Offloading increases temporary memory usage</p></li>
+<li><p>This is because outputs of optimizer states need memory buffers before being copied to host</p></li>
+<li><p>The memory live ranges for these temporary buffers are extended due to the host-device transfers</p></li>
+</ul>
+</li>
+<li><p>Latency Hiding Scheduling:</p>
+<ul class="simple">
+<li><p>JAX uses XLA’s latency hiding scheduling to overlap computation with host-device transfers</p></li>
+<li><p>The overlapping can cause tensors to have larger live ranges, which increases memory pressure on the device</p></li>
+<li><p>This adaptive behavior helps maintain stable memory usage while still providing some performance benefits</p></li>
+</ul>
+</li>
+<li><p>Memory Trade-off:</p>
+<ul class="simple">
+<li><p>Total memory size with offloading: 2.87 GB</p></li>
+<li><p>Total memory size without offloading: 4.59 GB</p></li>
+<li><p>Net memory saving: 1.72 GB</p></li>
+</ul>
+</li>
+</ol>
+<p>while offloading increases temporary memory usage, the reduction in argument size more than compensates for this increase, resulting in an overall reduction in device memory usage.</p>
+<p>Note: The optimizer states can be compared for numerical equivalence using <code class="docutils literal notranslate"><span class="pre">jax.tree_util.tree_map</span></code> and <code class="docutils literal notranslate"><span class="pre">jnp.allclose</span></code>, but this verification step is omitted here for brevity.</p>
 </section>
 <section id="tools-for-host-offloading">
 <h2>Tools for Host Offloading<a class="headerlink" href="#tools-for-host-offloading" title="Link to this heading">#</a></h2>
-<p>For device memory analysis, refer to :doc:<code class="docutils literal notranslate"><span class="pre">device_memory_profiling</span></code>. The profiling tools described in <a class="reference external" href="https://docs.python.org/3/c-api/init.html#profiling" title="(in Python v3.13)"><span>Profiling and Tracing</span></a> can help measure memory savings and performance impact from host offloading.</p>
+<p>:func:<code class="docutils literal notranslate"><span class="pre">jax.stages.Compiled.memory_analysis</span></code> API is utilized above to get memory usage information. For device memory analysis, refer to :doc:<code class="docutils literal notranslate"><span class="pre">device_memory_profiling</span></code>. The profiling tools described in <a class="reference external" href="https://docs.python.org/3/c-api/init.html#profiling" title="(in Python v3.13)"><span>Profiling and Tracing</span></a> can help measure memory savings and performance impact from host offloading.</p>
 </section>
 </section>
 
@@ -1049,12 +1385,12 @@ device
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="shard_map.html"
+       href="layout.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></p>
+        <p class="prev-next-title">Device-local array layout control</p>
       </div>
     </a>
     <a class="right-next"
@@ -1081,6 +1417,7 @@ device
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">JAX Memories and Host Offloading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-blocks-for-offloading">Building Blocks for Offloading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namedsharding-and-memory-kinds">NamedSharding and Memory Kinds</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-placement-with-device-put">Data Placement with device_put</a></li>
@@ -1100,11 +1437,26 @@ device
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-offloading">Parameter Offloading</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-placement-for-computation">Parameter Placement for Computation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-initialization-with-host-offloading">Parameter Initialization with Host Offloading</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation-of-parameter-offloading">Limitation of Parameter Offloading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-analysis">Memory Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-optimizations">Key Optimizations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-parameter-offloading">Limitations of Parameter Offloading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer-state-offloading">Optimizer State Offloading</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-implementation">Basic Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-sharding-and-memory-kinds">Setting Up Sharding and Memory Kinds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-and-training-step-implementation">Model and Training Step Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-and-comparing-results">Running and Comparing Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools-for-host-offloading">Tools for Host Offloading</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

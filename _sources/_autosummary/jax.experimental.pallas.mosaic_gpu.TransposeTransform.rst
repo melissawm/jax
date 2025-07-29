@@ -16,6 +16,7 @@
       ~TransposeTransform.__init__
       ~TransposeTransform.batch
       ~TransposeTransform.to_gpu_transform
+      ~TransposeTransform.to_gpu_transform_attr
       ~TransposeTransform.undo
    
    

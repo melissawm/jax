@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -735,7 +734,7 @@ and evaluate future contributions, and to motivate the removal of some out-of-sc
 <p>From the beginning, JAX has aimed to provide a NumPy-like API for executing code in XLA,
 and a big part of the project’s development has been building out the <a class="reference internal" href="../jax.numpy.html#module-jax.numpy" title="jax.numpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.numpy</span></code></a> and
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy</span></code> namespaces as JAX-based implementations of NumPy and SciPy APIs. There has always
-been an implicit understanding that some parts of <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> are out-of-scope
+been an implicit understanding that some parts of <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> are out-of-scope
 for JAX, but this scope has not been well defined. This can lead to confusion and frustration
 for contributors, because there’s no clear answer to whether potential <a class="reference internal" href="../jax.numpy.html#module-jax.numpy" title="jax.numpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.numpy</span></code></a> and
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy</span></code> contributions will be accepted into JAX.</p>
@@ -753,14 +752,14 @@ positive for the project given its goals and resources.</p>
 <section id="evaluation-rubric">
 <h2>Evaluation Rubric<a class="headerlink" href="#evaluation-rubric" title="Link to this heading">#</a></h2>
 <p>This document proposes a rubric of six axes along which the scope of any particular <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a>
-or <a class="reference external" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> API can be judged for inclusion into JAX. An API which is strong along all axes
+or <a class="reference external" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> API can be judged for inclusion into JAX. An API which is strong along all axes
 is an excellent candidate for inclusion in the JAX package; a strong weakness along <em>any</em> of
 the six axes is a good argument against inclusion in JAX.</p>
 <section id="axis-1-xla-alignment">
 <h3>Axis 1: XLA alignment<a class="headerlink" href="#axis-1-xla-alignment" title="Link to this heading">#</a></h3>
 <p>The first axis we consider is the degree to which the proposed API aligns with native XLA
 operations. For example, <a class="reference internal" href="../_autosummary/jax.numpy.exp.html#jax.numpy.exp" title="jax.numpy.exp"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.numpy.exp()</span></code></a> is a function that more-or-less directly mirrors
-<code class="docutils literal notranslate"><span class="pre">jax.lax.exp</span></code>. A large number of functions in  <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code></a>,  <a class="reference external" href="https://numpy.org/doc/stable/reference/routines.linalg.html#module-numpy.linalg" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.linalg</span></code></a>,
+<code class="docutils literal notranslate"><span class="pre">jax.lax.exp</span></code>. A large number of functions in  <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code></a>,  <a class="reference external" href="https://numpy.org/doc/stable/reference/routines.linalg.html#module-numpy.linalg" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.linalg</span></code></a>,
 <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code>, and others meet this criteria: such functions pass the XLA-alignment check
 when considering their inclusion into JAX.</p>
 <p>On the other end, there are functions like  <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.unique.html#numpy.unique" title="(in NumPy v2.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.unique()</span></code></a>, which do not directly correspond
@@ -777,7 +776,7 @@ incompatible with JAX’s computational model built on XLA.</p>
 <p>The second axis we consider focuses on the
 <a class="reference external" href="https://data-apis.org/array-api/2022.12/">Python Array API Standard</a>: this is in some
 senses a community-driven outline of which array operations are central to array-oriented
-programming across a wide range of user communities. If an API in  <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> or <a class="reference external" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> is
+programming across a wide range of user communities. If an API in  <a class="reference external" href="https://numpy.org/doc/stable/reference/index.html#module-numpy" title="(in NumPy v2.3)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code></a> or <a class="reference external" href="https://docs.scipy.org/doc/scipy/index.html#module-scipy" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy</span></code></a> is
 listed within the Array API standard, it is a strong signal that JAX should include it.
 Using the example from above, the Array API standard includes several variants of
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.unique.html#numpy.unique" title="(in NumPy v2.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.unique()</span></code></a> (<code class="docutils literal notranslate"><span class="pre">unique_all</span></code>, <code class="docutils literal notranslate"><span class="pre">unique_counts</span></code>, <code class="docutils literal notranslate"><span class="pre">unique_inverse</span></code>, <code class="docutils literal notranslate"><span class="pre">unique_values</span></code>) which
@@ -788,8 +787,8 @@ enough to the Python user community that JAX should perhaps implement it.</p>
 <h3>Axis 3: Existence of Downstream Implementations<a class="headerlink" href="#axis-3-existence-of-downstream-implementations" title="Link to this heading">#</a></h3>
 <p>For functionality that does not align with Axis 1 or 2, an important consideration for
 inclusion into JAX is whether there exist well-supported downstream packages that supply
-the functionality in question. A good example of this is <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a>: while JAX does
-include a minimal set of wrappers of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> functionality, a much more complete
+the functionality in question. A good example of this is <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a>: while JAX does
+include a minimal set of wrappers of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> functionality, a much more complete
 treatment exists in the <a class="reference external" href="https://jaxopt.github.io/">JAXopt</a> package, which is actively
 maintained by JAX collaborators. In cases like this, we should lean toward pointing users
 and contributors to these specialized packages rather than re-implementing such APIs in
@@ -888,7 +887,7 @@ the JAX test suite.</p>
 submodules. We consider each below, leaving out modules which have been deprecated.</p>
 <section id="scipy-cluster">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.cluster</span></code><a class="headerlink" href="#scipy-cluster" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code></a> module includes tools for hierarchical clustering, k-means,
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/cluster.html#module-scipy.cluster" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.cluster</span></code></a> module includes tools for hierarchical clustering, k-means,
 and related algorithms. These are weak along several axes, and would be better
 served by a downstream package. One function already exists within JAX
 (<a class="reference internal" href="../_autosummary/jax.scipy.cluster.vq.vq.html#jax.scipy.cluster.vq.vq" title="jax.scipy.cluster.vq.vq"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.scipy.cluster.vq.vq()</span></code></a>) but has
@@ -898,25 +897,25 @@ on github: this suggests that clustering is not broadly important to JAX users.<
 </section>
 <section id="scipy-constants">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.constants</span></code><a class="headerlink" href="#scipy-constants" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.constants</span></code></a> module includes mathematical and physical constants.
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/constants.html#module-scipy.constants" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.constants</span></code></a> module includes mathematical and physical constants.
 These constants can be used directly with JAX, and so there is no reason to
 re-implement this in JAX.</p>
 </section>
 <section id="scipy-datasets">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.datasets</span></code><a class="headerlink" href="#scipy-datasets" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/datasets.html#module-scipy.datasets" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.datasets</span></code></a> module includes tools to fetch and load datasets.
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/datasets.html#module-scipy.datasets" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.datasets</span></code></a> module includes tools to fetch and load datasets.
 These fetched datasets can be used directly with JAX, and so there is no
 reason to re-implement this in JAX.</p>
 </section>
 <section id="scipy-fft">
 <h4>✅ <code class="docutils literal notranslate"><span class="pre">scipy.fft</span></code><a class="headerlink" href="#scipy-fft" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/fft.html#module-scipy.fft" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.fft</span></code></a> module contains functions that broadly align with functionality
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/fft.html#module-scipy.fft" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.fft</span></code></a> module contains functions that broadly align with functionality
 provided by XLA, and fare well along other axes as well. For this reason,
 we deem them in-scope for JAX.</p>
 </section>
 <section id="scipy-integrate">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code><a class="headerlink" href="#scipy-integrate" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a> module contains functions for numerical integration. The
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a> module contains functions for numerical integration. The
 more sophisticated of these (<code class="docutils literal notranslate"><span class="pre">quad</span></code>, <code class="docutils literal notranslate"><span class="pre">dblquad</span></code>, <code class="docutils literal notranslate"><span class="pre">ode</span></code>) are out-of-scope for JAX by
 axes 1 &amp; 4, since they tend to be loopy algorithms based on dynamic numbers of
 evaluations. <code class="xref py py-func docutils literal notranslate"><span class="pre">jax.experimental.ode.odeint()</span></code> is related, but rather limited and not
@@ -925,68 +924,68 @@ under any active development.</p>
 <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.trapz()</span></code> was recently deprecated in favor of this. For any particular input,
 its implementation could be replaced with one line of <a class="reference internal" href="../jax.numpy.html#module-jax.numpy" title="jax.numpy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.numpy</span></code></a> expressions, so
 it’s not a particularly useful API to provide.</p>
-<p>Based on Axes 1, 2, 4, and 6, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a> should be considered out-of-scope for JAX.</p>
+<p>Based on Axes 1, 2, 4, and 6, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a> should be considered out-of-scope for JAX.</p>
 <p><em>Recommendation: remove <a class="reference internal" href="../_autosummary/jax.scipy.integrate.trapezoid.html#jax.scipy.integrate.trapezoid" title="jax.scipy.integrate.trapezoid"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.scipy.integrate.trapezoid()</span></code></a>, which was added in JAX 0.4.14.</em></p>
 </section>
 <section id="scipy-interpolate">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.interpolate</span></code><a class="headerlink" href="#scipy-interpolate" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a> module provides both low-level and object-oriented routines
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a> module provides both low-level and object-oriented routines
 for interpolating in one or more dimensions. These APIs rate poorly along a number
 of the axes above: they are class-based rather than low-level, and none but the
 simplest methods can be expressed efficiently in terms of XLA operations.</p>
-<p>JAX does currently have wrappers for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RegularGridInterpolator.html#scipy.interpolate.RegularGridInterpolator" title="(in SciPy v1.16.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.RegularGridInterpolator</span></code></a>.
+<p>JAX does currently have wrappers for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RegularGridInterpolator.html#scipy.interpolate.RegularGridInterpolator" title="(in SciPy v1.16.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.interpolate.RegularGridInterpolator</span></code></a>.
 Were we considering this contribution today, we would probably reject it by the
 above criteria. But this code has been fairly stable so there is not much downside
 to continuing to maintain it.</p>
-<p>Going forward, we should consider other members of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a> to be
+<p>Going forward, we should consider other members of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/interpolate.html#module-scipy.interpolate" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.interpolate</span></code></a> to be
 out-of-scope for JAX.</p>
 </section>
 <section id="scipy-io">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.io</span></code><a class="headerlink" href="#scipy-io" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.io</span></code></a> submodule has to do with file input/output. There is no reason
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/io.html#module-scipy.io" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.io</span></code></a> submodule has to do with file input/output. There is no reason
 to re-implement this in JAX.</p>
 </section>
 <section id="scipy-linalg">
 <h4>✅ <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code><a class="headerlink" href="#scipy-linalg" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.linalg</span></code></a> submodule contains functions that broadly align with functionality
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.linalg</span></code></a> submodule contains functions that broadly align with functionality
 provided by XLA, and fast linear algebra is broadly important to the JAX user community.
 For this reason, we deem it in-scope for JAX.</p>
 </section>
 <section id="scipy-ndimage">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.ndimage</span></code><a class="headerlink" href="#scipy-ndimage" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code></a> submodule contains a set of tools for working on image data. Many
-of these overlap with tools in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code></a> (e.g. convolutions and filtering). JAX
-currently provides one <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code></a> API, in <a class="reference internal" href="../_autosummary/jax.scipy.ndimage.map_coordinates.html#jax.scipy.ndimage.map_coordinates" title="jax.scipy.ndimage.map_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.scipy.ndimage.map_coordinates()</span></code></a>.
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code></a> submodule contains a set of tools for working on image data. Many
+of these overlap with tools in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code></a> (e.g. convolutions and filtering). JAX
+currently provides one <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code></a> API, in <a class="reference internal" href="../_autosummary/jax.scipy.ndimage.map_coordinates.html#jax.scipy.ndimage.map_coordinates" title="jax.scipy.ndimage.map_coordinates"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.scipy.ndimage.map_coordinates()</span></code></a>.
 Additionally, JAX provides some image-related tools in the <code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module. The
 deepmind ecosystem includes <a class="reference external" href="https://github.com/google-deepmind/dm_pix">dm-pix</a>, a
 more full-featured set of tools for image manipulation in JAX. Given all these factors,
-I’d suggest that <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code></a> should be considered out-of-scope for JAX core; we can
+I’d suggest that <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.ndimage</span></code></a> should be considered out-of-scope for JAX core; we can
 point interested users and contributors to dm-pix. We can consider moving <code class="docutils literal notranslate"><span class="pre">map_coordinates</span></code>
 to <code class="docutils literal notranslate"><span class="pre">dm-pix</span></code> or to another appropriate package.</p>
 </section>
 <section id="scipy-odr">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.odr</span></code><a class="headerlink" href="#scipy-odr" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.odr</span></code></a> module provides an object-oriented wrapper around <code class="docutils literal notranslate"><span class="pre">ODRPACK</span></code> for
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.odr</span></code></a> module provides an object-oriented wrapper around <code class="docutils literal notranslate"><span class="pre">ODRPACK</span></code> for
 performing orthogonal distance regressions. It is not clear that this could be cleanly
 expressed using existing JAX primitives, and so we deem it out of scope for JAX itself.</p>
 </section>
 <section id="scipy-optimize">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code><a class="headerlink" href="#scipy-optimize" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> module provides high-level and low-level interfaces for optimization.
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> module provides high-level and low-level interfaces for optimization.
 Such functionality is important to a lot of JAX users, and very early on JAX created
 <a class="reference internal" href="../jax.scipy.html#module-jax.scipy.optimize" title="jax.scipy.optimize"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy.optimize</span></code></a> wrappers. However, developers of these routines soon realized that
-the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> API was too constraining, and different teams began working on the
+the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a> API was too constraining, and different teams began working on the
 <a class="reference external" href="https://jaxopt.github.io/">JAXopt</a> package and the
 <a class="reference external" href="https://github.com/patrick-kidger/optimistix">Optimistix</a> package, each of which contain
 a much more comprehensive and better-tested set of optimization routines in JAX.</p>
-<p>Because of these well-supported external packages, we now consider <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a>
+<p>Because of these well-supported external packages, we now consider <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.optimize</span></code></a>
 to be out-of-scope for JAX.</p>
 <p><em>Recommendation: deprecate <a class="reference internal" href="../jax.scipy.html#module-jax.scipy.optimize" title="jax.scipy.optimize"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy.optimize</span></code></a> and/or make it a lightweight wrapper
 around an optional JAXopt or Optimistix dependency.</em></p>
 </section>
 <section id="scipy-signal">
 <h4>🟡 <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code><a class="headerlink" href="#scipy-signal" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code></a> module is mixed: some functions are squarely in-scope for JAX
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#module-scipy.signal" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.signal</span></code></a> module is mixed: some functions are squarely in-scope for JAX
 (e.g. <code class="docutils literal notranslate"><span class="pre">correlate</span></code> and <code class="docutils literal notranslate"><span class="pre">convolve</span></code>, which are more user-friendly wrappers of
 <code class="docutils literal notranslate"><span class="pre">lax.conv_general_dilated</span></code>), while many others are squarely out-of-scope (domain-specific
 tools with no viable lowering path to XLA). Potential contributions to <a class="reference internal" href="../jax.scipy.html#module-jax.scipy.signal" title="jax.scipy.signal"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy.signal</span></code></a>
@@ -994,17 +993,17 @@ will have to be weighed on a case-by-case basis.</p>
 </section>
 <section id="scipy-sparse">
 <h4>🟡 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code><a class="headerlink" href="#scipy-sparse" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> submodule mainly contains data structures for storing and operating
-on sparse matrices and arrays in a variety of formats. Additionally, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a>
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> submodule mainly contains data structures for storing and operating
+on sparse matrices and arrays in a variety of formats. Additionally, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a>
 contains a number of matrix-free solvers, suitable for use with sparse matrices,
 dense matrices, and linear operators.</p>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> array and matrix data structures are out-of-scope for JAX, because
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> array and matrix data structures are out-of-scope for JAX, because
 they do not align with JAX’s computational model (e.g. many operations depend on
 dynamically-sized buffers). JAX has developed the <code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module
 as an alternative set of data structures that are more in-line with JAX’s computational
-constraints. For these reasons, we consider the data structures in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> to
+constraints. For these reasons, we consider the data structures in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> to
 be out-of-scope for JAX.</p>
-<p>On the other hand, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> has proven to be an interesting area, and
+<p>On the other hand, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html#module-scipy.sparse.linalg" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.sparse.linalg</span></code></a> has proven to be an interesting area, and
 <a class="reference internal" href="../jax.scipy.html#module-jax.scipy.sparse.linalg" title="jax.scipy.sparse.linalg"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy.sparse.linalg</span></code></a> includes the <code class="docutils literal notranslate"><span class="pre">bicgstab</span></code>, <code class="docutils literal notranslate"><span class="pre">cg</span></code>, and <code class="docutils literal notranslate"><span class="pre">gmres</span></code> solvers. These
 are useful to the JAX user community (Axis 6) but aside from this do not fare well
 along other axes. They would be very suitable for moving into a downstream library;
@@ -1015,9 +1014,9 @@ a number of linear solvers built on JAX.</p>
 </section>
 <section id="scipy-spatial">
 <h4>❌ <code class="docutils literal notranslate"><span class="pre">scipy.spatial</span></code><a class="headerlink" href="#scipy-spatial" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial</span></code></a> module contains mainly object-oriented interfaces to spatial/distance
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial</span></code></a> module contains mainly object-oriented interfaces to spatial/distance
 computations and nearest neighbor searches. It is mostly out-of-scope for JAX</p>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.transform.html#module-scipy.spatial.transform" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial.transform</span></code></a> submodule provides tools for manipulating three-dimensional
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.transform.html#module-scipy.spatial.transform" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial.transform</span></code></a> submodule provides tools for manipulating three-dimensional
 spatial rotations. It is a relatively complicated object-oriented interface, and could
 perhaps be better served by a downstream project. JAX currently contains partial
 implementations of <a class="reference internal" href="../_autosummary/jax.scipy.spatial.transform.Rotation.html#jax.scipy.spatial.transform.Rotation" title="jax.scipy.spatial.transform.Rotation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rotation</span></code></a> and
@@ -1026,22 +1025,22 @@ these are object-oriented wrappers of otherwise basic
 functions, which introduce a very large API surface and have very few users. It is our
 judgment that they are out-of-scope for JAX itself, with users better-served by a
 hypothetical downstream project.</p>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.distance.html#module-scipy.spatial.distance" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial.distance</span></code></a> submodule contains a useful collection of distance metrics,
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.distance.html#module-scipy.spatial.distance" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial.distance</span></code></a> submodule contains a useful collection of distance metrics,
 and it might be tempting to provide JAX wrappers for these. That said, with jit and vmap
 it would be straightforward for a user to define efficient versions of most of these from
 scratch if needed, so adding them to JAX is not particularly beneficial.</p>
 <p><em>Recommendation: consider deprecating and removing the <code class="xref py py-class docutils literal notranslate"><span class="pre">Rotation</span></code> and <code class="docutils literal notranslate"><span class="pre">Slerp</span></code> APIs, and
-consider <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial</span></code></a> as a whole out-of-scope for future contributions.</em></p>
+consider <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/spatial.html#module-scipy.spatial" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.spatial</span></code></a> as a whole out-of-scope for future contributions.</em></p>
 </section>
 <section id="scipy-special">
 <h4>✅ <code class="docutils literal notranslate"><span class="pre">scipy.special</span></code><a class="headerlink" href="#scipy-special" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code></a> module includes implementations of a number of more specialized
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code></a> module includes implementations of a number of more specialized
 functions. In many cases, these functions are squarely in scope: for example, functions
 like <code class="docutils literal notranslate"><span class="pre">gammaln</span></code>, <code class="docutils literal notranslate"><span class="pre">betainc</span></code>, <code class="docutils literal notranslate"><span class="pre">digamma</span></code>, and many others correspond directly to available
 XLA primitives, and are clearly in-scope by Axis 1 and others.</p>
 <p>Other functions require more complicated implementations; one example mentioned above
 is <code class="docutils literal notranslate"><span class="pre">bessel_jn</span></code>. Despite not aligning on Axes 1 and 2, these functions tend to be very
-strong along Axis 6: <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code></a> provides fundamental functions necessary for
+strong along Axis 6: <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/special.html#module-scipy.special" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.special</span></code></a> provides fundamental functions necessary for
 computation in a variety of domains, so even functions with complicated implementations
 should lean toward in-scope, so long as the implementations are well-designed and robust.</p>
 <p>There are a few existing function wrappers that we should take a closer look at; for example:</p>
@@ -1061,7 +1060,7 @@ with a new, more robust implementation (e.g. <a class="reference external" href=
 </section>
 <section id="scipy-stats">
 <h4>✅ <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code><a class="headerlink" href="#scipy-stats" title="Link to this heading">#</a></h4>
-<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats" title="(in SciPy v1.16.0)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> module contains a wide range of statistical functions, including discrete
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html#module-scipy.stats" title="(in SciPy v1.16.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> module contains a wide range of statistical functions, including discrete
 and continuous distributions, summary statistics, and hypothesis testing. JAX currently wraps
 a number of these in <a class="reference internal" href="../jax.scipy.html#module-jax.scipy.stats" title="jax.scipy.stats"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.scipy.stats</span></code></a>, primarily including 20 or so statistical distributions,
 along with a few other functions (<code class="docutils literal notranslate"><span class="pre">mode</span></code>, <code class="docutils literal notranslate"><span class="pre">rankdata</span></code>, <code class="docutils literal notranslate"><span class="pre">gaussian_kde</span></code>). In general these are

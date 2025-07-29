@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction to debugging" href="debugging.html" />
-    <link rel="prev" title="Custom pytrees and initialization with unexpected values" href="custom_pytrees.html" />
+    <link rel="prev" title="Advanced automatic differentiation" href="advanced-autodiff.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -531,7 +530,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     <li class="breadcrumb-item active" aria-current="page">Errors</li>
   </ul>
@@ -695,7 +694,7 @@ along with representative examples of how one might fix them.</p>
 <dt class="sig sig-object py" id="jax.errors.ConcretizationTypeError">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.errors.</span></span><span class="sig-name descname"><span class="pre">ConcretizationTypeError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jax.errors.ConcretizationTypeError" title="Link to this definition">#</a></dt>
 <dd><p>This error occurs when a JAX Tracer object is used in a context where a
-concrete value is required (see <a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>
+concrete value is required (see <a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>
 for more on what a Tracer is). In some situations, it can be easily fixed by
 marking problematic values as static; in others, it may indicate that your
 program is doing operations that are not directly supported by JAX’s JIT
@@ -774,11 +773,11 @@ creation of a dynamically-sized index array:</p>
 </dl>
 <p>To understand more subtleties having to do with tracers vs. regular values,
 and concrete vs. abstract values, you may want to read
-<a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
+<a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tracer</strong> (<a class="reference internal" href="_autosummary/jax.core.Tracer.html#jax.core.Tracer" title="jax.core.Tracer"><em>core.Tracer</em></a>)</p></li>
+<li><p><strong>tracer</strong> (<em>core.Tracer</em>)</p></li>
 <li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>)</p></li>
 </ul>
 </dd>
@@ -906,7 +905,7 @@ of <a class="reference internal" href="_autosummary/jax.numpy.where.html#jax.num
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tracer</strong> (<a class="reference internal" href="_autosummary/jax.core.Tracer.html#jax.core.Tracer" title="jax.core.Tracer"><em>core.Tracer</em></a>)</p>
+<dd class="field-odd"><p><strong>tracer</strong> (<em>core.Tracer</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -915,7 +914,7 @@ of <a class="reference internal" href="_autosummary/jax.numpy.where.html#jax.num
 <dt class="sig sig-object py" id="jax.errors.TracerArrayConversionError">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.errors.</span></span><span class="sig-name descname"><span class="pre">TracerArrayConversionError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jax.errors.TracerArrayConversionError" title="Link to this definition">#</a></dt>
 <dd><p>This error occurs when a program attempts to convert a JAX Tracer object into
-a standard NumPy array (see <a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a> for more
+a standard NumPy array (see <a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a> for more
 on what a Tracer is). It typically occurs in one of a few situations.</p>
 <dl>
 <dt>Using non-JAX functions in JAX transformations</dt><dd><p>This error can occur if you attempt to use a non-JAX library like <code class="docutils literal notranslate"><span class="pre">numpy</span></code>
@@ -989,10 +988,10 @@ into a JAX array:</p>
 </dl>
 <p>To understand more subtleties having to do with tracers vs. regular values,
 and concrete vs. abstract values, you may want to read
-<a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
+<a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tracer</strong> (<a class="reference internal" href="_autosummary/jax.core.Tracer.html#jax.core.Tracer" title="jax.core.Tracer"><em>core.Tracer</em></a>)</p>
+<dd class="field-odd"><p><strong>tracer</strong> (<em>core.Tracer</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1001,7 +1000,7 @@ and concrete vs. abstract values, you may want to read
 <dt class="sig sig-object py" id="jax.errors.TracerBoolConversionError">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.errors.</span></span><span class="sig-name descname"><span class="pre">TracerBoolConversionError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jax.errors.TracerBoolConversionError" title="Link to this definition">#</a></dt>
 <dd><p>This error occurs when a traced value in JAX is used in a context where a
-boolean value is expected (see <a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>
+boolean value is expected (see <a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>
 for more on what a Tracer is).</p>
 <p>The boolean cast may be an explicit (e.g. <code class="docutils literal notranslate"><span class="pre">bool(x)</span></code>) or implicit, through use of
 control flow (e.g. <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">x</span></code>), use of Python boolean
@@ -1099,10 +1098,10 @@ compatible with JAX transforms. This can be fixed by replacing it with
 </dl>
 <p>To understand more subtleties having to do with tracers vs. regular values,
 and concrete vs. abstract values, you may want to read
-<a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
+<a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tracer</strong> (<a class="reference internal" href="_autosummary/jax.core.Tracer.html#jax.core.Tracer" title="jax.core.Tracer"><em>core.Tracer</em></a>)</p>
+<dd class="field-odd"><p><strong>tracer</strong> (<em>core.Tracer</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1111,7 +1110,7 @@ and concrete vs. abstract values, you may want to read
 <dt class="sig sig-object py" id="jax.errors.TracerIntegerConversionError">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.errors.</span></span><span class="sig-name descname"><span class="pre">TracerIntegerConversionError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#jax.errors.TracerIntegerConversionError" title="Link to this definition">#</a></dt>
 <dd><p>This error can occur when a JAX Tracer object is used in a context where a
-Python integer is expected (see <a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a> for
+Python integer is expected (see <a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a> for
 more on what a Tracer is). It typically occurs in a few situations.</p>
 <dl>
 <dt>Passing a tracer in place of an integer</dt><dd><p>This error can occur if you attempt to pass a traced value to a function
@@ -1195,10 +1194,10 @@ the list to a JAX array:</p>
 </dl>
 <p>To understand more subtleties having to do with tracers vs. regular values,
 and concrete vs. abstract values, you may want to read
-<a class="reference internal" href="tracing.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
+<a class="reference internal" href="faq.html#faq-different-kinds-of-jax-values"><span class="std std-ref">Different kinds of JAX values</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tracer</strong> (<a class="reference internal" href="_autosummary/jax.core.Tracer.html#jax.core.Tracer" title="jax.core.Tracer"><em>core.Tracer</em></a>)</p>
+<dd class="field-odd"><p><strong>tracer</strong> (<em>core.Tracer</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1353,12 +1352,12 @@ performance and should only be used when debugging.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="custom_pytrees.html"
+       href="advanced-autodiff.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Custom pytrees and initialization with unexpected values</p>
+        <p class="prev-next-title">Advanced automatic differentiation</p>
       </div>
     </a>
     <a class="right-next"

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -55,7 +55,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Profiling device memory" href="device_memory_profiling.html" />
-    <link rel="prev" title="Benchmarking JAX code" href="benchmarking.html" />
+    <link rel="prev" title="GPU performance tips" href="gpu_performance_tips.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -531,7 +530,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     <li class="breadcrumb-item active" aria-current="page">Profiling...</li>
   </ul>
@@ -676,12 +675,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xprof-tensorboard-profiling">XProf (TensorBoard profiling)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-capture">Programmatic capture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-the-trace">Viewing the trace</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-standalone-xprof">Using Standalone XProf</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-tensorboard">With TensorBoard</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-capture-via-tensorboard">Manual capture via TensorBoard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-the-trace">Viewing the trace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-capture-via-xprof">Manual capture via XProf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xprof-and-tensorboard">XProf and Tensorboard</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-custom-trace-events">Adding custom trace events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-profiler-options">Configuring profiler options</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-options">General options</a></li>
@@ -710,7 +706,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="profiling-computation">
 <h1>Profiling computation<a class="headerlink" href="#profiling-computation" title="Link to this heading">#</a></h1>
-<!--* freshness: { reviewed: '2024-03-18' } *-->
+<!--* freshness: { reviewed: '2025-06-12' } *-->
 <section id="viewing-program-traces-with-perfetto">
 <h2>Viewing program traces with Perfetto<a class="headerlink" href="#viewing-program-traces-with-perfetto" title="Link to this heading">#</a></h2>
 <p>We can use the JAX profiler to generate traces of a JAX program that can be
@@ -770,7 +766,7 @@ Tensorboard to the <code class="docutils literal notranslate"><span class="pre">
 </section>
 </section>
 <section id="xprof-tensorboard-profiling">
-<span id="tensorboard-profiling"></span><h2>XProf (TensorBoard profiling)<a class="headerlink" href="#xprof-tensorboard-profiling" title="Link to this heading">#</a></h2>
+<span id="xprof-profiling"></span><h2>XProf (TensorBoard profiling)<a class="headerlink" href="#xprof-tensorboard-profiling" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras">XProf</a>
 can be used to profile JAX programs. XProf is a great way to acquire and
 visualize performance traces and profiles of your program, including activity on
@@ -800,12 +796,12 @@ XProf.</p>
 <p>You can instrument your code to capture a profiler trace via the
 <a class="reference internal" href="_autosummary/jax.profiler.start_trace.html#jax.profiler.start_trace" title="jax.profiler.start_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.profiler.start_trace()</span></code></a> and <a class="reference internal" href="_autosummary/jax.profiler.stop_trace.html#jax.profiler.stop_trace" title="jax.profiler.stop_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.profiler.stop_trace()</span></code></a> methods.
 Call <a class="reference internal" href="_autosummary/jax.profiler.start_trace.html#jax.profiler.start_trace" title="jax.profiler.start_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_trace()</span></code></a> with the directory to write trace files
-to. This should be the same <code class="docutils literal notranslate"><span class="pre">--logdir</span></code> directory used to start TensorBoard.
-Then, you can use TensorBoard to view the traces.</p>
+to. This should be the same <code class="docutils literal notranslate"><span class="pre">--logdir</span></code> directory used to start XProf.
+Then, you can XProf to view the traces.</p>
 <p>For example, to take a profiler trace:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
 
-<span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">start_trace</span><span class="p">(</span><span class="s2">&quot;/tmp/tensorboard&quot;</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">start_trace</span><span class="p">(</span><span class="s2">&quot;/tmp/profile-data&quot;</span><span class="p">)</span>
 
 <span class="c1"># Run the operations to be profiled</span>
 <span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -823,7 +819,7 @@ this is necessary.</p>
 alternative to <code class="docutils literal notranslate"><span class="pre">start_trace</span></code> and <code class="docutils literal notranslate"><span class="pre">stop_trace</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
 
-<span class="k">with</span> <span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="s2">&quot;/tmp/tensorboard&quot;</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="s2">&quot;/tmp/profile-data&quot;</span><span class="p">):</span>
   <span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
   <span class="n">x</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
   <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">x</span>
@@ -833,17 +829,14 @@ alternative to <code class="docutils literal notranslate"><span class="pre">star
 </section>
 <section id="viewing-the-trace">
 <h3>Viewing the trace<a class="headerlink" href="#viewing-the-trace" title="Link to this heading">#</a></h3>
-<p>After capturing a trace, you can view it using either the standalone XProf
-tool or the TensorBoard UI. The profiler interface is the same in both cases.</p>
-<section id="using-standalone-xprof">
-<h4>Using Standalone XProf<a class="headerlink" href="#using-standalone-xprof" title="Link to this heading">#</a></h4>
+<p>After capturing a trace, you can view it using the XProf UI.</p>
 <p>You can launch the profiler UI directly using the standalone XProf command by
 pointing it to your log directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ xprof --port 8791 /tmp/tensorboard
-Attempting to start XProf server:
-  Log Directory: /tmp/tensorboard
-  Port: 8791
-XProf at http://localhost:8791/ (Press CTRL+C to quit)
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>xprof<span class="w"> </span>--port<span class="w"> </span><span class="m">8791</span><span class="w"> </span>/tmp/profile-data
+Attempting<span class="w"> </span>to<span class="w"> </span>start<span class="w"> </span>XProf<span class="w"> </span>server:
+<span class="w">  </span>Log<span class="w"> </span>Directory:<span class="w"> </span>/tmp/profile-data
+<span class="w">  </span>Port:<span class="w"> </span><span class="m">8791</span>
+XProf<span class="w"> </span>at<span class="w"> </span>http://localhost:8791/<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>CTRL+C<span class="w"> </span>to<span class="w"> </span>quit<span class="o">)</span>
 </pre></div>
 </div>
 <p>Navigate to the provided URL (e.g., http://localhost:8791/) in your browser
@@ -856,34 +849,16 @@ details. See
 <a class="reference external" href="https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras#use_the_tensorflow_profiler_to_profile_model_training_performance">these TensorFlow docs</a>=
 for more details on using the trace viewer.</p>
 </section>
-<section id="with-tensorboard">
-<h4>With TensorBoard<a class="headerlink" href="#with-tensorboard" title="Link to this heading">#</a></h4>
-<p>To view the trace, first start TensorBoard if you haven’t already:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tensorboard<span class="w"> </span>--logdir<span class="o">=</span>/tmp/tensorboard
-<span class="o">[</span>...<span class="o">]</span>
-Serving<span class="w"> </span>TensorBoard<span class="w"> </span>on<span class="w"> </span>localhost<span class="p">;</span><span class="w"> </span>to<span class="w"> </span>expose<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>network,<span class="w"> </span>use<span class="w"> </span>a<span class="w"> </span>proxy<span class="w"> </span>or<span class="w"> </span>pass<span class="w"> </span>--bind_all
-TensorBoard<span class="w"> </span><span class="m">2</span>.20.0<span class="w"> </span>at<span class="w"> </span>http://localhost:6006/<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>CTRL+C<span class="w"> </span>to<span class="w"> </span>quit<span class="o">)</span>
-</pre></div>
-</div>
-<p>You should be able to load TensorBoard at http://localhost:6006/ in this
-example. Then, select “Profile” from the dropdown menu in the upper-right,
-or navigate directly to http://localhost:6006/#profile.</p>
-<p>From there, the experience is the same as the standalone tool: available
-traces appear in the “Runs” dropdown menu on the left. Select the run
-you’re interested in, and then under “Tools”, select trace_viewer to see the
-timeline.</p>
-</section>
-</section>
-<section id="manual-capture-via-tensorboard">
-<h3>Manual capture via TensorBoard<a class="headerlink" href="#manual-capture-via-tensorboard" title="Link to this heading">#</a></h3>
+<section id="manual-capture-via-xprof">
+<h3>Manual capture via XProf<a class="headerlink" href="#manual-capture-via-xprof" title="Link to this heading">#</a></h3>
 <p>The following are instructions for capturing a manually-triggered N-second trace
 from a running program.</p>
 <ol class="arabic">
-<li><p>Start a TensorBoard server:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tensorboard<span class="w"> </span>--logdir<span class="w"> </span>/tmp/tensorboard/
+<li><p>Start an XProf server:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>xprof<span class="w"> </span>--logdir<span class="w"> </span>/tmp/profile-data/
 </pre></div>
 </div>
-<p>You should be able to load TensorBoard at <a class="reference external" href="http://localhost:6006/">http://localhost:6006/</a>. You can
+<p>You should be able to load XProf at <a class="reference external" href="http://localhost:8791/">http://localhost:8791/</a>. You can
 specify a different port with the <code class="docutils literal notranslate"><span class="pre">--port</span></code> flag. See <a class="reference internal" href="#id1"><span class="std std-ref">Profiling on a remote machine</span></a>
 below if running JAX on a remote server.<br /><br /></p>
 </li>
@@ -893,7 +868,7 @@ somewhere near the beginning:</p>
 <span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">start_server</span><span class="p">(</span><span class="mi">9999</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This starts the profiler server that TensorBoard connects to. The profiler
+<p>This starts the profiler server that XProf connects to. The profiler
 server must be running before you move on to the next step. When you’re done
 using the server, you can call <code class="docutils literal notranslate"><span class="pre">jax.profiler.stop_server()</span></code> to shut it down.</p>
 <p>If you’d like to profile a snippet of a long-running program (e.g. a long
@@ -905,7 +880,7 @@ the next step. Another option is to start the profiler server at the
 beginning of the program and use <code class="docutils literal notranslate"><span class="pre">time.sleep()</span></code> to give you enough time to
 start the capture.<br /><br /></p>
 </li>
-<li><p>Open <a class="reference external" href="http://localhost:6006/#profile">http://localhost:6006/#profile</a>, and click the “CAPTURE PROFILE” button
+<li><p>Open <a class="reference external" href="http://localhost:8791/">http://localhost:8791/</a>, and click the “CAPTURE PROFILE” button
 in the upper left. Enter “localhost:9999” as the profile service URL (this is
 the address of the profiler server you started in the previous step). Enter
 the number of milliseconds you’d like to profile for, and click “CAPTURE”.<br
@@ -913,19 +888,41 @@ the number of milliseconds you’d like to profile for, and click “CAPTURE”.
 <li><p>If the code you’d like to profile isn’t already running (e.g. if you started
 the profiler server in a Python shell), run it while the capture is
 running.<br /><br /></p></li>
-<li><p>After the capture finishes, TensorBoard should automatically refresh. (Not
-all of the TensorBoard profiling features are hooked up with JAX, so it may
+<li><p>After the capture finishes, XProf should automatically refresh. (Not
+all of the XProf profiling features are hooked up with JAX, so it may
 initially look like nothing was captured.) On the left under “Tools”, select
-<code class="docutils literal notranslate"><span class="pre">trace_viewer</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">trace_viewer</span></code>.</p></li>
+</ol>
 <p>You should now see a timeline of the execution. You can use the WASD keys to
 navigate the trace, and click or drag to select events to see more details at
-the bottom. See <a class="reference external" href="https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras#use_the_tensorflow_profiler_to_profile_model_training_performance">these TensorFlow
-docs</a>
+the bottom. See <a class="reference external" href="https://openxla.org/xprof/trace_viewer">these XProf docs</a>
 for more details on using the trace viewer.</p>
-<p>You can also use the <code class="docutils literal notranslate"><span class="pre">memory_viewer</span></code>, <code class="docutils literal notranslate"><span class="pre">op_profile</span></code>, and <code class="docutils literal notranslate"><span class="pre">graph_viewer</span></code>
-tools.<br /><br /></p>
-</li>
-</ol>
+<p>You can also use the following tools:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openxla.org/xprof/framework_op_stats">Framework Op Stats</a></p></li>
+<li><p><a class="reference external" href="https://openxla.org/xprof/graph_viewer">Graph Viewer</a></p></li>
+<li><p><a class="reference external" href="https://openxla.org/xprof/hlo_op_stats">HLO Op Stats</a></p></li>
+<li><p><a class="reference external" href="https://openxla.org/xprof/memory_profile">Memory Profile</a></p></li>
+<li><p><a class="reference external" href="https://openxla.org/xprof/memory_viewer">Memory Viewer</a></p></li>
+<li><p><a class="reference external" href="https://openxla.org/xprof/hlo_op_profile">HLO Op Profile</a></p></li>
+<li><p><a class="reference external" href="https://openxla.org/xprof/roofline_analysis">Roofline Model</a><br /><br /></p></li>
+</ul>
+</section>
+<section id="xprof-and-tensorboard">
+<h3>XProf and Tensorboard<a class="headerlink" href="#xprof-and-tensorboard" title="Link to this heading">#</a></h3>
+<p>XProf is the underlying tool that powers the profiling and trace capturing
+functionality in Tensorboard. As long as <code class="docutils literal notranslate"><span class="pre">xprof</span></code> is installed, a “Profile” tab
+will be present within Tensorboard. Using this is identical to launching XProf
+independently, as long as it is launched pointing to the same log directory.
+This includes profile capture, analysis, and viewing functionality. XProf
+supplants the <code class="docutils literal notranslate"><span class="pre">tensorboard_plugin_profile</span></code> functionality that was previously
+recommended.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tensorboard<span class="w"> </span>--logdir<span class="o">=</span>/tmp/profile-data
+<span class="o">[</span>...<span class="o">]</span>
+Serving<span class="w"> </span>TensorBoard<span class="w"> </span>on<span class="w"> </span>localhost<span class="p">;</span><span class="w"> </span>to<span class="w"> </span>expose<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>network,<span class="w"> </span>use<span class="w"> </span>a<span class="w"> </span>proxy<span class="w"> </span>or<span class="w"> </span>pass<span class="w"> </span>--bind_all
+TensorBoard<span class="w"> </span><span class="m">2</span>.19.0<span class="w"> </span>at<span class="w"> </span>http://localhost:6006/<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>CTRL+C<span class="w"> </span>to<span class="w"> </span>quit<span class="o">)</span>
+</pre></div>
+</div>
 </section>
 <section id="adding-custom-trace-events">
 <h3>Adding custom trace events<a class="headerlink" href="#adding-custom-trace-events" title="Link to this heading">#</a></h3>
@@ -946,7 +943,7 @@ should be an instance of <code class="docutils literal notranslate"><span class=
 <span class="n">options</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">ProfileOptions</span><span class="p">()</span>
 <span class="n">options</span><span class="o">.</span><span class="n">python_tracer_level</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">options</span><span class="o">.</span><span class="n">host_tracer_level</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">start_trace</span><span class="p">(</span><span class="s2">&quot;/tmp/tensorboard&quot;</span><span class="p">,</span> <span class="n">profiler_options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">jax</span><span class="o">.</span><span class="n">profiler</span><span class="o">.</span><span class="n">start_trace</span><span class="p">(</span><span class="s2">&quot;/tmp/profile-data&quot;</span><span class="p">,</span> <span class="n">profiler_options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
 
 <span class="c1"># Run the operations to be profiled</span>
 <span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -966,14 +963,14 @@ should be an instance of <code class="docutils literal notranslate"><span class=
 <p><code class="docutils literal notranslate"><span class="pre">1</span></code>: Enables tracing of only user-instrumented TraceMe events (this is the
 default).</p>
 <p><code class="docutils literal notranslate"><span class="pre">2</span></code>: Includes level 1 traces plus high-level program execution details like
-expensive TensorFlow or XLA operations.</p>
+expensive XLA operations.</p>
 <p><code class="docutils literal notranslate"><span class="pre">3</span></code>: Includes level 2 traces plus more verbose, low-level program execution
-details such as cheap TensorFlow operations.</p>
+details such as cheap XLA operations.</p>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">python_tracer_level</span></code>: Controls whether Python tracing is enabled.</p>
 <p>Supported Values:</p>
 <p><code class="docutils literal notranslate"><span class="pre">0</span></code>: Disables Python function call tracing.</p>
-<p><code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">0</span></code>: Enables Python tracing (this is the default).</p>
+<p><code class="docutils literal notranslate"><span class="pre">1</span></code>: Enables Python tracing (this is the default).</p>
 </li>
 </ol>
 </section>
@@ -1099,12 +1096,12 @@ documentation</a>.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="benchmarking.html"
+       href="gpu_performance_tips.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Benchmarking JAX code</p>
+        <p class="prev-next-title">GPU performance tips</p>
       </div>
     </a>
     <a class="right-next"
@@ -1139,12 +1136,9 @@ documentation</a>.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xprof-tensorboard-profiling">XProf (TensorBoard profiling)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-capture">Programmatic capture</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-the-trace">Viewing the trace</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-standalone-xprof">Using Standalone XProf</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-tensorboard">With TensorBoard</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-capture-via-tensorboard">Manual capture via TensorBoard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-the-trace">Viewing the trace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-capture-via-xprof">Manual capture via XProf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xprof-and-tensorboard">XProf and Tensorboard</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-custom-trace-events">Adding custom trace events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-profiler-options">Configuring profiler options</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-options">General options</a></li>

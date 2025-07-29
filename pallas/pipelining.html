@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -173,24 +173,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guide.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -201,15 +199,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
@@ -237,6 +235,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -251,7 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -304,6 +303,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -344,7 +344,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -533,7 +532,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="../advanced_guide.html" class="nav-link">Resources and Advanced Guides</a></li>
+    <li class="breadcrumb-item"><a href="../advanced_guides.html" class="nav-link">Resources and Advanced Guides</a></li>
     
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Pallas: a JAX kernel language</a></li>
@@ -707,7 +706,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="software-pipelining">
 <span id="pallas-software-pipelining"></span><h1>Software Pipelining<a class="headerlink" href="#software-pipelining" title="Link to this heading">#</a></h1>
 <p>Software pipelining is an important technique in performance optimization by overlapping multiple asynchronous operations even if there are data dependencies between them. In the context of kernel writing, the most common form of pipelining involves overlapping communication and memory transfers with compute such that the hardware accelerator never stalls while waiting for data to arrive. Therefore, we will solely focus on the problem of communication-compute pipelining in this tutorial. We will begin by covering the problem conceptually, outlining the Pallas API for writing pipelines, and going over some realistic examples using the API.</p>
-<p>This tutorial only covers the conceptual foundations of pipelining. For platform-specific references, please see <a class="reference internal" href="tpu/pipelining.html#pallas-tpu-pipelining"><span class="std std-ref">TPU Pipelining</span></a>, or GPU (coming soon!) specific pipelining references.</p>
+<p>This tutorial only covers the conceptual foundations of pipelining. For platform-specific references, please see <a class="reference internal" href="tpu/pipelining.html#pallas-tpu-pipelining"><span class="std std-ref">TPU Pipelining</span></a>, or <a class="reference internal" href="gpu/pipelining.html#pallas-mgpu-pipelining"><span class="std std-ref">Mosaic GPU Pipelining</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
@@ -720,7 +719,7 @@ document.write(`
 </div>
 <section id="memory-hierarchies">
 <h2>Memory Hierarchies<a class="headerlink" href="#memory-hierarchies" title="Link to this heading">#</a></h2>
-<p>The first step in understanding pipelining conceptually involves understanding the different forms of memory available and the tradeoffs between them. Most hardware architectures (including CPUs, GPUs, and TPUs) utilize a wide variety of memory spaces that tradeoff capicity vs latency/bandwidth. For the purpose of Pallas, we are typically interested in registers, SRAM, DRAM, and potentially network communication:</p>
+<p>The first step in understanding pipelining conceptually involves understanding the different forms of memory available and the tradeoffs between them. Most hardware architectures (including CPUs, GPUs, and TPUs) utilize a wide variety of memory spaces that tradeoff capacity vs latency/bandwidth. For the purpose of Pallas, we are typically interested in registers, SRAM, DRAM, and potentially network communication:</p>
 <ul class="simple">
 <li><p><strong>Registers</strong> are the the memory physically closest to the processor, and typically values must be loaded directly into registers before doing any compute on them.</p></li>
 <li><p><strong>SRAM</strong> (also known as Shared Memory/L1 and L2 cache on GPUs, or VMEM on TPUs) also lives fairly close to the processor, but has larger capacity than registers.
@@ -873,7 +872,7 @@ for i in range(N):
   # Itr 4 - No copy-in
   copy_in_wait(X[1])
   Y[1] = X[1] + 1
-  copy_out_start(Y[1], A[2])
+  copy_out_start(Y[1], A[3])
   copy_out_wait(Y[1])
 </pre>
 <p>Next, we can push the <code class="docutils literal notranslate"><span class="pre">copy_out_wait</span></code> as late as possible, right before we need to write into Y on the subsequent loop iteration.</p>
@@ -904,7 +903,7 @@ for i in range(N):
   # Itr 4 - No copy-in
   copy_in_wait(X[1])
   Y[1] = X[1] + 1
-  copy_out_start(Y[1], A[2])
+  copy_out_start(Y[1], A[3])
   <b>copy_out_wait(Y[0])</b>
 
   # Epilogue
@@ -953,18 +952,19 @@ for i in range(N):
   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid_size</span><span class="p">):</span>
     <span class="n">cur_slot</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span>
     <span class="n">next_slot</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">:</span>
-      <span class="n">copy_in_start</span><span class="p">(</span><span class="n">in_hbm</span><span class="p">[</span><span class="n">data_slices</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">in_sram</span><span class="p">[</span><span class="n">next_slot</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">grid_size</span><span class="p">:</span>
+      <span class="n">copy_in_start</span><span class="p">(</span><span class="n">in_hbm</span><span class="p">[</span><span class="n">in_slices</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">in_sram</span><span class="p">[</span><span class="n">next_slot</span><span class="p">])</span>
     <span class="n">copy_in_wait</span><span class="p">(</span><span class="n">in_sram</span><span class="p">[</span><span class="n">cur_slot</span><span class="p">])</span>
 
-    <span class="n">kernel</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+    <span class="n">kernel</span><span class="p">(</span><span class="n">in_sram</span><span class="p">[</span><span class="n">cur_slot</span><span class="p">],</span> <span class="n">out_ram</span><span class="p">[</span><span class="n">cur_slot</span><span class="p">])</span>
 
     <span class="n">copy_out_start</span><span class="p">(</span><span class="n">out_sram</span><span class="p">[</span><span class="n">cur_slot</span><span class="p">],</span> <span class="n">out_hbm</span><span class="p">[</span><span class="n">out_slices</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
       <span class="n">copy_out_wait</span><span class="p">(</span><span class="n">out_sram</span><span class="p">[</span><span class="n">next_slot</span><span class="p">])</span>
 
   <span class="c1"># Epilogue</span>
-  <span class="n">copy_out_wait</span><span class="p">(</span><span class="n">out_sram</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">last_slot</span> <span class="o">=</span> <span class="p">(</span><span class="n">grid_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+  <span class="n">copy_out_wait</span><span class="p">(</span><span class="n">out_sram</span><span class="p">[</span><span class="n">last_slot</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Now that we’ve seen how to manually implement a pipelined loop, let’s look into how to use the Pallas API.</p>
@@ -1166,7 +1166,7 @@ The Pallas pipeline emitter performs an optimization where if the data slices be
 </div>
 </div>
 <p>This result is completely wrong!</p>
-<p>There are two errors inside this kernel. First, we are accumulating along the first grid dimension instead of the last grid dimension. Second, <code class="docutils literal notranslate"><span class="pre">o_ref</span></code> is initially contains garbage values and thus we need to initialize it to zeros before we begin accumulation.</p>
+<p>There are two errors inside this kernel. First, we are accumulating along the first grid dimension instead of the last grid dimension. Second, <code class="docutils literal notranslate"><span class="pre">o_ref</span></code> initially contains garbage values and thus we need to initialize it to zeros before we begin accumulation.</p>
 <p>After fixing these two issues, we obtain the following corrected kernel. In this new kernel, we use <code class="docutils literal notranslate"><span class="pre">&#64;pl.when</span></code> to create a conditional that checks when the program ID is <code class="docutils literal notranslate"><span class="pre">0</span></code> along the reduction axis, indicating we are beginning to accumulate into a new output block. We have also moved the reduction dimension to the last axis of the <code class="docutils literal notranslate"><span class="pre">grid</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1227,7 +1227,7 @@ The Pallas pipeline emitter performs an optimization where if the data slices be
 <p><img alt="pipelining_bandwidth" src="../_images/pipelining_bandwidth_bound.svg" /></p>
 <p>If the bottleneck is specifically the latency and not the bandwidth, it is possible to fix the problem by inserting additional pipeline stages at the cost of additional SRAM required to store more buffers. With sufficient stages, the problem will either become compute or bandwidth bound again depending on which bottleneck we hit first during the steady-stage stage of the pipeline. The downside, however, of a multi-stage pipeline is that the size of the bubble is proportional to the number of stages so it is important to make sure the pipeline is long enough such that the bubble does not take up a substantial amount of the total runtime.</p>
 <p><img alt="pipelining_latency" src="../_images/pipelining_latency_multistage.svg" /></p>
-<p>Pallas on TPU only supports double-buffering, as TPU programs can operate on larger block sizes and double-buffering is typically enough to cover the latency. On GPU, the number of pipeline stages can be specified in both the Triton (via <code class="docutils literal notranslate"><span class="pre">TritonCompilerParams</span></code>) and Mosaic GPU backends (via argument to the pipeline emitter). See the platform-specific pipelining documentation for more details.</p>
+<p>Pallas on TPU only supports double-buffering, as TPU programs can operate on larger block sizes and double-buffering is typically enough to cover the latency. On GPU, the number of pipeline stages can be specified in both the Triton (via <code class="docutils literal notranslate"><span class="pre">CompilerParams</span></code>) and Mosaic GPU backends (via argument to the pipeline emitter). See the platform-specific pipelining documentation for more details.</p>
 </section>
 </section>
 

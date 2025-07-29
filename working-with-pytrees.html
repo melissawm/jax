@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -54,6 +54,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Key concepts" href="key-concepts.html" />
+    <link rel="prev" title="Pytrees" href="pytrees.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,30 +165,28 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/thinking_in_jax.html">Quickstart: How to think in JAX</a></li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="tutorials.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -197,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -233,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -247,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -300,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -340,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -528,6 +529,9 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
+    
+    <li class="breadcrumb-item"><a href="tutorials.html" class="nav-link">Tutorials</a></li>
+    
     <li class="breadcrumb-item active" aria-current="page">Working with pytrees</li>
   </ul>
 </nav>
@@ -675,6 +679,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pytree-gotchas">Common pytree gotchas</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistaking-pytree-nodes-for-leaves">Mistaking pytree nodes for leaves</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-of-none-by-jax-tree-util">Handling of <code class="docutils literal notranslate"><span class="pre">None</span></code> by <code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-pytrees-and-initialization-with-unexpected-values">Custom pytrees and initialization with unexpected values</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pytree-patterns">Common pytree patterns</a><ul class="visible nav section-nav flex-column">
@@ -697,7 +702,6 @@ document.write(`
 <!--* freshness: { reviewed: '2024-05-03' } *-->
 <p>JAX has built-in support for objects that look like dictionaries (dicts) of arrays, or lists of lists of dicts, or other nested structures — in JAX these are called pytrees.
 This section will explain how to use them, provide useful code examples, and point out common “gotchas” and patterns.</p>
-<p>For an explanation of how to create custom pytrees, see <a class="reference internal" href="custom_pytrees.html"><span class="doc">Custom pytrees and initialization with unexpected values</span></a>.</p>
 <section id="what-is-a-pytree">
 <span id="pytrees-what-is-a-pytree"></span><h2>What is a pytree?<a class="headerlink" href="#what-is-a-pytree" title="Link to this heading">#</a></h2>
 <p>A pytree is a container-like structure built out of container-like Python objects — “leaf” pytrees and/or more pytrees. A pytree can include lists, tuples, and dicts. A leaf is anything that’s not a pytree, such as an array, but a single leaf is also a pytree.</p>
@@ -731,7 +735,7 @@ This section will explain how to use them, provide useful code examples, and poi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, &#39;a&#39;, &lt;object object at 0x7fcb0dd7be00&gt;]   has 3 leaves: [1, &#39;a&#39;, &lt;object object at 0x7fcb0dd7be00&gt;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, &#39;a&#39;, &lt;object object at 0x7f8cb845be20&gt;]   has 3 leaves: [1, &#39;a&#39;, &lt;object object at 0x7f8cb845be20&gt;]
 (1, (2, 3), ())                               has 3 leaves: [1, 2, 3]
 [1, {&#39;k1&#39;: 2, &#39;k2&#39;: (3, 4)}, 5]               has 5 leaves: [1, 2, 3, 4, 5]
 {&#39;a&#39;: 2, &#39;b&#39;: (2, 3)}                         has 3 leaves: [2, 2, 3]
@@ -880,7 +884,7 @@ for convenience many of these have aliases in the <a class="reference internal" 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;__main__.Special at 0x7fcac274e610&gt;, &lt;__main__.Special at 0x7fcab4431a10&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;__main__.Special at 0x7f8cb81616d0&gt;, &lt;__main__.Special at 0x7f8c57c0fa10&gt;]
 </pre></div>
 </div>
 </div>
@@ -1049,7 +1053,7 @@ for convenience many of these have aliases in the <a class="reference internal" 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>: Error interpreting argument to &lt;function f at 0x7fcab4448e00&gt; as an abstract array. The problematic value is of type &lt;class &#39;str&#39;&gt; and was passed to the function at path x.name.
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>: Error interpreting argument to &lt;function f at 0x7f8c57c6d080&gt; as an abstract array. The problematic value is of type &lt;class &#39;str&#39;&gt; and was passed to the function at path x.name.
 <span class="n">This</span> <span class="n">typically</span> <span class="n">means</span> <span class="n">that</span> <span class="n">a</span> <span class="n">jit</span><span class="o">-</span><span class="n">wrapped</span> <span class="n">function</span> <span class="n">was</span> <span class="n">called</span> <span class="k">with</span> <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">array</span> <span class="n">argument</span><span class="p">,</span> <span class="ow">and</span> <span class="n">this</span> <span class="n">argument</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">marked</span> <span class="k">as</span> <span class="n">static</span> <span class="n">using</span> <span class="n">the</span> <span class="n">static_argnums</span> <span class="ow">or</span> <span class="n">static_argnames</span> <span class="n">parameters</span> <span class="n">of</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span>
 </pre></div>
 </div>
@@ -1199,6 +1203,77 @@ Key path of tree[2].name: (SequenceKey(idx=2), GetAttrKey(name=&#39;name&#39;))
 </div>
 </div>
 </section>
+<section id="custom-pytrees-and-initialization-with-unexpected-values">
+<h3>Custom pytrees and initialization with unexpected values<a class="headerlink" href="#custom-pytrees-and-initialization-with-unexpected-values" title="Link to this heading">#</a></h3>
+<p>Another common gotcha with user-defined pytree objects is that JAX transformations occasionally initialize them with unexpected values, so that any input validation done at initialization may fail. For example:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTree</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">register_pytree_node</span><span class="p">(</span><span class="n">MyTree</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">tree</span><span class="p">:</span> <span class="p">((</span><span class="n">tree</span><span class="o">.</span><span class="n">a</span><span class="p">,),</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">MyTree</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">MyTree</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>
+
+<span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)(</span><span class="n">tree</span><span class="p">)</span>      <span class="c1"># Error because object() is passed to `MyTree`.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>: Value &#39;&lt;object object at 0x7f8cb845b740&gt;&#39; with dtype object is not a valid JAX array type. Only arrays of numeric types are supported by JAX.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jax</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)(</span><span class="n">tree</span><span class="p">)</span>  <span class="c1"># Error because MyTree(...) is passed to `MyTree`.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span>: None is not a valid value for jnp.array
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>In the first case with <code class="docutils literal notranslate"><span class="pre">jax.vmap(...)(tree)</span></code>, JAX’s internals use arrays of <code class="docutils literal notranslate"><span class="pre">object()</span></code> values to infer the structure of the tree</p></li>
+<li><p>In the second case with <code class="docutils literal notranslate"><span class="pre">jax.jacobian(...)(tree)</span></code>, the Jacobian of a function mapping a tree to a tree is defined as a tree of trees.</p></li>
+</ul>
+<p><strong>Potential solution 1:</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__init__</span></code> and <code class="docutils literal notranslate"><span class="pre">__new__</span></code> methods of custom pytree classes should generally avoid doing any array conversion or other input validation, or else anticipate and handle these special cases. For example:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTree</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">object</span> <span class="ow">or</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">MyTree</span><span class="p">)):</span>
+      <span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Potential solution 2:</strong></p>
+<ul class="simple">
+<li><p>Structure your custom <code class="docutils literal notranslate"><span class="pre">tree_unflatten</span></code> function so that it avoids calling <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. If you choose this route, make sure that your <code class="docutils literal notranslate"><span class="pre">tree_unflatten</span></code> function stays in sync with <code class="docutils literal notranslate"><span class="pre">__init__</span></code> if and when the code is updated. Example:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tree_unflatten</span><span class="p">(</span><span class="n">aux_data</span><span class="p">,</span> <span class="n">children</span><span class="p">):</span>
+  <span class="k">del</span> <span class="n">aux_data</span>  <span class="c1"># Unused in this class.</span>
+  <span class="n">obj</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">MyTree</span><span class="p">)</span>
+  <span class="n">obj</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+  <span class="k">return</span> <span class="n">obj</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="common-pytree-patterns">
 <span id="pytrees-common-pytree-patterns"></span><h2>Common pytree patterns<a class="headerlink" href="#common-pytree-patterns" title="Link to this heading">#</a></h2>
@@ -1259,6 +1334,24 @@ Key path of tree[2].name: (SequenceKey(idx=2), GetAttrKey(name=&#39;name&#39;))
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="pytrees.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pytrees</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="key-concepts.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Key concepts</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1286,6 +1379,7 @@ Key path of tree[2].name: (SequenceKey(idx=2), GetAttrKey(name=&#39;name&#39;))
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pytree-gotchas">Common pytree gotchas</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistaking-pytree-nodes-for-leaves">Mistaking pytree nodes for leaves</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-of-none-by-jax-tree-util">Handling of <code class="docutils literal notranslate"><span class="pre">None</span></code> by <code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-pytrees-and-initialization-with-unexpected-values">Custom pytrees and initialization with unexpected values</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pytree-patterns">Common pytree patterns</a><ul class="visible nav section-nav flex-column">

@@ -13,10 +13,23 @@ Remember to align the itemized text with the first line of an item within a list
 
 ## Unreleased
 
+* Deprecations
+
+  * `pl.atomic_*` APIs have been moved to {mod}`jax.experimental.pallas.triton`.
+    Accessing them via {mod}`jax.experimental.pallas` is deprecated.
+
+## Released with jax 0.7.0
+
 * New functionality
 
   * Added a new decorator {func}`jax.experimental.pallas.loop` which allows
     to write stateless loops as functions.
+  * Added new multiple buffering and lookahead functionality to
+    {func}`jax.experimental.pallas.tpu.emit_pipeline`. Input buffers can now
+    be multiple-buffered with more than 2 buffers and support a lookahead option
+    to fetch blocks that are an arbitrary number of grid iterations ahead
+    rather than the immediate next iterations. Additionally, pipeline state
+    can now be held in registers to reduce scalar memory usage.
 
 * Deprecations
 

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -739,7 +738,7 @@ for persistent archival.</p>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.export.Exported">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.export.</span></span><span class="sig-name descname"><span class="pre">Exported</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_avals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_avals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_shardings_hlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_shardings_hlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_devices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">platforms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered_effects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unordered_effects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disabled_safety_checks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlir_module_serialized</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calling_convention_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_kept_var_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uses_global_constants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_get_vjp</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L128-L314"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.export.</span></span><span class="sig-name descname"><span class="pre">Exported</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_avals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_avals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_shardings_hlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_shardings_hlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nr_devices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">platforms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered_effects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unordered_effects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disabled_safety_checks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlir_module_serialized</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calling_convention_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_kept_var_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uses_global_constants</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_get_vjp</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L127-L313"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported" title="Link to this definition">#</a></dt>
 <dd><p>A JAX function lowered to StableHLO.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -989,7 +988,7 @@ corresponding to the flattened primal inputs.</p>
 <p>See a [description of the calling convention for the <cite>mlir_module</cite>](<a class="reference external" href="https://docs.jax.dev/en/latest/export/export.html#module-calling-convention">https://docs.jax.dev/en/latest/export/export.html#module-calling-convention</a>).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.call">
-<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L297-L314"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.call" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L296-L313"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.call" title="Link to this definition">#</a></dt>
 <dd><p>Call an exported function from a JAX program.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1012,7 +1011,7 @@ See the examples in the [JAX export documentation](<a class="reference external"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.has_vjp">
-<span class="sig-name descname"><span class="pre">has_vjp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L268-L271"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.has_vjp" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">has_vjp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L267-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.has_vjp" title="Link to this definition">#</a></dt>
 <dd><p>Returns if this Exported supports VJP.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1023,7 +1022,7 @@ See the examples in the [JAX export documentation](<a class="reference external"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.in_shardings_jax">
-<span class="sig-name descname"><span class="pre">in_shardings_jax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L218-L257"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.in_shardings_jax" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">in_shardings_jax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L217-L256"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.in_shardings_jax" title="Link to this definition">#</a></dt>
 <dd><p>Creates Shardings corresponding to self.in_shardings_hlo.</p>
 <p>The Exported object stores <cite>in_shardings_hlo</cite> as HloShardings, which are
 independent of a mesh or set of devices. This method constructs
@@ -1057,7 +1056,7 @@ Sharding that can be used in JAX APIs such as <cite>jax.jit</cite> or
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mesh</strong> (<a class="reference internal" href="jax.sharding.html#jax.sharding.Mesh" title="jax._src.mesh.Mesh"><em>mesh.Mesh</em></a>)</p>
+<dd class="field-odd"><p><strong>mesh</strong> (<em>mesh_lib.Mesh</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Sequence[<a class="reference internal" href="jax.sharding.html#jax.sharding.Sharding" title="jax.sharding.Sharding">sharding.Sharding</a> | None]</p>
@@ -1067,7 +1066,7 @@ Sharding that can be used in JAX APIs such as <cite>jax.jit</cite> or
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.mlir_module">
-<span class="sig-name descname"><span class="pre">mlir_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L209-L212"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.mlir_module" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">mlir_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L208-L211"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.mlir_module" title="Link to this definition">#</a></dt>
 <dd><p>A string representation of the <cite>mlir_module_serialized</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1078,12 +1077,12 @@ Sharding that can be used in JAX APIs such as <cite>jax.jit</cite> or
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.out_shardings_jax">
-<span class="sig-name descname"><span class="pre">out_shardings_jax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L258-L267"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.out_shardings_jax" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">out_shardings_jax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L257-L266"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.out_shardings_jax" title="Link to this definition">#</a></dt>
 <dd><p>Creates Shardings corresponding to <cite>self.out_shardings_hlo</cite>.</p>
 <p>See documentation for in_shardings_jax.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mesh</strong> (<a class="reference internal" href="jax.sharding.html#jax.sharding.Mesh" title="jax._src.mesh.Mesh"><em>mesh.Mesh</em></a>)</p>
+<dd class="field-odd"><p><strong>mesh</strong> (<em>mesh_lib.Mesh</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Sequence[<a class="reference internal" href="jax.sharding.html#jax.sharding.Sharding" title="jax.sharding.Sharding">sharding.Sharding</a> | None]</p>
@@ -1093,7 +1092,7 @@ Sharding that can be used in JAX APIs such as <cite>jax.jit</cite> or
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.serialize">
-<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vjp_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L282-L296"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.serialize" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">serialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vjp_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L281-L295"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.serialize" title="Link to this definition">#</a></dt>
 <dd><p>Serializes an Exported.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1110,7 +1109,7 @@ function. i.e., <cite>jax.grad(jax.grad(f)).</cite></p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.Exported.vjp">
-<span class="sig-name descname"><span class="pre">vjp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L272-L281"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.vjp" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">vjp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L271-L280"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.Exported.vjp" title="Link to this definition">#</a></dt>
 <dd><p>Gets the exported VJP.</p>
 <p>Returns None if not available, which can happen if the Exported has been
 loaded from an external format without a VJP.</p>
@@ -1125,7 +1124,7 @@ loaded from an external format without a VJP.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.export.DisabledSafetyCheck">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.export.</span></span><span class="sig-name descname"><span class="pre">DisabledSafetyCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_impl</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L77-L126"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.export.</span></span><span class="sig-name descname"><span class="pre">DisabledSafetyCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_impl</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L76-L125"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck" title="Link to this definition">#</a></dt>
 <dd><p>A safety check that should be skipped on (de)serialization.</p>
 <p>Most of these checks are performed on serialization, but some are deferred to
 deserialization. The list of disabled checks is attached to the serialization,
@@ -1140,7 +1139,7 @@ by passing <cite>TF_XLA_FLAGS=–tf_xla_call_module_disabled_checks=platform</ci
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.DisabledSafetyCheck.custom_call">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">custom_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L98-L107"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck.custom_call" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">custom_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L97-L106"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck.custom_call" title="Link to this definition">#</a></dt>
 <dd><p>Allows the serialization of a call target not known to be stable.</p>
 <p>Has effect only on serialization.
 :param target_name: the name of the custom call target to allow.</p>
@@ -1156,7 +1155,7 @@ by passing <cite>TF_XLA_FLAGS=–tf_xla_call_module_disabled_checks=platform</ci
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.DisabledSafetyCheck.is_custom_call">
-<span class="sig-name descname"><span class="pre">is_custom_call</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L108-L112"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck.is_custom_call" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">is_custom_call</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L107-L111"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck.is_custom_call" title="Link to this definition">#</a></dt>
 <dd><p>Returns the custom call target allowed by this directive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -1167,7 +1166,7 @@ by passing <cite>TF_XLA_FLAGS=–tf_xla_call_module_disabled_checks=platform</ci
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.export.DisabledSafetyCheck.platform">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">platform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L90-L97"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck.platform" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">platform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/export/_export.py#L89-L96"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.export.DisabledSafetyCheck.platform" title="Link to this definition">#</a></dt>
 <dd><p>Allows the compilation platform to differ from the export platform.</p>
 <p>Has effect only on deserialization.</p>
 <dl class="field-list simple">

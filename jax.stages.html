@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="key-concepts.html">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -721,7 +720,7 @@ that represent the stages of this process.</p>
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.stages.Wrapped">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Wrapped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L728-L766"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Wrapped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L742-L780"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped" title="Link to this definition">#</a></dt>
 <dd><p>A function ready to be traced, lowered, and compiled.</p>
 <p>This protocol reflects the output of functions such as
 <code class="docutils literal notranslate"><span class="pre">jax.jit</span></code>. Calling it results in JIT (just-in-time) lowering,
@@ -729,13 +728,13 @@ compilation, and execution. It can also be explicitly lowered prior
 to compilation, and the result compiled prior to execution.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Wrapped.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L738-L741"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped.__call__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L752-L755"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped.__call__" title="Link to this definition">#</a></dt>
 <dd><p>Executes the wrapped function, lowering and compiling as needed.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Wrapped.lower">
-<span class="sig-name descname"><span class="pre">lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L753-L766"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped.lower" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L767-L780"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped.lower" title="Link to this definition">#</a></dt>
 <dd><p>Lower this function explicitly for the given arguments.</p>
 <p>This is a shortcut for <code class="docutils literal notranslate"><span class="pre">self.trace(*args,</span> <span class="pre">**kwargs).lower()</span></code>.</p>
 <p>A lowered function is staged out of Python and translated to a
@@ -753,7 +752,7 @@ manner. It is ready for compilation but not yet compiled.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Wrapped.trace">
-<span class="sig-name descname"><span class="pre">trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L742-L752"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped.trace" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L756-L766"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Wrapped.trace" title="Link to this definition">#</a></dt>
 <dd><p>Trace this function explicitly for the given arguments.</p>
 <p>A traced function is staged out of Python and translated to a jaxpr. It is
 ready for lowering but not yet lowered.</p>
@@ -771,7 +770,7 @@ ready for lowering but not yet lowered.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.stages.Traced">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Traced</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jaxpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fun_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_flat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_consts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L683-L726"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Traced" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Traced</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jaxpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fun_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_flat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_consts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params_out_shardings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L687-L740"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Traced" title="Link to this definition">#</a></dt>
 <dd><p>Traced form of a function specialized to argument types and values.</p>
 <p>A traced computation is ready for lowering. This class carries the
 traced representation with the remaining information needed to later
@@ -787,7 +786,7 @@ lower, compile, and execute it.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Traced.lower">
-<span class="sig-name descname"><span class="pre">lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowering_platforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_private_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L710-L726"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Traced.lower" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">lower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowering_platforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_private_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L725-L740"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Traced.lower" title="Link to this definition">#</a></dt>
 <dd><p>Lower to compiler input, returning a <code class="docutils literal notranslate"><span class="pre">Lowered</span></code> instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -803,7 +802,7 @@ lower, compile, and execute it.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.stages.Lowered">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Lowered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lowering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L559-L681"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Lowered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lowering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L553-L685"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered" title="Link to this definition">#</a></dt>
 <dd><p>Lowering of a function specialized to argument types and values.</p>
 <p>A lowering is a computation ready for compilation. This class
 carries a lowering together with the remaining information needed to
@@ -822,7 +821,7 @@ lowering paths (<a class="reference internal" href="_autosummary/jax.jit.html#ja
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Lowered.as_text">
-<span class="sig-name descname"><span class="pre">as_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L628-L643"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.as_text" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">as_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L632-L647"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.as_text" title="Link to this definition">#</a></dt>
 <dd><p>A human-readable text representation of this lowering.</p>
 <p>Intended for visualization and debugging purposes. This need not be a valid
 nor reliable serialization.
@@ -844,11 +843,14 @@ e.g., source location.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Lowered.compile">
-<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L617-L627"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.compile" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compiler_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_assignment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L616-L631"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.compile" title="Link to this definition">#</a></dt>
 <dd><p>Compile, returning a corresponding <code class="docutils literal notranslate"><span class="pre">Compiled</span></code> instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>compiler_options</strong> (<em>CompilerOptions</em><em> | </em><em>None</em>)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>compiler_options</strong> (<em>CompilerOptions</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>device_assignment</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><em>xc.Device</em><em>, </em><em>...</em><em>] </em><em>| </em><em>None</em>)</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="#jax.stages.Compiled" title="jax.stages.Compiled">Compiled</a></p>
@@ -858,7 +860,7 @@ e.g., source location.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Lowered.compiler_ir">
-<span class="sig-name descname"><span class="pre">compiler_ir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L644-L663"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.compiler_ir" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">compiler_ir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L648-L667"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.compiler_ir" title="Link to this definition">#</a></dt>
 <dd><p>An arbitrary object representation of this lowering.</p>
 <p>Intended for debugging purposes. This is not a valid nor reliable
 serialization. The output has no guarantee of consistency across
@@ -879,7 +881,7 @@ or “hlo”).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Lowered.cost_analysis">
-<span class="sig-name descname"><span class="pre">cost_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L664-L681"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.cost_analysis" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">cost_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L668-L685"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.cost_analysis" title="Link to this definition">#</a></dt>
 <dd><p>A summary of execution cost estimates.</p>
 <p>Intended for visualization and debugging purposes. The object output by
 this is some simple data structure that can easily be printed or serialized
@@ -897,7 +899,7 @@ runtime.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.stages.Lowered.in_tree">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_tree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tree_util.PyTreeDef</span></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L322-L326"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.in_tree" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_tree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tree_util.PyTreeDef</span></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L314-L318"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Lowered.in_tree" title="Link to this definition">#</a></dt>
 <dd><p>Tree structure of the pair (positional arguments, keyword arguments).</p>
 </dd></dl>
 
@@ -905,7 +907,7 @@ runtime.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="jax.stages.Compiled">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Compiled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L355-L557"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jax.stages.</span></span><span class="sig-name descname"><span class="pre">Compiled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L347-L551"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled" title="Link to this definition">#</a></dt>
 <dd><p>Compiled representation of a function specialized to types/values.</p>
 <p>A compiled computation is associated with an executable and the
 remaining information needed to execute it. It also provides a
@@ -921,13 +923,13 @@ JAX’s various compilation paths and backends.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Compiled.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L546-L557"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.__call__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L540-L551"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.__call__" title="Link to this definition">#</a></dt>
 <dd><p>Call self as a function.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Compiled.as_text">
-<span class="sig-name descname"><span class="pre">as_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L379-L392"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.as_text" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">as_text</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L371-L384"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.as_text" title="Link to this definition">#</a></dt>
 <dd><p>A human-readable text representation of this executable.</p>
 <p>Intended for visualization and debugging purposes. This is not a valid nor
 reliable serialization.</p>
@@ -942,7 +944,7 @@ runtime.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Compiled.cost_analysis">
-<span class="sig-name descname"><span class="pre">cost_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L393-L410"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.cost_analysis" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">cost_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L385-L402"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.cost_analysis" title="Link to this definition">#</a></dt>
 <dd><p>A summary of execution cost estimates.</p>
 <p>Intended for visualization and debugging purposes. The object output by
 this is some simple data structure that can easily be printed or serialized
@@ -960,13 +962,13 @@ runtime.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="jax.stages.Compiled.in_tree">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_tree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tree_util.PyTreeDef</span></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L322-L326"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.in_tree" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_tree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tree_util.PyTreeDef</span></em><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L314-L318"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.in_tree" title="Link to this definition">#</a></dt>
 <dd><p>Tree structure of the pair (positional arguments, keyword arguments).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jax.stages.Compiled.memory_analysis">
-<span class="sig-name descname"><span class="pre">memory_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L411-L428"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.memory_analysis" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">memory_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jax-ml/jax/blob/main/jax/_src/stages.py#L403-L420"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jax.stages.Compiled.memory_analysis" title="Link to this definition">#</a></dt>
 <dd><p>A summary of estimated memory requirements.</p>
 <p>Intended for visualization and debugging purposes. The object output by
 this is some simple data structure that can easily be printed or serialized

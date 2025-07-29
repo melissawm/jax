@@ -5,7 +5,7 @@ Tutorials
 
 These tutorials cover basic usage of JAX and its features, including some of the
 internal mechanisms that make JAX work. For more in-depth discussions of JAX's
-design and implementation, see the :doc:`advanced guides <advanced_guide>`.
+design and implementation, see the :doc:`advanced guides <advanced_guides>`.
 
 .. toctree::
    :maxdepth: 1
@@ -13,9 +13,8 @@ design and implementation, see the :doc:`advanced guides <advanced_guide>`.
    jit-compilation
    automatic-vectorization
    automatic-differentiation
-   tracing
    random-numbers
    stateful-computations
    control-flow
    pytrees
-   intro_parallel
+   working-with-pytrees

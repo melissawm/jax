@@ -37,7 +37,5 @@
       ~Device.platform
       ~Device.process_index
       ~Device.task_id
-      ~Device.transfer_from_outfeed
-      ~Device.transfer_to_infeed
    
    

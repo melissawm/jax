@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/style.css?v=537c1ddb" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css?v=7143c0a5" />
     <link rel="stylesheet" href="_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -54,8 +54,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Resources and Advanced Guides" href="advanced_guide.html" />
-    <link rel="prev" title="Introduction to Parallel Programming with JAX" href="intro_parallel.html" />
+    <link rel="next" title="Resources and Advanced Guides" href="advanced_guides.html" />
+    <link rel="prev" title="Working with pytrees" href="working-with-pytrees.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,24 +171,22 @@
 <li class="toctree-l2"><a class="reference internal" href="jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tracing.html">Tracing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="random-numbers.html">Pseudorandom numbers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stateful-computations.html">Stateful computations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="control-flow.html">Control flow and logical operators with JIT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytrees.html">Pytrees</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro_parallel.html">Introduction to Parallel Programming with JAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working-with-pytrees.html">Working with pytrees</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources and Advanced Guides</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources, guides, and references</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Key concepts</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guide.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_pytrees.html">Custom pytrees and initialization with unexpected values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="errors.html">Errors</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
@@ -199,15 +197,15 @@
 <li class="toctree-l2"><a class="reference internal" href="debugging/flags.html">JAX debugging flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="transfer_guard.html">Transfer guard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="buffer_donation.html">Buffer donation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarking.html">Benchmarking JAX code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="profiling.html">Profiling computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/layout.html">Device-local array layout control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/host-offloading.html">JAX Memories and Host Offloading</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="distributed_data_loading.html">Distributed data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external-callbacks.html">External callbacks</a></li>
@@ -235,6 +233,7 @@
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/gpu/index.html">Pallas:Mosaic GPU</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="pallas/gpu/reference.html">Writing Mosaic GPU kernels with Pallas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pallas/gpu/pipelining.html">Mosaic GPU Pipelining</a></li>
 </ul>
 </li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="pallas/design/index.html">Pallas Design Notes</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -249,7 +248,7 @@
 <li class="toctree-l2"><a class="reference internal" href="notebooks/Neural_Network_and_Data_Loading.html">Training a simple neural network, with PyTorch data loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">List of XLA compiler flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xla_flags.html">XLA compiler flags</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jaxpr.html">JAX internals: The jaxpr language</a></li>
@@ -302,6 +301,7 @@
 <li class="toctree-l2"><a class="reference internal" href="concurrency.html">Concurrency</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gpu_memory_allocation.html">GPU memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rank_promotion_warning.html">Rank promotion warning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
@@ -342,7 +342,6 @@
 <li class="toctree-l2"><a class="reference internal" href="jax.distributed.html"><code class="docutils literal notranslate"><span class="pre">jax.distributed</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.dtypes.html"><code class="docutils literal notranslate"><span class="pre">jax.dtypes</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
-
 <li class="toctree-l2"><a class="reference internal" href="jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -748,12 +747,12 @@ to extract the sequence of operations that the function encodes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traced&lt;int32[5]&gt;with&lt;DynamicJaxprTrace&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JitTracer&lt;int32[5]&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>The value printed is not the array <code class="docutils literal notranslate"><span class="pre">x</span></code>, but a <a class="reference internal" href="_autosummary/jax.core.Tracer.html#jax.core.Tracer" title="jax.core.Tracer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code></a> instance that
+<p>The value printed is not the array <code class="docutils literal notranslate"><span class="pre">x</span></code>, but a <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code> instance that
 represents essential attributes of <code class="docutils literal notranslate"><span class="pre">x</span></code>, such as its <code class="docutils literal notranslate"><span class="pre">shape</span></code> and <code class="docutils literal notranslate"><span class="pre">dtype</span></code>. By executing
 the function with traced values, JAX can determine the sequence of operations encoded
 by the function before those operations are actually executed: transformations like
@@ -788,7 +787,7 @@ how to keep a static value static. Consider this function:</p>
 <span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">14</span> <span class="n">frame</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">13</span> <span class="n">frame</span><span class="p">]</span>
 
 <span class="nn">Cell In[4], line 6,</span> in <span class="ni">f</span><span class="nt">(x)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nd">@jit</span>
@@ -797,24 +796,24 @@ how to keep a static value static. Consider this function:</p>
 
     <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">2</span> <span class="n">frame</span><span class="p">]</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/numpy/array_methods.py:454,</span> in <span class="ni">_compute_newshape</span><span class="nt">(arr, newshape)</span>
-<span class="g g-Whitespace">    </span><span class="mi">452</span> <span class="k">except</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">453</span>   <span class="n">newshape</span> <span class="o">=</span> <span class="p">[</span><span class="n">newshape</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">454</span> <span class="n">newshape</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">canonicalize_shape</span><span class="p">(</span><span class="n">newshape</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
-<span class="g g-Whitespace">    </span><span class="mi">455</span> <span class="n">neg1s</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">newshape</span><span class="p">)</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">456</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg1s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="nn">File ~/projects/jax/jax/_src/numpy/array_methods.py:457,</span> in <span class="ni">_compute_newshape</span><span class="nt">(arr, newshape)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span> <span class="k">except</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>   <span class="n">newshape</span> <span class="o">=</span> <span class="p">[</span><span class="n">newshape</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">457</span> <span class="n">newshape</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">canonicalize_shape</span><span class="p">(</span><span class="n">newshape</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
+<span class="g g-Whitespace">    </span><span class="mi">458</span> <span class="n">neg1s</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">newshape</span><span class="p">)</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">459</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg1s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/core.py:1864,</span> in <span class="ni">canonicalize_shape</span><span class="nt">(shape, context)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1862</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1863</span>   <span class="k">pass</span>
-<span class="ne">-&gt; </span><span class="mi">1864</span> <span class="k">raise</span> <span class="n">_invalid_shape_error</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+<span class="nn">File ~/projects/jax/jax/_src/core.py:1924,</span> in <span class="ni">canonicalize_shape</span><span class="nt">(shape, context)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1922</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1923</span>   <span class="k">pass</span>
+<span class="ne">-&gt; </span><span class="mi">1924</span> <span class="k">raise</span> <span class="n">_invalid_shape_error</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: Shapes must be 1D sequences of concrete values of integer type, got [Traced&lt;int32[]&gt;with&lt;DynamicJaxprTrace&gt;].
+<span class="ne">TypeError</span>: Shapes must be 1D sequences of concrete values of integer type, got [JitTracer&lt;int32[]&gt;].
 <span class="n">If</span> <span class="n">using</span> <span class="err">`</span><span class="n">jit</span><span class="err">`</span><span class="p">,</span> <span class="k">try</span> <span class="n">using</span> <span class="err">`</span><span class="n">static_argnums</span><span class="err">`</span> <span class="ow">or</span> <span class="n">applying</span> <span class="err">`</span><span class="n">jit</span><span class="err">`</span> <span class="n">to</span> <span class="n">smaller</span> <span class="n">subfunctions</span><span class="o">.</span>
-<span class="n">The</span> <span class="n">error</span> <span class="n">occurred</span> <span class="k">while</span> <span class="n">tracing</span> <span class="n">the</span> <span class="n">function</span> <span class="n">f</span> <span class="n">at</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_231220</span><span class="o">/</span><span class="mf">1983583872.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span> <span class="k">for</span> <span class="n">jit</span><span class="o">.</span> <span class="n">This</span> <span class="n">value</span> <span class="n">became</span> <span class="n">a</span> <span class="n">tracer</span> <span class="n">due</span> <span class="n">to</span> <span class="n">JAX</span> <span class="n">operations</span> <span class="n">on</span> <span class="n">these</span> <span class="n">lines</span><span class="p">:</span>
+<span class="n">The</span> <span class="n">error</span> <span class="n">occurred</span> <span class="k">while</span> <span class="n">tracing</span> <span class="n">the</span> <span class="n">function</span> <span class="n">f</span> <span class="n">at</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_144294</span><span class="o">/</span><span class="mf">1983583872.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span> <span class="k">for</span> <span class="n">jit</span><span class="o">.</span> <span class="n">This</span> <span class="n">value</span> <span class="n">became</span> <span class="n">a</span> <span class="n">tracer</span> <span class="n">due</span> <span class="n">to</span> <span class="n">JAX</span> <span class="n">operations</span> <span class="n">on</span> <span class="n">these</span> <span class="n">lines</span><span class="p">:</span>
 
   <span class="n">operation</span> <span class="n">a</span><span class="p">:</span><span class="n">i32</span><span class="p">[]</span> <span class="o">=</span> <span class="n">reduce_prod</span><span class="p">[</span><span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,)]</span> <span class="n">b</span>
-    <span class="kn">from</span> <span class="nn">line</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_231220</span><span class="o">/</span><span class="mf">1983583872.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">19</span> <span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">line</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_144294</span><span class="o">/</span><span class="mf">1983583872.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">19</span> <span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -837,9 +836,9 @@ to understand why this is happening:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = Traced&lt;float32[2,3]&gt;with&lt;DynamicJaxprTrace&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = JitTracer&lt;float32[2,3]&gt;
 x.shape = (2, 3)
-jnp.array(x.shape).prod() = Traced&lt;int32[]&gt;with&lt;DynamicJaxprTrace&gt;
+jnp.array(x.shape).prod() = JitTracer&lt;int32[]&gt;
 </pre></div>
 </div>
 </div>
@@ -903,15 +902,15 @@ given a particular input:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:f32[5]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
 <span class=" -Color -Color-Bold -Color-Bold-Blue">    </span>b<span class=" -Color -Color-Magenta">:bool[5]</span> = gt a 0.0:f32[]
     c<span class=" -Color -Color-Magenta">:f32[5]</span> = exp a
-    d<span class=" -Color -Color-Magenta">:f32[5]</span> = mul 1.6699999570846558:f32[] c
-    e<span class=" -Color -Color-Magenta">:f32[5]</span> = sub d 1.6699999570846558:f32[]
-    f<span class=" -Color -Color-Magenta">:f32[5]</span> = pjit[
+    d<span class=" -Color -Color-Magenta">:f32[5]</span> = mul 1.67:f32[] c
+    e<span class=" -Color -Color-Magenta">:f32[5]</span> = sub d 1.67:f32[]
+    f<span class=" -Color -Color-Magenta">:f32[5]</span> = jit[
       name=_where
       jaxpr={ <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; b<span class=" -Color -Color-Magenta">:bool[5]</span> a<span class=" -Color -Color-Magenta">:f32[5]</span> e<span class=" -Color -Color-Magenta">:f32[5]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
 <span class=" -Color -Color-Bold -Color-Bold-Blue">          </span>f<span class=" -Color -Color-Magenta">:f32[5]</span> = select_n b e a
         <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(f,) }
     ] b a e
-    g<span class=" -Color -Color-Magenta">:f32[5]</span> = mul 1.0499999523162842:f32[] f
+    g<span class=" -Color -Color-Magenta">:f32[5]</span> = mul 1.05:f32[] f
   <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(g,) }
 </pre></div>
 </div>
@@ -994,7 +993,7 @@ in a tree.</p>
 </section>
 <section id="jax-api-layering-numpy-lax-xla">
 <h2>JAX API layering: NumPy, lax &amp; XLA<a class="headerlink" href="#jax-api-layering-numpy-lax-xla" title="Link to this heading">#</a></h2>
-<p>All JAX operations are implemented in terms of operations in <a class="reference external" href="https://www.tensorflow.org/xla/">XLA</a> – the Accelerated Linear Algebra compiler. If you look at the source of <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code>, you’ll see that all the operations are eventually expressed in terms of functions defined in <a class="reference internal" href="jax.lax.html#module-jax.lax" title="jax.lax"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.lax</span></code></a>. While <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> is a high-level wrapper that provides a familiar interface, you can think of <code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> as a stricter, but often more powerful, lower-level API for working with multi-dimensional arrays.</p>
+<p>All JAX operations are implemented in terms of operations in <a class="reference external" href="https://www.openxla.org/xla/">XLA</a> – the Accelerated Linear Algebra compiler. If you look at the source of <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code>, you’ll see that all the operations are eventually expressed in terms of functions defined in <a class="reference internal" href="jax.lax.html#module-jax.lax" title="jax.lax"><code class="xref py py-mod docutils literal notranslate"><span class="pre">jax.lax</span></code></a>. While <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> is a high-level wrapper that provides a familiar interface, you can think of <code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> as a stricter, but often more powerful, lower-level API for working with multi-dimensional arrays.</p>
 <p>For example, while <code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> will implicitly promote arguments to allow operations between mixed data types, <code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> will not:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1023,51 +1022,51 @@ in a tree.</p>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">lax</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># jax.lax API requires explicit type promotion.</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/lax/lax.py:1196,</span> in <span class="ni">add</span><span class="nt">(x, y)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1176</span><span class="w"> </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Elementwise addition: :math:`x + y`.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1177</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1178</span><span class="sd"> This function lowers directly to the `stablehlo.add`_ operation.</span>
+<span class="nn">File ~/projects/jax/jax/_src/lax/lax.py:1194,</span> in <span class="ni">add</span><span class="nt">(x, y)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1174</span><span class="w"> </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Elementwise addition: :math:`x + y`.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1175</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1176</span><span class="sd"> This function lowers directly to the `stablehlo.add`_ operation.</span>
 <span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1193</span><span class="sd"> .. _stablehlo.add: https://openxla.org/stablehlo/spec#add</span>
-<span class="g g-Whitespace">   </span><span class="mi">1194</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1195</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">standard_insert_pvary</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1196</span> <span class="k">return</span> <span class="n">add_p</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1191</span><span class="sd"> .. _stablehlo.add: https://openxla.org/stablehlo/spec#add</span>
+<span class="g g-Whitespace">   </span><span class="mi">1192</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1193</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">standard_insert_pvary</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1194</span> <span class="k">return</span> <span class="n">add_p</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/core.py:536,</span> in <span class="ni">Primitive.bind</span><span class="nt">(self, *args, **params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span> <span class="k">def</span> <span class="nf">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span>   <span class="n">args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_canonicalization</span> <span class="k">else</span> <span class="nb">map</span><span class="p">(</span><span class="n">canonicalize_value</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">536</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_true_bind</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="nn">File ~/projects/jax/jax/_src/core.py:576,</span> in <span class="ni">Primitive.bind</span><span class="nt">(self, *args, **params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="k">def</span> <span class="nf">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span>   <span class="n">args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_canonicalization</span> <span class="k">else</span> <span class="nb">map</span><span class="p">(</span><span class="n">canonicalize_value</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">576</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_true_bind</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/core.py:552,</span> in <span class="ni">Primitive._true_bind</span><span class="nt">(self, *args, **params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">550</span> <span class="n">trace_ctx</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="n">eval_trace</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">551</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">552</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_with_trace</span><span class="p">(</span><span class="n">prev_trace</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">553</span> <span class="k">finally</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">554</span>   <span class="n">trace_ctx</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="n">prev_trace</span><span class="p">)</span>
+<span class="nn">File ~/projects/jax/jax/_src/core.py:592,</span> in <span class="ni">Primitive._true_bind</span><span class="nt">(self, *args, **params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span> <span class="n">trace_ctx</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="n">eval_trace</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">592</span>   <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_with_trace</span><span class="p">(</span><span class="n">prev_trace</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">593</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">594</span>   <span class="n">trace_ctx</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="n">prev_trace</span><span class="p">)</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/core.py:562,</span> in <span class="ni">Primitive.bind_with_trace</span><span class="nt">(self, trace, args, params)</span>
-<span class="g g-Whitespace">    </span><span class="mi">559</span>   <span class="k">with</span> <span class="n">set_current_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">560</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_lojax</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-<span class="ne">--&gt; </span><span class="mi">562</span> <span class="k">return</span> <span class="n">trace</span><span class="o">.</span><span class="n">process_primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="nn">File ~/projects/jax/jax/_src/core.py:602,</span> in <span class="ni">Primitive.bind_with_trace</span><span class="nt">(self, trace, args, params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">599</span>   <span class="k">with</span> <span class="n">set_current_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">600</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_lojax</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+<span class="ne">--&gt; </span><span class="mi">602</span> <span class="k">return</span> <span class="n">trace</span><span class="o">.</span><span class="n">process_primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/core.py:1066,</span> in <span class="ni">EvalTrace.process_primitive</span><span class="nt">(self, primitive, args, params)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1064</span> <span class="n">args</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">full_lower</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1065</span> <span class="n">check_eval_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1066</span> <span class="k">return</span> <span class="n">primitive</span><span class="o">.</span><span class="n">impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="nn">File ~/projects/jax/jax/_src/core.py:1126,</span> in <span class="ni">EvalTrace.process_primitive</span><span class="nt">(self, primitive, args, params)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1124</span> <span class="n">args</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">full_lower</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1125</span> <span class="n">check_eval_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1126</span> <span class="k">return</span> <span class="n">primitive</span><span class="o">.</span><span class="n">impl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/dispatch.py:91,</span> in <span class="ni">apply_primitive</span><span class="nt">(prim, *args, **params)</span>
+<span class="nn">File ~/projects/jax/jax/_src/dispatch.py:91,</span> in <span class="ni">apply_primitive</span><span class="nt">(prim, *args, **params)</span>
 <span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">jax_jit</span><span class="o">.</span><span class="n">swap_thread_local_state_disable_jit</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="k">try</span><span class="p">:</span>
 <span class="ne">---&gt; </span><span class="mi">91</span>   <span class="n">outs</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="k">finally</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">93</span>   <span class="n">lib</span><span class="o">.</span><span class="n">jax_jit</span><span class="o">.</span><span class="n">swap_thread_local_state_disable_jit</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span>
 
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">24</span> <span class="n">frame</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">26</span> <span class="n">frame</span><span class="p">]</span>
 
-<span class="nn">File ~/micromamba/envs/jax-dev/lib/python3.11/site-packages/jax/_src/lax/lax.py:8795,</span> in <span class="ni">check_same_dtypes</span><span class="nt">(name, *avals)</span>
-<span class="g g-Whitespace">   </span><span class="mi">8793</span>   <span class="n">equiv</span> <span class="o">=</span> <span class="n">_JNP_FUNCTION_EQUIVALENTS</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">8794</span>   <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; (Tip: jnp.</span><span class="si">{</span><span class="n">equiv</span><span class="si">}</span><span class="s2"> is a similar function that does automatic type promotion on inputs).&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">8795</span> <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">avals</span><span class="p">)))</span>
+<span class="nn">File ~/projects/jax/jax/_src/lax/lax.py:8747,</span> in <span class="ni">check_same_dtypes</span><span class="nt">(name, *avals)</span>
+<span class="g g-Whitespace">   </span><span class="mi">8745</span>   <span class="n">equiv</span> <span class="o">=</span> <span class="n">_JNP_FUNCTION_EQUIVALENTS</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">8746</span>   <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; (Tip: jnp.</span><span class="si">{</span><span class="n">equiv</span><span class="si">}</span><span class="s2"> is a similar function that does automatic type promotion on inputs).&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">8747</span> <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">avals</span><span class="p">)))</span>
 
 <span class="ne">TypeError</span>: lax.add requires arguments to have the same dtypes, got int32, float32. (Tip: jnp.add is a similar function that does automatic type promotion on inputs).
 </pre></div>
@@ -1123,7 +1122,7 @@ in a tree.</p>
 </div>
 </div>
 <p>This is a batched convolution operation designed to be efficient for the types of convolutions often used in deep neural nets. It requires much more boilerplate, but is far more flexible and scalable than the convolution provided by NumPy (See <a class="reference external" href="https://docs.jax.dev/en/latest/notebooks/convolutions.html">Convolutions in JAX</a> for more detail on JAX convolutions).</p>
-<p>At their heart, all <code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> operations are Python wrappers for operations in XLA; here, for example, the convolution implementation is provided by <a class="reference external" href="https://www.tensorflow.org/xla/operation_semantics#convwithgeneralpadding_convolution">XLA:ConvWithGeneralPadding</a>.
+<p>At their heart, all <code class="docutils literal notranslate"><span class="pre">jax.lax</span></code> operations are Python wrappers for operations in XLA; here, for example, the convolution implementation is provided by <a class="reference external" href="https://www.openxla.org/xla/operation_semantics#convwithgeneralpadding_convolution">XLA:ConvWithGeneralPadding</a>.
 Every JAX operation is eventually expressed in terms of these fundamental XLA operations, which is what enables just-in-time (JIT) compilation.</p>
 </section>
 </section>
@@ -1140,16 +1139,16 @@ Every JAX operation is eventually expressed in terms of these fundamental XLA op
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro_parallel.html"
+       href="working-with-pytrees.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Parallel Programming with JAX</p>
+        <p class="prev-next-title">Working with pytrees</p>
       </div>
     </a>
     <a class="right-next"
-       href="advanced_guide.html"
+       href="advanced_guides.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

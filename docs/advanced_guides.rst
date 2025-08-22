@@ -8,6 +8,18 @@ such as multi-core computation, automatic differentiation, and custom
 operations.
 
 .. toctree::
+   :caption: Parallel computation
+   :maxdepth: 1
+
+   notebooks/Distributed_arrays_and_automatic_parallelization
+   notebooks/explicit-sharding
+   notebooks/shard_map
+   notebooks/layout
+   notebooks/host-offloading
+   multi_process
+   distributed_data_loading
+
+.. toctree::
    :caption: Automatic differentiation
    :maxdepth: 1
 
@@ -38,18 +50,6 @@ operations.
 
    profiling
    device_memory_profiling
-
-.. toctree::
-   :caption: Parallel computation
-   :maxdepth: 1
-
-   notebooks/Distributed_arrays_and_automatic_parallelization
-   notebooks/explicit-sharding
-   notebooks/shard_map
-   notebooks/layout
-   notebooks/host-offloading
-   multi_process
-   distributed_data_loading
 
 .. toctree::
    :caption: External Callbacks
@@ -97,8 +97,6 @@ operations.
 
    notebooks/convolutions
    xla_flags
-
-   sharded-computation
    jax-primitives
    jaxpr
 

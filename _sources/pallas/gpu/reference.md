@@ -410,8 +410,8 @@ TODO: Explain the conditions under which it is acceptable to do this.
 
 The supported MMA shapes are such that:
 * `M` is divisible by 64
-* `N` is divisible by 8 and smaller than 256
-* `K` is a multiple of `swizzle` divided by the bytewidth of element type
+* `N` is divisible by 8 and not greater than 256
+* `K` is a multiple of `swizzle` divided by the operand's element type bytewidth
 
 The currently supported data types are: `jnp.float32`, `jnp.bfloat16` and `jnp.float16`.
 The accumulator `D` must be a `jnp.float32`, with the exception of `jnp.float16` inputs,
@@ -553,12 +553,12 @@ The `A` operand can be passed in as a TMEM reference as well, but it must be pac
 
 The supported **non-collective** MMA shapes are such that:
 * `M` is 64 or 128
-* `N` is divisible by 8 and smaller than 512
+* `N` is divisible by 8 and not greater than 512
 * `K` is a multiple of `8 * swizzle` divided by the bitwidth of element type
 
 The supported [**collective** MMA](#collective-mma) shapes are such that:
 * `M` is 128 or 256 (half of that per block)
-* `N` is divisible by 8 and smaller than 256 (smaller than 128 in each block)
+* `N` is divisible by 8 and not greater than 256 (not greater than 128 in each block)
 * `K` is a multiple of `8 * swizzle` divided by the bitwidth of element type
 
 The currently supported floating-point data types are: `jnp.bfloat16`,
@@ -669,14 +669,14 @@ Let us begin with a simple Pallas kernel that increments an array:
   pl.pallas_call,
   grid=(2,),
   in_specs=[pl.BlockSpec(block_shape=(128,), index_map=lambda i: (i,))],
-  out_specs=pl.BlockSpec(block_shape=(128,), index_map=lambda i: (i,))
+  out_specs=pl.BlockSpec(block_shape=(128,), index_map=lambda i: (i,)),
   out_shape=jax.ShapeDtypeStruct((256,), jnp.float32), # Total output shape
 )
 def run_kernel(x_ref, y_ref):
   # x_ref and y_ref are in SMEM!
   y_ref[...] = x_ref[...] + 1
 
-x = jnp.arange(256, jnp.float32)
+x = jnp.arange(256, dtype=jnp.float32)
 y = run_kernel(x)
 np.testing.assert_array_equal(y, x + 1)
 ```
@@ -700,12 +700,12 @@ def run_kernel(refs):
   @pl.core_map(mesh)  # core_map executes the body
   def kernel_body():
     # Once we enter the pl.core_map scope, we are in the body of the kernel.
-    block_slice = pl.ds(lax.axis_index("x") * 128, 128)
+    block_slice = pl.ds(jax.lax.axis_index("x") * 128, 128)
     y_ref[block_slice] = x_ref[block_slice] + 1
 
-x = jnp.arange(256, jnp.float32)
+x = jnp.arange(256, dtype=jnp.float32)
 y_init = jnp.zeros_like(x)
-_, y = run_kernel(x, y_init)
+_, y = run_kernel((x, y_init))
 np.testing.assert_array_equal(y, x + 1)
 ```
 
@@ -715,19 +715,18 @@ much always used in under `pl.run_state` (to make JAX arrays into refs) or
 provide a convenience API `plgpu.kernel`:
 
 ```python
-mesh = plgpu.Mesh(grid=(2,), grid_names=("x",))
-
 @functools.partial(
     plgpu.kernel,
     out_shape=jax.ShapeDtypeStruct((256,), jnp.float32),
-    mesh=mesh
+    grid=(2,),
+    grid_names=("x",),
 )
 def run_kernel(x_ref, y_ref):
   # x_ref and y_ref are in GMEM!
-  block_slice = pl.ds(lax.axis_index("x") * 128, 128)
+  block_slice = pl.ds(jax.lax.axis_index("x") * 128, 128)
   y_ref[block_slice] = x_ref[block_slice] + 1
 
-x = jnp.arange(256, jnp.float32)
+x = jnp.arange(256, dtype=jnp.float32)
 y = run_kernel(x)  # No need to preallocate outputs as in pl.core_map.
 np.testing.assert_array_equal(y, x + 1)
 ```
@@ -742,8 +741,8 @@ Both involve SPMD programs executing across the defined topology. Furthermore,
 you can run "collectives" over the Pallas threads and cluster (e.g., using
 `plgpu.ClusterBarrier` or collective async copies), similar to how JAX
 collectives (`psum`, `all_gather`, etc.) operate across devices in a JAX `Mesh`.
-Both also use named axes, and `lax.axis_index(axis_name)` can be used to get a
-thread's or block's coordinate.
+Both also use named axes, and `jax.lax.axis_index(axis_name)` can be used to get
+a thread's or block's coordinate.
 ```
 
 ### Using multiple Pallas threads per CUDA block
@@ -752,12 +751,12 @@ Below, you can find an example of two Pallas threads within a single block
 synchronizing through a barrier and even exchanging data through SMEM.
 
 ```python
-mesh = plgpu.Mesh(num_threads=2, thread_name="pallas_thread")
-x = jnp.arange(128, jnp.float32)
+x = jnp.arange(128, dtype=jnp.float32)
 
 @functools.partial(
-  plgpu.kernel, out_shape=x, mesh=mesh,
-  scratch_shapes=[plgpu.SMEM(x.shape, x.dtype), plgpu.Barrier()]
+  plgpu.kernel, out_shape=x,
+  scratch_shapes=[plgpu.SMEM(x.shape, x.dtype), plgpu.Barrier()],
+  num_threads=2, thread_name="pallas_thread",
 )
 def run_kernel(x_ref, y_ref, smem_ref, barrier_ref):
   thread_id = jax.lax.axis_index("pallas_thread")
@@ -797,22 +796,21 @@ blocks. All blocks participating in the collective copy must schedule the exact
 same copy for the program to be valid.
 
 ```python
-mesh = plgpu.Mesh(cluster=(2,), cluster_names=("cluster",))
-
 @functools.partial(
   plgpu.kernel,
   out_shape=jax.ShapeDtypeStruct((2, 128), jnp.float32),
-  mesh=mesh,
-  scratch_shapes=[plgpu.SMEM((128,), jnp.float32), plgpu.Barrier()]
+  scratch_shapes=[plgpu.SMEM((128,), jnp.float32), plgpu.Barrier()],
+  cluster=(2,),
+  cluster_names=("cluster",),
 )
 def run_kernel(x_ref, y_ref, smem_ref, barrier_ref):
   # Specifying collective_axes will enable TMA multicast automatically.
   plgpu.copy_gmem_to_smem(x_ref, smem_ref, barrier_ref, collective_axes="cluster")
   plgpu.barrier_wait(barrier_ref)
-  plgpu.copy_smem_to_gmem(smem_ref, o_ref.at[lax.axis_index("cluster")])
+  plgpu.copy_smem_to_gmem(smem_ref, o_ref.at[jax.lax.axis_index("cluster")])
   plgpu.wait_smem_to_gmem(0)
 
-x = jnp.arange(128, jnp.float32)
+x = jnp.arange(128, dtype=jnp.float32)
 y = run_kernel(x)
 # Each block gets the same data and writes it out.
 np.testing.assert_array_equal(y, jnp.stack([x, x], axis=0))
@@ -1013,3 +1011,30 @@ TODO
 ## Compiler parameters
 
 TODO
+
+## Debugging
+
+Mosaic GPU exposes a number of environment variables to diagnose issues with the
+generated low-level code:
+
+* `MOSAIC_GPU_DUMP_PTXAS` allows dumping the compilation logs from `ptxas` to
+  standard output when set;
+* `MOSAIC_GPU_DUMP_PTX` allows dumping the PTX code generated during compilation
+  to standard output when set;
+* `MOSAIC_GPU_DUMP_MLIR_PASSES` allows dumping the IR after every MLIR pass
+  in the compilation pipeline to standard output;
+* `MOSAIC_GPU_DUMP_SASS` allows dumping the SASS code produced at the end of
+  compilation to standard output;
+* `MOSAIC_GPU_DUMP_SASS_CTRL` allows dumping the SASS control codes following
+  [NervanaSystems/maxas](https://github.com/NervanaSystems/maxas) to standard
+  output;
+* `MOSAIC_GPU_DUMP_TO` allows specifying a directory path (that must exist)
+  where all of the above will be dumped as files.
+* `MOSAIC_GPU_LLVM_DEBUG_ONLY` allows specifying a comma-separated list of
+  [LLVM debug types](https://llvm.org/docs/ProgrammersManual.html#fine-grained-debug-info-with-debug-type-and-the-debug-only-option),
+  in order to produce relevant LLVM debugging logs. This environment variable is
+  only available in debug builds (i.e. builds without `NDEBUG`).
+* `MOSAIC_GPU_DUMP_LLVM` allows dumping LLVM IR when set. It is equivalent to
+  setting `MOSAIC_GPU_LLVM_DEBUG_ONLY=serialize-to-llvm`, and both environment
+  variables compose. Like `MOSAIC_GPU_LLVM_DEBUG_ONLY`, this environment
+  variable is only available in debug builds.

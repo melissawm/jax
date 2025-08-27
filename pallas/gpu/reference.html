@@ -28,13 +28,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=7143c0a5" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=17fd2dad" />
     <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -167,15 +167,15 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax-101.html">JAX 101</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../working-with-pytrees.html">Working with pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
 </ul>
 </li>
 </ul>
@@ -183,23 +183,6 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../key-concepts.html">Key concepts</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../advanced_guides.html">Resources and Advanced Guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
@@ -208,6 +191,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../the-training-cookbook.html">The Training Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../array_refs.html"><code class="docutils literal notranslate"><span class="pre">ArrayRef</span></code>: mutable arrays for data plumbing and memory control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../external-callbacks.html">External callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../ffi.html">Foreign function interface (FFI)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
@@ -218,7 +220,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../export/jax2tf.html">Interoperation with TensorFlow</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">Pallas: a JAX kernel language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../quickstart.html">Pallas Quickstart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pipelining.html">Software Pipelining</a></li>
@@ -249,7 +250,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/convolutions.html">Generalized convolutions in JAX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../xla_flags.html">XLA compiler flags</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jaxpr.html">JAX internals: The jaxpr language</a></li>
 </ul>
@@ -280,11 +280,15 @@
 <li class="toctree-l3"><a class="reference internal" href="../../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../internals/index.html">JAX Internal Implementation Notes</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../internals/constants.html">Handling of closed-over constants</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../extensions.html">Extension guides</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../notebooks/Writing_custom_interpreters_in_Jax.html">Writing custom Jaxpr interpreters in JAX</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
@@ -294,7 +298,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../building_on_jax.html">Building on JAX</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../api_compatibility.html">API compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../deprecation.html">Python and NumPy version support policy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../async_dispatch.html">Asynchronous dispatch</a></li>
@@ -305,8 +309,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
@@ -327,7 +331,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
@@ -344,31 +348,32 @@
 <li class="toctree-l2"><a class="reference internal" href="../../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../jax.ref.html"><code class="docutils literal notranslate"><span class="pre">jax.ref</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
@@ -377,7 +382,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
@@ -386,7 +391,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
@@ -735,6 +740,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-copies">Asynchronous copies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-mosaic-gpu">Inline Mosaic GPU</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-parameters">Compiler parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
 </ul>
             </nav>
         </div>
@@ -753,8 +759,8 @@ It’s not a tutorial and as such we do not expect everyone to read it top to bo
 Still, it is worth going over
 just to familiarise yourself with some patterns you can find in other tutorials.</p>
 <p>In the following examples, we’re going to assume the following imports are in scope:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.experimental.pallas</span> <span class="k">as</span> <span class="nn">pl</span>
-<span class="kn">import</span> <span class="nn">jax.experimental.pallas.mosaic_gpu</span> <span class="k">as</span> <span class="nn">plgpu</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jax.experimental.pallas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.experimental.pallas.mosaic_gpu</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plgpu</span>
 </pre></div>
 </div>
 <section id="what-is-a-gpu">
@@ -938,7 +944,7 @@ below will likely continue to function, but will become optional.</p>
 <p>Transforms are applied when a memory reference is first allocated. Pallas
 primitives that operate on these references will automatically account for their
 associated transforms.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">scratch_ref</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">body</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">scratch_ref</span><span class="p">):</span>
   <span class="c1"># Asynchronous copy will reformat the GMEM data to match the SMEM transforms</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">scratch_ref</span><span class="p">,</span> <span class="n">barrier</span><span class="p">)</span>
   <span class="n">barrier</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
@@ -1051,7 +1057,7 @@ the TensorCore requires the data to be laid out into row-major 2D tiles of shape
 <code class="docutils literal notranslate"><span class="pre">(8,</span> <span class="pre">swizzle_elems)</span></code>, where <code class="docutils literal notranslate"><span class="pre">swizzle_elems</span></code> is derived by dividing the swizzle by the
 element type bytewidth.  The currently supported swizzles are: 128, 64, and 32. Larger
 swizzles are preferable as they improve the performance of GMEM-to-SMEM copies.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mma_transforms</span><span class="p">(</span><span class="n">shape_dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mma_transforms</span><span class="p">(</span><span class="n">shape_dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">):</span>
   <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape_dtype</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
   <span class="k">if</span> <span class="n">shape_dtype</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">8</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of rows must be divisible by 8&quot;</span><span class="p">)</span>
@@ -1090,7 +1096,7 @@ it is modeled as a mutable reference, as each MMA operation accumulates in-place
 There are two ways to allocate the accumulator.</p>
 <p>To create a zero-initialized accumulator you can use <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code> with a
 <code class="docutils literal notranslate"><span class="pre">plgpu.ACC((m,</span> <span class="pre">n),</span> <span class="pre">dtype)</span></code> type.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">):</span>
   <span class="o">...</span>
   <span class="k">return</span> <span class="n">acc_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">(</span><span class="n">compute</span><span class="p">,</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">ACC</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
@@ -1100,7 +1106,7 @@ There are two ways to allocate the accumulator.</p>
 implicitly await all outstanding WGMMA operations.</p>
 <p>If you’d like to initialize it with an existing array, you can use <code class="docutils literal notranslate"><span class="pre">pl.run_state</span></code> with
 <code class="docutils literal notranslate"><span class="pre">plgpu.ACC.init(init_array)</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">):</span>
   <span class="o">...</span>
   <span class="k">return</span> <span class="c1"># pl.run_state only returns the final value of the accumulator</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">run_state</span><span class="p">(</span><span class="n">compute</span><span class="p">)(</span><span class="n">plgpu</span><span class="o">.</span><span class="n">ACC</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">init_array</span><span class="p">))</span>
@@ -1124,8 +1130,8 @@ make this safe.</p>
 <p>The supported MMA shapes are such that:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> is divisible by 64</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and smaller than 256</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">swizzle</span></code> divided by the bytewidth of element type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and not greater than 256</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">swizzle</span></code> divided by the operand’s element type bytewidth</p></li>
 </ul>
 <p>The currently supported data types are: <code class="docutils literal notranslate"><span class="pre">jnp.float32</span></code>, <code class="docutils literal notranslate"><span class="pre">jnp.bfloat16</span></code> and <code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code>.
 The accumulator <code class="docutils literal notranslate"><span class="pre">D</span></code> must be a <code class="docutils literal notranslate"><span class="pre">jnp.float32</span></code>, with the exception of <code class="docutils literal notranslate"><span class="pre">jnp.float16</span></code> inputs,
@@ -1142,13 +1148,13 @@ instructions can be reused. This is especially relevant for pipelining WGMMA wit
 <span class="k">assert</span> <span class="n">b_smem</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffers</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">acc_ref</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">fetch_a_b</span><span class="p">(</span><span class="n">ki</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_a_b</span><span class="p">(</span><span class="n">ki</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
   <span class="n">a_slice</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Replace with the right M/K slice</span>
   <span class="n">b_slice</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Replace with the right K/N slice</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="n">a_gmem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">a_slice</span><span class="p">],</span> <span class="n">a_smem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">],</span> <span class="n">a_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="n">b_gmem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">b_slice</span><span class="p">],</span> <span class="n">b_smem</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">],</span> <span class="n">b_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
 
-<span class="k">def</span> <span class="nf">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
   <span class="n">slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">buffers</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">a_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">b_loaded</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>
@@ -1158,7 +1164,7 @@ instructions can be reused. This is especially relevant for pipelining WGMMA wit
   <span class="n">load_i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">buffers</span> <span class="o">-</span> <span class="mi">1</span>
   <span class="n">load_slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">load_i</span><span class="p">,</span> <span class="n">buffers</span><span class="p">)</span>
   <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">load_i</span> <span class="o">&gt;=</span> <span class="n">buffers</span><span class="p">,</span> <span class="n">load_i</span> <span class="o">&lt;</span> <span class="n">num_steps</span><span class="p">))</span>
-  <span class="k">def</span> <span class="nf">_do_fetch</span><span class="p">():</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">_do_fetch</span><span class="p">():</span>
     <span class="n">fetch_a_b</span><span class="p">(</span><span class="n">load_i</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">buffers</span><span class="p">):</span>
   <span class="n">fetch_a_b</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span>
@@ -1180,7 +1186,7 @@ larger MMA operations that span both SMs. We call this a <a class="reference int
 <p>TMEM references can be allocated in the same way in which all other references
 are allocated—using <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.run_scoped.html#jax.experimental.pallas.run_scoped" title="jax.experimental.pallas.run_scoped"><code class="xref py py-func docutils literal notranslate"><span class="pre">pl.run_scoped</span></code></a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">tmem_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">tmem_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">barrier_scope</span><span class="p">(</span><span class="n">tmem_ref</span><span class="p">):</span>
   <span class="o">...</span>
 </pre></div>
 </div>
@@ -1195,7 +1201,7 @@ operand it passed in TMEM, it must always be packed:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span>
                    <span class="n">acc_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">packed</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
                    <span class="n">lhs_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">TMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">packed</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">barrier_scope</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">):</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_ref</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_smem_ref</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
   <span class="o">...</span>
 </pre></div>
@@ -1258,13 +1264,13 @@ The <code class="docutils literal notranslate"><span class="pre">A</span></code>
 <p>The supported <strong>non-collective</strong> MMA shapes are such that:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> is 64 or 128</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and smaller than 512</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and not greater than 512</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">*</span> <span class="pre">swizzle</span></code> divided by the bitwidth of element type</p></li>
 </ul>
 <p>The supported <a class="reference internal" href="#collective-mma"><strong>collective</strong> MMA</a> shapes are such that:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">M</span></code> is 128 or 256 (half of that per block)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and smaller than 256 (smaller than 128 in each block)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> is divisible by 8 and not greater than 256 (not greater than 128 in each block)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">K</span></code> is a multiple of <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">*</span> <span class="pre">swizzle</span></code> divided by the bitwidth of element type</p></li>
 </ul>
 <p>The currently supported floating-point data types are: <code class="docutils literal notranslate"><span class="pre">jnp.bfloat16</span></code>,
@@ -1305,7 +1311,7 @@ the <code class="xref py py-func docutils literal notranslate"><span class="pre"
 completing a wait on that barrier will indicate that the final accumulator has
 been written to TMEM. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">orders_tensor_core</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">,</span> <span class="n">accumulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
   <span class="c1"># We can read the result now.</span>
@@ -1316,7 +1322,7 @@ been written to TMEM. For example:</p>
 <p>If no barrier is given to <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_mma</span></code>,
 its completion will be tracked only once <code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.tcgen05_commit</span></code> is called:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">orders_tensor_core</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_ref</span><span class="p">,</span> <span class="n">accumulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref2</span><span class="p">,</span> <span class="n">rhs_ref2</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_commit</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
@@ -1371,14 +1377,14 @@ cluster (e.g. to utilize multicast TMA).</p>
   <span class="n">pl</span><span class="o">.</span><span class="n">pallas_call</span><span class="p">,</span>
   <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span>
   <span class="n">in_specs</span><span class="o">=</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">block_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,),</span> <span class="n">index_map</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,))],</span>
-  <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">block_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,),</span> <span class="n">index_map</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,))</span>
+  <span class="n">out_specs</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">BlockSpec</span><span class="p">(</span><span class="n">block_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,),</span> <span class="n">index_map</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">i</span><span class="p">,)),</span>
   <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">256</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="c1"># Total output shape</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">):</span>
   <span class="c1"># x_ref and y_ref are in SMEM!</span>
   <span class="n">y_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1389,7 +1395,7 @@ If you want them, you can either insert them yourself or use the
 <a class="reference internal" href="../../_autosummary/jax.experimental.pallas.mosaic_gpu.emit_pipeline.html#jax.experimental.pallas.mosaic_gpu.emit_pipeline" title="jax.experimental.pallas.mosaic_gpu.emit_pipeline"><code class="xref py py-func docutils literal notranslate"><span class="pre">plgpu.emit_pipeline</span></code></a>
 helper. We recommend reviewing the <a class="reference internal" href="pipelining.html"><span class="std std-doc">software pipelining guide</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pl</span><span class="o">.</span><span class="n">run_state</span>
-<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">refs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_kernel</span><span class="p">(</span><span class="n">refs</span><span class="p">):</span>
   <span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span> <span class="o">=</span> <span class="n">refs</span>
   <span class="c1"># Here, we&#39;re not in the kernel yet! pl.run_state simply changes the JAX</span>
   <span class="c1"># immutable arrays into mutable GMEM (not SMEM!) references.</span>
@@ -1398,14 +1404,14 @@ helper. We recommend reviewing the <a class="reference internal" href="pipelinin
   <span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">grid_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
 
   <span class="nd">@pl</span><span class="o">.</span><span class="n">core_map</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>  <span class="c1"># core_map executes the body</span>
-  <span class="k">def</span> <span class="nf">kernel_body</span><span class="p">():</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">kernel_body</span><span class="p">():</span>
     <span class="c1"># Once we enter the pl.core_map scope, we are in the body of the kernel.</span>
-    <span class="n">block_slice</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+    <span class="n">block_slice</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
     <span class="n">y_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">y_init</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_init</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y_init</span><span class="p">))</span>
 <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1413,19 +1419,18 @@ helper. We recommend reviewing the <a class="reference internal" href="pipelinin
 much always used in under <code class="docutils literal notranslate"><span class="pre">pl.run_state</span></code> (to make JAX arrays into refs) or
 <code class="docutils literal notranslate"><span class="pre">pl.run_scoped</span></code> (to allocate for scratch refs). For that reason, we also
 provide a convenience API <code class="docutils literal notranslate"><span class="pre">plgpu.kernel</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">grid_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
-
-<span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
     <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span>
     <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">256</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
-    <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span>
+    <span class="n">grid</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span>
+    <span class="n">grid_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,),</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">):</span>
   <span class="c1"># x_ref and y_ref are in GMEM!</span>
-  <span class="n">block_slice</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+  <span class="n">block_slice</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">ds</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
   <span class="n">y_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="n">block_slice</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># No need to preallocate outputs as in pl.core_map.</span>
 <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1441,31 +1446,31 @@ Both involve SPMD programs executing across the defined topology. Furthermore,
 you can run “collectives” over the Pallas threads and cluster (e.g., using
 <code class="docutils literal notranslate"><span class="pre">plgpu.ClusterBarrier</span></code> or collective async copies), similar to how JAX
 collectives (<code class="docutils literal notranslate"><span class="pre">psum</span></code>, <code class="docutils literal notranslate"><span class="pre">all_gather</span></code>, etc.) operate across devices in a JAX <code class="docutils literal notranslate"><span class="pre">Mesh</span></code>.
-Both also use named axes, and <code class="docutils literal notranslate"><span class="pre">lax.axis_index(axis_name)</span></code> can be used to get a
-thread’s or block’s coordinate.</p>
+Both also use named axes, and <code class="docutils literal notranslate"><span class="pre">jax.lax.axis_index(axis_name)</span></code> can be used to get
+a thread’s or block’s coordinate.</p>
 </div>
 </section>
 <section id="using-multiple-pallas-threads-per-cuda-block">
 <h3>Using multiple Pallas threads per CUDA block<a class="headerlink" href="#using-multiple-pallas-threads-per-cuda-block" title="Link to this heading">#</a></h3>
 <p>Below, you can find an example of two Pallas threads within a single block
 synchronizing through a barrier and even exchanging data through SMEM.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">num_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thread_name</span><span class="o">=</span><span class="s2">&quot;pallas_thread&quot;</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
 <span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
-  <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
-  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">[</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()]</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">[</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()],</span>
+  <span class="n">num_threads</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thread_name</span><span class="o">=</span><span class="s2">&quot;pallas_thread&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">):</span>
   <span class="n">thread_id</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;pallas_thread&quot;</span><span class="p">)</span>
 
   <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">thread_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">producer_thread</span><span class="p">():</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">producer_thread</span><span class="p">():</span>
     <span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_arrive</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>  <span class="c1"># Signal the consumer thread</span>
 
   <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">thread_id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">consumer_thread</span><span class="p">():</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">consumer_thread</span><span class="p">():</span>
     <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>  <span class="c1"># Wait for the producer thread</span>
     <span class="n">out_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">smem_ref</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
 
@@ -1490,22 +1495,21 @@ convenient helper API: <code class="docutils literal notranslate"><span class="p
 multicast feature to collectively perform a copy of GMEM into SMEM of both
 blocks. All blocks participating in the collective copy must schedule the exact
 same copy for the program to be valid.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mesh</span> <span class="o">=</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Mesh</span><span class="p">(</span><span class="n">cluster</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">cluster_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;cluster&quot;</span><span class="p">,))</span>
-
-<span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">kernel</span><span class="p">,</span>
   <span class="n">out_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
-  <span class="n">mesh</span><span class="o">=</span><span class="n">mesh</span><span class="p">,</span>
-  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">[</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()]</span>
+  <span class="n">scratch_shapes</span><span class="o">=</span><span class="p">[</span><span class="n">plgpu</span><span class="o">.</span><span class="n">SMEM</span><span class="p">((</span><span class="mi">128</span><span class="p">,),</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()],</span>
+  <span class="n">cluster</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span>
+  <span class="n">cluster_names</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;cluster&quot;</span><span class="p">,),</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_kernel</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">):</span>
   <span class="c1"># Specifying collective_axes will enable TMA multicast automatically.</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_gmem_to_smem</span><span class="p">(</span><span class="n">x_ref</span><span class="p">,</span> <span class="n">smem_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">,</span> <span class="n">collective_axes</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
-  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_smem_to_gmem</span><span class="p">(</span><span class="n">smem_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;cluster&quot;</span><span class="p">)])</span>
+  <span class="n">plgpu</span><span class="o">.</span><span class="n">copy_smem_to_gmem</span><span class="p">(</span><span class="n">smem_ref</span><span class="p">,</span> <span class="n">o_ref</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">axis_index</span><span class="p">(</span><span class="s2">&quot;cluster&quot;</span><span class="p">)])</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">wait_smem_to_gmem</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">run_kernel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="c1"># Each block gets the same data and writes it out.</span>
 <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
@@ -1620,10 +1624,10 @@ threads:</p>
 <span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffering</span><span class="p">,</span> <span class="o">*</span><span class="n">item_shape</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">produced</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">consumed</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">buffering</span><span class="p">,)</span>
 
-<span class="k">def</span> <span class="nf">thread0_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thread0_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
   <span class="n">slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">buffering</span><span class="p">)</span>
   <span class="nd">@pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">buffering</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">_await_consumed</span><span class="p">():</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">_await_consumed</span><span class="p">():</span>
     <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">consumed</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Wait for consumption of the value before overwriting it</span>
   <span class="c1"># Option 1: Compute the next value</span>
   <span class="n">queue</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="n">produce</span><span class="p">()</span>
@@ -1632,7 +1636,7 @@ threads:</p>
   <span class="c1"># plgpu.copy_gmem_to_smem(..., queue.at[slot], barrier=produced.at[slot])</span>
 <span class="n">pl</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">tid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">fori_loop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">thread0_body</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
-<span class="k">def</span> <span class="nf">thread1_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">thread1_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
   <span class="n">slot</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">rem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">buffering</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">produced</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Wait for the value to be ready</span>
   <span class="n">consume</span><span class="p">(</span><span class="n">queue</span><span class="p">[</span><span class="n">slot</span><span class="p">])</span>  <span class="c1"># Load and compute</span>
@@ -1664,7 +1668,7 @@ function. Once the MMA is complete, the TensorCore will arrive on the barrier.</
 <code class="docutils literal notranslate"><span class="pre">orders_tensor_core=True</span></code>, since they are used to synchronize with TensorCore
 operations.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">run_scoped</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="o">=</span><span class="n">plgpu</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">orders_tensor_core</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">barrier_scope</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">):</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">tcgen05_mma</span><span class="p">(</span><span class="n">acc_tmem</span><span class="p">,</span> <span class="n">lhs_ref</span><span class="p">,</span> <span class="n">rhs_ref</span><span class="p">,</span> <span class="n">barrier_ref</span><span class="p">,</span> <span class="n">accumulate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
   <span class="n">plgpu</span><span class="o">.</span><span class="n">barrier_wait</span><span class="p">(</span><span class="n">barrier_ref</span><span class="p">)</span>
   <span class="c1"># We can read the result now</span>
@@ -1694,6 +1698,34 @@ operations.</p>
 <section id="compiler-parameters">
 <h2>Compiler parameters<a class="headerlink" href="#compiler-parameters" title="Link to this heading">#</a></h2>
 <p>TODO</p>
+</section>
+<section id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h2>
+<p>Mosaic GPU exposes a number of environment variables to diagnose issues with the
+generated low-level code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_PTXAS</span></code> allows dumping the compilation logs from <code class="docutils literal notranslate"><span class="pre">ptxas</span></code> to
+standard output when set;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_PTX</span></code> allows dumping the PTX code generated during compilation
+to standard output when set;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_MLIR_PASSES</span></code> allows dumping the IR after every MLIR pass
+in the compilation pipeline to standard output;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_SASS</span></code> allows dumping the SASS code produced at the end of
+compilation to standard output;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_SASS_CTRL</span></code> allows dumping the SASS control codes following
+<a class="reference external" href="https://github.com/NervanaSystems/maxas">NervanaSystems/maxas</a> to standard
+output;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_TO</span></code> allows specifying a directory path (that must exist)
+where all of the above will be dumped as files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_LLVM_DEBUG_ONLY</span></code> allows specifying a comma-separated list of
+<a class="reference external" href="https://llvm.org/docs/ProgrammersManual.html#fine-grained-debug-info-with-debug-type-and-the-debug-only-option">LLVM debug types</a>,
+in order to produce relevant LLVM debugging logs. This environment variable is
+only available in debug builds (i.e. builds without <code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_DUMP_LLVM</span></code> allows dumping LLVM IR when set. It is equivalent to
+setting <code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_LLVM_DEBUG_ONLY=serialize-to-llvm</span></code>, and both environment
+variables compose. Like <code class="docutils literal notranslate"><span class="pre">MOSAIC_GPU_LLVM_DEBUG_ONLY</span></code>, this environment
+variable is only available in debug builds.</p></li>
+</ul>
 </section>
 </section>
 
@@ -1801,6 +1833,7 @@ operations.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asynchronous-copies">Asynchronous copies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inline-mosaic-gpu">Inline Mosaic GPU</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-parameters">Compiler parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">Debugging</a></li>
 </ul>
   </nav></div>
 

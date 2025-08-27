@@ -28,13 +28,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=7143c0a5" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css?v=17fd2dad" />
     <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -167,15 +167,15 @@
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Common_Gotchas_in_JAX.html">🔪 JAX - The Sharp Bits 🔪</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../jax-101.html">JAX 101</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../jit-compilation.html">Just-in-time compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-vectorization.html">Automatic vectorization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../automatic-differentiation.html">Automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working-with-pytrees.html">Working with pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../random-numbers.html">Pseudorandom numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control-flow.html">Control flow and logical operators with JIT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stateful-computations.html">Stateful computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 </ul>
 </li>
 </ul>
@@ -183,23 +183,6 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../key-concepts.html">Key concepts</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../advanced_guides.html">Resources and Advanced Guides</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="autodiff_cookbook.html">The Autodiff Cookbook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Distributed_arrays_and_automatic_parallelization.html">Distributed arrays and automatic parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="explicit-sharding.html">Explicit sharding (a.k.a. “sharding in types”)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="shard_map.html">Manual parallelism with <code class="docutils literal notranslate"><span class="pre">shard_map</span></code></a></li>
@@ -208,6 +191,25 @@
 
 <li class="toctree-l2"><a class="reference internal" href="../multi_process.html">Introduction to multi-controller JAX (aka multi-process/multi-host JAX)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../distributed_data_loading.html">Distributed data loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../the-training-cookbook.html">The Training Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodiff_cookbook.html">The Autodiff Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Custom_derivative_rules_for_Python_code.html">Custom derivative rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autodiff_remat.html">Control autodiff’s saved values with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (aka <code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced-autodiff.html">Advanced automatic differentiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../errors.html">Errors</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../debugging.html">Introduction to debugging</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/print_breakpoint.html">Compiled prints and breakpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/checkify_guide.html">The <code class="docutils literal notranslate"><span class="pre">checkify</span></code> transformation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/flags.html">JAX debugging flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transfer_guard.html">Transfer guard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytrees.html">Pytrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../persistent_compilation_cache.html">Persistent compilation cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gpu_performance_tips.html">GPU performance tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../profiling.html">Profiling computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../device_memory_profiling.html">Profiling device memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../array_refs.html"><code class="docutils literal notranslate"><span class="pre">ArrayRef</span></code>: mutable arrays for data plumbing and memory control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../external-callbacks.html">External callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ffi.html">Foreign function interface (FFI)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gradient-checkpointing.html">Gradient checkpointing with <code class="docutils literal notranslate"><span class="pre">jax.checkpoint</span></code> (<code class="docutils literal notranslate"><span class="pre">jax.remat</span></code>)</a></li>
@@ -218,7 +220,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../export/jax2tf.html">Interoperation with TensorFlow</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../type_promotion.html">Type promotion semantics</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../pallas/index.html">Pallas: a JAX kernel language</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../pallas/quickstart.html">Pallas Quickstart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pallas/pipelining.html">Software Pipelining</a></li>
@@ -249,7 +250,6 @@
 <li class="toctree-l2"><a class="reference internal" href="vmapped_log_probs.html">Autobatching for Bayesian inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="convolutions.html">Generalized convolutions in JAX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../xla_flags.html">XLA compiler flags</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sharded-computation.html">Introduction to parallel programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax-primitives.html">JAX Internals: primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jaxpr.html">JAX internals: The jaxpr language</a></li>
 </ul>
@@ -280,11 +280,15 @@
 <li class="toctree-l3"><a class="reference internal" href="../jep/28661-jax-array-protocol.html">28661: Supporting the `__jax_array__` protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../internals/index.html">JAX Internal Implementation Notes</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../internals/constants.html">Handling of closed-over constants</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../extensions.html">Extension guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../extensions.html">Extension guides</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Writing custom Jaxpr interpreters in JAX</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
@@ -294,7 +298,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../building_on_jax.html">Building on JAX</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notes.html">Notes</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api_compatibility.html">API compatibility</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../deprecation.html">Python and NumPy version support policy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../async_dispatch.html">Asynchronous dispatch</a></li>
@@ -305,8 +309,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../default_dtypes.html">Default dtypes and the X64 flag</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../jax.html">Public API: <code class="docutils literal notranslate"><span class="pre">jax</span></code> package</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.numpy.html"><code class="docutils literal notranslate"><span class="pre">jax.numpy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft.html">jax.numpy.fft.fft</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fft2.html">jax.numpy.fft.fft2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.fftfreq.html">jax.numpy.fft.fftfreq</a></li>
@@ -327,7 +331,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.numpy.fft.rfftn.html">jax.numpy.fft.rfftn</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.scipy.html"><code class="docutils literal notranslate"><span class="pre">jax.scipy</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.logpmf.html">jax.scipy.stats.bernoulli.logpmf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.pmf.html">jax.scipy.stats.bernoulli.pmf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../_autosummary/jax.scipy.stats.bernoulli.cdf.html">jax.scipy.stats.bernoulli.cdf</a></li>
@@ -344,31 +348,32 @@
 <li class="toctree-l2"><a class="reference internal" href="../jax.ffi.html"><code class="docutils literal notranslate"><span class="pre">jax.ffi</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.flatten_util.html"><code class="docutils literal notranslate"><span class="pre">jax.flatten_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.image.html"><code class="docutils literal notranslate"><span class="pre">jax.image</span></code> module</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.nn.html"><code class="docutils literal notranslate"><span class="pre">jax.nn</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jax.nn.initializers.html"><code class="docutils literal notranslate"><span class="pre">jax.nn.initializers</span></code> module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.ops.html"><code class="docutils literal notranslate"><span class="pre">jax.ops</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.profiler.html"><code class="docutils literal notranslate"><span class="pre">jax.profiler</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jax.ref.html"><code class="docutils literal notranslate"><span class="pre">jax.ref</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.stages.html"><code class="docutils literal notranslate"><span class="pre">jax.stages</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.test_util.html"><code class="docutils literal notranslate"><span class="pre">jax.test_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.tree.html"><code class="docutils literal notranslate"><span class="pre">jax.tree</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.tree_util.html"><code class="docutils literal notranslate"><span class="pre">jax.tree_util</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.typing.html"><code class="docutils literal notranslate"><span class="pre">jax.typing</span></code> module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jax.export.html"><code class="docutils literal notranslate"><span class="pre">jax.export</span></code> module</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.extend.html"><code class="docutils literal notranslate"><span class="pre">jax.extend</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.core.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.core</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.linear_util.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.linear_util</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.mlir.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.mlir</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.extend.random.html"><code class="docutils literal notranslate"><span class="pre">jax.extend.random</span></code> module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.example_libraries.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.optimizers.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.optimizers</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.example_libraries.stax.html"><code class="docutils literal notranslate"><span class="pre">jax.example_libraries.stax</span></code> module</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../jax.experimental.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.checkify.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.checkify</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.compilation_cache.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.compilation_cache</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.custom_dce.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.custom_dce</span></code> module</a></li>
@@ -377,7 +382,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.key_reuse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.key_reuse</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.mesh_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.mesh_utils</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.multihost_utils.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.multihost_utils</span></code> module</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.pallas.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.mosaic_gpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.mosaic_gpu</span></code> module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.triton.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.triton</span></code> module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../jax.experimental.pallas.tpu.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pallas.tpu</span></code> module</a></li>
@@ -386,7 +391,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.pjit.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.pjit</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.serialize_executable.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.serialize_executable</span></code> module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../jax.experimental.shard_map.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.shard_map</span></code> module</a></li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jax.experimental.sparse.html"><code class="docutils literal notranslate"><span class="pre">jax.experimental.sparse</span></code> module</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.BCOO.html">jax.experimental.sparse.BCOO</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_broadcast_in_dim.html">jax.experimental.sparse.bcoo_broadcast_in_dim</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../_autosummary/jax.experimental.sparse.bcoo_concatenate.html">jax.experimental.sparse.bcoo_concatenate</a></li>
@@ -700,10 +705,10 @@ etc.) that enable writing concise, accelerated code.</p>
 <p><strong>This example uses internal JAX APIs, which may break at any time. Anything not in <a class="reference external" href="https://docs.jax.dev/en/latest/jax.html">the API Documentation</a> should be assumed internal.</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">vmap</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">vmap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">random</span>
 </pre></div>
 </div>
 </div>
@@ -714,7 +719,7 @@ etc.) that enable writing concise, accelerated code.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
 <span class="n">fast_f</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
@@ -734,7 +739,7 @@ it transforms a function into one that, given example arguments, produces a Jaxp
 Let’s use it to look at how some example Jaxprs are structured.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">examine_jaxpr</span><span class="p">(</span><span class="n">closed_jaxpr</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">examine_jaxpr</span><span class="p">(</span><span class="n">closed_jaxpr</span><span class="p">):</span>
   <span class="n">jaxpr</span> <span class="o">=</span> <span class="n">closed_jaxpr</span><span class="o">.</span><span class="n">jaxpr</span>
   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invars:&quot;</span><span class="p">,</span> <span class="n">jaxpr</span><span class="o">.</span><span class="n">invars</span><span class="p">)</span>
   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;outvars:&quot;</span><span class="p">,</span> <span class="n">jaxpr</span><span class="o">.</span><span class="n">outvars</span><span class="p">)</span>
@@ -744,7 +749,7 @@ Let’s use it to look at how some example Jaxprs are structured.</p>
   <span class="nb">print</span><span class="p">()</span>
   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;jaxpr:&quot;</span><span class="p">,</span> <span class="n">jaxpr</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=====&quot;</span><span class="p">)</span>
@@ -752,7 +757,7 @@ Let’s use it to look at how some example Jaxprs are structured.</p>
 
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">x</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=====&quot;</span><span class="p">)</span>
@@ -763,22 +768,22 @@ Let’s use it to look at how some example Jaxprs are structured.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>foo
 =====
-invars: [Var(id=140670317087808):int32[]]
-outvars: [Var(id=140670317143424):int32[]]
+invars: [Var(id=139855952662144):int32[]]
+outvars: [Var(id=139855952667840):int32[]]
 constvars: []
-equation: [Var(id=140670317087808):int32[], Literal(1)] add [Var(id=140670317143424):int32[]] {}
+equation: [Var(id=139855952662144):int32[], Literal(1)] add [Var(id=139855952667840):int32[]] {}
 
 jaxpr: { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:i32[]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span> b<span class=" -Color -Color-Magenta">:i32[]</span> = add a 1:i32[] <span class=" -Color -Color-Bold -Color-Bold-Blue">in </span>(b,) }
 
 bar
 =====
-invars: [Var(id=140670314153024):float32[5,10], Var(id=140670314151296):float32[5], Var(id=140670314152192):float32[10]]
-outvars: [Var(id=140670314165888):float32[5], Var(id=140670314152192):float32[10]]
+invars: [Var(id=139855952716544):float32[5,10], Var(id=139855952716672):float32[5], Var(id=139855952716736):float32[10]]
+outvars: [Var(id=139855952723712):float32[5], Var(id=139855952716736):float32[10]]
 constvars: []
-equation: [Var(id=140670314153024):float32[5,10], Var(id=140670314152192):float32[10]] dot_general [Var(id=140670314161280):float32[5]] {&#39;dimension_numbers&#39;: (((1,), (0,)), ((), ())), &#39;precision&#39;: None, &#39;preferred_element_type&#39;: dtype(&#39;float32&#39;), &#39;out_sharding&#39;: None}
-equation: [Var(id=140670314161280):float32[5], Var(id=140670314151296):float32[5]] add [Var(id=140670314165312):float32[5]] {}
-equation: [Literal(1.0)] broadcast_in_dim [Var(id=140670314165568):float32[5]] {&#39;shape&#39;: (5,), &#39;broadcast_dimensions&#39;: (), &#39;sharding&#39;: None}
-equation: [Var(id=140670314165312):float32[5], Var(id=140670314165568):float32[5]] add [Var(id=140670314165888):float32[5]] {}
+equation: [Var(id=139855952716544):float32[5,10], Var(id=139855952716736):float32[10]] dot_general [Var(id=139855952719872):float32[5]] {&#39;dimension_numbers&#39;: (((1,), (0,)), ((), ())), &#39;precision&#39;: None, &#39;preferred_element_type&#39;: dtype(&#39;float32&#39;), &#39;out_sharding&#39;: None}
+equation: [Var(id=139855952719872):float32[5], Var(id=139855952716672):float32[5]] add [Var(id=139855952723072):float32[5]] {}
+equation: [Literal(1.0)] broadcast_in_dim [Var(id=139855952723520):float32[5]] {&#39;shape&#39;: (5,), &#39;broadcast_dimensions&#39;: (), &#39;sharding&#39;: None}
+equation: [Var(id=139855952723072):float32[5], Var(id=139855952723520):float32[5]] add [Var(id=139855952723712):float32[5]] {}
 
 jaxpr: { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<span class=" -Color -Color-Magenta">:f32[5,10]</span> b<span class=" -Color -Color-Magenta">:f32[5]</span> c<span class=" -Color -Color-Magenta">:f32[10]</span>. <span class=" -Color -Color-Bold -Color-Bold-Blue">let</span>
 <span class=" -Color -Color-Bold -Color-Bold-Blue">    </span>d<span class=" -Color -Color-Magenta">:f32[5]</span> = dot_general[
@@ -813,7 +818,7 @@ jaxpr: { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<sp
 <h2>Your first interpreter: <code class="docutils literal notranslate"><span class="pre">invert</span></code><a class="headerlink" href="#your-first-interpreter-invert" title="Link to this heading">#</a></h2>
 <p>Let’s try to implement a simple function “inverter”, which takes in the output of the original function and returns the inputs that produced those outputs. For now, let’s focus on simple, unary functions which are composed of other invertible unary functions.</p>
 <p>Goal:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="n">f_inv</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">jnp</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">f_inv</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)),</span> <span class="mf">1.0</span><span class="p">)</span>
@@ -826,11 +831,11 @@ jaxpr: { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<sp
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing Jax functions useful for tracing/interpreting.</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
 
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
-<span class="kn">from</span> <span class="nn">jax.extend</span> <span class="kn">import</span> <span class="n">core</span>
-<span class="kn">from</span> <span class="nn">jax._src.util</span> <span class="kn">import</span> <span class="n">safe_map</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">lax</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax.extend</span><span class="w"> </span><span class="kn">import</span> <span class="n">core</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax._src.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">safe_map</span>
 </pre></div>
 </div>
 </div>
@@ -839,7 +844,7 @@ jaxpr: { <span class=" -Color -Color-Bold -Color-Bold-Blue">lambda </span>; a<sp
 the constants (<code class="docutils literal notranslate"><span class="pre">literals</span></code>) from the trace.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 <span class="n">closed_jaxpr</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_jaxpr</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
@@ -862,17 +867,17 @@ the constants (<code class="docutils literal notranslate"><span class="pre">lite
 <p>To do this, we first create an environment to store the values for each of the variables, and update the environment with each equation we evaluate in the Jaxpr.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eval_jaxpr</span><span class="p">(</span><span class="n">jaxpr</span><span class="p">,</span> <span class="n">consts</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eval_jaxpr</span><span class="p">(</span><span class="n">jaxpr</span><span class="p">,</span> <span class="n">consts</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
   <span class="c1"># Mapping from variable -&gt; value</span>
   <span class="n">env</span> <span class="o">=</span> <span class="p">{}</span>
 
-  <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
     <span class="c1"># Literals are values baked into the Jaxpr</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="ow">is</span> <span class="n">core</span><span class="o">.</span><span class="n">Literal</span><span class="p">:</span>
       <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">val</span>
     <span class="k">return</span> <span class="n">env</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
 
-  <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
     <span class="n">env</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
   <span class="c1"># Bind args and consts to environment</span>
@@ -935,9 +940,9 @@ the constants (<code class="docutils literal notranslate"><span class="pre">lite
 <p><code class="docutils literal notranslate"><span class="pre">inverse</span></code> will first trace the function, then custom-interpret the Jaxpr. Let’s set up a simple skeleton.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">inverse</span><span class="p">(</span><span class="n">fun</span><span class="p">):</span>
   <span class="nd">@wraps</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
-  <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="c1"># Since we assume unary functions, we won&#39;t worry about flattening and</span>
     <span class="c1"># unflattening arguments.</span>
     <span class="n">closed_jaxpr</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">make_jaxpr</span><span class="p">(</span><span class="n">fun</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -951,15 +956,15 @@ the constants (<code class="docutils literal notranslate"><span class="pre">lite
 <p>Now we just need to define <code class="docutils literal notranslate"><span class="pre">inverse_jaxpr</span></code>, which will walk through the Jaxpr backward and invert primitives when it can.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inverse_jaxpr</span><span class="p">(</span><span class="n">jaxpr</span><span class="p">,</span> <span class="n">consts</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">inverse_jaxpr</span><span class="p">(</span><span class="n">jaxpr</span><span class="p">,</span> <span class="n">consts</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
   <span class="n">env</span> <span class="o">=</span> <span class="p">{}</span>
 
-  <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">var</span><span class="p">)</span> <span class="ow">is</span> <span class="n">core</span><span class="o">.</span><span class="n">Literal</span><span class="p">:</span>
       <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">val</span>
     <span class="k">return</span> <span class="n">env</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
 
-  <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
     <span class="n">env</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
   <span class="c1"># Args now correspond to Jaxpr outvars</span>
   <span class="n">safe_map</span><span class="p">(</span><span class="n">write</span><span class="p">,</span> <span class="n">jaxpr</span><span class="o">.</span><span class="n">outvars</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
@@ -983,7 +988,7 @@ the constants (<code class="docutils literal notranslate"><span class="pre">lite
 <p>That’s it!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 <span class="n">f_inv</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>

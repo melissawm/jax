@@ -27,7 +27,6 @@
    
       ~BlockSpec.block_shape
       ~BlockSpec.index_map
-      ~BlockSpec.indexing_mode
       ~BlockSpec.memory_space
       ~BlockSpec.pipeline_mode
       ~BlockSpec.transforms

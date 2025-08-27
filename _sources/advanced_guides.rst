@@ -8,6 +8,24 @@ such as multi-core computation, automatic differentiation, and custom
 operations.
 
 .. toctree::
+   :caption: Parallel computation
+   :maxdepth: 1
+
+   notebooks/Distributed_arrays_and_automatic_parallelization
+   notebooks/explicit-sharding
+   notebooks/shard_map
+   notebooks/layout
+   notebooks/host-offloading
+   multi_process
+   distributed_data_loading
+
+.. toctree::
+   :caption: Machine learning
+   :maxdepth: 1
+
+   the-training-cookbook
+
+.. toctree::
    :caption: Automatic differentiation
    :maxdepth: 1
 
@@ -27,6 +45,12 @@ operations.
 
 .. toctree::
    :maxdepth: 1
+   :caption: Pytrees
+
+   pytrees
+
+.. toctree::
+   :maxdepth: 1
    :caption: Performance optimizations
 
    persistent_compilation_cache
@@ -40,16 +64,10 @@ operations.
    device_memory_profiling
 
 .. toctree::
-   :caption: Parallel computation
+   :caption: Non-functional programming
    :maxdepth: 1
 
-   notebooks/Distributed_arrays_and_automatic_parallelization
-   notebooks/explicit-sharding
-   notebooks/shard_map
-   notebooks/layout
-   notebooks/host-offloading
-   multi_process
-   distributed_data_loading
+   array_refs
 
 .. toctree::
    :caption: External Callbacks
@@ -72,12 +90,6 @@ operations.
    export/index
 
 .. toctree::
-   :caption: Type promotion semantics
-   :maxdepth: 1
-
-   type_promotion
-
-.. toctree::
    :caption: Pallas
    :maxdepth: 1
 
@@ -97,8 +109,5 @@ operations.
 
    notebooks/convolutions
    xla_flags
-
-   sharded-computation
    jax-primitives
    jaxpr
-

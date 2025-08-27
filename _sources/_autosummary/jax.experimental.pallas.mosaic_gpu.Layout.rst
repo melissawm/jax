@@ -32,6 +32,8 @@
       ~Layout.TCGEN05_TRANSPOSED
       ~Layout.TCGEN05_M64_COLLECTIVE
       ~Layout.TCGEN05_TMEM_NATIVE
+      ~Layout.SMEM_GMEM_COPY
+      ~Layout.TMA_GATHER_INDICES
       ~Layout.WGMMA_ROW
       ~Layout.WGMMA_COL
       ~Layout.TCGEN05_ROW

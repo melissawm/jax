@@ -57,11 +57,11 @@ JAX: High performance array computing
       :link-type: ref
       :class-card: getting-started
 
-    .. grid-item-card:: :material-regular:`library_books;2em` Tutorials
+    .. grid-item-card:: :material-regular:`library_books;2em` JAX 101
       :columns: 12 6 6 4
-      :link: jax-tutorials
+      :link: jax-101
       :link-type: ref
-      :class-card: tutorials
+      :class-card: jax-101
 
 If you're looking to use JAX to train neural networks, check out the `JAX AI
 Stack`_!
@@ -140,7 +140,7 @@ maintains an up-to-date list.
    :maxdepth: 1
 
    notebooks/Common_Gotchas_in_JAX
-   tutorials
+   jax-101
 
 .. toctree::
    :hidden:

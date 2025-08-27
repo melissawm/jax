@@ -19,14 +19,18 @@ kernelspec:
 
 Do you have exploding gradients? Are NaNs making you gnash your teeth? Just want
 to poke around the intermediate values in your computation? This section
-introduces you to a set of built-in JAX debugging methods —
-{func}`jax.debug.print`, {func}`jax.debug.breakpoint`, and
-{func}`jax.debug.callback` — that you can use with various JAX transformations.
+introduces you to a set of built-in JAX debugging methods that you can use with
+various JAX transformations.
 
-  **Summary:** Use {func}`jax.debug.print` to print values to stdout in `jax.jit`-,`jax.pmap`-, and `pjit`-decorated functions,
-  and {func}`jax.debug.breakpoint` to pause execution of your compiled function to inspect values in the call stack.
+  **Summary:**
 
-Let's begin with {func}`jax.debug.print`.
+  - Use {func}`jax.debug.print` to print values to stdout in `jax.jit`-,`jax.pmap`-, and `pjit`-decorated functions,
+    and {func}`jax.debug.breakpoint` to pause execution of your compiled function to inspect values in the call stack.
+  - {mod}`jax.experimental.checkify` lets you add `jit`-able runtime error checking (e.g. out of bounds indexing) to your JAX
+    code.
+  - JAX offers config flags and context managers that enable catching errors more easily. For example, enable the
+    `jax_debug_nans` flag to automatically detect when NaNs are produced in `jax.jit`-compiled code and enable the
+    `jax_disable_jit` flag to disable JIT-compilation.
 
 ## `jax.debug.print` for simple inspection
 
@@ -269,3 +273,10 @@ Read more in [](debugging/flags).
 ## Next steps
 
 Check out the {ref}`advanced-debugging` to learn more about debugging in JAX.
+
+```{toctree}
+:hidden:
+
+debugging/print_breakpoint
+debugging/checkify_guide
+```
